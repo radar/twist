@@ -5,16 +5,17 @@ describe 'books' do
     let(:user) { Factory(:user) }
 
     before do
-      sign_in(:user, user)
+      actually_sign_in_as(user)
     end
     
     it "can register a book" do
-      visit new_book_path
+      page!
+      click_link "New Book"
       fill_in "Title", :with => "Rails 3 in Action"
       fill_in "Path", :with => "http://github.com/radar/rails3book_test"
       click_button "Create Book"
       page.should have_content("Thanks! Your book is now being processed. Please wait.")
-      click_link "Or if you're feeling impatient, click here to go to your book now."
+      click_link "Or, if you're feeling impatient, click here to go to your book now."
     end
   end
 end
