@@ -13,6 +13,7 @@ group :development, :test do
   gem 'capybara', '~> 1.0'
   gem 'rspec-rails', '~> 2.6'
   gem 'webmock'
+  gem 'launchy'
 end
 
 # Asset template engines
