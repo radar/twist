@@ -6,7 +6,7 @@ gem 'devise'
 gem 'resque'
 #gem 'omniauth'
 
-gem 'grit'
+gem 'nokogiri'
 
 group :development, :test do
   gem 'factory_girl'
