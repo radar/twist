@@ -46,4 +46,16 @@ class Git
   def files
     Dir[path + "**/*"]
   end
+  
+  def changed_files(old_commit)
+    Dir.chdir(path) do
+      return `git diff --name-only HEAD #{old_commit}`.split("\n")
+    end
+  end
+  
+  def current_commit
+    Dir.chdir(path) do
+      `git rev-parse HEAD`.strip
+    end
+  end
 end

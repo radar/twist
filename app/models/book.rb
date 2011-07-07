@@ -15,10 +15,6 @@ class Book < ActiveRecord::Base
     user, repo = book.path.split("/")[-2, 2]
     git = Git.new(user, repo)
     git.update!
-    
-    # Update Chapters
-    Dir[git.path + "ch*/*.xml"].each do |chapter|
-      Chapter.process!(book, chapter)
-    end
+    book.current_commit = git.current_commit
   end
 end

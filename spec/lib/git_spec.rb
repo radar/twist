@@ -37,4 +37,47 @@ describe Git do
     git.update!
     git.files.should == Dir[git.path + "**/*"]
   end
+  
+  context "changed files" do
+    before do
+      @git = Git.new(*args)
+      @git.update!
+      @old_commit = @git.current_commit
+    end
+
+    it "contains new files" do
+      Dir.chdir(@git.path) do
+        `touch test.txt`
+        `git add .`
+        `git commit -m "Testing changes"`
+      end
+
+      @git.changed_files(@old_commit).should == ["test.txt"]
+    end
+
+    it "contains modified files" do
+      Dir.chdir(@git.path) do
+        `echo "string" > ch01/ch01.xml`
+        `git add .`
+        `git commit -m "Testing changes"`
+      end
+
+      @git.changed_files(@old_commit).should == ["ch01/ch01.xml"]
+    end
+
+    it "contains deleted files" do
+      Dir.chdir(@git.path) do
+        `git rm ch01/ch01.xml`
+        `git commit -m "Testing changes"`
+      end
+
+      @git.changed_files(@old_commit).should == ["ch01/ch01.xml"]
+    end
+  end
+
+  it "retreives the current commit" do
+    git = Git.new(*args)
+    git.update!
+    git.current_commit.should eql("55802542ad90dc3b48d99de2e45c3b6ddaa6d445")
+  end
 end
