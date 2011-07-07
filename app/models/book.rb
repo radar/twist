@@ -2,7 +2,13 @@ class Book < ActiveRecord::Base
   @queue = "normal"
   after_create :enqueue
   
-  has_many :chapters
+  has_many :chapters do
+    # This method will process the chapters, but needs to be defined on the association as that's how it's called
+    def process!(file)
+      xml = Nokogiri::XML(File.read(file))
+      create!(:title => xml.xpath("chapter/title").text)
+    end
+  end
 
   def enqueue
     Resque.enqueue(self.class, self.id)
