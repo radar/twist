@@ -4,8 +4,8 @@ class Book < ActiveRecord::Base
   
   has_many :chapters do
     # This method will process the chapters, but needs to be defined on the association as that's how it's called
-    def process!(file)
-      xml = Nokogiri::XML(File.read(file))
+    def process!(git, file)
+      xml = Nokogiri::XML(File.read(git.path + file))
       create!(:title => xml.xpath("chapter/title").text)
     end
   end
@@ -23,8 +23,8 @@ class Book < ActiveRecord::Base
     current_commit = git.current_commit
     git.update!
 
-    git.changed_files(current_commit).each do |file|
-      book.chapters.process!(file)
+    git.changed_files(current_commit).grep(/ch\d+\/ch\d+.xml/).each do |file|
+      book.chapters.process!(git, file)
     end
 
     # When done, update the book with the current commit as a point of reference
