@@ -15,6 +15,10 @@ class Book < ActiveRecord::Base
     user, repo = book.path.split("/")[-2, 2]
     git = Git.new(user, repo)
     git.update!
+    # TOOD: Process chapters here!
+    
+    # When done, update the book with the current commit as a point of reference
     book.current_commit = git.current_commit
+    book.save
   end
 end
