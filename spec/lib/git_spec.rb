@@ -45,6 +45,27 @@ describe Git do
       @old_commit = @git.current_commit
     end
 
+    it "first commit ever" do
+      @git.changed_files.should == [
+        "ch01",
+        "ch01/app.jpg",
+        "ch01/ch01.xml",
+        "ch01/hello_world.png",
+        "ch01/new_purchase.png",
+        "ch01/purchase_destroy.png",
+        "ch01/purchase_errors.png",
+        "ch01/purchase_errors_2.png",
+        "ch01/purchase_listing.png",
+        "ch01/purchases.png",
+        "ch01/purchases_edit.png",
+        "ch01/purchases_show_with_url.png",
+        "ch01/show_purchase.png",
+        "ch01/update_purchase_fail.png",
+        "ch01/updated_purchase.png",
+        "ch01/welcome_aboard.png"
+      ]
+    end
+
     it "contains new files" do
       Dir.chdir(@git.path) do
         `touch test.txt`

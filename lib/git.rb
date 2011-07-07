@@ -47,9 +47,13 @@ class Git
     Dir[path + "**/*"]
   end
   
-  def changed_files(old_commit)
+  def changed_files(old_commit=nil)
     Dir.chdir(path) do
-      return `git diff --name-only HEAD #{old_commit}`.split("\n")
+      if old_commit
+        return `git diff --name-only HEAD #{old_commit}`.split("\n")
+      else
+        Dir["**/*"]
+      end
     end
   end
   
