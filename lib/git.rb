@@ -49,13 +49,19 @@ class Git
   
   def changed_files(old_commit=nil)
     Dir.chdir(path) do
-      if old_commit
+      # If there is an old_commit specified 
+      # and there's more than one commit in the repo
+      # Then show a diff between current commit and last-known commit (old_commit)
+      if old_commit && `git log --oneline | wc -l`.to_i > 1
         return `git diff --name-only HEAD #{old_commit}`.split("\n")
+      # Otherwise, return a list of files for this repository.
       else
         Dir["**/*"]
       end
     end
   end
+  
+  alias_method :files, :changed_files
   
   def current_commit
     Dir.chdir(path) do

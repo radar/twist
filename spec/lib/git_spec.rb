@@ -65,6 +65,27 @@ describe Git do
         "ch01/welcome_aboard.png"
       ]
     end
+    
+    it "shows all files if current commit is only commit" do
+      @git.changed_files("55802542ad90dc3b48d99de2e45c3b6ddaa6d445").should == [
+        "ch01",
+        "ch01/app.jpg",
+        "ch01/ch01.xml",
+        "ch01/hello_world.png",
+        "ch01/new_purchase.png",
+        "ch01/purchase_destroy.png",
+        "ch01/purchase_errors.png",
+        "ch01/purchase_errors_2.png",
+        "ch01/purchase_listing.png",
+        "ch01/purchases.png",
+        "ch01/purchases_edit.png",
+        "ch01/purchases_show_with_url.png",
+        "ch01/show_purchase.png",
+        "ch01/update_purchase_fail.png",
+        "ch01/updated_purchase.png",
+        "ch01/welcome_aboard.png"
+      ]
+    end
 
     it "contains new files" do
       Dir.chdir(@git.path) do
