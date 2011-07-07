@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: twist_new_dev
+
+test: &test
+  adapter: postgresql
+  database: twist_new_test
