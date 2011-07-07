@@ -11,10 +11,10 @@ describe Book do
     it "processes a book" do
       # Should enqueue a job...
       book = Book.create(:title => "Rails 3 in Action", :path => "http://github.com/radar/rails3book_test")
-      # ... which will call process! ...
-      Chapter.should_receive(:process!)
-      # ... when run using this method!
+      # ... which when run ...
       run_resque_job!
+      # ... creates a chapter!
+      book.chapters.count.should eql(1)
     end
   end
 end

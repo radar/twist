@@ -20,9 +20,13 @@ class Book < ActiveRecord::Base
     # TODO: determine if path is public
     user, repo = book.path.split("/")[-2, 2]
     git = Git.new(user, repo)
+    current_commit = git.current_commit
     git.update!
-    # TOOD: Process chapters here!
-    
+
+    git.changed_files(current_commit).each do |file|
+      book.chapters.process!(file)
+    end
+
     # When done, update the book with the current commit as a point of reference
     book.current_commit = git.current_commit
     book.save
