@@ -17,4 +17,10 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
   end
+
+  def receive
+    @book = Book.find(params[:id])
+    @book.enqueue
+    render :nothing => true
+  end
 end
