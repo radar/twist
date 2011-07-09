@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110709014152) do
+ActiveRecord::Schema.define(:version => 20110709075457) do
 
   create_table "books", :force => true do |t|
     t.integer  "user_id"
@@ -30,6 +30,25 @@ ActiveRecord::Schema.define(:version => 20110709014152) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "element_versions", :force => true do |t|
+    t.integer "element_id"
+    t.text    "content"
+    t.string  "tag"
+    t.integer "number"
+  end
+
+  add_index "element_versions", ["element_id"], :name => "index_element_versions_on_element_id"
+
+  create_table "elements", :force => true do |t|
+    t.integer "chapter_id"
+    t.string  "identifier"
+    t.text    "content"
+    t.string  "tag"
+    t.integer "current_version", :default => 1
+  end
+
+  add_index "elements", ["chapter_id"], :name => "index_elements_on_chapter_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
