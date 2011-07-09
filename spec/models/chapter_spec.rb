@@ -11,7 +11,7 @@ describe Chapter do
   end
 
   it "processes a chapter" do
-    book.chapters.process!(git.path + "ch01/ch01.xml")
+    book.chapters.process!(git, "ch01/ch01.xml")
     book.chapters.first.title.should eql("Ruby on Rails, the framework")
   end
 end
