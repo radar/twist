@@ -35,7 +35,9 @@ describe Git do
   it "retreives a list of files" do
     git = Git.new(*args)
     git.update!
-    git.files.should == Dir[git.path + "**/*"]
+    Dir.chdir(git.path) do
+      git.files.should == Dir["**/*"]
+    end
   end
   
   context "changed files" do
