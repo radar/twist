@@ -8,10 +8,6 @@ describe 'books' do
       actually_sign_in_as(user)
     end
     
-    after do
-      Resque.remove_queue("normal")
-    end
-    
     it "can register a book" do
       click_link "New Book"
       fill_in "Title", :with => "Rails 3 in Action"
