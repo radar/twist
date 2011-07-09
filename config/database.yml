@@ -1,7 +1,9 @@
 development:
   adapter: postgresql
   database: twist_new_dev
+  min_messages: warning
 
 test: &test
   adapter: postgresql
   database: twist_new_test
+  min_messages: warning
