@@ -1,11 +1,16 @@
 module DeviseExtensions
   def actually_sign_in_as(user)
     visit root_path
-    page!
     click_link "Sign in"
     fill_in "Email", :with => user.email
     fill_in "Password", :with => "password" # test password
     click_button "Sign in"
+  end
+  
+  def create_user!
+    user = Factory(:user)
+    user.confirm!
+    user
   end
 end
 

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Twist</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<%= link_to "Sign in", new_user_session_path %>
-<%= yield %>
+  <head>
+    <title>Twist</title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= flash[:notice] %>
+    <%= flash[:alert] %>
 
-</body>
+    <%= link_to "Sign in", new_user_session_path %>
+
+    <%= yield %>
+
+  </body>
 </html>
