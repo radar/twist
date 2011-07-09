@@ -12,6 +12,8 @@ class Book < ActiveRecord::Base
 
   def enqueue
     Resque.enqueue(self.class, self.id)
+    self.processing = true
+    self.save!
   end
   
   def self.perform(id)
@@ -29,6 +31,7 @@ class Book < ActiveRecord::Base
 
     # When done, update the book with the current commit as a point of reference
     book.current_commit = git.current_commit
+    book.processing = false
     book.save
   end
 end
