@@ -56,4 +56,20 @@ module Processor
             :identifier => element["id"],
             :content => element.text)
   end
+  
+  def process_indexterm!(element)
+    create!(:tag => "indexterm",
+            :identifier => element["id"],
+            :content => element.text)
+  end
+  
+  def process_figure!(element)
+    create!(:tag => "figure",
+            :identifier => element["id"],
+            :content => "")
+  end
+  
+  def process_example!(element)
+    # TODO: process callouts!
+  end
 end
