@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110709075457) do
+ActiveRecord::Schema.define(:version => 20110710100731) do
 
   create_table "books", :force => true do |t|
     t.integer  "user_id"
@@ -41,14 +41,24 @@ ActiveRecord::Schema.define(:version => 20110709075457) do
   add_index "element_versions", ["element_id"], :name => "index_element_versions_on_element_id"
 
   create_table "elements", :force => true do |t|
-    t.integer "chapter_id"
+    t.integer "parent_id"
+    t.string  "parent_type"
     t.string  "identifier"
     t.text    "content"
     t.string  "tag"
     t.integer "current_version", :default => 1
+    t.string  "title"
   end
 
-  add_index "elements", ["chapter_id"], :name => "index_elements_on_chapter_id"
+  add_index "elements", ["parent_id", "parent_type"], :name => "index_elements_on_parent_id_and_parent_type"
+
+  create_table "sections", :force => true do |t|
+    t.string  "title"
+    t.string  "identifier"
+    t.integer "chapter_id"
+    t.integer "number"
+    t.integer "parent_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false

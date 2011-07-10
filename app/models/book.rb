@@ -6,7 +6,12 @@ class Book < ActiveRecord::Base
     # This method will process the chapters, but needs to be defined on the association as that's how it's called
     def process!(git, file)
       xml = Nokogiri::XML(File.read(git.path + file))
-      create!(:title => xml.xpath("chapter/title").text)
+      chapter_xml = xml.xpath("chapter")
+      chapter = create!(:title => chapter_xml.xpath("title").text)
+      
+      chapter_xml.children.each do |child|
+        chapter.elements.send("process_#{child.name}!", child)
+      end
     end
   end
 
