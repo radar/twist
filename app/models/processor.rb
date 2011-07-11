@@ -1,7 +1,7 @@
 module Processor
-  def process_text!(element, parent=nil)
+  def process_text!(element)
     # Skip text nodes that lie outside of elements
-    return unless parent
+    return if [Section, Chapter].include?(@association.owner.class)
   end
   
   def process_title!(element)
@@ -24,9 +24,13 @@ module Processor
   end
   
   def process_para!(element)
-    element = create!(:tag => "para",
-                      :identifier => element["id"])
-   
+    para = create!(:tag => "para",
+                   :identifier => element["id"])
+    p element
+    element.xpath("para").children.map do |child|
+      para.elements.send("process_#{child.name}!", child)
+    end
+    para
   end
   
   def process_formalpara!(element)
