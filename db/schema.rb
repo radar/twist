@@ -41,16 +41,16 @@ ActiveRecord::Schema.define(:version => 20110710100731) do
   add_index "element_versions", ["element_id"], :name => "index_element_versions_on_element_id"
 
   create_table "elements", :force => true do |t|
-    t.integer "parent_id"
     t.string  "parent_type"
+    t.integer "parent_id"
+    t.string  "tag"
     t.string  "identifier"
     t.text    "content"
-    t.string  "tag"
     t.integer "current_version", :default => 1
     t.string  "title"
   end
 
-  add_index "elements", ["parent_id", "parent_type"], :name => "index_elements_on_parent_id_and_parent_type"
+  add_index "elements", ["parent_type", "parent_id"], :name => "index_elements_on_parent_type_and_parent_id"
 
   create_table "sections", :force => true do |t|
     t.string  "title"

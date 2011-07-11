@@ -6,6 +6,7 @@ gem 'devise'
 gem 'resque'
 #gem 'omniauth'
 
+gem 'eeepub'
 gem 'nokogiri'
 
 group :development, :test do

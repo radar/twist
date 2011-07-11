@@ -12,6 +12,10 @@ describe Chapter do
 
   it "processes a chapter" do
     book.chapters.process!(git, "ch01/ch01.xml")
-    book.chapters.first.title.should eql("Ruby on Rails, the framework")
+    chapter = book.chapters.first
+    chapter.title.should eql("Ruby on Rails, the framework")
+    chapter.elements.first.tag.should == "p"
   end
+  
+  it "updates a chapter"
 end
