@@ -15,5 +15,8 @@ describe 'books' do
       click_button "Create Book"
       page.should have_content("Thanks! Your book is now being processed. Please wait.")
     end
+    
+    it "cannot register a book if not given a URL"
+    it "cannot register a book if URL is inaccessible"
   end
 end
