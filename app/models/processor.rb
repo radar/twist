@@ -13,14 +13,14 @@ module Processor
     section = @association.owner.sections.create!(:title => element.xpath("title").text, 
                                                   :identifier => id)
 
-    create!(:tag => "section", :identifier => id)
-    
     # Process the children elements (paras, etc.) found within a section
     # Need to xpath to section here so that grabs children for that location
     # rather than the section itself
     element.xpath("section").children.each do |child|
       section.elements.send("process_#{child.name}!", child)
     end
+
+    create!(:tag => "section", :identifier => id)
   end
   
   def process_para!(element)
