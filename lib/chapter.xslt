@@ -16,17 +16,17 @@
         </em>
     </xsl:template>
     <xsl:template match="para">
-        <p>
+        <p id='{@id}'>
             <xsl:apply-templates />
         </p>
     </xsl:template>
     <xsl:template match="section">
-        <div class="section">
+        <section id='{@id}'>
             <xsl:apply-templates />
-        </div>
+        </section>
     </xsl:template>
     <xsl:template match="chapter">
-        <div class="chapter">
+        <div class="chapter" id='{@id}'>
             <xsl:apply-templates />
         </div>
     </xsl:template>
@@ -111,7 +111,7 @@
         </div>
     </xsl:template>
     <xsl:template match="example/title">
-        <span class="exampletitle">
+        <span class="title">
             <xsl:apply-templates />
         </span>
     </xsl:template>
@@ -121,7 +121,7 @@
         </div>
     </xsl:template>
     <xsl:template match="figure/title">
-        <span class="figuretitle">
+        <span class="title">
             <xsl:apply-templates />
         </span>
     </xsl:template>
@@ -145,10 +145,46 @@
         <xsl:apply-templates />
       </span>
     </xsl:template>
+    <!-- BEGIN TABLE XSLT DEFINITION --> 
+    <xsl:template match="table">
+      <div id='{@id}' class="table">
+        <span class="title"><xsl:value-of select="title"/></span>
+        <table>
+          <xsl:apply-templates />
+        </table>
+      </div>
+    </xsl:template>
+    <xsl:template match="table/title">
+    </xsl:template>
+    <xsl:template match="table/tgroup">
+      <xsl:apply-templates />
+    </xsl:template>
+    <xsl:template match="table/thead">
+      <thead id='{@id}'>
+        <xsl:apply-templates />
+      </thead>
+    </xsl:template>
+    <xsl:template match="row">
+      <tr id='{@id}'>
+        <xsl:apply-templates />
+      </tr>
+    </xsl:template>
+    <xsl:template match="entry">
+      <td id='{@id}'>
+        <xsl:apply-templates />
+      </td>
+    </xsl:template>
+    <!-- END TABLE XSLT DEFINITION --> 
+      
+    
     <xsl:template match="note">
-        <div class="note">
-            <xsl:apply-templates />
-        </div>
+      <div class="note">
+          <xsl:apply-templates />
+      </div>
+    </xsl:template>
+    
+    <xsl:template match="note/title">
+        <span class="title"><xsl:apply-templates /></span>
     </xsl:template>
     
 </xsl:stylesheet>

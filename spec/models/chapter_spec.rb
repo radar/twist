@@ -15,6 +15,9 @@ describe Chapter do
     chapter = book.chapters.first
     chapter.title.should eql("Ruby on Rails, the framework")
     chapter.elements.first.tag.should == "p"
+    chapter.sections.map(&:title).should == ["1.1 What is Ruby on Rails?", 
+                                             "1.2 Developing your first application",
+                                             "1.3 Summary"]
   end
   
   it "updates a chapter"

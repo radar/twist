@@ -1,6 +1,6 @@
 class Chapter < ActiveRecord::Base
-  has_many :elements, :as => :parent
-  has_many :sections
+  has_many :elements, :order => "id ASC", :as => :parent, :extend => Processor
+  has_many :sections, :extend => SectionProcessor
 
   class << self
     def process!(git, file)
@@ -11,9 +11,8 @@ class Chapter < ActiveRecord::Base
       
       chapter = create!(:title => xml.xpath("chapter/title").text,
                         :position => 1)
-      intro_para = parsed_doc.css("div.chapter > p")
-      chapter.elements.create(:tag => "p", :content => intro_para.to_html)
-      
+      elements = parsed_doc.css("div.chapter > *")
+      elements.each { |element| chapter.elements.process!(element) }
       # 
       # image_count = 1
       # parsed_doc.css("img").each do |img|
@@ -97,6 +96,11 @@ class Chapter < ActiveRecord::Base
       # 
       # image_files += Dir["output/ch#{number}/*.png"]
     end
+  end
+  
+  # Helper method to access current chapter. Mainly used for sections, but can be called on a chapter.
+  def chapter
+    self
   end
   
   def to_param
