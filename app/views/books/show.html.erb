@@ -1,2 +1,8 @@
 Or, if you're feeling impatient, refresh this page.
 <h1><%= @book.title %></h1>
+
+<ol>
+  <% @book.chapters.each do |chapter| %>
+    <li><%= link_to chapter.title, [@book, chapter] %></li>
+  <% end %>
+</ol>
