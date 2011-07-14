@@ -2,12 +2,12 @@ class Git
   attr_accessor :user, :repo
   
   def self.host
-    if Rails.env.test?
-      # Clone locally to speed up tests
-      Rails.root + "spec/fixtures/repos/"
-    else
-      # Otherwise, rely on GitHub
+    if Rails.env.production?
+      # Rely on GitHub
       "git@github.com:"
+    else
+      # Otherwise, clone locally to speed up tests
+      Rails.root + "spec/fixtures/repos/"
     end
   end
 
