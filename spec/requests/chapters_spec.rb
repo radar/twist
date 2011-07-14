@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'chapters' do                           
+describe 'chapters' do
   let(:user) { create_user! }
   before do
     Resque.remove_queue("normal") # TODO: is there a better way than just putting this *everywhere*?
