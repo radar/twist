@@ -10,8 +10,11 @@ module SectionProcessor
     section = create!(:title      => markup.css("h2").text,
                       :identifier => id,
                       :number     => @section_count)
-    
-    parent_sections = section.ancestors.map(&:number) unless section.ancestors.empty?
+
+    unless section.ancestors.empty?
+      section.chapter = section.ancestors.first.chapter
+      parent_sections = section.ancestors.map(&:number)
+    end
     # Chapter number, then all parent sections
     number = [chapter.position, parent_sections, @section_count].flatten.compact.join(".")
     # Create a tag so it can be rendered in-line for a chapter
