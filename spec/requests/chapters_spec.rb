@@ -13,11 +13,18 @@ describe 'chapters' do
   it "can view a given chapter and its parts" do
     visit book_chapter_path(@book, @book.chapters.first)
     page!
-    page.should have_content("It's great to have you with us on this journey throughout the world of Ruby on Rails.")
+    
+    # Paragraph test
+    within "p#ch01_3" do
+      page.should have_content("It's great to have you with us on this journey throughout the world of Ruby on Rails.")
+    end
+    
     # Section test
-    within "h2" do
+    within "h2#ch01_5" do
       page.should have_content("1.1 What is Ruby on Rails?")
     end
+    
+    page.find("a#ch01_797")["href"].should == "http://en.wikipedia.org/wiki/MIT_License"
     
     # Sub-section test
     within "h3" do

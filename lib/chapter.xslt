@@ -145,6 +145,10 @@
         <xsl:apply-templates />
       </span>
     </xsl:template>
+    
+    <xsl:template match="uri">
+      <a href="{.}" id='{@id}'><xsl:apply-templates /></a>
+    </xsl:template>
     <!-- BEGIN TABLE XSLT DEFINITION --> 
     <xsl:template match="table">
       <div id='{@id}' class="table">
