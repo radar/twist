@@ -1,0 +1,3 @@
+<%= raw(element.content) %>
+<% section = Section.find_by_identifier(element.identifier) %>
+<%= render_elements(section.elements) %>
