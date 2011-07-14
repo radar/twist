@@ -14,3 +14,7 @@ body {
 p {
   font: 13pt/1.5 "Georgia";
 }
+
+p span.footnote {
+  display: none;
+}
