@@ -1,6 +1,7 @@
 class Chapter < ActiveRecord::Base
   has_many :elements, :order => "id ASC", :as => :parent, :extend => Processor
   has_many :sections, :extend => SectionProcessor
+  belongs_to :book
 
   class << self
     def process!(git, file)
