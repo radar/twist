@@ -141,9 +141,13 @@
       </img>
     </xsl:template>
     <xsl:template match="footnote">
-      <span class="footnote" style='display:none' id='{@id}'>
+      <span class="footnote" id='{@id}'>
         <xsl:apply-templates />
       </span>
+    </xsl:template>
+    
+    <xsl:template match="footnote/para">
+      <xsl:apply-templates />
     </xsl:template>
     
     <xsl:template match="uri">

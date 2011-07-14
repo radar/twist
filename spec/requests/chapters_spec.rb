@@ -12,11 +12,15 @@ describe 'chapters' do
   
   it "can view a given chapter and its parts" do
     visit book_chapter_path(@book, @book.chapters.first)
-    page!
     
     # Paragraph test
     within "p#ch01_3" do
       page.should have_content("It's great to have you with us on this journey throughout the world of Ruby on Rails.")
+    end
+    
+    # Footnote test
+    within "span.footnote" do
+      page.should have_content("The MIT license")
     end
     
     # Section test
