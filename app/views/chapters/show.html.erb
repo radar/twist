@@ -1,3 +1,4 @@
-<h1><%= @chapter.book.title %> - Chapter <%= @chapter.position %> - <%= @chapter.title %></h1>
-
-<%= render_elements(@chapter.elements) %>
+<div class='chapter'>
+  <h1><%= @chapter.book.title %> - Chapter <%= @chapter.position %> - <%= @chapter.title %></h1>
+  <%= render_elements(@chapter.elements) %>
+</div>
