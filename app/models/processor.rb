@@ -4,7 +4,26 @@ module Processor
   end
 
   def process_p!(markup)
-    create!(:tag => "p", :content => markup.to_html)
+    paragraph = create!(:tag => "p", :content => markup.to_html)
+    content = markup.to_html
+    markup.css("span.footnote").each do |footnote|
+      Chapter.current_chapter.footnote_count ||= 0
+      Chapter.current_chapter.footnote_count += 1
+      footnote_link = "<a href='#footnote_#{Chapter.current_chapter.footnote_count.to_s}'><sup>#{Chapter.current_chapter.footnote_count}</sup></a>"
+      content = content.gsub(/<span class="footnote" id="#{footnote["id"]}">(.*?)<\/span>/, footnote_link)
+      process_footnote!(footnote)
+      footnote.children.map(&:remove)
+      footnote.remove
+    end
+    paragraph.content = content
+    paragraph.save!
+    paragraph
+  end
+  
+  def process_footnote!(markup)
+    create!(:tag        => "footnote",
+            :content    => markup.to_html,
+            :identifier => markup["id"])
   end
 
   def process_section!(markup)

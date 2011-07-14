@@ -2,6 +2,12 @@ class Chapter < ActiveRecord::Base
   has_many :elements, :order => "id ASC", :as => :parent, :extend => Processor
   has_many :sections, :extend => SectionProcessor
   belongs_to :book
+  
+  # Hack to work around chapter object "hopping" when processing, so we can keep footnote count of entire chapter
+  cattr_accessor :current_chapter
+  
+  # used for counting the footnotes in a chapter when processing them
+  attr_accessor :footnote_count
 
   class << self
     def process!(git, file)
@@ -12,6 +18,9 @@ class Chapter < ActiveRecord::Base
       
       chapter = create!(:title => xml.xpath("chapter/title").text,
                         :position => 1)
+      # TODO: SO INCREDIBLY HACKY
+      Chapter.current_chapter = chapter
+      Chapter.current_chapter.footnote_count = 0
       elements = parsed_doc.css("div.chapter > *")
       elements.each { |element| chapter.elements.process!(element) }
     end
