@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0.rc4'
 gem 'pg'
-gem 'devise'
+gem 'devise', :git => "git://github.com/plataformatec/devise"
 gem 'resque'
 #gem 'omniauth'
 
