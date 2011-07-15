@@ -16,11 +16,14 @@ class Chapter < ActiveRecord::Base
       xslt = Nokogiri::XSLT(File.read(Rails.root + 'lib/chapter.xslt'))
       parsed_doc = xslt.transform(xml)
       
-      chapter = create!(:title => xml.xpath("chapter/title").text,
-                        :position => 1)
+      chapter = find_or_initialize_by_identifier(xml.xpath("chapter").first["id"])
+      chapter.title = xml.xpath("chapter/title").text
+      chapter.position = 1 # TODO: un "fix"
+
       # TODO: SO INCREDIBLY HACKY
       Chapter.current_chapter = chapter
       Chapter.current_chapter.footnote_count = 0
+
       elements = parsed_doc.css("div.chapter > *")
       elements.each { |element| chapter.elements.process!(element) }
     end
