@@ -29,13 +29,17 @@ class Git
   end
 
   def clone
-    `git clone #{self.class.host}#{user}/#{repo} #{path}`
+    silence_stream(STDERR) do
+      `git clone #{self.class.host}#{user}/#{repo} #{path}`
+    end
   end
   
   def pull
     Dir.chdir(path) do
-      `git checkout`
-      `git pull origin master`
+      silence_stream(STDERR) do
+        `git checkout`
+        `git pull origin master`
+      end
     end
   end
   
