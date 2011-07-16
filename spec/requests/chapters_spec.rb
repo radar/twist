@@ -8,7 +8,6 @@ describe 'chapters' do
                         :path => "http://github.com/radar/rails3book_test")
     run_resque_job!
     @book.reload
-    p @book.chapters
     actually_sign_in_as(user)
   end
   
