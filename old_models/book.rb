@@ -1,15 +1,8 @@
-class Book
-  include Mongoid::Document
-  field :user_id, :type => Integer
-  field :path, :type => Integer
-  field :title, :type => String
-  field :current_commit, :type => String
-  field :processing, :type => Boolean, :default => false
-  
-  embeds_many :chapters
-  
+class Book < ActiveRecord::Base
   @queue = "normal"
   after_create :enqueue
+  
+  has_many :chapters
   
   def self.perform(id)
     book = Book.find(id)
@@ -21,7 +14,7 @@ class Book
     git.update!
 
     git.changed_files(current_commit).grep(/ch\d+\/ch\d+.xml/).each do |file|
-      book.chapters << Chapter.process!(git, file)
+      book.chapters.process!(git, file)
     end
 
     # When done, update the book with the current commit as a point of reference

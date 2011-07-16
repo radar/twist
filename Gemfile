@@ -1,6 +1,9 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0.rc4'
+gem 'mongoid', '~> 2.0'
+gem 'bson_ext', '~> 1.3.1'
+
 gem 'pg'
 gem 'devise', :git => "git://github.com/plataformatec/devise"
 gem 'resque'

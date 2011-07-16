@@ -1,0 +1,3 @@
+class Appendix < Chapter
+  
+end
