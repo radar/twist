@@ -32,14 +32,14 @@ class Chapter
     @section_count ||= [position, 0]
   end
   
-  def self.process!(git, file)
+  def self.process!(book, git, file)
     # Read the XML, parse it with XSLT which will convert it into lovely HTML
     xml = Nokogiri::XML(File.read(git.path + file))
     xslt = Nokogiri::XSLT(File.read(Rails.root + 'lib/chapter.xslt'))
     parsed_doc = xslt.transform(xml)
     
-    # chapter = find_or_initialize_by_identifier(xml.xpath("chapter").first["id"])
-    chapter = new(:identifier => xml.xpath("chapter").first["id"])
+    chapter = book.chapters.find_or_initialize_by(identifier: xml.xpath("chapter").first["id"])
+    chapter.elements = [] # Clear the elements, begin anew.
     chapter.title = xml.xpath("chapter/title").text
     chapter.position = 1 # TODO: un "fix"
 
@@ -47,6 +47,7 @@ class Chapter
     # Why do we have to pass in the Chapter object here? Surely it can know it.
     # In ActiveRecord there is an @association.owner object which would return it.
     elements.each { |element| Element.process!(chapter, element) }
+    book.save
     chapter
   end
   

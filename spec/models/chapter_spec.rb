@@ -11,7 +11,7 @@ describe Chapter do
   end
 
   it "processes a chapter" do
-    book.chapters << Chapter.process!(git, "ch01/ch01.xml")
+    Chapter.process!(book, git, "ch01/ch01.xml")
     chapter = book.chapters.first
     chapter.title.should == "Ruby on Rails, the framework"
     chapter.identifier.should == "ch01_1"
@@ -36,5 +36,23 @@ describe Chapter do
                                      "Summary"]
   end
 
-  it "updates a chapter"
+  it "updates a chapter" do
+    Chapter.process!(book, git, "ch01/ch01.xml")
+    chapter = book.chapters.first
+    chapter.title.should == "Ruby on Rails, the framework"
+    Dir.chdir(git.path) do
+      doc = Nokogiri::XML(File.read("ch01/ch01.xml"))
+      # Replace first paragraph's content with simply "Hello world!"
+      doc.css("#ch01_3").first.content = "Hello world!"
+      File.open("ch01/ch01.xml", "w+") do |f|
+        f.write(doc.to_xml)
+      end
+    end
+
+    # Re-process the chapter
+    chapter = Chapter.process!(book, git, "ch01/ch01.xml")
+    book.chapters.count.should == 1
+    element = chapter.elements.first
+    element.content.should == "<p id=\"ch01_3\">Hello world!</p>"
+  end
 end

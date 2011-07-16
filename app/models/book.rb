@@ -21,7 +21,7 @@ class Book
     git.update!
 
     git.changed_files(current_commit).grep(/ch\d+\/ch\d+.xml/).each do |file|
-      book.chapters << Chapter.process!(git, file)
+      Chapter.process!(book, git, file)
     end
 
     # When done, update the book with the current commit as a point of reference
