@@ -74,7 +74,7 @@ module Processor
 
     chapter.elements << formalpara
     # Iterate through and process each sub-element of the formalpara separately
-    markup.css("div.formalpara > *").each { |element| process!(chapter, element) }
+    markup.children.each { |element| process!(chapter, element) }
     
     formalpara
   end
