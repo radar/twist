@@ -4,7 +4,7 @@ class ChaptersController < ApplicationController
   caches_action :show
   
   def show
-    @chapter = @book.chapters.find_by_position(params[:id])
+    @chapter = @book.chapters.detect { |chapter| chapter.position == params[:id].to_i }
   end
   
   private

@@ -17,8 +17,22 @@ describe Chapter do
     chapter.identifier.should == "ch01_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
-    sections.map(&:title).should == ["What is Ruby on Rails?", 
+    sections.map(&:title).should == ["What is Ruby on Rails?",
+                                     "Benefits",
+                                     "Common Terms",
+                                     "Rails in the wild",
                                      "Developing your first application",
+                                     "Installing Rails",
+                                     "Generating an application",
+                                     "Starting the application",
+                                     "Scaffolding",
+                                     "Migrations",
+                                     "Viewing & creating purchases",
+                                     "Validations",
+                                     "Showing off",
+                                     "Routing",
+                                     "Updating",
+                                     "Deleting",
                                      "Summary"]
   end
 

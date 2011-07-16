@@ -7,11 +7,14 @@ describe 'chapters' do
     @book = Book.create(:title => "Rails 3 in Action", 
                         :path => "http://github.com/radar/rails3book_test")
     run_resque_job!
+    @book.reload
+    p @book.chapters
     actually_sign_in_as(user)
   end
   
   it "can view a given chapter and its parts" do
     visit book_chapter_path(@book, @book.chapters.first)
+    page!
     
     # Paragraph test
     within "p#ch01_3" do
@@ -38,6 +41,10 @@ describe 'chapters' do
     # Formal paragraph
     within "h4" do
       page.should have_content("MVC")
+    end
+    
+    within "div.formalpara" do
+      page.should have_content(" This paradigm is designed to keep the logically different")
     end
     
     # Informal example

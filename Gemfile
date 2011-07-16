@@ -18,6 +18,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'webmock'
   gem 'launchy'
+  gem 'database_cleaner'
 end
 
 # Asset template engines
