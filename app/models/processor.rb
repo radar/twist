@@ -118,6 +118,7 @@ module Processor
   alias_method :process_h1!, :process_header!
   alias_method :process_h2!, :process_header!
   alias_method :process_h3!, :process_header!
+  alias_method :process_h4!, :process_header!
   
   def process_text!(chapter, markup)
     # We don't care about orphaned text, only text within an element such as a paragraph.
