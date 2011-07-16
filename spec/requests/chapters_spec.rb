@@ -41,10 +41,9 @@ describe 'chapters' do
     within "h4" do
       page.should have_content("MVC")
     end
-    
-    within "div.formalpara" do
-      page.should have_content(" This paradigm is designed to keep the logically different")
-    end
+
+    # This content is within a formal paragraph
+    page.should have_content(" This paradigm is designed to keep the logically different")
     
     # Informal example
     within "pre" do
