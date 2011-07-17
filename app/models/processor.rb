@@ -86,6 +86,9 @@ module Processor
   end
   
   def process_informalexample!(chapter, markup)
+    # Remove excessive linebreaks
+    pre = markup.css("pre")[0]
+    pre.content = pre.content.strip
     chapter.elements << new(:tag        => "informalexample",
                             :identifier => markup["id"],
                             :content    => markup.css("pre").to_html)
