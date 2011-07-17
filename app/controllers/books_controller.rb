@@ -19,11 +19,11 @@ class BooksController < ApplicationController
   end
   
   def show
-    @book = Book.find(params[:id])
+    @book = Book.where(:permalink => params[:id]).first
   end
 
   def receive
-    @book = Book.find(params[:id])
+    @book = Book.where(:permalink => params[:id]).first
     @book.enqueue
     render :nothing => true
   end

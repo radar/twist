@@ -10,6 +10,6 @@ class ChaptersController < ApplicationController
   private
   
   def find_book
-    @book = Book.find(params[:book_id])
+    @book = Book.where(:permalink => params[:book_id]).first
   end
 end

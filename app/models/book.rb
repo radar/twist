@@ -3,12 +3,14 @@ class Book
   field :user_id, :type => Integer
   field :path, :type => Integer
   field :title, :type => String
+  field :permalink, :type => String
   field :current_commit, :type => String
   field :processing, :type => Boolean, :default => false
   
   embeds_many :chapters
   
   @queue = "normal"
+  before_create :set_permalink
   after_create :enqueue
   
   def self.perform(id)
@@ -29,10 +31,18 @@ class Book
     book.processing = false
     book.save
   end
+  
+  def to_param
+    permalink
+  end
 
   def enqueue
     Resque.enqueue(self.class, self.id)
     self.processing = true
     self.save!
+  end
+  
+  def set_permalink
+    self.permalink = title.parameterize
   end
 end
