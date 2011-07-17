@@ -11,6 +11,7 @@ gem 'resque'
 
 # gem 'eeepub'
 gem 'nokogiri'
+gem 'dragonfly'
 
 group :development, :test do
   gem 'factory_girl'

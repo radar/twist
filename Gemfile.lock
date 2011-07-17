@@ -63,6 +63,8 @@ GEM
     crack (0.1.8)
     database_cleaner (0.6.7)
     diff-lcs (1.1.2)
+    dragonfly (0.9.4)
+      rack
     erubis (2.7.0)
     execjs (1.2.0)
       multi_json (~> 1.0)
@@ -184,6 +186,7 @@ DEPENDENCIES
   coffee-script
   database_cleaner
   devise!
+  dragonfly
   factory_girl
   jquery-rails
   launchy
