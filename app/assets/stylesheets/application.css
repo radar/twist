@@ -8,16 +8,41 @@
 
 body {
   margin: 1% 2.5% 1% 2.5%;
+  font: 12pt Georgia;
 }
 
 .chapter {
-  margin: 0% 40% 0% 0%;
+  margin: 0% 35% 0% 0%;
 }
 
 p {
   font: 13pt/1.5 "Georgia";
 }
 
-p span.footnote {
+p span.footnote, span.indexterm {
   display: none;
+}
+
+.example pre {
+  background: #efefef;
+  margin-left: 1em;
+  padding-left: 1em;
+  padding-top: 10px;
+  margin-top: 5px;
+  border: 2px solid #232323;
+  font: 10pt "Inconsolata", Monaco, monospace;
+}
+
+pre {
+  font: 10pt "Inconsolata", Monaco, monospace;
+}
+
+.example .title {
+  font: 12pt Helvetica;
+  font-weight: bold;
+  margin-left: 0.85em;
+  padding-left: 1em;
+  background: #232323;
+  color: white;
+  padding: 5px;
 }
