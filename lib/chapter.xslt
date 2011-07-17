@@ -20,6 +20,10 @@
             <xsl:apply-templates />
         </p>
     </xsl:template>
+    <!-- Don't show indexterms -->
+    <xsl:template match="para/indexterm">
+      <span class='indexterm'><xsl:apply-templates /></span>
+    </xsl:template>
     <xsl:template match="section">
         <section id='{@id}'>
             <xsl:apply-templates />
