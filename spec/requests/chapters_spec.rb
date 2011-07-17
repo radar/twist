@@ -67,6 +67,13 @@ describe 'chapters' do
       end
     end
     
+    # Figure
+    within "div.figure" do
+      within "span.title" do
+        page.should have_content("Figure 1.1 The app directory")
+      end
+    end
+    
     # Table (oh boy, these are fun!)
     within "div.table" do
       within ".title" do

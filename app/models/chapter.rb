@@ -9,11 +9,17 @@ class Chapter
   
   attr_accessor :footnote_count
   attr_accessor :section_count
+  attr_accessor :figure_count
   
   # Defaults footnote_count to something.
   # Would use attr_accessor_with_default if it wasn't deprecated.
   def footnote_count
     @footnote_count ||= 0
+  end
+  
+  # Default figure count to 0, increments when we call process_figure! in Processor
+  def figure_count
+    @figure_count ||= 0
   end
   
   # Used for correctly counting + labelling the sections.

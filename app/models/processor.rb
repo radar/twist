@@ -96,6 +96,9 @@ module Processor
   end
   
   def process_figure!(chapter, markup)
+    chapter.figure_count += 1
+    title = markup.css("span.title")[0]
+    title.content = "Figure #{chapter.position}.#{chapter.figure_count} #{title.content}"
     chapter.elements << build_element(markup, "figure")
   end
   
