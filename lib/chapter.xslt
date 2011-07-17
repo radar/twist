@@ -46,9 +46,9 @@
         </h3>
     </xsl:template>
     <xsl:template match="chapter/section/section/section/title">
-        <h4 id='{@id}'>
+        <h3 id='{@id}'>
             <xsl:apply-templates />
-        </h4>
+        </h3>
     </xsl:template>
     <xsl:template match="filename">
         <span class="filename" id='{@id}'>

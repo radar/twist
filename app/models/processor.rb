@@ -118,10 +118,14 @@ module Processor
     # headers are processed separately, we don't care about them in this context
   end
   
+  # H4s are formal paragraph headers
+  def process_h4!(chapter, markup)
+    chapter.elements << build_element(markup, "h4")
+  end
+  
   alias_method :process_h1!, :process_header!
   alias_method :process_h2!, :process_header!
   alias_method :process_h3!, :process_header!
-  alias_method :process_h4!, :process_header!
   
   def process_text!(chapter, markup)
     # We don't care about orphaned text, only text within an element such as a paragraph.
