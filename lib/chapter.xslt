@@ -56,19 +56,13 @@
         </span>
     </xsl:template>
     <xsl:template match="formalpara">
-        <div class="formalpara" id='{@id}'>
-            <xsl:apply-templates />
-        </div>
+      <xsl:apply-templates />
     </xsl:template>
-    <xsl:template match="chapter/section/formalpara/title">
-        <h4 id='{@id}'>
-            <xsl:apply-templates />
-        </h4>
+    <xsl:template match="formalpara/title">
+        <h4><xsl:apply-templates /></h4>
     </xsl:template>
-    <xsl:template match="chapter/section/section/formalpara/title">
-        <h4 id='{@id}'>
-            <xsl:apply-templates />
-        </h4>
+    <xsl:template match="formalpara/para[figure]">
+        <xsl:apply-templates />
     </xsl:template>
     <xsl:template match="itemizedlist">
         <ul id='{@id}'>
