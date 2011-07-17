@@ -11,7 +11,10 @@ module ElementsHelper
     @footnote_count ||= 0
     @footnote_count += 1
     footnote = Nokogiri::HTML(element.content)
-    footnote.content = "<a name='footnote_#{@footnote_count}'></a><sup>#{@footnote_count}</sup> #{footnote.to_html}<br />".html_safe
+    # TODO: Work out a better way to style the whole footnote container
+    content_tag("span", :class => "footnote_container") do
+      "<a name='footnote_#{@footnote_count}'></a><sup>#{@footnote_count}</sup> #{footnote.to_html}<br />".html_safe
+    end
   end
   
   private
