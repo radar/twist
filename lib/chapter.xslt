@@ -117,14 +117,11 @@
     </xsl:template>
     <xsl:template match="figure">
         <div class="figure" id='{@id}'>
-            <xsl:apply-templates />
+          <xsl:apply-templates />
+          <span class="title"><xsl:value-of select="title"/></span>
         </div>
     </xsl:template>
-    <xsl:template match="figure/title">
-        <span class="title" id='{@id}'>
-            <xsl:apply-templates />
-        </span>
-    </xsl:template>
+    <xsl:template match="figure/title"></xsl:template>
     <xsl:template match="mediaobject">
         <div class="mediaobject" id='{@id}'>
             <xsl:apply-templates />
