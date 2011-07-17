@@ -9,7 +9,7 @@ gem 'devise', :git => "git://github.com/plataformatec/devise"
 gem 'resque'
 #gem 'omniauth'
 
-gem 'eeepub'
+# gem 'eeepub'
 gem 'nokogiri'
 
 group :development, :test do
