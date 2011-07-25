@@ -16,7 +16,7 @@ module Processor
     content = markup.to_html
     markup.css("span.footnote").each do |footnote|
       chapter.footnote_count += 1
-      footnote_link = "<a href='#footnote_#{chapter.footnote_count}'><sup>#{chapter.footnote_count}</sup></a>"
+      footnote_link = "<a href='#footnote_#{chapter.footnote_count}' class='footnote'><sup>#{chapter.footnote_count}</sup></a>"
       content = content.gsub(/<span class="footnote" id="#{footnote["id"]}">(.*?)<\/span>/, footnote_link)
       process_footnote!(chapter, footnote)
     end
@@ -89,9 +89,11 @@ module Processor
     # Remove excessive linebreaks
     pre = markup.css("pre")[0]
     pre.content = pre.content.strip
-    chapter.elements << new(:tag        => "informalexample",
+    informalexample = new(:tag        => "informalexample",
                             :identifier => markup["id"],
                             :content    => markup.css("pre").to_html)
+    chapter.elements << informalexample
+    informalexample
   end
   
   def process_example!(chapter, markup)
@@ -102,6 +104,8 @@ module Processor
     chapter.figure_count += 1
     title = markup.css("span.title")[0]
     title.content = "Figure #{chapter.position}.#{chapter.figure_count} #{title.content}"
+    filename = markup.css("img")[0]["src"]
+    chapter.figures << Figure.new(:figure => File.open(chapter.git.path + filename), :filename => filename)
     chapter.elements << build_element(markup, "figure")
   end
   
@@ -111,6 +115,14 @@ module Processor
   
   def process_note!(chapter, markup)
     chapter.elements << build_element(markup, "note")
+  end
+  
+  def process_warning!(chapter, markup)
+    chapter.elements << build_element(markup, "warning")
+  end
+  
+  def process_tip!(chapter, markup)
+    chapter.elements << build_element(markup, "tip")
   end
   
   def process_indexterm!(chapter, markup)
