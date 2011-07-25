@@ -9,10 +9,16 @@
 body {
   margin: 1% 2.5% 1% 2.5%;
   font: 12pt Georgia;
+  color: #444;
+  background: #ddd;
 }
 
 .chapter {
+  background: white;
   margin: 0% 35% 0% 0%;
+  border: 1px solid #AAA;
+  margin-left: 25px;
+  padding: 10px;
 }
 
 p {
@@ -26,23 +32,47 @@ p span.footnote, span.indexterm {
 .example pre {
   background: #efefef;
   margin-left: 1em;
+  margin-right: 1em;
   padding-left: 1em;
   padding-top: 10px;
   margin-top: 5px;
   border: 2px solid #232323;
-  font: 10pt "Inconsolata", Monaco, monospace;
+  font: 10.5pt "Inconsolata", Monaco, monospace;
 }
 
 pre {
-  font: 10pt "Inconsolata", Monaco, monospace;
+  font: 11pt "Inconsolata", Monaco, monospace;
+  background: #dfdfdf;
+  padding: 5px;
 }
 
 .example .title {
   font: 12pt Helvetica;
   font-weight: bold;
-  margin-left: 0.85em;
+  margin-left: 0.90em;
   padding-left: 1em;
   background: #232323;
   color: white;
   padding: 5px;
+}
+
+a.footnote {
+  color: blue;
+  padding-left: 2px;
+}
+
+span.footnote {
+  font-size: 85%;
+  color: #333;
+}
+
+.figure {
+  border: 1px dashed #343434;
+  padding: 10px;
+  margin: 10px;
+}
+
+.figure .title {
+  font: 12pt Helvetica;
+  font-weight: bold;
 }
