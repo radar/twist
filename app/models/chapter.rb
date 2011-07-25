@@ -3,9 +3,14 @@ class Chapter
   field :position, :type => Integer
   field :title, :type => String
   field :identifier, :type => String
+  field :file_name, :type => String
   
   embedded_in :book
   embeds_many :elements
+  embeds_many  :figures
+
+  # Provides an accessor to get to the git repository where the chapter is contained
+  attr_accessor :git
   
   attr_accessor :footnote_count
   attr_accessor :section_count
@@ -45,6 +50,7 @@ class Chapter
     parsed_doc = xslt.transform(xml)
     
     chapter = book.chapters.find_or_initialize_by(identifier: xml.xpath("chapter").first["id"])
+    chapter.git = git
     chapter.elements = [] # Clear the elements, begin anew.
     chapter.title = xml.xpath("chapter/title").text
     chapter.position = 1 # TODO: un "fix"
@@ -54,10 +60,15 @@ class Chapter
     # In ActiveRecord there is an @association.owner object which would return it.
     elements.each { |element| Element.process!(chapter, element) }
     book.save
+    chapter.save_figure_attachments!
     chapter
   end
   
   def to_param
     position.to_s
+  end
+
+  def save_figure_attachments!
+    self.figures.each { |figure| figure.save_attachment! }
   end
 end

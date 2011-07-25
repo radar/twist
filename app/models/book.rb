@@ -19,6 +19,7 @@ class Book
     # TODO: determine if path is public
     user, repo = book.path.split("/")[-2, 2]
     git = Git.new(user, repo)
+    book.path = git.path.to_s
     current_commit = git.current_commit
     git.update!
 

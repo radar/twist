@@ -11,6 +11,7 @@ describe 'chapters' do
 
     @book = Book.create(:title => "Rails 3 in Action", 
                         :path => "http://github.com/radar/rails3book_test")
+    @book.path = git.path
     run_resque_job!
     @book.reload
     actually_sign_in_as(user)
