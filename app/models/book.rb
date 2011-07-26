@@ -5,6 +5,7 @@ class Book
   field :title, :type => String
   field :permalink, :type => String
   field :current_commit, :type => String
+  field :just_added, :type => Boolean, :default => true
   field :processing, :type => Boolean, :default => false
   
   embeds_many :chapters
@@ -23,13 +24,23 @@ class Book
     current_commit = git.current_commit
     git.update!
 
-    git.changed_files(current_commit).grep(/ch\d+\/ch\d+.xml/).each do |file|
+    # Use instance variable to make it bubble up out of the `chdir` block
+    if book.just_added?
+      Dir.chdir(git.path) do
+        @changed_files = Dir["**/*.xml"]
+      end
+    else
+      @changed_files = git.changed_files(current_commit)
+    end
+
+    @changed_files.grep(/ch\d+\/ch\d+.xml/).each do |file|
       Chapter.process!(book, git, file)
     end
 
     # When done, update the book with the current commit as a point of reference
     book.current_commit = git.current_commit
     book.processing = false
+    book.just_added = false
     book.save
   end
   
