@@ -13,16 +13,42 @@ body {
   background: #ddd;
 }
 
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+a {
+  color: #0074FF;
+}
+
+.menu {
+  float: right;
+}
+
+ol.chapters li {
+  padding: 3px;
+  font-size: 14pt;
+}
+
 .chapter {
   background: white;
-  margin: 0% 35% 0% 0%;
+  margin: 1% 35% 0% 0%;
   border: 1px solid #AAA;
   margin-left: 25px;
-  padding: 10px;
+  padding: 1.5em;
 }
 
 p {
   font: 13pt/1.5 "Georgia";
+}
+
+p code, p .filename {
+  font-size: 11.5pt;
+  font-family: "Inconsolata", Monaco, monospace;
 }
 
 p span.footnote, span.indexterm {
@@ -75,4 +101,20 @@ span.footnote {
 .figure .title {
   font: 12pt Helvetica;
   font-weight: bold;
+}
+
+#section_listing {
+  position: fixed;
+  right: 3%;
+  width: 30%;
+  top: 7.5%;
+}
+
+#section_listing div {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+#section_listing div, #section_listing h3 {
+  text-decoration: underline;
 }

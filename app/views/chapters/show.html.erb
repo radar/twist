@@ -1,4 +1,11 @@
 <div class='chapter'>
-  <h1><%= @chapter.book.title %> - Chapter <%= @chapter.position %> - <%= @chapter.title %></h1>
+  <div id='section_listing'>
+    <h3>Chapter <%= @chapter.position %></h3>
+  </div>
+  <h1><%= link_to @chapter.book.title, @chapter.book %></h1>
+  <br>
+  <h2>Chapter <%= @chapter.position %> - <%= @chapter.title %></h2>
   <%= render_elements(@chapter.elements) %>
 </div>
+
+<span id='bottom'></span>

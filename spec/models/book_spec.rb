@@ -18,9 +18,9 @@ describe Book do
       assert book.processing?
     end
 
-    it "processes a book" do
+    it "processes a test book" do
       # Should enqueue a job...
-      book = Book.create(:title => "Rails 3 in Action", :path => "http://github.com/radar/rails3book_test")
+      book = Book.create(:title => "Rails 3 in Action (TESTs)", :path => "http://github.com/radar/rails3book_test")
       assert book.processing?
       # ... which when run ...
       run_resque_job!
@@ -28,6 +28,18 @@ describe Book do
       assert !book.processing?
       # ... creates a chapter!
       book.chapters.count.should eql(1)
+    end
+    
+    it "processes the Rails 3 in Action real book" do
+      # Should enqueue a job...
+      book = Book.create(:title => "Rails 3 in Action", :path => "http://github.com/radar/rails3book")
+      assert book.processing?
+      # ... which when run ...
+      run_resque_job!
+      book.reload
+      assert !book.processing?
+      # ... creates a chapter!
+      book.chapters.count.should eql(18)
     end
   end
 end

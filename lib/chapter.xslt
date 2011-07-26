@@ -40,7 +40,7 @@
         </h1>
     </xsl:template>
     <xsl:template match="chapter/section/title">
-        <h2 id='{@id}'>
+        <h2 id='{@id}' class='section_title'>
             <xsl:apply-templates />
         </h2>
     </xsl:template>
