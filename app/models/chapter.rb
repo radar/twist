@@ -53,7 +53,7 @@ class Chapter
     chapter.git = git
     chapter.elements = [] # Clear the elements, begin anew.
     chapter.title = xml.xpath("chapter/title").text
-    chapter.position = 1 # TODO: un "fix"
+    chapter.position = book.chapters.count + 1
 
     elements = parsed_doc.css("div.chapter > *")
     # Why do we have to pass in the Chapter object here? Surely it can know it.
