@@ -31,6 +31,8 @@ describe 'chapters' do
       page.should have_content("The MIT license")
     end
     
+    pending("Parse footnote containing paragraph elements")
+    
     # Section test
     within "h2#ch01_5" do
       page.should have_content("1.1 What is Ruby on Rails?")
