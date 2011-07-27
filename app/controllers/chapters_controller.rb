@@ -1,4 +1,5 @@
 class ChaptersController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :find_book
   
   caches_action :show
