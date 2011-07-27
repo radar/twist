@@ -53,7 +53,6 @@ class Chapter
     chapter.git = git
     chapter.elements = [] # Clear the elements, begin anew.
     chapter.title = xml.xpath("chapter/title").text
-    puts caller[0,5].join("\n")
     if chapter.new_record?
       # TODO: This needs to be fixed to use the chapter's position within the book, as that may change
       # We cannot rely on the ordering to stay the same.
