@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe 'chapters' do
   let(:user) { create_user! }
-  let(:git) { Git.new("radar", "rails3book_test") }
   before do
     create_book!
     actually_sign_in_as(user)
