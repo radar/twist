@@ -1,1 +1,2 @@
-<span class='note_button'><%= link_to "#{pluralize(element.notes.count, "note")} +", new_element_note_path(element.identifier), :remote => true, :update => element.identifier %></span>
+<% id = element.identifier %>
+<span class='note_button' id='note_button_<%= id %>'><%= link_to "#{pluralize(element.notes.count, "note")} +", new_element_note_path(id), :remote => true, :update => ids %></span>
