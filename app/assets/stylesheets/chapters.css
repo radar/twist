@@ -1,0 +1,92 @@
+
+ol.chapters li {
+  padding: 3px;
+  font-size: 14pt;
+}
+
+.chapter {
+  background: white;
+  margin: 1% 35% 0% 0%;
+  border: 1px solid #AAA;
+  margin-left: 4em;
+  padding: 1.5em;
+  -webkit-border-radius: 5px;
+}
+
+p {
+  margin: 0px;
+  font: 13pt/1.5 "Georgia";
+}
+
+p code, p .filename {
+  font-size: 11.5pt;
+  font-family: "Inconsolata", Monaco, monospace;
+}
+
+p span.footnote, span.indexterm {
+  display: none;
+}
+
+.example pre {
+  background: #efefef;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-left: 1em;
+  padding-top: 10px;
+  margin-top: 5px;
+  border: 2px solid #232323;
+  font: 10.5pt "Inconsolata", Monaco, monospace;
+}
+
+pre {
+  font: 11pt "Inconsolata", Monaco, monospace;
+  background: #dfdfdf;
+  padding: 5px;
+}
+
+.example .title {
+  font: 12pt Helvetica;
+  font-weight: bold;
+  margin-left: 0.90em;
+  padding-left: 1em;
+  background: #232323;
+  color: white;
+  padding: 5px;
+}
+
+a.footnote {
+  color: blue;
+  padding-left: 2px;
+}
+
+span.footnote {
+  font-size: 85%;
+  color: #333;
+}
+
+.figure {
+  border: 1px dashed #343434;
+  padding: 10px;
+  margin: 10px;
+}
+
+.figure .title {
+  font: 12pt Helvetica;
+  font-weight: bold;
+}
+
+#section_listing {
+  position: fixed;
+  right: 3%;
+  width: 30%;
+  top: 3.5em;
+}
+
+#section_listing div {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+#section_listing div, #section_listing h3 {
+  text-decoration: underline;
+}

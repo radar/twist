@@ -1,0 +1,7 @@
+.note_button {
+  position: relative;
+  right: 6.5em;
+  top: 23px;
+  padding: 5px;
+  -webkit-border-radius: 5px;
+}
