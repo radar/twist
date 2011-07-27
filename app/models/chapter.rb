@@ -53,7 +53,12 @@ class Chapter
     chapter.git = git
     chapter.elements = [] # Clear the elements, begin anew.
     chapter.title = xml.xpath("chapter/title").text
-    chapter.position = book.chapters.count + 1
+    puts caller[0,5].join("\n")
+    if chapter.new_record?
+      # TODO: This needs to be fixed to use the chapter's position within the book, as that may change
+      # We cannot rely on the ordering to stay the same.
+      chapter.position = book.chapters.count + 1
+    end
 
     elements = parsed_doc.css("div.chapter > *")
     # Why do we have to pass in the Chapter object here? Surely it can know it.
