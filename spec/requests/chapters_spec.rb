@@ -4,22 +4,12 @@ describe 'chapters' do
   let(:user) { create_user! }
   let(:git) { Git.new("radar", "rails3book_test") }
   before do
-    Resque.remove_queue("normal") # TODO: is there a better way than just putting this *everywhere*?
-    # Nuke the repo, start afresh.
-    FileUtils.rm_r(git.path)
-    git.update!
-
-    @book = Book.create(:title => "Rails 3 in Action", 
-                        :path => "http://github.com/radar/rails3book_test")
-    @book.path = git.path
-    run_resque_job!
-    @book.reload
+    create_book!
     actually_sign_in_as(user)
   end
   
   it "can view a given chapter and its parts" do
     visit book_chapter_path(@book, @book.chapters.first)
-    page!
     
     # Paragraph test
     within "p#ch01_3" do
