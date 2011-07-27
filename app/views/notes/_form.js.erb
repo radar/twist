@@ -1,0 +1,6 @@
+<%= form_for(@note, :url => element_notes_path(params[:element_id])) do |f| %>
+  <p>
+    <strong><%= f.label :text, "Leave a note:" %></strong><br>
+    <%= f.text_area :text, :cols => 80, :rows => 5 %>
+  </p>
+<% end %>

@@ -1,0 +1,3 @@
+<% partial = render(:partial => 'notes/form') %>
+$('#notes_container_<%= params[:element_id] %>').toggle();
+$('#notes_container_<%= params[:element_id] %>').html(<%= raw(partial.inspect) %>)

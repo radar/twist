@@ -6,8 +6,9 @@ class Element
   field :title, :type => String
   field :content, :type => String
   
-  
   embedded_in :chapter
+  
+  has_many :notes
   
   delegate :book, :to => :chapter
 end

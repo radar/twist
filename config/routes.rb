@@ -8,6 +8,10 @@ Twist::Application.routes.draw do
     
     resources :chapters
   end
+  
+  resources :elements do
+    resources :notes
+  end
 
   devise_for :users
 end
