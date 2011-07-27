@@ -10,7 +10,13 @@
     <%= flash[:notice] %>
     <%= flash[:alert] %>
 
-    <menu><%= link_to "Sign in", new_user_session_path %></menu>
+    <menu>
+      <% if user_signed_in? %>
+        <%= link_to "Sign out", user_session_path, :method => :delete %>
+      <% else %>
+        <%= link_to "Sign in", new_user_session_path %>
+      <% end %>
+    </menu>
 
     <%= yield %>
 
