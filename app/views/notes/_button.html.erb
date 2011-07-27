@@ -1,4 +1,4 @@
 <% id = element.identifier %>
-<% if id %>
+<% unless id.blank? %>
   <span class='note_button' id='note_button_<%= id %>'><%= link_to "#{pluralize(element.notes.count, "note")} +", new_element_note_path(id), :remote => true, :update => id %></span>
 <% end %>
