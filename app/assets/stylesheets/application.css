@@ -6,17 +6,16 @@
  *= require_tree . 
 */
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 1% 2.5% 1% 2.5%;
   font: 12pt Georgia;
   color: #444;
   background: #ddd;
-}
-
-
-h1, h2, h3 {
-  margin: 0;
-  padding: 0;
 }
 
 h1, h2, h3 {
@@ -27,7 +26,7 @@ h2 {
   margin-top: 1em;
 }
 
-h3 {
+h3, h4 {
   margin-top: 0.75em;
 }
 
@@ -35,6 +34,13 @@ a {
   color: #0074FF;
 }
 
-.menu {
-  float: right;
+ol {
+  margin-top: 1em;
+  margin-left: 2em;
+}
+
+menu {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
 }
