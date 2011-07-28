@@ -1,3 +1,6 @@
 <% partial = render(:partial => 'notes/form') %>
-$('#notes_container_<%= params[:element_id] %>').toggle();
-$('#notes_container_<%= params[:element_id] %>').html(<%= raw(partial.inspect) %>)
+container = $('#notes_container_<%= params[:element_id] %>');
+container.toggle();
+container.html(<%= raw(partial.inspect) %>);
+container.append("<h4>Previous Notes</h4>");
+container.append(<%= raw(render(@notes).inspect) %>);

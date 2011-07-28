@@ -12,6 +12,7 @@ class NotesController < ApplicationController
 
   def new
     @note = Note.new
+    @notes = @chapter.notes.where(:element_identifier => params[:element_id])
   end
   
   def create
