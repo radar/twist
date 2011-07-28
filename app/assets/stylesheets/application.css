@@ -44,3 +44,12 @@ menu {
   top: 0.5em;
   right: 0.5em;
 }
+
+.wrapper {
+  background: white;
+  margin: 1% 35% 0% 0%;
+  border: 1px solid #AAA;
+  margin-left: 4em;
+  padding: 1.5em;
+  -webkit-border-radius: 5px;
+}
