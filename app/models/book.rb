@@ -3,6 +3,7 @@ class Book
   field :user_id, :type => Integer
   field :path, :type => String
   field :title, :type => String
+  field :blurb, :type => String
   field :permalink, :type => String
   field :current_commit, :type => String
   field :just_added, :type => Boolean, :default => true

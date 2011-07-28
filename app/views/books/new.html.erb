@@ -11,5 +11,10 @@
     <%= f.text_field :path %>
   </p>
 
+  <p>
+    <%= f.label :blurb %>
+    <%= f.text_area :blurb, :rows => 5, :cols => 80 %>
+  </p>
+
   <%= f.submit%>
 <% end %>
