@@ -1,8 +1,6 @@
-<div class='wrapper'>
-  <h2><%= link_to @note.chapter.book.title, @note.chapter.book %> - <%= link_to @note.chapter.title, [@note.chapter.book, @note.chapter] %></h2>
-  <h3>Note #<%= @note.number %></h3>
-  <%= render_element(@note.element) %>
-  
-  <h3><%= @note.user.email %> writes:</h3>
-  <p><%= @note.text %></p>
-</div>
+<h2><%= link_to @note.chapter.book.title, @note.chapter.book %> - <%= link_to @note.chapter.title, [@note.chapter.book, @note.chapter] %></h2>
+<h3>Note #<%= @note.number %></h3>
+<%= render_element(@note.element) %>
+
+<h3><%= @note.user.email %> writes:</h3>
+<p><%= @note.text %></p>

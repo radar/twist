@@ -1,11 +1,12 @@
-<div class='wrapper'>
-  <div id='sidebar'>
-    <%= link_to "All notes for this chapter", book_chapter_notes_path(@book, @chapter) %>
-    <h3>Chapter <%= @chapter.position %></h3>
-  </div>
-  <h1><%= link_to @chapter.book.title, @chapter.book %></h1>
-  <br>
-  <h2>Chapter <%= @chapter.position %> - <%= @chapter.title %></h2>
-  <%= render_elements(@chapter.elements) %>
+<div id='sidebar'>
+  <%= link_to "All notes for this chapter", book_chapter_notes_path(@book, @chapter) %>
+  <h3>Chapter <%= @chapter.position %></h3>
 </div>
+
+<h1><%= link_to @chapter.book.title, @chapter.book %></h1>
+<br>
+<h2>Chapter <%= @chapter.position %> - <%= @chapter.title %></h2>
+
+<%= render_elements(@chapter.elements) %>
+
 <script>create_section_listing();</script>

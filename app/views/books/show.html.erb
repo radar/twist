@@ -1,8 +1,6 @@
-<div class='wrapper'>
-  <h1><%= @book.title %></h1>
-  <ol class='chapters'>
-    <% @book.chapters.each do |chapter| %>
-      <li><%= link_to chapter.title, [@book, chapter] %></li>
-    <% end %>
-  </ol>
-</div>
+<h1><%= @book.title %></h1>
+<ol class='chapters'>
+  <% @book.chapters.each do |chapter| %>
+    <li><%= link_to chapter.title, [@book, chapter] %></li>
+  <% end %>
+</ol>
