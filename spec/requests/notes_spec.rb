@@ -17,5 +17,7 @@ describe "notes" do
     page.should have_content("1 note +")
     click_link "All notes for this chapter"
     click_link "This is a test note!"
+    page.should have_content("user@example.com writes:")
+    page.should have_content("This is a test note!")
   end
 end
