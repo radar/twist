@@ -103,20 +103,25 @@ ul {
   font-family: Helvetica;
   font-size: 90%;
   
-  div {
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-  
-  div, h3 {
-    text-decoration: underline;
-  }
-  
-  .major {
-    font-weight: bold;
-  }
-  
-  .minor {
-    margin-left: 1em;
+  #section_listing {
+    a {
+      margin-top: 4px;
+      margin-bottom: 4px;
+      color: #444;
+      display: block;
+    }
+
+    a, h3 {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .major {
+      font-weight: bold;
+    }
+
+    .minor {
+      margin-left: 1em;
+    }
   }
 }

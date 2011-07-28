@@ -1,6 +1,8 @@
 <div id='sidebar'>
   <%= link_to "All notes for this chapter", book_chapter_notes_path(@book, @chapter) %>
   <h3>Chapter <%= @chapter.position %></h3>
+  <div id='section_listing'>
+  </div>
 </div>
 
 <h1><%= link_to @chapter.book.title, @chapter.book %></h1>
