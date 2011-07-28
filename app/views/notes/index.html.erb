@@ -1,0 +1,10 @@
+<div class='wrapper'>
+  <h1>Notes for <%= link_to @book.title, @book %></h1>
+  <h2><%= link_to "Chapter #{@chapter.position} - #{@chapter.title}", [@book, @chapter] %></h2>
+  <br>
+
+  <% if @notes.empty? %>
+    <p>There are currently no notes for this chapter.</p>
+  <% end %>
+  <%= render @notes %>
+</div>

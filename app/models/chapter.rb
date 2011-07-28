@@ -7,7 +7,8 @@ class Chapter
   
   embedded_in :book
   embeds_many :elements
-  embeds_many  :figures
+  embeds_many :figures
+  embeds_many :notes
 
   # Provides an accessor to get to the git repository where the chapter is contained
   attr_accessor :git

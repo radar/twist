@@ -1,10 +1,14 @@
 module ElementsHelper
   def render_elements(elements)
     elements.each do |element|
-      partial = find_element_partial(element) ? element.tag : "element"
-      concat(render(:partial => "elements/#{partial}", :locals => { :element => element }))
+      concat(render_element(element))
     end
     nil
+  end
+  
+  def render_element(element)
+    partial = find_element_partial(element) ? element.tag : "element"
+    render(:partial => "elements/#{partial}", :locals => { :element => element })
   end
   
   def render_footnote(element)

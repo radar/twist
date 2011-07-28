@@ -1,0 +1,3 @@
+<p>
+  <%= link_to "##{note.number} - #{note.text}", book_chapter_note_path(@book, @chapter, note) %> - <%= note.user.email %>
+</p>

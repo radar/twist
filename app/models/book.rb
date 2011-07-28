@@ -7,6 +7,7 @@ class Book
   field :current_commit, :type => String
   field :just_added, :type => Boolean, :default => true
   field :processing, :type => Boolean, :default => false
+  field :notes_count, :type => Integer, :default => 0
   
   embeds_many :chapters
   

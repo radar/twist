@@ -6,11 +6,13 @@ Twist::Application.routes.draw do
       post :receive
     end
     
-    resources :chapters
-  end
-  
-  resources :elements do
-    resources :notes
+    resources :chapters do
+      resources :elements do
+        resources :notes
+      end
+
+      resources :notes
+    end
   end
 
   devise_for :users

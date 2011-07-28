@@ -7,6 +7,7 @@ class Element
   field :content, :type => String
   
   embedded_in :chapter
+  embedded_in :note
   
   has_many :notes
   
