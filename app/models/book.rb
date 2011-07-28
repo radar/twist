@@ -1,7 +1,7 @@
 class Book
   include Mongoid::Document
   field :user_id, :type => Integer
-  field :path, :type => Integer
+  field :path, :type => String
   field :title, :type => String
   field :permalink, :type => String
   field :current_commit, :type => String
