@@ -25,3 +25,12 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
+# def puts(*args)
+#   super(caller.join("\n"))
+#   super(args)
+# end
+# 
+# def p(*args)
+#   puts caller.join("\n")
+# end
