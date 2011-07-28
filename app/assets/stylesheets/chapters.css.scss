@@ -94,6 +94,10 @@ ul {
   right: 3%;
   width: 30%;
   top: 3.5em;
+  height: 83%;
+  overflow: auto;
+  font-family: Helvetica;
+  font-size: 90%;
   
   div {
     margin-top: 4px;
@@ -102,5 +106,13 @@ ul {
   
   div, h3 {
     text-decoration: underline;
+  }
+  
+  .major {
+    font-weight: bold;
+  }
+  
+  .minor {
+    margin-left: 1em;
   }
 }

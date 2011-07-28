@@ -5,6 +5,13 @@ function create_section_listing() {
 
   $('.section_title').each(function (i, e) {
     $("div#sidebar").append("<div id='" + e.id + "_link'>" + e.innerText + "</div>");
+    just_added = $("div#sidebar").children().last();
+    if (e.tagName == "H2") {
+      just_added.addClass("major");
+    }
+    else {
+      just_added.addClass("minor");
+    }
   });
   
   $('#sidebar div').click(function(e) {

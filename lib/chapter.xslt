@@ -45,12 +45,12 @@
         </h2>
     </xsl:template>
     <xsl:template match="chapter/section/section/title">
-        <h3 id='{@id}'>
+        <h3 id='{@id}' class='section_title'>
             <xsl:apply-templates />
         </h3>
     </xsl:template>
     <xsl:template match="chapter/section/section/section/title">
-        <h3 id='{@id}'>
+        <h3 id='{@id}' class='section_title'>
             <xsl:apply-templates />
         </h3>
     </xsl:template>
