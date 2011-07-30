@@ -8,10 +8,10 @@ describe Chapter do
     # Nuke the repo, start afresh.
     FileUtils.rm_r(git.path)
     git.update!
+    book.path = (Rails.root + "repos/radar/rails3book_test").to_s
   end
 
   it "processes a chapter" do
-    book.path = (Rails.root + "repos/radar/rails3book_test").to_s
     Chapter.process!(book, git, "ch01/ch01.xml")
     chapter = book.chapters.first
     chapter.title.should == "Ruby on Rails, the framework"
