@@ -7,6 +7,7 @@ gem 'bson_ext', '~> 1.3.1'
 gem 'pg'
 gem 'devise', :git => "git://github.com/plataformatec/devise"
 gem 'resque'
+gem 'rdiscount'
 #gem 'omniauth'
 
 # gem 'eeepub'

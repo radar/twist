@@ -1,0 +1,9 @@
+<%= form_for [@book, @chapter, @note, @comment] do |f| %>
+  <p>
+    <%= f.text_area :text, :cols => 80, :rows => 5 %>
+  </p>
+  
+  <p>
+    <%= f.submit "Leave Comment" %>
+  </p>
+<% end %>

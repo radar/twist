@@ -8,6 +8,8 @@ class NotesController < ApplicationController
   
   def show
     @note = @chapter.notes.where(:number => params[:id]).first
+    @comment = @note.comments.build
+    @comments = @note.comments - [@comment]
   end
 
   def new

@@ -11,7 +11,9 @@ Twist::Application.routes.draw do
         resources :notes
       end
 
-      resources :notes
+      resources :notes do
+        resources :comments
+      end
     end
   end
 

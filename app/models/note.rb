@@ -9,6 +9,8 @@ class Note
   embeds_one :element
   embedded_in :chapter
   
+  embeds_many :comments
+  
   belongs_to :user
   
   def to_param

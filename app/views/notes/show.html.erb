@@ -2,5 +2,19 @@
 <h3>Note #<%= @note.number %></h3>
 <%= render_element(@note.element) %>
 
-<h3><%= @note.user.email %> writes:</h3>
-<p><%= @note.text %></p>
+<div id='note'>
+  <h3><%= @note.user.email %> writes:</h3>
+  <%= markdown(@note.text) %>
+</div>
+
+<h4>New comment</h4>
+
+<%= render "comments/form" %>
+
+<div id='comments'>
+  <h4>Comments</h4>
+  <% if @comments.empty? %>
+    There are no comments for this note.
+  <% end %>
+  <%= render @comments %>
+</div>
