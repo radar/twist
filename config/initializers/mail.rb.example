@@ -1,0 +1,7 @@
+ActionMailer::Base.smtp_settings = {  
+  :address => "smtp.sendgrid.com",  
+  :domain => "xxxx",
+  :user_name => "xxxx",
+  :password => "xxxx",
+  :authentication => :plain,
+  :enable_starttls_auto => false
