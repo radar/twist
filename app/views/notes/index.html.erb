@@ -5,6 +5,6 @@
 <br>
 
 <% if @notes.empty? %>
-  <p>There are currently no notes for this chapter.</p>
+  <p>There are currently no notes for this <% if @chapter %>chapter<% else %>book<% end %>.</p>
 <% end %>
 <%= render @notes %>
