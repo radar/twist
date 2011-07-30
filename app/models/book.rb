@@ -35,7 +35,7 @@ class Book
       @changed_files = git.changed_files(current_commit)
     end
 
-    @changed_files.grep(/ch\d+\/ch\d+.xml/).each do |file|
+    @changed_files.grep(/ch\d+\/ch\d+.xml/).sort.each do |file|
       Chapter.process!(book, git, file)
     end
 
