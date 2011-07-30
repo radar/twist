@@ -7,8 +7,9 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= flash[:notice] %>
-    <%= flash[:alert] %>
+    <% flash.each do |k,v| %>
+      <div class='flash' id='flash_<%= k %>'><%= v %></div>
+    <% end %>
 
     <menu>
       <% if user_signed_in? %>
