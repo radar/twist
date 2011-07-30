@@ -1,5 +1,8 @@
+<div id='sidebar'>
+  <%= link_to "All notes for this book", book_notes_path(@book) %>
+</div>
+
 <h1><%= @book.title %></h1>
-<%= link_to "All notes for this book", book_notes_path(@book) %>
 <ol class='chapters'>
   <% @book.chapters.each do |chapter| %>
     <li><%= link_to chapter.title, [@book, chapter] %></li>
