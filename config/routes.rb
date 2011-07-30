@@ -15,6 +15,8 @@ Twist::Application.routes.draw do
         resources :comments
       end
     end
+    
+    resources :notes
   end
 
   devise_for :users

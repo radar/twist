@@ -3,11 +3,16 @@ class NotesController < ApplicationController
   before_filter :find_book_and_chapter
 
   def index
-    @notes = @chapter.notes
+    if @chapter
+      @notes = @chapter.notes
+    else
+      @notes = @book.notes
+    end
   end
   
   def show
-    @note = @chapter.notes.where(:number => params[:id]).first
+    @note = @book.notes.detect { |n| n.number == params[:id].to_i }
+    @chapter = @note._parent
     @comment = @note.comments.build
     @comments = @note.comments - [@comment]
   end
@@ -37,7 +42,7 @@ class NotesController < ApplicationController
 
     def find_book_and_chapter
       @book = Book.where(permalink: params[:book_id]).first
-      @chapter = @book.chapters.where(:position => params[:chapter_id]).first
+      @chapter = @book.chapters.where(:position => params[:chapter_id]).first if params[:chapter_id]
     end
 
 end

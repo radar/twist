@@ -46,6 +46,10 @@ class Book
     book.save
   end
   
+  def notes
+    chapters.map(&:notes).flatten
+  end
+  
   def to_param
     permalink
   end
