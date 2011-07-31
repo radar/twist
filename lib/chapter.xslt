@@ -178,13 +178,6 @@
       </td>
     </xsl:template>
     <!-- END TABLE XSLT DEFINITION --> 
-      
-    
-    <xsl:template match="note">
-      <div class="note" id='{@id}'>
-          <xsl:apply-templates />
-      </div>
-    </xsl:template>
     
     <xsl:template match="internalnote">
       <div class="internalnote" id='{@id}' style="display:none">
@@ -192,7 +185,33 @@
       </div>
     </xsl:template>
     
+    <xsl:template match="note">
+      <div class="note" id='{@id}'>
+          <xsl:apply-templates />
+      </div>
+    </xsl:template>
+    
     <xsl:template match="note/title">
+        <span class="title"><xsl:apply-templates /></span>
+    </xsl:template>
+    
+    <xsl:template match="tip">
+      <div class="tip" id='{@id}'>
+          <xsl:apply-templates />
+      </div>
+    </xsl:template>
+    
+    <xsl:template match="tip/title">
+        <span class="title"><xsl:apply-templates /></span>
+    </xsl:template>
+    
+    <xsl:template match="warning">
+      <div class="warning" id='{@id}'>
+          <xsl:apply-templates />
+      </div>
+    </xsl:template>
+    
+    <xsl:template match="warning/title">
         <span class="title"><xsl:apply-templates /></span>
     </xsl:template>
     
