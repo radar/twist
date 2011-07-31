@@ -1,5 +1,3 @@
-<%= link_to "New Book", new_book_path %>
-
 <% @books.each do |book| %>
   <h2><%= link_to book.title, book %></h2>
   <span class='blurb'><%= book.blurb %></span>
