@@ -20,6 +20,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'email_spec'
 end
 
 # Asset template engines

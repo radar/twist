@@ -62,6 +62,9 @@ GEM
     diff-lcs (1.1.2)
     dragonfly (0.9.5)
       rack
+    email_spec (1.2.1)
+      mail (~> 2.2)
+      rspec (~> 2.0)
     erubis (2.7.0)
     execjs (1.2.2)
       multi_json (~> 1.0)
@@ -182,6 +185,7 @@ DEPENDENCIES
   database_cleaner
   devise!
   dragonfly
+  email_spec
   factory_girl
   jquery-rails
   launchy
