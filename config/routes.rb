@@ -20,4 +20,6 @@ Twist::Application.routes.draw do
   end
 
   devise_for :users
+  
+  get 'signed_out', :to => "users#signed_out"
 end
