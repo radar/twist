@@ -5,3 +5,8 @@
   padding: 5px;
   -webkit-border-radius: 5px;
 }
+
+.comment {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}

@@ -1,2 +1,4 @@
-<strong><%= comment.user.email %> writes:</strong>
-<%= markdown(comment.text) %>
+<div class='comment'>
+  <strong><%= comment.user.email %> replied:</strong>
+  <%= markdown(comment.text) %>
+</div>

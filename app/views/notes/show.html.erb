@@ -7,10 +7,6 @@
   <%= markdown(@note.text) %>
 </div>
 
-<h4>New comment</h4>
-
-<%= render "comments/form" %>
-
 <div id='comments'>
   <h4>Comments</h4>
   <% if @comments.empty? %>
@@ -18,3 +14,6 @@
   <% end %>
   <%= render @comments %>
 </div>
+
+<h4>New comment</h4>
+<%= render "comments/form" %>
