@@ -10,7 +10,7 @@ gem 'resque'
 gem 'rdiscount'
 #gem 'omniauth'
 
-# gem 'eeepub'
+gem 'eeepub'
 gem 'nokogiri'
 gem 'dragonfly'
 
