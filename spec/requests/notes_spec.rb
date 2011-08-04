@@ -38,4 +38,18 @@ describe "notes" do
       end
     end
   end
+  
+  it "can view all notes for a book" do
+    chapter = @book.chapters.first
+    chapter.notes.create!(:text => "This is a test note!", 
+                          :user => user, 
+                          :number => 1,
+                          :element => chapter.elements.first)
+    
+    visit book_path(@book)
+    click_link "All notes for this book"
+    click_link "This is a test note!"
+    page.should have_content("user@example.com writes:")
+    page.should have_content("This is a test note!")
+  end
 end
