@@ -5,6 +5,7 @@ class Note
   # This is used in notes/_button and feels hacky, which is a good sign that something is wrong
   field :element_identifier, :type => String
   field :number, :type => Integer
+  field :state, :type => String, :default => "new"
   
   embeds_one :element
   embedded_in :chapter
@@ -15,5 +16,10 @@ class Note
   
   def to_param
     number.to_s
+  end
+  
+  def complete!
+    self.state = "complete"
+    self.save
   end
 end

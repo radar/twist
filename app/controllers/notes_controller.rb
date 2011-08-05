@@ -1,17 +1,14 @@
 class NotesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_book_and_chapter
+  before_filter :find_note, :only => [:show, :complete]
+  before_filter :find_notes, :only => [:index, :completed]
 
   def index
-    if @chapter
-      @notes = @chapter.notes
-    else
-      @notes = @book.notes
-    end
+    @notes = @notes.select { |n| n.state != "complete" }
   end
   
   def show
-    @note = @book.notes.detect { |n| n.number == params[:id].to_i }
     @chapter = @note._parent
     @comment = @note.comments.build
     @comments = @note.comments - [@comment]
@@ -38,7 +35,31 @@ class NotesController < ApplicationController
     end
   end
   
+  def complete
+    @note.complete!
+    flash[:notice] = "Note ##{@note.number} has been marked as completed!"
+    redirect_to [@book, @chapter, :notes]
+  end
+  
+  def completed
+    @notes = @notes.select { |n| n.state == "complete" }
+    @title = "Completed notes"
+    render :index
+  end
+  
   private
+
+    def find_notes
+      if @chapter
+        @notes = @chapter.notes
+      else
+        @notes = @book.notes
+      end
+    end
+
+    def find_note
+      @note = @book.notes.detect { |n| n.number == params[:id].to_i }
+    end
 
     def find_book_and_chapter
       @book = Book.where(permalink: params[:book_id]).first

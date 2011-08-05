@@ -1,8 +1,10 @@
 <div id='sidebar'>
-  <%= link_to "Go back to previous location", :back %>
+  <%= link_to "Go back to previous location", :back %><br><br>
+  
+  <%= link_to "Complete note", [:complete, @book, @chapter, @note], :method => :put %>
 </div>
 <h2><%= link_to @note.chapter.book.title, @note.chapter.book %> - <%= link_to @note.chapter.title, [@note.chapter.book, @note.chapter] %></h2>
-<h3>Note #<%= @note.number %></h3>
+<h3>Note #<%= @note.number %> - <%= @note.state.titleize %></h3>
 <%= render_element(@note.element) %>
 
 <div id='note'>

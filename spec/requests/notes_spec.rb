@@ -52,4 +52,24 @@ describe "notes" do
     page.should have_content("user@example.com writes:")
     page.should have_content("This is a test note!")
   end
+  
+  it "can complete a note" do
+    chapter = @book.chapters.first
+    chapter.notes.create!(:text => "This is a test note!", 
+                          :user => user, 
+                          :number => 1,
+                          :element => chapter.elements.first)
+    
+    visit book_path(@book)
+    click_link "All notes for this book"
+    click_link "This is a test note!"
+    click_link "Complete note"
+    page.should have_content("Note #1 has been marked as completed!")
+    
+    # Note should no longer appear on main page, should be on completed list.
+    page.should_not have_content("This is a test note!")
+    
+    click_link "Completed notes"
+    page.should have_content("This is a test note!")
+  end
 end

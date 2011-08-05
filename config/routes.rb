@@ -1,4 +1,16 @@
 Twist::Application.routes.draw do
+  
+  notes_routes = lambda do
+    collection do
+      get :completed
+    end
+
+    member do
+      put :complete
+    end
+    
+    resources :comments
+  end
 
   root :to => "books#index"
   resources :books do
@@ -10,13 +22,11 @@ Twist::Application.routes.draw do
       resources :elements do
         resources :notes
       end
-
-      resources :notes do
-        resources :comments
-      end
+        
+      resources :notes, &notes_routes
     end
     
-    resources :notes
+    resources :notes, &notes_routes
   end
 
   devise_for :users

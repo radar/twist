@@ -1,14 +1,16 @@
 <div id='sidebar'>
-  <%= link_to "Go back to previous location", :back %>
+  <%= link_to "Go back to previous location", :back %><br><br>
+  
+  <%= link_to "Completed notes", [:completed, @book, @chapter, :notes] %>
 </div>
 
-<h1>Notes for <%= link_to @book.title, @book %></h1>
+<h1><%= @title || "Notes" %> for <%= link_to @book.title, @book %></h1>
 <% if @chapter %>
   <h2><%= link_to "Chapter #{@chapter.position} - #{@chapter.title}", [@book, @chapter] %></h2>
 <% end %>
 <br>
 
 <% if @notes.empty? %>
-  <p>There are currently no notes for this <% if @chapter %>chapter<% else %>book<% end %>.</p>
+  <p>There are currently no <%= (@title || "notes").downcase %> for this <% if @chapter %>chapter<% else %>book<% end %>.</p>
 <% end %>
 <%= render @notes %>
