@@ -72,6 +72,10 @@ class Chapter
   def to_param
     position.to_s
   end
+  
+  def identifier
+    self["identifier"]
+  end
 
   def save_figure_attachments!
     self.figures.each { |figure| figure.save_attachment! }

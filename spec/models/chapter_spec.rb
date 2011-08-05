@@ -16,7 +16,7 @@ describe Chapter do
     chapter = book.chapters.first
     chapter.title.should == "Ruby on Rails, the framework"
     # TODO: workout why we can't use chapter.identifier here
-    chapter["identifier"].should == "ch01_1"
+    chapter.identifier.should == "ch01_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["What is Ruby on Rails?",
