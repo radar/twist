@@ -9,7 +9,5 @@ class Element
   embedded_in :chapter
   embedded_in :note
   
-  has_many :notes
-  
   delegate :book, :to => :chapter
 end
