@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_book_and_chapter
-  before_filter :find_note, :only => [:show, :complete]
+  before_filter :find_note, :only => [:show, :complete, :reopen]
   before_filter :find_notes, :only => [:index, :completed]
 
   def index
@@ -38,6 +38,12 @@ class NotesController < ApplicationController
   def complete
     @note.complete!
     flash[:notice] = "Note ##{@note.number} has been marked as completed!"
+    redirect_to [@book, @chapter, :notes]
+  end
+  
+  def reopen
+    @note.reopen!
+    flash[:notice] = "Note ##{@note.number} has been reopened!"
     redirect_to [@book, @chapter, :notes]
   end
   

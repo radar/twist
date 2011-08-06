@@ -7,6 +7,7 @@ Twist::Application.routes.draw do
 
     member do
       put :complete
+      put :reopen
     end
     
     resources :comments

@@ -63,7 +63,7 @@ describe "notes" do
     visit book_path(@book)
     click_link "All notes for this book"
     click_link "This is a test note!"
-    click_link "Complete note"
+    click_link "Mark note as complete"
     page.should have_content("Note #1 has been marked as completed!")
     
     # Note should no longer appear on main page, should be on completed list.
@@ -72,4 +72,23 @@ describe "notes" do
     click_link "Completed notes"
     page.should have_content("This is a test note!")
   end
+  
+  it "can reopen a note" do
+    chapter = @book.chapters.first
+    chapter.notes.create!(:text => "This is a test note!", 
+                          :user => user, 
+                          :number => 1,
+                          :element => chapter.elements.first,
+                          :state => "complete")
+    
+    visit book_path(@book)
+    click_link "All notes for this book"
+    page.should_not have_content("This is a test note!")
+    visit book_note_path(@book, 1)
+    click_link "Mark note as reopened"
+    page.should have_content("Note #1 has been reopened!")
+    # Validate content now appears on notes page.
+    page.should have_content("This is a test note!")
+  end
+
 end

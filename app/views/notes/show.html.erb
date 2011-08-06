@@ -1,7 +1,11 @@
 <div id='sidebar'>
   <%= link_to "Go back to previous location", :back %><br><br>
   
-  <%= link_to "Complete note", [:complete, @book, @chapter, @note], :method => :put %>
+  <% if @note.state != "complete" %>
+    <%= link_to "Mark note as complete", [:complete, @book, @chapter, @note], :method => :put %>
+  <% else %>
+    <%= link_to "Mark note as reopened", [:reopen, @book, @chapter, @note], :method => :put %>
+  <% end %>
 </div>
 <h2><%= link_to @note.chapter.book.title, @note.chapter.book %> - <%= link_to @note.chapter.title, [@note.chapter.book, @note.chapter] %></h2>
 <h3>Note #<%= @note.number %> - <%= @note.state.titleize %></h3>

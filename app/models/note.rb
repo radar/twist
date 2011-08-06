@@ -22,4 +22,9 @@ class Note
     self.state = "complete"
     self.save
   end
+  
+  def reopen!
+    self.state = "reopened"
+    self.save
+  end
 end
