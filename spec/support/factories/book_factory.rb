@@ -1,3 +1,5 @@
-Factory.define(:book) do |book|
-  book.title "Rails 3 in Action"
+FactoryGirl.define do
+  factory :book do
+    title "Rails 3 in Action"
+  end
 end

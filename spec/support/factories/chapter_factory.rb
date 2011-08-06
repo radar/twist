@@ -1,3 +1,5 @@
-Factory.define(:chapter) do |c|
-  c.title "Ruby on Rails, the framework"
+FactoryGirl.define do
+  factory :chapter do
+    title "Ruby on Rails, the framework"
+  end
 end
