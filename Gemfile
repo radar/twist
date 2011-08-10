@@ -15,6 +15,7 @@ gem 'nokogiri'
 gem 'dragonfly'
 
 group :development, :test do
+  gem 'mailcatcher'
   gem 'factory_girl'
   gem 'capybara', '~> 1.0'
   gem 'rspec-rails', '~> 2.6'

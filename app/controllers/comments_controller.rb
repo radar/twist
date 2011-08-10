@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   def create
     comment = @note.comments.build(params[:comment].merge!(:user => current_user))
     if comment.save
+      comment.send_notifications!
       flash[:notice] = "Comment has been created."
       redirect_to [@book, @chapter, @note]
     else

@@ -1,0 +1,8 @@
+<strong>Hello!</strong>
+
+<p><%= @comment.user.email %> just left a comment on <%= link_to "Note ##{@note.number}", [@book, @note] %> for <%= @book.title %>:</p>
+
+<%= raw(RDiscount.new(@comment.text).to_html) %>
+
+<p>Love,<br>
+The Twist Bot.</p>
