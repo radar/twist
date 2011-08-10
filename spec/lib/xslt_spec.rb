@@ -29,7 +29,7 @@ describe "XSLT parsing" do
   end
   
   it "can parse footnotes containing paragraphs" do
-    pending
+    pending("Footnote content still shows up in paragraph or vice versa. It's a tricky one.")
     xml = Nokogiri::XML::Builder.new do |xml|
       xml.chapter(:id => "ch1_1") do
         xml.para(:id => "ch1_2") do
