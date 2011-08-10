@@ -7,8 +7,8 @@ module DeviseExtensions
     click_button "Sign in"
   end
   
-  def create_user!
-    user = Factory(:user)
+  def create_user!(attributes={})
+    user = Factory(:user, attributes)
     user.confirm!
     user
   end
