@@ -2,8 +2,8 @@ require 'rspec'
 require 'nokogiri'
 
 describe "XSLT parsing" do
+  let(:xslt) { Nokogiri::XSLT(File.read("lib/chapter.xslt")) }
   it "can parse formal paragraphs containing figures" do
-    xslt = Nokogiri::XSLT(File.read("lib/chapter.xslt"))
     xml = Nokogiri::XML::Builder.new do |xml|
       xml.chapter(:id => "ch1_1") do
         xml.formalpara(:id => "ch1_2") do
@@ -29,24 +29,22 @@ describe "XSLT parsing" do
   end
   
   it "can parse footnotes containing paragraphs" do
-      xml = Nokogiri::XML::Builder.new do |xml|
-        xml.chapter(:id => "ch1_1") do
-          xml.para(:id => "ch1_2") do
-            xml.text "This is content within the outside paragraph."
-            xml.footnote(:id => "ch1_3") do
-              xml.para(:id => "ch1_4") do
-                xml.text "This is some content within this paragraph."
-                xml.filename "run_this"
-                xml.text "More text."
-              end
+    pending
+    xml = Nokogiri::XML::Builder.new do |xml|
+      xml.chapter(:id => "ch1_1") do
+        xml.para(:id => "ch1_2") do
+          xml.text "This is content within the outside paragraph."
+          xml.footnote(:id => "ch1_3") do
+            xml.para(:id => "ch1_4") do
+              xml.text "This is some content within this paragraph."
+              xml.filename "run_this"
+              xml.text "More text."
             end
           end
         end
       end
-     
-      puts xml.to_xml
-      
-      parsed_doc = xslt.transform(Nokogiri::XML(xml.to_xml))
-      puts parsed_doc.to_xml
     end
+      
+    parsed_doc = xslt.transform(Nokogiri::XML(xml.to_xml))
+  end
 end
