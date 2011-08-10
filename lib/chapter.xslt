@@ -8,7 +8,9 @@
         </xsl:copy>
     </xsl:template>
     <xsl:template match="co">
-      <xsl:apply-templates />
+      <span id='{@id}' class="callout">
+        <xsl:apply-templates />
+      </span>
     </xsl:template>
     <xsl:template match="emphasis">
         <em>

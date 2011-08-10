@@ -47,4 +47,19 @@ describe "XSLT parsing" do
       
     parsed_doc = xslt.transform(Nokogiri::XML(xml.to_xml))
   end
+  
+  it "can parse paragraphs containing callouts" do
+    xml = Nokogiri::XML::Builder.new do |xml|
+      xml.chapter(:id => "ch1_1") do
+        xml.para(:id => "ch1_2") do
+          xml.text "This is content within the paragraph."
+          xml.co(:id => "ch1_3")
+          xml.text "This is some further text after the callout."
+        end
+      end
+    end
+    
+    parsed_doc = xslt.transform(Nokogiri::XML(xml.to_xml))
+    parsed_doc.css("p span.callout")[0]["id"].should == "ch1_3"
+  end
 end

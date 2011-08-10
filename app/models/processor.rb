@@ -13,13 +13,24 @@ module Processor
   def process_p!(chapter, markup)
     paragraph = build_element(markup, "p")
     chapter.elements << paragraph
+    
+    callout_count = 0
     content = markup.to_html
+    # Parse footnotes
     markup.css("span.footnote").each do |footnote|
       chapter.footnote_count += 1
       footnote_link = "<a href='#footnote_#{chapter.footnote_count}' class='footnote'><sup>#{chapter.footnote_count}</sup></a>"
       content = content.gsub(/<span class="footnote" id="#{footnote["id"]}">(.*?)<\/span>/, footnote_link)
       process_footnote!(chapter, footnote)
     end
+    
+    # Parse callouts
+    markup.css("span.callout").each do |callout|
+      callout_count += 1
+      image = "<img src='/images/callouts/#{callout_count}' class='callout'/>"
+      content = content.gsub(callout.to_html, image)
+    end
+
     paragraph.content = content
     paragraph
   end
