@@ -173,7 +173,31 @@ describe Chapter do
                                      "Restricting actions to admins only",
                                      "Fixing three more broken scenarios",
                                      "Hiding the \"New Project\" link", 
-                                     "Hiding the edit and delete links"]
+                                     "Hiding the edit and delete links",
+                                     "Namespace routing",
+                                     "Generating a namespaced controller",
+                                     "Wrapping up",
+                                     "Namespace Based CRUD",
+                                     "Writing a feature",
+                                     "Adding a namespace root",
+                                     "The index action",
+                                     "The new action",
+                                     "The create action",
+                                     "Creating Admin Users",
+                                     "Writing a feature",
+                                     "Identifying admin users",
+                                     "Wrapping up",
+                                     "Editing users",
+                                     "Writing a feature",
+                                     "The show action",
+                                     "The edit action",
+                                     "The update action",
+                                     "Wrapping up",
+                                     "Deleting users",
+                                     "Writing a feature",
+                                     "The destroy action",
+                                     "Ensuring you cannot delete yourself",
+                                     "Wrapping up"]
     chapter.figures.count.should == 0
   end
   
