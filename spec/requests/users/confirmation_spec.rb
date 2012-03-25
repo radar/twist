@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "confirmation" do
   before do
-    Factory(:user, :email => "user@example.com")
+    Factory.create(:user, :email => "user@example.com")
   end
   
   it "can confirm their account" do

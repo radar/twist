@@ -3,7 +3,7 @@ class Note
   field :text, :type => String
   # TODO: work out how to query for notes that have elements containing a specific id
   # This is used in notes/_button and feels hacky, which is a good sign that something is wrong
-  field :element_identifier, :type => String
+  field :element_id, :type => String
   field :number, :type => Integer
   field :state, :type => String, :default => "new"
   

@@ -9,6 +9,7 @@ describe "notes" do
     
   it "can add a new note to a paragraph and leave a comment on it", :js => true do
     visit book_chapter_path(@book, @book.chapters.first)
+    page!
     within "#note_button_ch01_3" do
       click_link "0 notes +"
     end

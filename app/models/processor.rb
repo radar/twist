@@ -3,7 +3,7 @@ module Processor
   def build_element(markup, name)
     new(:tag        => name,
         :content    => markup.to_html,
-        :identifier => markup["id"])
+        :xml_id     => markup["id"])
   end
   
   def process!(chapter, markup)
@@ -53,7 +53,7 @@ module Processor
     section = new(:tag        => "section",
                   :title      => original_title,
                   :content    => title,
-                  :identifier => markup["id"],
+                  :xml_id     => markup["id"],
                   :number     => chapter.section_count[-1])
     # section_count > 2 if this section is a sub-section, 
     # in which case it would be picked up by the `within_section` code beneath
@@ -80,7 +80,7 @@ module Processor
   def process_formalpara!(chapter, markup)
     # Create a new element which is just a <h4> of the title
     formalpara = new(:tag        => "formalpara",
-                     :identifier => markup["id"],
+                     :xml_id     => markup["id"],
                      :content    => markup.css("h4").to_html)
 
     chapter.elements << formalpara
@@ -92,7 +92,7 @@ module Processor
   
   def process_ul!(chapter, markup)
     chapter.elements << new(:tag        => "ul",
-                            :identifier => markup["id"],
+                            :xml_id     => markup["id"],
                             :content    => markup.to_html)
   end
   
@@ -101,7 +101,7 @@ module Processor
     pre = markup.css("pre")[0]
     pre.content = pre.content.strip
     informalexample = new(:tag        => "informalexample",
-                            :identifier => markup["id"],
+                            :xml_id     => markup["id"],
                             :content    => markup.css("pre").to_html)
     chapter.elements << informalexample
     informalexample

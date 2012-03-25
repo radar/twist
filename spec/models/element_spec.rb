@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Element do
-  let(:book) { Factory(:book) }
+  let(:book) { Factory.create(:book) }
   let(:chapter) { book.chapters.create!(:title => "Testing", :position => 1) }
   
   before do

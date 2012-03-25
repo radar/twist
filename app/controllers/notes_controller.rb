@@ -16,13 +16,13 @@ class NotesController < ApplicationController
 
   def new
     @note = Note.new
-    @notes = @chapter.notes.where(:element_identifier => params[:element_id])
+    @notes = @chapter.notes.where(:element_id => params[:element_id])
   end
   
   def create
-    element = @chapter.elements.where(:identifier => params[:element_id]).first
-    note = @chapter.notes.build(params[:note].merge(:element => element, 
-                                                    :element_identifier => params[:element_id],
+    element = @chapter.elements.where(:xml_id => params[:element_id]).first
+    note = @chapter.notes.build(params[:note].merge(:element => element,
+                                                    :element_id => params[:element_id],
                                                     :number => @book.notes_count + 1,
                                                     :user => current_user))
     if note.save

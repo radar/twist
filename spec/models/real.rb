@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Chapter do
   let(:git) { Git.new("radar", "rails3book") }
-  let(:book) { Factory(:book) }
+  let(:book) { Factory.create(:book) }
   
   
   before do
@@ -161,6 +161,7 @@ describe Chapter do
   end
   
   it "processes chapter seven" do
+    p git.path + "ch07/ch07.xml"
     book.path = (Rails.root + "repos/radar/rails3book").to_s
     Chapter.process!(book, git, "ch07/ch07.xml")
     chapter = book.chapters.first

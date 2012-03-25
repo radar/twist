@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Chapter do
   let(:git) { Git.new("radar", "rails3book_test") }
-  let(:book) { Factory(:book) }
+  let(:book) { Factory.create(:book) }
 
   before do
     # Nuke the repo, start afresh.
@@ -15,8 +15,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch01/ch01.xml")
     chapter = book.chapters.first
     chapter.title.should == "Ruby on Rails, the framework"
-    # TODO: workout why we can't use chapter.identifier here
-    chapter.identifier.should == "ch01_1"
+    chapter.xml_id.should == "ch01_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["What is Ruby on Rails?",

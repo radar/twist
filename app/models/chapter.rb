@@ -2,7 +2,7 @@ class Chapter
   include Mongoid::Document
   field :position, :type => Integer
   field :title, :type => String
-  field :identifier, :type => String
+  field :xml_id, :type => String
   field :file_name, :type => String
   
   embedded_in :book
@@ -50,7 +50,7 @@ class Chapter
     xslt = Nokogiri::XSLT(File.read(Rails.root + 'lib/chapter.xslt'))
     parsed_doc = xslt.transform(xml)
     
-    chapter = book.chapters.find_or_initialize_by(identifier: xml.xpath("chapter").first["id"])
+    chapter = book.chapters.find_or_initialize_by(xml_id: xml.xpath("chapter").first["id"])
     chapter.git = git
     chapter.elements = [] # Clear the elements, begin anew.
     chapter.title = xml.xpath("chapter/title").text
@@ -73,8 +73,8 @@ class Chapter
     position.to_s
   end
   
-  def identifier
-    self["identifier"]
+  def xml_id
+    self["xml_id"]
   end
 
   def save_figure_attachments!

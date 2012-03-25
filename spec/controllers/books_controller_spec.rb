@@ -3,7 +3,7 @@ require 'spec_helper'
 describe BooksController do
   before do
     # Needs to exist (and have called Resque.enqueue) before we trigger the post-receive hook
-    @book = Factory(:book)
+    @book = Factory.create(:book)
   end
   
   it "post-receive hooks" do

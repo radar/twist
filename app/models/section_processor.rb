@@ -8,7 +8,7 @@ module SectionProcessor
     # Where "number" represents the section number within this chapter / section, not the full number
     id = markup["id"]
     section = create!(:title      => markup.css("h2").text,
-                      :identifier => id,
+                      :xml_id     => id,
                       :number     => @section_count)
 
     unless section.ancestors.empty?
@@ -23,7 +23,7 @@ module SectionProcessor
     # Re-use title_element to provide a header for this section
     title_element.content = title
     chapter.elements.create!(:tag        => "section",
-                             :identifier => id,
+                             :xml_id     => id,
                              :content    => title_element.to_html)
     # Process direct child elements of this section.
     # Can include things like paragraphs or sections
