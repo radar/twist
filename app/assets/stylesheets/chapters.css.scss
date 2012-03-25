@@ -8,10 +8,11 @@ p {
   margin: 0px;
   font: 13pt/1.5 "Georgia";
   
-  code, .filename {
+  code, .filename, span.command {
     font-size: 11.5pt;
     font-family: "Inconsolata", Monaco, monospace;
   }
+
   
   span.footnote, span.indexterm {
     display: none;
