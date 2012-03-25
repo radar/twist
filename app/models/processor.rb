@@ -113,8 +113,6 @@ module Processor
   
   def process_figure!(chapter, markup)
     chapter.figure_count += 1
-    title = markup.css("span.title")[0]
-    title.content = "Figure #{chapter.position}.#{chapter.figure_count} #{title.content}"
     filename = markup.css("img")[0]["src"]
     chapter.figures << Figure.new(:figure => File.open(chapter.git.path + filename), :filename => filename)
     chapter.elements << build_element(markup, "figure")
