@@ -16,7 +16,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch01/ch01.xml")
     chapter = book.chapters.first
     chapter.title.should == "Ruby on Rails, the framework"
-    chapter.identifier.should == "ch01_1"
+    chapter.xml_id.should == "ch01_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["What is Ruby on Rails?",
@@ -45,7 +45,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch02/ch02.xml")
     chapter = book.chapters.first
     chapter.title.should == "Testing saves your bacon"
-    chapter.identifier.should == "ch02_1"
+    chapter.xml_id.should == "ch02_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Test and Behavior Driven Development",
@@ -65,7 +65,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch03/ch03.xml")
     chapter = book.chapters.first
     chapter.title.should == "Developing a real Rails application"
-    chapter.identifier.should == "ch03_1"
+    chapter.xml_id.should == "ch03_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Application setup",
@@ -90,7 +90,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch04/ch04.xml")
     chapter = book.chapters.first
     chapter.title.should == "Oh CRUD!"
-    chapter.identifier.should == "ch04_1"
+    chapter.xml_id.should == "ch04_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Viewing Projects",
@@ -114,7 +114,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch05/ch05.xml")
     chapter = book.chapters.first
     chapter.title.should == "Nested resources"
-    chapter.identifier.should == "ch05_1"
+    chapter.xml_id.should == "ch05_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Creating tickets",
@@ -140,7 +140,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch06/ch06.xml")
     chapter = book.chapters.first
     chapter.title.should == "Authentication & Basic Authorization"
-    chapter.identifier.should == "ch06_5015"
+    chapter.xml_id.should == "ch06_5015"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["What Devise Does",
@@ -166,7 +166,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch07/ch07.xml")
     chapter = book.chapters.first
     chapter.title.should == "Basic Access Control"
-    chapter.identifier.should == "ch07_1"
+    chapter.xml_id.should == "ch07_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Projects can only be created by admins",
@@ -207,7 +207,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch08/ch08.xml")
     chapter = book.chapters.first
     chapter.title.should == "More Authorization"
-    chapter.identifier.should == "ch08_1"
+    chapter.xml_id.should == "ch08_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Restricting read access",
@@ -248,7 +248,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch09/ch09.xml")
     chapter = book.chapters.first
     chapter.title.should == "File uploading"
-    chapter.identifier.should == "ch09_5"
+    chapter.xml_id.should == "ch09_5"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Attaching a file",
@@ -280,7 +280,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch10/ch10.xml")
     chapter = book.chapters.first
     chapter.title.should == "Tracking State"
-    chapter.identifier.should == "ch10_3"
+    chapter.xml_id.should == "ch10_3"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Leaving a comment",
@@ -318,7 +318,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch11/ch11.xml")
     chapter = book.chapters.first
     chapter.title.should == "Tagging"
-    chapter.identifier.should == "ch11_1"
+    chapter.xml_id.should == "ch11_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Creating tags",
@@ -352,7 +352,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch12/ch12.xml")
     chapter = book.chapters.first
     chapter.title.should == "Sending Email"
-    chapter.identifier.should == "ch12_1"
+    chapter.xml_id.should == "ch12_1"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Sending ticket notifications",
@@ -382,7 +382,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch13/ch13.xml")
     chapter = book.chapters.first
     chapter.title.should == "Designing an API"
-    chapter.identifier.should == "ch13"
+    chapter.xml_id.should == "ch13"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["The projects API",
@@ -413,7 +413,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch14/ch14.xml")
     chapter = book.chapters.first
     chapter.title.should == "Deployment"
-    chapter.identifier.should == "ch14"
+    chapter.xml_id.should == "ch14"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Server setup",
@@ -447,7 +447,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch15/ch15.xml")
     chapter = book.chapters.first
     chapter.title.should == "Alternative Authentication"
-    chapter.identifier.should == "ch15"
+    chapter.xml_id.should == "ch15"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["How OAuth Works",
@@ -467,7 +467,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch16/ch16.xml")
     chapter = book.chapters.first
     chapter.title.should == "Basic performance enhancements"
-    chapter.identifier.should == "ch16"
+    chapter.xml_id.should == "ch16"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Pagination",
@@ -493,7 +493,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch17/ch17.xml")
     chapter = book.chapters.first
     chapter.title.should == "Engines"
-    chapter.identifier.should == "ch17"
+    chapter.xml_id.should == "ch17"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["A brief history of engines",
@@ -533,7 +533,7 @@ describe Chapter do
     Chapter.process!(book, git, "ch18/ch18.xml")
     chapter = book.chapters.first
     chapter.title.should == "Rack-based Applications"
-    chapter.identifier.should == "value"
+    chapter.xml_id.should == "value"
     chapter.elements.first.tag.should == "p"
     sections = chapter.elements.select { |e| e.tag == "section" }
     sections.map(&:title).should == ["Building Rack applications",
