@@ -24,6 +24,18 @@ p {
   }
 }
 
+.table {
+  margin-left: 1em;
+
+  .title {
+    font-style: italic;
+  }
+
+  table thead {
+    font-weight: bold;
+  }
+}
+
 
 .example pre {
   background: #efefef;
