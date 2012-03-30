@@ -28,7 +28,7 @@ describe "notes" do
     # And the rest of it.
     page.should have_content("This is a test note!")
     
-    fill_in "comment_text", :with => "**This** _is_ a `comment`"
+    fill_in "comment_text", :with => "**This** _is_ a `comment`. Fixed in @edc32b4f1ecc7f43dcfae57c02b90df98c1b38f9."
     click_button "Leave Comment"
     page.should have_content("Comment has been created.")
     within "#comments" do
@@ -37,6 +37,7 @@ describe "notes" do
         within("strong") { page.should have_content("This") }
         within("em") { page.should have_content("is") }
         within("code") { page.should have_content("comment") }
+        find("a")["href"].should == "https://github.com/radar/rails3book/commits/edc32b4f1ecc7f43dcfae57c02b90df98c1b38f9"
       end
     end
   end
