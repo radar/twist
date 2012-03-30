@@ -83,6 +83,10 @@ a.footnote {
 }
 
 span.footnote_container {
+  font-size: 90%;
+  color: #999;
+  font-style: italic;
+
   sup {
     float: left;
     margin-right: 5px;
@@ -91,8 +95,6 @@ span.footnote_container {
 }
 
 span.footnote {
-  font-size: 90%;
-  color: #333;
   
   p {
     font-size: 90%;
