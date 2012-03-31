@@ -7,3 +7,27 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+$(document).ready(function() {
+  // Hide if page is on landscape
+  if (Math.abs(window.orientation) == 90) {
+    hide_sidebar()
+  }
+})
+
+$(window).resize(function () {
+  // Hide if page swaps to landscape
+  if (Math.abs(window.orientation) == 90) {
+    hide_sidebar()
+  }
+  else {
+    $('#sidebar').show();
+    $('.wrapper').css("margin", "1% 35% 0% 7%")
+    $('#sidebar_tip').hide();
+  }
+})
+
+function hide_sidebar() {
+  $('#sidebar').hide();
+  $('.wrapper').css("margin", "1% 5% 0% 7%")
+  $('#sidebar_tip').show();
+}
