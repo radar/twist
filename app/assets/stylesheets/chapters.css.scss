@@ -50,6 +50,9 @@ p {
 }
 
 .example pre {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   background: #efefef;
   margin-left: 1em;
   margin-right: 1em;
@@ -61,10 +64,14 @@ p {
 }
 
 pre {
-  font: 11pt "Inconsolata", Monaco, monospace;
-  background: #dfdfdf;
-  padding: 5px;
+  font: 16px "Inconsolata", Monaco, monospace;
+  background: #ececec;
+  border: 1px solid #ccc;
+  padding: 5px 5px 5px 7px;
   overflow: auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .example .title {
@@ -102,13 +109,19 @@ span.footnote {
 }
 
 .figure {
-  border: 1px dashed #343434;
-  padding: 10px;
+  border: 3px solid #ccc;
   margin: 10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   
   .title {
+    border-top: 3px solid #ccc;
     font: 12pt Helvetica;
+    background: #efefef;
     font-weight: bold;
+    display: block;
+    padding: 10px;
   }
   
   img {

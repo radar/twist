@@ -53,3 +53,30 @@ menu {
   padding: 1.5em;
   -webkit-border-radius: 5px;
 }
+
+input[type="email"], input[type="password"], input[type="text"], textarea {
+  margin-top: 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #CCC;
+  padding: 4px;
+}
+
+input[type="email"], input[type="password"], input[type="text"] {
+  padding: 4px;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  font-size: 16px;
+}
+
+textarea {
+  resize: none;
+}
+
+label {
+  font: 14px Helvetica;
+}
+
