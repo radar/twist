@@ -10,6 +10,8 @@ class Chapter
   embeds_many :figures
   embeds_many :notes
 
+  after_save :expire_cache
+
   # Provides an accessor to get to the git repository where the chapter is contained
   attr_accessor :git
   
@@ -80,4 +82,9 @@ class Chapter
   def save_figure_attachments!
     self.figures.each { |figure| figure.save_attachment! }
   end
+
+  def expire_cache
+    Rails.cache.delete_matched("*chapters/#{id}")
+  end
+
 end

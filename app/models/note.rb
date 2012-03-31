@@ -11,6 +11,8 @@ class Note
   embedded_in :chapter
   
   embeds_many :comments
+
+  after_save :expire_chapter_cache
   
   belongs_to :user
   
@@ -27,4 +29,8 @@ class Note
     self.state = "reopened"
     self.save
   end
+
+    def expire_chapter_cache
+      chapter.expire_cache
+    end
 end

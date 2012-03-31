@@ -14,6 +14,8 @@ gem 'eeepub'
 gem 'nokogiri'
 gem 'dragonfly'
 
+gem 'redis-activesupport'
+
 group :development, :test do
   gem 'mailcatcher'
   gem 'factory_girl'

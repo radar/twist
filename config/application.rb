@@ -38,5 +38,7 @@ module Twist
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    config.cache_store = :redis_store
   end
 end
