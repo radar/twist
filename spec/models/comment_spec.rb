@@ -30,5 +30,13 @@ describe Comment do
       email_1.subject.should == "[Twist] - Rails 3 in Action - Note #1"
       email_2.subject.should == "[Twist] - Rails 3 in Action - Note #1"
     end
+
+    it "sends notification emails to the right users" do
+      comment = @note.comments.build(:user => user_3)
+      emails = comment.notification_emails
+      emails.should include("user@example.com")
+      emails.should include("user2@example.com")
+      emails.should_not include("user3@example.com")
+    end
   end
 end
