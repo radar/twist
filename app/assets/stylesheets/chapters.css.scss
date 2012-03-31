@@ -166,3 +166,21 @@ ul {
     }
   }
 }
+
+.tip {
+  background: #DCECFC;
+  border: 2px solid #7ABEFF;
+  padding: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
+  .title {
+    font-weight: bold;
+  }
+
+  pre {
+    border: 1px solid #C7E0FC;
+    background: #F0F7FF;
+  }
+}
