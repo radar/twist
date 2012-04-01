@@ -164,20 +164,43 @@ ul {
   }
 }
 
-.tip {
-  background: #DCECFC;
-  border: 2px solid #7ABEFF;
-  padding: 5px;
+.tip, .note, .warning {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  padding: 5px;
 
-  .title {
+  title {
     font-weight: bold;
   }
+}
+
+.tip {
+  background: #DCECFC;
+  border: 2px solid #7ABEFF;
 
   pre {
     border: 1px solid #C7E0FC;
     background: #F0F7FF;
+  }
+}
+
+.note {
+  background: #DCFCEC;
+  border: 2px solid #7AFFBE;
+
+  pre {
+    border: 1px solid #C7FCE0;
+    background: #F0FFF7;
+  }
+}
+
+.warning {
+  background: #FFDCDC;
+  border: 2px solid #FF0000;
+
+  pre {
+    border: 1px solid #C78282;
+    background: #F0E0E0;
   }
 }
