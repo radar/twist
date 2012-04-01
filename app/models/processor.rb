@@ -114,7 +114,7 @@ module Processor
   def process_figure!(chapter, markup)
     chapter.figure_count += 1
     filename = markup.css("img")[0]["src"]
-    figure = chapter.find_or_initialize_by_filename(filename)
+    figure = chapter.figures.find_or_initialize_by_filename(filename)
     figure.figure = File.open(chapter.git.path + filename)
     chapter.elements << build_element(markup, "figure")
   end
