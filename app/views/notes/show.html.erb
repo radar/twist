@@ -12,7 +12,7 @@
 <%= render_element(@note.element) %>
 
 <div id='note'>
-  <h3><%= @note.user.email %> writes:</h3>
+  <h3><%= @note.user.try(:email) || "[deleted]" %> writes:</h3>
   <%= markdown(@note.text) %>
 </div>
 
