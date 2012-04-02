@@ -8,12 +8,18 @@ class ChaptersController < ApplicationController
   end
   
   def show
-    @chapter = @book.chapters.detect { |chapter| chapter.position == params[:id].to_i }
+    @chapter = find_chapter(params[:id])
+    @previous_chapter = find_chapter(params[:id].to_i-1)
+    @next_chapter = find_chapter(params[:id].to_i+1)
   end
   
   private
   
   def find_book
     @book = Book.where(:permalink => params[:book_id]).first
+  end
+
+  def find_chapter(position)
+    @book.chapters.detect { |chapter| chapter.position == position.to_i }
   end
 end

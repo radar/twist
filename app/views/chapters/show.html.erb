@@ -9,7 +9,9 @@
 <br>
 <div id='chapter'>
   <h2>Chapter <%= @chapter.position %> - <%= @chapter.title %></h2>
+  <%= render "chapters/pagination" %>
   <%= render_elements(@chapter.elements) %>
+  <%= render "chapters/pagination" %>
 </div>
 
 <script>create_section_listing();</script>
