@@ -21,7 +21,7 @@ $(window).resize(function () {
   }
   else {
     $('#sidebar').show();
-    $('.wrapper').css("margin", "1% 35% 0% 7%")
+    $('.wrapper').css("margin", "1% 35% 0% 8%")
     $('#sidebar_tip').hide();
   }
 })
