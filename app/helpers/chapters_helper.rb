@@ -1,11 +1,11 @@
 module ChaptersHelper
-  def previous_chapter
+  def previous_chapter_link
     if @previous_chapter
       ("&laquo; " + chapter_link(@previous_chapter)).html_safe
     end
   end
 
-  def next_chapter
+  def next_chapter_link
     if @next_chapter
       (chapter_link(@next_chapter) + " &raquo;".html_safe)
     end
