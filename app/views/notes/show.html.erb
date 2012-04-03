@@ -5,11 +5,7 @@
 
 <!-- Shamelessly ripped off from GitHub's AWESOME comment styling -->
 <div class='comment review-note'>
-  <span class='avatar'>
-    <% if @note.user %>
-      <%= image_tag "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(@note.user.email)}?s=140", :width => 48, :height => 48 %>
-    <% end %>
-  </span>
+  <%= avatar(@note.user) %>
   <div class='comment_container'>
     <div class='container'>
       <div class='details'>
