@@ -1,13 +1,1 @@
-<div class='comment'>
-  <%= avatar(comment.user) %>
-  <div class='comment_container'>
-    <div class='container'>
-      <div class='details'>
-        <div class='info'><strong><%= comment.user.try(:email) || "[deleted]" %></strong> commented</div>
-        <div class='body'>
-          <%= markdown(parse(comment.text)) %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= comment(comment, 'commented') %>

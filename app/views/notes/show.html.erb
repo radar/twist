@@ -5,17 +5,7 @@
 
 <!-- Shamelessly ripped off from GitHub's AWESOME comment styling -->
 <div class='comment review-note'>
-  <%= avatar(@note.user) %>
-  <div class='comment_container'>
-    <div class='container'>
-      <div class='details'>
-        <div class='info'><strong><%= @note.user.try(:email) || "[deleted]" %></strong> started the discussion</div>
-        <div class='body'>
-          <%= markdown(@note.text) %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= comment(@note, 'started a discussion', :class => 'review-note') %>
 </div>
 
 <div id='comments'>

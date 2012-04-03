@@ -1,9 +1,3 @@
-<div id='sidebar'>
-  <%= link_to "Go back to previous location", :back %><br><br>
-  
-  <%= link_to "Completed notes", [:completed, @book, @chapter, :notes] %>
-</div>
-
 <h1><%= @title || "Notes" %> for <%= link_to @book.title, @book %></h1>
 <% if @chapter %>
   <h2><%= link_to "Chapter #{@chapter.position} - #{@chapter.title}", [@book, @chapter] %></h2>

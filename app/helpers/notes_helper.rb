@@ -8,4 +8,22 @@ module NotesHelper
       end
     end
   end
+
+  def comment(object, blurb, attributes={})
+    content_tag(:div, {:class => "comment"}.merge(attributes)) do
+      avatar(object.user) +
+      content_tag(:div, :class => 'comment_container') do
+        content_tag(:div, :class => "container") do
+          content_tag(:div, :class => "details") do
+            content_tag(:div, :class => "info") do
+              "<strong>#{object.user.try(:email) || "[deleted]"}</strong> #{blurb} <time>#{time_ago_in_words(object.created_at) + ' ago' if object.created_at}</time>".html_safe
+            end +
+            content_tag(:div, :class => "body") do
+              markdown(parse(object.text))
+            end
+          end
+        end
+      end
+    end
+  end
 end
