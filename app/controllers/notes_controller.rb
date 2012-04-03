@@ -5,8 +5,8 @@ class NotesController < ApplicationController
   before_filter :find_notes, :only => [:index, :completed]
 
   def index
-    @notes = @notes.select { |n| n.state != "complete" ||
-                                 n.state != "accepted" ||
+    @notes = @notes.select { |n| n.state != "complete" &&
+                                 n.state != "accepted" &&
                                  n.state != "rejected"}
   end
   
