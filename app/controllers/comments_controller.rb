@@ -23,11 +23,11 @@ class CommentsController < ApplicationController
     if current_user.author?
       case params[:commit]
       when "Accept"
-        comment.note.accept!
+        @comment.note.accept!
       when "Reject"
-        comment.note.rejected!
+        @comment.note.rejected!
       when "Reopen"
-        comment.note.reopen!
+        @comment.note.reopen!
       end
     end
   end
