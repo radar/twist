@@ -1,6 +1,14 @@
 <%= form_for [@book, @chapter, @note, @comment] do |f| %>
   <div class="comment_form">
     <strong>Comment on this note (Markdown enabled)</strong>
+    <% if current_user.author? %>
+      <% if @note.completed? %>
+        <%= f.submit "Reopen", :class => "reopen-button" %>
+      <% else %>
+        <%= f.submit "Accept", :class => "accept-button" %>
+        <%= f.submit "Reject", :class => "reject-button" %>
+      <% end %>
+    <% end %>
 
     <p>
       <%= f.text_area :text, :rows => 5 %>
@@ -8,6 +16,6 @@
 
   </div>
   <p>
-    <%= f.submit "Leave Comment" %>
+    <%= f.submit "Leave Comment", :class => "comment-button" %>
   </p>
 <% end %>

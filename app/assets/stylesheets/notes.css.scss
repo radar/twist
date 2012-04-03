@@ -137,13 +137,16 @@
 .new_comment {
   margin-bottom: 30px;
 
-  input[type=submit] {
-    float: right;
+  .comment-button, .accept-button, .reject-button {
     color: white;
     font-size: 12px;
     border-radius: 5px;
     border-width: 1px;
     font-weight: bold;
+  }
+
+  .comment-button {
+    float: right;
     padding: 8px 15px;
     border-color: #74bb5a;
     border-bottom-color: #509338;
@@ -151,4 +154,19 @@
     text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
     background: -webkit-linear-gradient(#8add6d,#60b044);
   }
+
+  .accept-button, .reopen-button {
+    float: right;
+    margin: 3px;
+    padding: 5px 10px;
+    background: -webkit-linear-gradient(#6BE640,#60b044,#579E3E);
+  }
+
+  .reject-button {
+    float: left;
+    margin: 3px;
+    padding: 5px 10px;
+    background: -webkit-linear-gradient(#E64040,#B04444,#9E3E3E);
+  }
+
 }

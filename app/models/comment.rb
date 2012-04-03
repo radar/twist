@@ -4,6 +4,8 @@ class Comment
   field :text, :type => String
   field :user_id, :type => Integer
 
+  validates_presence_of :text
+
   belongs_to :user
   embedded_in :note
   

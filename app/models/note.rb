@@ -25,13 +25,27 @@ class Note
     self.state = "complete"
     self.save
   end
-  
+
+  def accept!
+    self.state = "accepted"
+    self.save
+  end
+
+  def reject!
+    self.state = "rejected"
+    self.save
+  end
+
   def reopen!
     self.state = "reopened"
     self.save
   end
 
-    def expire_chapter_cache
-      chapter.expire_cache
-    end
+  def completed?
+    state == "accepted" || state == "rejected" || state == "completed"
+  end
+
+  def expire_chapter_cache
+    chapter.expire_cache
+  end
 end

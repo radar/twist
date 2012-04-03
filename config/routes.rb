@@ -6,7 +6,8 @@ Twist::Application.routes.draw do
     end
 
     member do
-      put :complete
+      put :accept
+      put :reject
       put :reopen
     end
     
