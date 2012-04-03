@@ -2,10 +2,11 @@
 <html>
   <head>
     <title>Twist</title>
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "application", params[:controller] %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.001">
+    <%= yield :head %>
   </head>
   <body>
     <% flash.each do |k,v| %>
@@ -22,7 +23,7 @@
     <div id="sidebar_tip" style='display:none'>
       <strong><em>To view the sidebar, turn your device to portrait mode.</em></strong>
     </div>
-    <div class='wrapper'>
+    <div class='wrapper <%= 'full-page' if @full_page %>'>
       <%= yield %>
     </div>
 

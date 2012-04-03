@@ -1,0 +1,19 @@
+<% content_for :head do %>
+  <style>
+    @media only screen and (max-device-width: 1024px) and (orientation:portrait) { 
+      #sidebar { display: block; }
+      #sidebar_tip { display: none; }
+      .wrapper {
+        margin: 1% 35% 0% 8%;
+      }
+    }
+    @media only screen and (max-device-width: 1024px) and (orientation:landscape) { 
+      #sidebar { display: none; }
+      #sidebar_tip { display: block }
+      .wrapper {
+        margin: 1% 5% 0% 7%;
+      }
+    }
+  </style>
+<% end %>
+

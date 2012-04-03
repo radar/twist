@@ -1,8 +1,12 @@
 <%= form_for [@book, @chapter, @note, @comment] do |f| %>
-  <p>
-    <%= f.text_area :text, :cols => 80, :rows => 5 %>
-  </p>
-  
+  <div class="comment_form">
+    <strong>Comment on this note (Markdown enabled)</strong>
+
+    <p>
+      <%= f.text_area :text, :rows => 5 %>
+    </p>
+
+  </div>
   <p>
     <%= f.submit "Leave Comment" %>
   </p>

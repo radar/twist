@@ -1,10 +1,4 @@
-/*
- * This is a manifest file that'll automatically include all the stylesheets available in this directory
- * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
- * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
- *= require_tree . 
-*/
+/*= require "chapters" */
 
 * {
   margin: 0;
@@ -13,7 +7,7 @@
 
 body {
   margin: 1% 2.5% 1% 2.5%;
-  font: 12pt Georgia;
+  font: 14px 'Helvetica Neue';
   color: #444;
   background: #ddd;
 }
@@ -52,6 +46,10 @@ menu {
   margin-left: 4em;
   padding: 1.5em;
   -webkit-border-radius: 5px;
+}
+
+.full-page {
+  margin: 1% 5%;
 }
 
 input[type="email"], input[type="password"], input[type="text"], textarea {

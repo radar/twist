@@ -1,28 +1,27 @@
-<div id='sidebar'>
-  <%= link_to "Go back to previous location", :back %><br><br>
-  
-  <% if @note.state != "complete" %>
-    <%= link_to "Mark note as complete", [:complete, @book, @chapter, @note], :method => :put %>
-  <% else %>
-    <%= link_to "Mark note as reopened", [:reopen, @book, @chapter, @note], :method => :put %>
-  <% end %>
-</div>
+<% @full_page = true %>
 <h2><%= link_to @note.chapter.book.title, @note.chapter.book %> - <%= link_to @note.chapter.title, [@note.chapter.book, @note.chapter] %></h2>
 <h3>Note #<%= @note.number %> - <%= @note.state.titleize %></h3>
 <%= render_element(@note.element) %>
 
-<div id='note'>
-  <h3><%= @note.user.try(:email) || "[deleted]" %> writes:</h3>
-  <%= markdown(@note.text) %>
+<!-- Shamelessly ripped off from GitHub's AWESOME comment styling -->
+<div class='comment review-note'>
+  <span class='avatar'>
+    <%= image_tag "https://secure.gravatar.com/avatar/9a2a53db8e9b4476038c94a64b32833f?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png", :width => 48, :height => 48 %>
+  </span>
+  <div class='comment_container'>
+    <div class='container'>
+      <div class='details'>
+        <div class='info'><strong><%= @note.user.try(:email) || "[deleted]" %></strong> started the discussion</div>
+        <div class='body'>
+          <%= markdown(@note.text) %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id='comments'>
-  <h4>Comments</h4>
-  <% if @comments.empty? %>
-    There are no comments for this note.
-  <% end %>
   <%= render @comments %>
 </div>
 
-<h4>New comment</h4>
 <%= render "comments/form" %>

@@ -1,4 +1,15 @@
 <div class='comment'>
-  <strong><%= comment.user.email %> replied:</strong>
-  <%= markdown(parse(comment.text)) %>
+  <span class='avatar'>
+    <%= image_tag "https://secure.gravatar.com/avatar/9a2a53db8e9b4476038c94a64b32833f?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png", :width => 48, :height => 48 %>
+  </span>
+  <div class='comment_container'>
+    <div class='container'>
+      <div class='details'>
+        <div class='info'><strong><%= comment.user.try(:email) || "[deleted]" %></strong> commented</div>
+        <div class='body'>
+          <%= markdown(parse(comment.text)) %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

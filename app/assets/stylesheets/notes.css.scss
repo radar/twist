@@ -1,0 +1,152 @@
+@media only screen and (min-device-width: 1025px) {
+  .wrapper {
+    margin: 1% 20%;
+  }
+}
+
+@media only screen and (max-device-width: 1024px) {
+  .wrapper {
+    margin: 1% 10%;
+  }
+}
+
+.comment {
+  .avatar {
+    position: relative;
+    top: 1em;
+    left: 0.25em;
+    float: left;
+    img {
+      border-radius: 3px;
+    }
+  }
+}
+
+.comment_container {
+  padding-left: 60px;
+
+  .container {
+    display: block;
+    background: #eee;
+    padding: 3px;
+    border-radius: 3px;
+
+    .details {
+      font: 14px 'Helvetica Neue';
+      border: 1px solid #cacaca;
+
+      .info {
+        border-bottom: 1px solid #cacaca;
+        font-size: 95%;
+        padding: 10px;
+        background: -moz-linear-gradient(#232323,#454545);
+        background: -webkit-linear-gradient(#232323,#454545);
+        color: white;
+      }
+
+      .body {
+        background: white;
+        padding: 10px;
+
+        p {
+          font: 13px 'Helvetica Neue';
+          margin-bottom: 0;
+        }
+
+        pre {
+          margin-top: 1em;
+          font-size: 90%;
+        }
+      }
+    }
+  }
+}
+
+.review-note {
+  .comment_container {
+    .container {
+      .details {
+        .info {
+          background: -moz-linear-gradient(#0074FF,#004BA6);
+          background: -webkit-linear-gradient(#0074FF,#004BA6);
+        }
+      }
+    }
+  }
+}
+
+
+.action-bubble {
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  .action {
+    .state {
+      border-radius: 3px;
+      padding: 3px;
+      padding-bottom: 5px;
+      margin-left: 4px;
+      margin-right: 5px;
+      font-size: 95%;
+      font-weight: bold;
+      color: #fff;
+    }
+    .state-closed {
+      background: #bd2c00;
+    }
+
+  }
+
+  .avatar {
+    position: relative;
+    top: 8px;
+    img {
+      border-radius: 3px;
+    }
+  }
+
+  a {
+    font-weight: bold;
+  }
+}
+
+.comment_form {
+  background: #eee;
+  margin-top: 1em;
+  margin-left: 60px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  margin-bottom: 0.5em;
+
+  strong {
+    padding: 5px;
+    display: block;
+    border-bottom: 1px solid #ccc;
+    font-size: 90%;
+  }
+
+  textarea {
+    margin: 10px 5px;
+    width: 96%;
+  }
+
+}
+
+.new_comment {
+  margin-bottom: 30px;
+
+  input[type=submit] {
+    float: right;
+    color: white;
+    font-size: 12px;
+    border-radius: 5px;
+    border-width: 1px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-color: #74bb5a;
+    border-bottom-color: #509338;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    background: -webkit-linear-gradient(#8add6d,#60b044);
+  }
+}
