@@ -42,7 +42,7 @@ class Note
   end
 
   def completed?
-    state == "accepted" || state == "rejected" || state == "completed"
+    state == "accepted" || state == "rejected" || state == "complete"
   end
 
   def expire_chapter_cache
