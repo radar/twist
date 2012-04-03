@@ -6,7 +6,9 @@
 <!-- Shamelessly ripped off from GitHub's AWESOME comment styling -->
 <div class='comment review-note'>
   <span class='avatar'>
-    <%= image_tag "https://secure.gravatar.com/avatar/9a2a53db8e9b4476038c94a64b32833f?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png", :width => 48, :height => 48 %>
+    <% if @note.user %>
+      <%= image_tag "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(@note.user.email)}?s=140", :width => 48, :height => 48 %>
+    <% end %>
   </span>
   <div class='comment_container'>
     <div class='container'>
