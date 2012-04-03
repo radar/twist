@@ -27,7 +27,7 @@ module Processor
     # Parse callouts
     markup.css("span.callout").each do |callout|
       callout_count += 1
-      image = "<img src='/images/callouts/#{callout_count}' class='callout'/>"
+      image = "<img src='/images/callouts/#{callout_count}.png' class='callout'/>"
       content = content.gsub(callout.to_html, image)
     end
 
