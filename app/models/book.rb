@@ -2,6 +2,7 @@ class Book
   include Mongoid::Document
   field :user_id, :type => Integer
   field :path, :type => String
+  field :url, :type => String
   field :title, :type => String
   field :blurb, :type => String
   field :permalink, :type => String
@@ -14,9 +15,8 @@ class Book
   
   @queue = "normal"
   before_create :set_permalink
-  after_create :enqueue
   
-  def self.perform(id)
+  def self.perform(id, payload)
     book = Book.find(id)
     # TODO: determine if path is HTTP || Git
     # TODO: determine if path is public
@@ -36,15 +36,31 @@ class Book
     end
 
     @changed_files.grep(/ch\d+\/ch\d+.xml$/).sort.each do |file|
-      puts "PROCESSING #{file}"
       Chapter.process!(book, git, file)
     end
+
+    book.process_payload!(payload)
 
     # When done, update the book with the current commit as a point of reference
     book.current_commit = git.current_commit
     book.processing = false
     book.just_added = false
     book.save
+  end
+
+  def process_payload!(payload)
+    set_url!(payload)
+    process_commits!(payload)
+  end
+
+  def process_commits!(payload)
+    payload["commits"].each do |commit|
+      Commit.process!(self, commit)
+    end
+  end
+
+  def set_url(payload)
+    self.url = payload["repository"]["url"]
   end
   
   def notes
@@ -55,8 +71,8 @@ class Book
     permalink
   end
 
-  def enqueue
-    Resque.enqueue(self.class, self.id)
+  def enqueue(payload)
+    Resque.enqueue(self.class, self.id, payload)
     self.processing = true
     self.save!
   end

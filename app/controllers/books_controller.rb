@@ -26,7 +26,7 @@ class BooksController < ApplicationController
 
   def receive
     @book = Book.where(:permalink => params[:id]).first
-    @book.enqueue
+    @book.enqueue(params[:payload])
     render :nothing => true
   end
 end
