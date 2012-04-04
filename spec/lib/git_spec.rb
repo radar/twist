@@ -122,6 +122,6 @@ describe Git do
   it "retreives the current commit" do
     git = Git.new(*args)
     git.update!
-    git.current_commit.should eql("ab7b14d21351d77cdf6daaaf69e20c8cbe60c32b")
+    git.current_commit.should eql("8a4de0df4009ed40f2e6476b5bbf44a3a47e2f0b")
   end
 end
