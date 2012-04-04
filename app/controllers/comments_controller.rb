@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
   def attempt_state_update
     if current_user.author?
       change_note_state!
-      flash[:notice] = "Note state changed to #{@note.state.titleize}"
+      flash.now[:notice] = "Note state changed to #{@note.state.titleize}"
       render "notes/show"
     else
       @comment = @note.comments.build
