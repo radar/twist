@@ -10,7 +10,7 @@
 </div>
 
 <div id='comments'>
-  <%= render @comments %>
+  <%= render @comments.select(&:persisted?) %>
 </div>
 
 <%= render "comments/form" %>
