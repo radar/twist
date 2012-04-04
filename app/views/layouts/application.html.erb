@@ -9,10 +9,6 @@
     <%= yield :head %>
   </head>
   <body>
-    <% flash.each do |k,v| %>
-      <div class='flash' id='flash_<%= k %>'><%= v %></div>
-    <% end %>
-
     <menu>
       <% if user_signed_in? %>
         <%= link_to "Sign out", destroy_user_session_path %>
@@ -23,7 +19,11 @@
     <div id="sidebar_tip" style='display:none'>
       <strong><em>To view the sidebar, turn your device to portrait mode.</em></strong>
     </div>
-    <div class='wrapper <%= 'full-page' if @full_page %>'>
+   <div class='wrapper <%= 'full-page' if @full_page %>'>
+     <% flash.each do |k,v| %>
+      <div class='flash' id='flash_<%= k %>'><%= v %></div>
+    <% end %>
+
       <%= yield %>
     </div>
 

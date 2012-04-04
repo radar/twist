@@ -78,3 +78,20 @@ label {
   font: 14px Helvetica;
 }
 
+.flash {
+  border-radius: 3px;
+  background: #eee;
+  padding: 10px;
+  font-size: 125%;
+  font-weight: bold;
+}
+
+#flash_notice {
+  background: #6BE640;
+  color: black;
+}
+
+#flash_error {
+  background: #E64040;
+  color: white;
+}
