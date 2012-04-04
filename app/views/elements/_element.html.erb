@@ -1,4 +1,5 @@
 <%= render :partial => "notes/button", :locals => { :element => element } %>
+<a name='<%= element.xml_id %>'></a>
 <%= raw(element.content) %>
 <div id='notes_container_<%= element.xml_id %>' class='notes_container' style='display:none'>
 
