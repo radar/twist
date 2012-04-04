@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
       when "Accept"
         @comment.note.accept!
       when "Reject"
-        @comment.note.rejected!
+        @comment.note.reject!
       when "Reopen"
         @comment.note.reopen!
       end
