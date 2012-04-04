@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Element do
-  let(:book) { Factory.create(:book) }
+  let(:book) { FactoryGirl.create(:book) }
   let(:chapter) { book.chapters.create!(:title => "Testing", :position => 1) }
   
   before do
@@ -20,11 +20,8 @@ describe Element do
         end
       end
     end
-    
-    puts xml.to_xml
-    
+
     Element.process!(chapter, Nokogiri::XML(xml.to_xml).css("p").first)
-    p chapter.elements.map(&:content)
   end
 end
   

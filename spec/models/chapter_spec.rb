@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Chapter do
   let(:git) { Git.new("radar", "rails3book_test") }
-  let(:book) { Factory.create(:book) }
+  let(:book) { FactoryGirl.create(:book) }
 
   before do
     # Nuke the repo, start afresh.
