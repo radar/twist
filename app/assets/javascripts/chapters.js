@@ -19,3 +19,9 @@ function create_section_listing() {
     window.scrollTo(0, $("#" + section_id)[0].offsetTop);
   })
 }
+
+$(document).ready(function() {
+  if (location.hash) {
+    $(location.hash).css("background", "cornsilk")
+  }
+})
