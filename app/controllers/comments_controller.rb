@@ -2,33 +2,50 @@ class CommentsController < ApplicationController
   before_filter :authenticate_user!
   # lol embedded documents
   before_filter :find_book_and_chapter_and_note
-  
+
   def create
+    @comments = @note.comments
     @comment = @note.comments.build(params[:comment].merge!(:user => current_user))
-    if @comment.save
-      change_note_state!
-      @comment.send_notifications!
-      flash[:notice] = "Comment has been created."
-      redirect_to [@book, @chapter, @note]
+    if params[:comment][:text].blank?
+      attempt_state_update
     else
-      @comments = @note.comments
+      create_new_comment
+    end
+  end
+
+  private
+
+  def attempt_state_update
+    if current_user.author?
+      change_note_state!
+      flash[:notice] = "Note state updated."
+      render "notes/show"
+    else
+      @comment = @note.comments.build
       flash[:error] = "Comment could not be created."
       render "notes/show"
     end
   end
-  
-  private
+
+  def create_new_comment
+    if @comment.save
+      @comment.send_notifications!
+      flash[:notice] = "Comment has been created."
+      redirect_to [@book, @chapter, @note]
+    else
+      flash[:error] = "Comment could not be created."
+      render "notes/show"
+    end
+  end
 
   def change_note_state!
-    if current_user.author?
-      case params[:commit]
-      when "Accept"
-        @comment.note.accept!
-      when "Reject"
-        @comment.note.reject!
-      when "Reopen"
-        @comment.note.reopen!
-      end
+    case params[:commit]
+    when "Accept"
+      @note.accept!
+    when "Reject"
+      @note.reject!
+    when "Reopen"
+      @note.reopen!
     end
   end
   
