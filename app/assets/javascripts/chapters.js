@@ -4,7 +4,7 @@ function create_section_listing() {
   });
 
   $('.section_title').each(function (i, e) {
-    $("div#sidebar #section_listing").append("<a id='" + e.id + "_link'>" + e.innerText + "</a>");
+    $("div#sidebar #section_listing").append("<a id='" + e.id + "_link'>" + (e.innerText || e.innerContent) + "</a>");
     just_added = $("div#sidebar #section_listing").children().last();
     if (e.tagName == "H2") {
       just_added.addClass("major");
