@@ -9,6 +9,18 @@ module NotesHelper
     end
   end
 
+  def state(note)
+    attributes = case note.state.titleize
+                  when "Accepted" || "Completed"
+                    { :class => "state-accepted" }
+                  when "Rejected"
+                    { :class => "state-rejected" }
+                  when "New"
+                    { :class => "state-new" }
+                  end
+    content_tag(:span, attributes) { note.state.titleize }
+  end
+
   def comment(object, blurb, attributes={})
     content_tag(:div, {:class => "comment"}.merge(attributes)) do
       avatar(object.user) +

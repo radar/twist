@@ -1,6 +1,6 @@
 <% @full_page = true %>
 <h2><%= link_to @note.chapter.book.title, @note.chapter.book %> - <%= link_to @note.chapter.title, [@note.chapter.book, @note.chapter] %></h2>
-<h3>Note #<%= @note.number %> - <%= @note.state.titleize %></h3>
+<h3>Note #<%= @note.number %> - <%= state(@note) %></h3>
 <%= render_element(@note.element) %>
 
 <!-- Shamelessly ripped off from GitHub's AWESOME comment styling -->
