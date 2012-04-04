@@ -8,9 +8,13 @@ module DeviseExtensions
   end
   
   def create_user!(attributes={})
-    user = Factory.create(:user, attributes)
+    user = FactoryGirl.create(:user, attributes)
     user.confirm!
     user
+  end
+
+  def create_author!(attributes={})
+    create_user!(attributes.merge!(:author => true))
   end
 end
 
