@@ -24,7 +24,7 @@ class Book
     git = Git.new(user, repo)
     book.path = git.path.to_s
     current_commit = git.current_commit rescue nil
-    puts "Received push notification from #{user}/#{repo}@#{current_commit}"
+    puts "Received push notification for #{user}/#{repo}@#{current_commit}"
     git.update!
 
     # Use instance variable to make it bubble up out of the `chdir` block
@@ -36,6 +36,7 @@ class Book
       @changed_files = git.changed_files(current_commit)
     end
 
+    puts "List of changed files: #{@changed_files.inspect}"
     @changed_files.grep(/ch\d+\/ch\d+.xml$/).sort.each do |file|
       puts "Processing #{file} for #{book.title}"
       Chapter.process!(book, git, file)
