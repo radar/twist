@@ -36,6 +36,7 @@ class Book
     end
 
     @changed_files.grep(/ch\d+\/ch\d+.xml$/).sort.each do |file|
+      Rails.logger.info("Processing #{file} for #{book.title}")
       Chapter.process!(book, git, file)
     end
 
