@@ -38,10 +38,8 @@ class Git
   def pull
     puts "Getting latest #{user}/#{repo}"
     Dir.chdir(path) do
-      silence_stream(STDERR) do
-        `git checkout`
-        `git pull origin master`
-      end
+      `git checkout`
+      `git pull origin master`
     end
   end
   
