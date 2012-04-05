@@ -74,11 +74,14 @@ describe "notes" do
     it "can accept a note" do
       click_button "Accept"
       page.should have_content("Note state changed to Accepted")
+      @note.state.should == "accepted"
+
     end
 
     it "can reject a note" do
       click_button "Reject"
       page.should have_content("Note state changed to Rejected")
+      @note.state.should == "rejected"
     end
   end
 

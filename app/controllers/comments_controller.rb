@@ -5,7 +5,6 @@ class CommentsController < ApplicationController
 
   def create
     @comments = @note.comments
-    @comment = @note.comments.build(params[:comment].merge!(:user => current_user))
     if params[:comment][:text].blank?
       attempt_state_update
     else
@@ -18,6 +17,7 @@ class CommentsController < ApplicationController
   def attempt_state_update
     if current_user.author?
       change_note_state!
+      @comment = @note.comments.build
       flash.now[:notice] = "Note state changed to #{@note.state.titleize}"
       render "notes/show"
     else
@@ -28,6 +28,7 @@ class CommentsController < ApplicationController
   end
 
   def create_new_comment
+    @comment = @note.comments.build(params[:comment].merge!(:user => current_user))
     if @comment.save
       @comment.send_notifications!
       flash[:notice] = "Comment has been created."
