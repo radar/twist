@@ -33,10 +33,11 @@ class Book
         @changed_files = Dir["**/*.xml"]
       end
     else
+      puts "Finding files that have changed between #{current_commit}...#{git.current_commit}"
       @changed_files = git.changed_files(current_commit)
+      puts "These files have changed: #{@changed_files.inspect}"
     end
 
-    puts "List of changed files: #{@changed_files.inspect}"
     @changed_files.grep(/ch\d+\/ch\d+.xml$/).sort.each do |file|
       puts "Processing #{file} for #{book.title}"
       Chapter.process!(book, git, file)
