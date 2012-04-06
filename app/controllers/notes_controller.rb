@@ -23,7 +23,8 @@ class NotesController < ApplicationController
     element = @chapter.elements.where(:xml_id => params[:element_id]).first
     note = @chapter.notes.build(params[:note].merge(:element => element,
                                                     :element_id => params[:element_id],
-                                                    :number => @book.notes.count + 1,
+                                                    # Temporary BS hack because I deleted some notes
+                                                    :number => @book.notes.map(&:number).max + 1,
                                                     :user => current_user))
     if note.save
       # Increment notes count for the book
