@@ -20,6 +20,10 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.start
   end
+  
+  config.before do
+    ActionMailer::Base.deliveries.clear
+  end
 
   config.after(:each) do
     DatabaseCleaner.clean
