@@ -19,13 +19,26 @@
     <div id="sidebar_tip" style='display:none'>
       <strong><em>To view the sidebar, turn your device to portrait mode.</em></strong>
     </div>
-   <div class='wrapper <%= 'full-page' if @full_page %>'>
-     <% flash.each do |k,v| %>
-      <div class='flash' id='flash_<%= k %>'><%= v %></div>
-    <% end %>
+    <div class='wrapper <%= 'full-page' if @full_page %>'>
+      <% flash.each do |k,v| %>
+        <div class='flash' id='flash_<%= k %>'><%= v %></div>
+      <% end %>
 
       <%= yield %>
     </div>
 
-  </body>
-</html>
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+       var t   = document.createElement('script');
+       t.type  = 'text/javascript';
+       t.async = true;
+       t.id    = 'gauges-tracker';
+       t.setAttribute('data-site-id', '4f8b76b1613f5d044e000083');
+       t.src = '//secure.gaug.es/track.js';
+       var s = document.getElementsByTagName('script')[0];
+       s.parentNode.insertBefore(t, s);
+       })();
+     </script>
+   </body>
+ </html>
