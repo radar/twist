@@ -11,17 +11,17 @@ p {
   margin: 0px;
   margin-bottom: 0.5em;
   font: 16px/1.5 "Georgia";
-  
+
   code, .filename, span.command {
     font-size: 11.5pt;
     font-family: "Inconsolata", Monaco, monospace;
   }
 
-  
+
   span.footnote, span.indexterm {
     display: none;
   }
-  
+
   sup {
     font-size: 75%;
     padding-left: 0px;
@@ -99,7 +99,7 @@ span.footnote_container {
 }
 
 span.footnote {
-  
+
   p {
     font-size: 90%;
   }
@@ -111,7 +111,7 @@ span.footnote {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  
+
   .title {
     border-top: 3px solid #ccc;
     font: 12pt Helvetica;
@@ -120,14 +120,22 @@ span.footnote {
     display: block;
     padding: 10px;
   }
-  
+
   img {
     max-width: 100%;
   }
 }
 
 ul {
-  margin-left: 1.5em
+  margin-left: 1.5em;
+}
+
+blockquote {
+  margin-left: 1.5em;
+  background: #dedede;
+  padding: 10px;
+  border-radius: 3px;
+  font-style: italic;
 }
 
 
@@ -139,7 +147,7 @@ ul {
   height: 100%;
   overflow: auto;
   font-family: Helvetica;
-  
+
   #section_listing {
     a {
       margin-top: 4px;
