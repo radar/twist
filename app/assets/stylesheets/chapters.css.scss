@@ -135,7 +135,11 @@ blockquote {
   background: #dedede;
   padding: 10px;
   border-radius: 3px;
-  font-style: italic;
+
+  p {
+    margin-bottom: 0px;
+    font-style: italic;
+  }
 }
 
 
