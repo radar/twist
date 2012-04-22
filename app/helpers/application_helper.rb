@@ -14,6 +14,6 @@ module ApplicationHelper
   end
 
   def find_and_replace_note_refs(text)
-    text.gsub(/\s#(\d+)\s?/) { link_to "##{$1}", book_note_path(@book, $1) }
+    text.gsub(/\s#(\d+)\s?/) { " " + link_to("##{$1}", book_note_path(@book, $1)) }
   end
 end
