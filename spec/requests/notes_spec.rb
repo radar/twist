@@ -7,7 +7,7 @@ describe "notes" do
     actually_sign_in_as(author)
   end
     
-  it "can add a new note to a paragraph and leave a comment on it", :js => true do
+  it "can add a new note to a paragraph", :js => true do
     visit book_chapter_path(@book, @book.chapters.first)
 
     within "#note_button_ch01_3" do
@@ -30,18 +30,6 @@ describe "notes" do
     # And the rest of it.
     page.should have_content("This is a test note!")
     
-    fill_in "comment_text", :with => "**This** _is_ a `comment`. Fixed in @edc32b4f1ecc7f43dcfae57c02b90df98c1b38f9."
-    click_button "Leave Comment"
-    page.should have_content("Comment has been created.")
-    within "#comments" do
-      within("p") do
-        # Ensure comment text shows up correctly in processed markdown.
-        within("strong") { page.should have_content("This") }
-        within("em") { page.should have_content("is") }
-        within("code") { page.should have_content("comment") }
-        find("a")["href"].should == "https://github.com/twist-books/rails-3-in-action/commit/edc32b4f1ecc7f43dcfae57c02b90df98c1b38f9"
-      end
-    end
   end
   
   it "can view all notes for a book" do

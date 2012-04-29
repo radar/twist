@@ -5,31 +5,11 @@ class CommentsController < ApplicationController
 
   def create
     @comments = @note.comments
-    attempt_state_update || create_new_comment
-  end
-
-  private
-
-  def attempt_state_update
-    if current_user.author?
-      if params[:comment][:text].present?
-        @comment = @note.comments.build(params[:comment].merge(:user => current_user))
-      else
-        @comment = Comment.new
-      end
-      change_note_state!
-      flash.now[:notice] = "Note state changed to #{@note.state.titleize}"
-      render "notes/show"
-    else
-      return false
-    end
-  end
-
-  def create_new_comment
     @comment = @note.comments.build(params[:comment].merge!(:user => current_user))
     if @comment.save
       @comment.send_notifications!
-      flash[:notice] = "Comment has been created."
+      check_for_state_transition!
+      flash[:notice] ||= "Comment has been created."
       redirect_to [@book, @chapter, @note]
     else
       flash[:error] = "Comment could not be created."
@@ -37,17 +17,24 @@ class CommentsController < ApplicationController
     end
   end
 
-  def change_note_state!
-    case params[:commit]
-    when "Accept"
-      @note.accept!
-    when "Reject"
-      @note.reject!
-    when "Reopen"
-      @note.reopen!
+  private
+
+  def check_for_state_transition!
+    if current_user.author?
+      if params[:commit] == "Accept"
+        @note.accept!
+        notify_of_note_state_change("Accepted")
+      elsif params[:commit] == "Reject"
+        @note.reject!
+        notify_of_note_state_change("Rejected")
+      end
     end
   end
-  
+
+  def notify_of_note_state_change(state)
+    flash[:notice] = "Note state changed to #{state}"
+  end
+
   def find_book_and_chapter_and_note
     @book = Book.where(permalink: params[:book_id]).first
     @chapter = @book.chapters.where(:position => params[:chapter_id]).first
