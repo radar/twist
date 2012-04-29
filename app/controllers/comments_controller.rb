@@ -5,15 +5,19 @@ class CommentsController < ApplicationController
 
   def create
     @comments = @note.comments
-    @comment = @note.comments.build(params[:comment].merge!(:user => current_user))
-    if @comment.save
-      @comment.send_notifications!
-      check_for_state_transition!
-      flash[:notice] ||= "Comment has been created."
-      redirect_to [@book, @chapter, @note]
+    check_for_state_transition!
+    if params[:comment][:text].present?
+      @comment = @note.comments.build(params[:comment].merge!(:user => current_user))
+      if @comment.save
+        @comment.send_notifications!
+        flash[:notice] ||= "Comment has been created."
+        redirect_to [@book, @chapter, @note]
+      else
+        flash[:error] = "Comment could not be created."
+        render "notes/show"
+      end
     else
-      flash[:error] = "Comment could not be created."
-      render "notes/show"
+      redirect_to [@book, @chapter, @note]
     end
   end
 

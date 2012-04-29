@@ -35,15 +35,6 @@ describe 'commenting' do
       assert_comment_present!
     end
 
-    it "cannot leave a blank comment" do
-      fill_in "comment_text", :with => ""
-      click_button "Leave Comment"
-      within("#flash_error") do
-        page.should have_content("Comment could not be created.")
-      end
-      lambda { find("#comments .comment") }.should raise_error(Capybara::ElementNotFound)
-    end
-
     it "accepting a note" do
       click_button "Accept"
       within("#flash_notice") do
