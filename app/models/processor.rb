@@ -108,6 +108,9 @@ module Processor
   end
   
   def process_example!(chapter, markup)
+    chapter.listing_count += 1
+    title = markup.css("span.title")[0]
+    title.content = "Listing #{chapter.position}.#{chapter.listing_count} #{title.content}"
     chapter.elements << build_element(markup, "element")
   end
   

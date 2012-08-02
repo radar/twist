@@ -29,6 +29,12 @@ class Chapter
   def figure_count
     @figure_count ||= 0
   end
+
+  # Default listing count to 0, increments when we call process_example! in
+  # Processor
+  def listing_count
+    @listing_count ||= 0
+  end
   
   # Used for correctly counting + labelling the sections.
   # Works with the within_section method contained in the Processor module.
