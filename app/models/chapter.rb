@@ -18,6 +18,7 @@ class Chapter
   attr_accessor :footnote_count
   attr_accessor :section_count
   attr_accessor :figure_count
+  attr_accessor :listing_count
   
   # Defaults footnote_count to something.
   # Would use attr_accessor_with_default if it wasn't deprecated.
