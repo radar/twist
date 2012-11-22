@@ -22,25 +22,24 @@ describe Book do
       # Should enqueue a job...
       book = Book.create(:title => "Rails 3 in Action (TESTs)", :path => "http://github.com/radar/rails3book_test")
       assert book.processing?
-      # ... which when run ...
-      run_resque_job!
+      Book.perform(book.id)
       book.reload
       assert !book.processing?
       # ... creates a chapter!
       book.chapters.count.should eql(1)
     end
-    
-    it "processes the Rails 3 in Action real book" do
+
+    it "processes a test Markdown book" do
       # Should enqueue a job...
-      book = Book.create(:title => "Rails 3 in Action", :path => "http://github.com/radar/rails3book")
+      book = Book.create(:title => "Markdown Book Test", :path => "http://github.com/radar/markdown_book_test")
       assert book.processing?
       # ... which when run ...
-      run_resque_job!
+      Book.perform(book.id)
       book.reload
       assert !book.processing?
       # ... creates a chapter!
-      book.chapters.count.should eql(18)
-      book.chapters.map(&:position).should == [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+      book.chapters.count.should eql(1)
+      book.chapters.map(&:position).should == [1]
     end
   end
 end

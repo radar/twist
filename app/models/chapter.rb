@@ -52,13 +52,24 @@ class Chapter
   def section_count
     @section_count ||= [position, 0]
   end
-  
+
   def self.process!(book, git, file)
+    ext = File.extname(file)
+    if %w(.markdown .md).include?(ext)
+      process_markdown!(book, git,file)
+    elsif %w(.xml).include?(ext)
+      process_xml!(book, git, file)
+    else
+      raise "Unknown chapter format!"
+    end
+  end
+
+  def process_xml!(book, git, file)
     # Read the XML, parse it with XSLT which will convert it into lovely HTML
     xml = Nokogiri::XML(File.read(git.path + file))
     xslt = Nokogiri::XSLT(File.read(Rails.root + 'lib/chapter.xslt'))
     parsed_doc = xslt.transform(xml)
-    
+
     chapter = book.chapters.find_or_initialize_by(xml_id: xml.xpath("chapter").first["id"])
     chapter.git = git
     chapter.elements = [] # Clear the elements, begin anew.
@@ -77,7 +88,11 @@ class Chapter
     chapter.save_figure_attachments!
     chapter
   end
-  
+
+  def process_markdown!(book, git, file)
+
+  end
+
   def to_param
     position.to_s
   end

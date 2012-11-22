@@ -42,3 +42,5 @@ module Twist
     config.cache_store = :redis_store
   end
 end
+
+require 'markdown_renderer'

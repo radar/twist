@@ -27,20 +27,16 @@ class Book
     puts "Received push notification for #{user}/#{repo}@#{current_commit}"
     git.update!
 
-    # Use instance variable to make it bubble up out of the `chdir` block
-    if book.just_added?
-      Dir.chdir(git.path) do
-        @changed_files = Dir["**/*.xml"]
+    Dir.chdir(book.path) do
+      if File.exist?("manifest.txt")
+        files = File.read("manifest.txt").split("\n")
+        files.sort.each do |file|
+          puts "Processing #{file} for #{book.title}"
+          Chapter.process!(book, git, file)
+        end
+      else
+        raise "Couldn't find manifest.txt!"
       end
-    else
-      puts "Finding files that have changed between #{current_commit}...#{git.current_commit}"
-      @changed_files = git.changed_files(current_commit)
-      puts "These files have changed: #{@changed_files.inspect}"
-    end
-
-    @changed_files.grep(/ch\d+\/ch\d+.xml$/).sort.each do |file|
-      puts "Processing #{file} for #{book.title}"
-      Chapter.process!(book, git, file)
     end
 
     # When done, update the book with the current commit as a point of reference
