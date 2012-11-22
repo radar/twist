@@ -35,4 +35,17 @@ T> authenticated user.
     parsed_tip.css("strong").text.should == "The constraint request object"
     parsed_tip.css("p").count.should == 2
   end
+
+  it "can parse a warning" do
+    warning = %Q{
+W> **Don't do that!**
+W>
+W> Please keep all extremities clear of the whirring blades.
+}
+
+    output = render(warning)
+    parsed_warning = output.css("div.warning")
+    parsed_warning.css("strong").text.should == "Don't do that!"
+    parsed_warning.css("p").count.should == 2
+  end
 end
