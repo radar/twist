@@ -138,6 +138,10 @@ module Processor
   def process_tip!(chapter, markup)
     chapter.elements << build_element(markup, "tip")
   end
+
+  def process_code!(chapter, markup)
+    chapter.elements << build_element(markup, "code")
+  end
   
   def process_indexterm!(chapter, markup)
     # TODO: process at a later date

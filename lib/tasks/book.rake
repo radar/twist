@@ -1,9 +1,10 @@
 namespace :book do
   task :load => :environment do
     Book.delete_all
-    Book.create!(:title => "Rails 3 in Action", :path => "http://github.com/radar/rails3book")
+    #Book.create!(:title => "Rails 3 in Action", :path => "http://github.com/radar/rails3book")
+    Book.create!(:title => "Multi-Tenancy with Rails", :path => "http://github.com/radar/saas_book")
   end
-  
+
   task :ebook => :environment do
     book = Book.first
     epub_path = Rails.root + "epubs" + book.permalink

@@ -1,3 +1,5 @@
+require 'markdown_renderer'
+
 class Chapter
   include Mongoid::Document
   field :position, :type => Integer
@@ -64,7 +66,7 @@ class Chapter
     end
   end
 
-  def process_xml!(book, git, file)
+  def self.process_xml!(book, git, file)
     # Read the XML, parse it with XSLT which will convert it into lovely HTML
     xml = Nokogiri::XML(File.read(git.path + file))
     xslt = Nokogiri::XSLT(File.read(Rails.root + 'lib/chapter.xslt'))
@@ -89,8 +91,23 @@ class Chapter
     chapter
   end
 
-  def process_markdown!(book, git, file)
+  def self.process_markdown!(book, git, file)
+    markdown = File.read(git.path + file)
+    renderer = Redcarpet::Markdown.new(MarkdownRenderer)
+    html = Nokogiri::HTML(renderer.render(markdown))
 
+    chapter = book.chapters.find_or_initialize_by(file_name: file)
+    chapter.git = git
+    chapter.elements = []
+    chapter.title = html.css("h1").text
+    chapter.position = book.manifest.index(file) + 1
+
+    p html.text
+    elements = html.css("body > *")
+    elements.each { |element| Element.process!(chapter, element) }
+    book.save
+    chapter.save_figure_attachments!
+    chapter
   end
 
   def to_param

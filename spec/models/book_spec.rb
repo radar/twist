@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Book do
   context "upon creation" do
-    let(:args) { ["radar", "rails3book_test"] }
-    let(:git) { Git.new(*args) }
+    let(:git) { Git.new("radar", "rails3book_test") }
 
     before do
       # Ensure a pristine state

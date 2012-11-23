@@ -27,15 +27,10 @@ class Book
     puts "Received push notification for #{user}/#{repo}@#{current_commit}"
     git.update!
 
-    Dir.chdir(book.path) do
-      if File.exist?("manifest.txt")
-        files = File.read("manifest.txt").split("\n")
-        files.sort.each do |file|
-          puts "Processing #{file} for #{book.title}"
-          Chapter.process!(book, git, file)
-        end
-      else
-        raise "Couldn't find manifest.txt!"
+    book.manifest do |files|
+      files.each do |file|
+        puts "Processing #{file} for #{book.title}"
+        Chapter.process!(book, git, file)
       end
     end
 
@@ -45,11 +40,27 @@ class Book
     book.just_added = false
     book.save
   end
-  
+
+  def manifest(&block)
+    Dir.chdir(path) do
+      if File.exist?("manifest.txt")
+        puts "Reading mainfest"
+        files = File.read("manifest.txt").split("\n")
+        if block_given?
+          yield(files)
+        else
+          files
+        end
+      else
+        raise "Couldn't find manifest.txt"
+      end
+    end
+  end
+
   def notes
     chapters.map(&:notes).flatten
   end
-  
+
   def to_param
     permalink
   end
@@ -59,7 +70,7 @@ class Book
     self.processing = true
     self.save!
   end
-  
+
   def set_permalink
     self.permalink = title.parameterize
   end

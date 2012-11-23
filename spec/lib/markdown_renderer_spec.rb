@@ -48,4 +48,23 @@ W> Please keep all extremities clear of the whirring blades.
     parsed_warning.css("strong").text.should == "Don't do that!"
     parsed_warning.css("p").count.should == 2
   end
+
+  it "can parse a titleized code listing" do
+    code = %Q{
+{title=lib/subscribem/constraints/subdomain_required.rb,lang=ruby,line-numbers=on}
+    module Subscribem
+      module Constraints
+        class SubdomainRequired
+          def self.matches?(request)
+            request.subdomain.present? && request.subdomain != "www"
+          end
+        end
+      end
+    end
+}
+    output = render(code)
+    parsed_code = output.css("div.code")
+    parsed_code.css("div.highlight").should_not be_empty
+    parsed_code.css(".highlight .n").first.text.should == "module"
+  end
 end
