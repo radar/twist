@@ -99,10 +99,14 @@ GEM
     orm_adapter (0.4.0)
     pg (0.14.1)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
     pry (0.9.10)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.3.1)
+    pygments.rb (0.3.2)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -189,6 +193,7 @@ GEM
     websocket (1.0.4)
     xpath (0.1.4)
       nokogiri (~> 1.3)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -209,6 +214,7 @@ DEPENDENCIES
   nokogiri
   pg
   pry
+  pygments.rb
   rails (= 3.2.9)
   redcarpet
   redis-activesupport

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe MarkdownRenderer do
-  let(:renderer) { Redcarpet::Markdown.new(MarkdownRenderer) }
+  let(:renderer) { Redcarpet::Markdown.new(MarkdownRenderer, :fenced_code_blocks => true) }
 
   def render(element)
     Nokogiri::HTML(renderer.render(element))
@@ -49,6 +49,19 @@ W> Please keep all extremities clear of the whirring blades.
     parsed_warning.css("p").count.should == 2
   end
 
+  it "can parse an aside" do
+    aside = %Q{
+A> **Pssst, over here!**
+A>
+A> Did you know that this is an aside? Please keep it on the DL.
+    }
+
+    output = render(aside)
+    parsed_aside = output.css("div.aside")
+    parsed_aside.css("strong").text.should == "Pssst, over here!"
+    parsed_aside.css("p").count.should == 2
+  end
+
   it "can parse a titleized code listing" do
     code = %Q{
 {title=lib/subscribem/constraints/subdomain_required.rb,lang=ruby,line-numbers=on}
@@ -61,10 +74,38 @@ W> Please keep all extremities clear of the whirring blades.
         end
       end
     end
+
+}
+# Two linebreaks is ultra important.
+# Regex used to locate and pre-process code listings uses two linebreaks as
+# a delimiter.
+
+    output = render(code)
+    parsed_code = output.css("div.code")
+    parsed_code.css("div.highlight").should_not be_empty
+    parsed_code.css(".highlight .k").first.text.should == "module"
+  end
+
+  it "can parse a titleized code listing with a paragraph following" do
+    code = %Q{
+{title=lib/subscribem/constraints/subdomain_required.rb,lang=ruby,line-numbers=on}
+    module Subscribem
+      module Constraints
+        class SubdomainRequired
+          def self.matches?(request)
+            request.subdomain.present? && request.subdomain != "www"
+          end
+        end
+      end
+    end
+
+This is just some text. Nothing to be too concerned about.
 }
     output = render(code)
     parsed_code = output.css("div.code")
     parsed_code.css("div.highlight").should_not be_empty
-    parsed_code.css(".highlight .n").first.text.should == "module"
+    parsed_code.css(".highlight .k").first.text.should == "module"
+
+    output.css("p").last.text.should == "This is just some text. Nothing to be too concerned about."
   end
 end

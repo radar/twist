@@ -13,6 +13,7 @@ gem 'redcarpet'
 gem 'eeepub'
 gem 'nokogiri'
 gem 'dragonfly'
+gem 'pygments.rb'
 
 gem 'redis-activesupport'
 

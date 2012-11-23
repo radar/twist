@@ -1,16 +1,15 @@
 class MarkdownRenderer < Redcarpet::Render::HTML
   def paragraph(text)
     # Is special
-    if text.gsub!(/^(T|W)&gt;/, '')
+    if text.gsub!(/^(T|W|A)&gt;/, '')
       special(text, $1)
     else
-      # Begins with a {, then on the next line contains fourspace indentation
-      if text[0] == "{" && /\s+/.match(text.split("\n")[1])[0].length == 4
-        p code(text)
-        return code(text)
-      end
       "<p>" + text + "</p>"
     end
+  end
+
+  def block_code(code, language)
+    "<div class='code'>" + Pygments.highlight(code, :lexer => language) + "</div>"
   end
 
   def special(text, type)
@@ -18,17 +17,27 @@ class MarkdownRenderer < Redcarpet::Render::HTML
     "<div class='#{convert_type(type)}'><p>" + paragraphs + "</p></div>"
   end
 
-  def code(text)
-    parts = text.split("\n") 
-    details = parts.shift
-    code = parts[1..-1].join("\n")
-    details = Hash[details[1..-2].split(",").map do |detail|
-      detail.split("=")
-    end]
-    "<div class='code'>" + Pygments.highlight(code, :lexer => details['lexer']) + "</div>"
+  def preprocess(full_document)
+    full_document = full_document.gsub(/({.*?})\n(.*)\n\n/m) do
+      preprocess_code($1, $2)
+    end
+
+    full_document
   end
 
   private
+
+  def preprocess_code(details, code)
+    output = ""
+    details = Hash[details[1..-2].split(",").map do |detail|
+      detail.split("=")
+    end]
+    if details['title']
+      output = "**#{details['title']}**\n\n"
+    end
+    output += "```#{details['lang']}\n#{code}\n```\n\n"
+    output
+  end
 
   def convert_type(type)
     case type
@@ -36,6 +45,8 @@ class MarkdownRenderer < Redcarpet::Render::HTML
         'tip'
       when 'W'
         'warning'
+      when 'A'
+        'aside'
     end
   end
 end
