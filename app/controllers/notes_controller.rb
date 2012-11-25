@@ -21,10 +21,10 @@ class NotesController < ApplicationController
   
   def create
     element = @chapter.elements.where(:xml_id => params[:element_id]).first
+    number = @book.notes.map(&:number).max.try(:+, 1) || 1
     note = @chapter.notes.build(params[:note].merge(:element => element,
                                                     :element_id => params[:element_id],
-                                                    # Temporary BS hack because I deleted some notes
-                                                    :number => @book.notes.map(&:number).max + 1,
+                                                    :number => number,
                                                     :user => current_user))
     if note.save
       # Increment notes count for the book
