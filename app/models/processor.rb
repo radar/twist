@@ -1,9 +1,11 @@
 module Processor
   
   def build_element(markup, name)
-    new(:tag        => name,
-        :content    => markup.to_html,
-        :xml_id     => markup["id"])
+    new({
+      :tag        => name,
+      :content    => markup.to_html,
+      :xml_id     => markup["id"] || Digest::MD5.hexdigest(markup.text)
+    })
   end
   
   def process!(chapter, markup)
@@ -142,7 +144,11 @@ module Processor
   def process_code!(chapter, markup)
     chapter.elements << build_element(markup, "code")
   end
-  
+
+  def process_aside!(chapter, markup)
+    chapter.elements << build_element(markup, "warning")
+  end
+
   def process_indexterm!(chapter, markup)
     # TODO: process at a later date
   end
@@ -162,6 +168,10 @@ module Processor
   
   def process_text!(chapter, markup)
     # We don't care about orphaned text, only text within an element such as a paragraph.
+  end
+
+  def process_em!(chapter, markup)
+    # Don't care
   end
   
   private

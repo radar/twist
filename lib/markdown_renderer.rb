@@ -3,13 +3,35 @@ class MarkdownRenderer < Redcarpet::Render::HTML
     # Is special
     if text.gsub!(/^(T|W|A)&gt;/, '')
       special(text, $1)
+    # Begins with the footnote markings: [^footnote]:
+    elsif footnote_prefix_regex.match(text.strip)
+      footnote(text)
     else
+      #inline footnotes
+      puts "Checking for a footnote"
+      footnote_regex = /\[\^([^\]]*)\]/ 
+      if footnote_regex.match(text)
+        text = text.gsub(footnote_regex) do
+          @footnote_count += 1
+          "<a href='#footnote_#{$1}'><sup>#{@footnote_count}</sup></a>"
+        end
+      end
+
       "<p>" + text + "</p>"
     end
   end
 
+  def footnote(text)
+    text = text.gsub(footnote_prefix_regex, '')
+    "<div class='footnote'><a name='footnote_#{$1}' href='#'></a>#{text}</div>"
+  end
+
   def block_code(code, language)
-    "<div class='code'>" + Pygments.highlight(code, :lexer => language) + "</div>"
+    if language == 'plain'
+      "<div class='code'>" + Pygments.highlight(code) + "</div>"
+    else
+      "<div class='code'>" + Pygments.highlight(code, :lexer => language) + "</div>"
+    end
   end
 
   def special(text, type)
@@ -18,14 +40,21 @@ class MarkdownRenderer < Redcarpet::Render::HTML
   end
 
   def preprocess(full_document)
-    full_document = full_document.gsub(/({.*?})\n(.*)\n\n/m) do
-      preprocess_code($1, $2)
+    @footnote_count = 0
+    full_document.gsub(/^({[^}]*})$(.*?)^([^\s].*?\n)/m) do
+      preprocess_code($1, $2.strip) + $3
     end
 
+    # ARE YOU RETURNING A STRING HERE?!
+    # If you don't, Redcarpet will raise a segfault
     full_document
   end
 
   private
+
+  def footnote_prefix_regex
+    /^\[\^([^\]]*)\]:\s*/
+  end
 
   def preprocess_code(details, code)
     output = ""

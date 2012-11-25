@@ -93,7 +93,7 @@ class Chapter
 
   def self.process_markdown!(book, git, file)
     markdown = File.read(git.path + file)
-    renderer = Redcarpet::Markdown.new(MarkdownRenderer)
+    renderer = Redcarpet::Markdown.new(MarkdownRenderer, :fenced_code_blocks => true)
     html = Nokogiri::HTML(renderer.render(markdown))
 
     chapter = book.chapters.find_or_initialize_by(file_name: file)
@@ -102,7 +102,6 @@ class Chapter
     chapter.title = html.css("h1").text
     chapter.position = book.manifest.index(file) + 1
 
-    p html.text
     elements = html.css("body > *")
     elements.each { |element| Element.process!(chapter, element) }
     book.save

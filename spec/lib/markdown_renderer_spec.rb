@@ -75,10 +75,11 @@ A> Did you know that this is an aside? Please keep it on the DL.
       end
     end
 
+Followed by some text
 }
-# Two linebreaks is ultra important.
-# Regex used to locate and pre-process code listings uses two linebreaks as
-# a delimiter.
+# Two linebreaks with text is ultra important.
+# Regex used to locate and pre-process code listings uses two linebreaks and
+# text as a delimiter.
 
     output = render(code)
     parsed_code = output.css("div.code")
@@ -107,5 +108,21 @@ This is just some text. Nothing to be too concerned about.
     parsed_code.css(".highlight .k").first.text.should == "module"
 
     output.css("p").last.text.should == "This is just some text. Nothing to be too concerned about."
+  end
+
+  it "can process a footnote" do
+    footnote = %Q{
+[^1]: Behold, a footnote.
+    }
+    output = render(footnote)
+    footnote = output.css(".footnote")
+    footnote.text.should == "Behold, a footnote."
+    footnote.css("a[name=footnote_1]").should_not be_empty
+  end
+
+  it "can process a footnote within a paragraph" do
+    footnote_within_paragraph = %Q{Hey, check out this footnote[^1]}
+    output = render(footnote_within_paragraph)
+    output.css("a sup").text.should == "1"
   end
 end
