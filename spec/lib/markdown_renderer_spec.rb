@@ -107,6 +107,18 @@ This is just some text. Nothing to be too concerned about.
     parsed_code.css("div.highlight").should_not be_empty
     parsed_code.css(".highlight .k").first.text.should == "module"
 
+    parsed_code.css("div.highlight").text.strip.should == %Q{
+module Subscribem
+  module Constraints
+    class SubdomainRequired
+      def self.matches?(request)
+        request.subdomain.present? && request.subdomain != "www"
+      end
+    end
+  end
+end
+    }.strip
+
     output.css("p").last.text.should == "This is just some text. Nothing to be too concerned about."
   end
 
@@ -120,8 +132,24 @@ This is just some text. Nothing to be too concerned about.
     footnote.css("a[name=footnote_1]").should_not be_empty
   end
 
+  it "can process a multi-char" do
+    footnote = %Q{
+[^123]: Behold, a footnote.
+    }
+    output = render(footnote)
+    footnote = output.css(".footnote")
+    footnote.text.should == "Behold, a footnote."
+    footnote.css("a[name=footnote_123]").should_not be_empty
+  end
+
   it "can process a footnote within a paragraph" do
     footnote_within_paragraph = %Q{Hey, check out this footnote[^1]}
+    output = render(footnote_within_paragraph)
+    output.css("a sup").text.should == "1"
+  end
+
+  it "can process a multi-char footnote within a paragraph" do
+    footnote_within_paragraph = %Q{Hey, check out this footnote[^123]}
     output = render(footnote_within_paragraph)
     output.css("a sup").text.should == "1"
   end

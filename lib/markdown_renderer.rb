@@ -8,7 +8,6 @@ class MarkdownRenderer < Redcarpet::Render::HTML
       footnote(text)
     else
       #inline footnotes
-      puts "Checking for a footnote"
       footnote_regex = /\[\^([^\]]*)\]/ 
       if footnote_regex.match(text)
         text = text.gsub(footnote_regex) do
@@ -41,7 +40,7 @@ class MarkdownRenderer < Redcarpet::Render::HTML
 
   def preprocess(full_document)
     @footnote_count = 0
-    full_document.gsub(/^({[^}]*})$(.*?)^([^\s].*?\n)/m) do
+    full_document = full_document.gsub(/^({[^}]*})$(.*?)^([^\s].*?\n)/m) do
       preprocess_code($1, $2.strip) + $3
     end
 
@@ -64,8 +63,13 @@ class MarkdownRenderer < Redcarpet::Render::HTML
     if details['title']
       output = "**#{details['title']}**\n\n"
     end
+
+    #outdent code
+    code_lines = code.split("\n")
+    outdented_code = code_lines[1..-1].map { |l| l.gsub(/^\s{4}/,'') }
+    code = ([code_lines[0]] + [*outdented_code]).join("\n")
+
     output += "```#{details['lang']}\n#{code}\n```\n\n"
-    output
   end
 
   def convert_type(type)
