@@ -31,4 +31,4 @@ gem 'sass-rails', "~> 3.2.5"
 gem 'coffee-script'
 
 gem 'jquery-rails'
-gem 'pry'
+gem 'therubyracer'
