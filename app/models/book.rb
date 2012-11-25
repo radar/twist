@@ -9,6 +9,7 @@ class Book
   field :just_added, :type => Boolean, :default => true
   field :processing, :type => Boolean, :default => false
   field :notes_count, :type => Integer, :default => 0
+  field :hidden, :type => Boolean, :default => false
   
   embeds_many :chapters
   

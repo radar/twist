@@ -16,7 +16,7 @@ class ChaptersController < ApplicationController
   private
   
   def find_book
-    @book = Book.where(:permalink => params[:book_id]).first
+    @book = Book.where(:permalink => params[:book_id], :hidden => false).first
   end
 
   def find_chapter(position)

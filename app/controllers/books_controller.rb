@@ -3,7 +3,7 @@ class BooksController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :receive
 
   def index
-    @books = Book.all
+    @books = Book.where(hidden: false)
   end
 
   def new
@@ -22,7 +22,7 @@ class BooksController < ApplicationController
   end
   
   def show
-    @book = Book.where(:permalink => params[:id]).first
+    @book = Book.where(:permalink => params[:id], :hidden => false).first
   end
 
   def receive

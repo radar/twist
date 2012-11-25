@@ -69,7 +69,7 @@ class NotesController < ApplicationController
     end
 
     def find_book_and_chapter
-      @book = Book.where(permalink: params[:book_id]).first
+      @book = Book.where(permalink: params[:book_id], :hidden => false).first
       @chapter = @book.chapters.where(:position => params[:chapter_id]).first if params[:chapter_id]
     end
 
