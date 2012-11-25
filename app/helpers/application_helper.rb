@@ -1,7 +1,7 @@
 module ApplicationHelper
   def markdown(text)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    raw(markdown.render)
+    raw(markdown.render(text))
   end
 
   def parse(text)
