@@ -49,6 +49,15 @@ class MarkdownRenderer < Redcarpet::Render::HTML
     full_document
   end
 
+  def postprocess(full_document)
+    html = Nokogiri::HTML(full_document)
+    html.css("h2, h3").each_with_index do |header, index|
+      header['class'] = 'section_title'
+      header['id'] = "header_#{index}"
+    end
+    html.to_html
+  end
+
   private
 
   def footnote_prefix_regex

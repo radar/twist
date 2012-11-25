@@ -77,7 +77,6 @@ class Chapter
     chapter.elements = [] # Clear the elements, begin anew.
     chapter.title = xml.xpath("chapter/title").text
     if chapter.new_record?
-      # TODO: This needs to be fixed to use the chapter's position within the book, as that may change
       # We cannot rely on the ordering to stay the same.
       chapter.position = book.chapters.count + 1
     end
