@@ -29,15 +29,17 @@ class Git
   end
 
   def clone
-    puts "Cloning #{user}/#{repo}"
-    `git clone #{self.class.host}#{user}/#{repo} #{path}`
+    silence do
+      `git clone #{self.class.host}#{user}/#{repo} #{path}`
+    end
   end
 
   def pull
-    puts "Getting latest #{user}/#{repo}"
     Dir.chdir(path) do
-      `git checkout`
-      `git pull origin master`
+      silence do
+        `git checkout`
+        `git pull origin master`
+      end
     end
   end
 
@@ -48,6 +50,12 @@ class Git
   def current_commit
     Dir.chdir(path) do
       `git rev-parse HEAD`.strip
+    end
+  end
+
+  def silence(&block)
+    silence_stream(STDOUT) do
+      silence_stream(STDERR, &block)
     end
   end
 end

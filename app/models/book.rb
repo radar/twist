@@ -25,12 +25,10 @@ class Book
     git = Git.new(user, repo)
     book.path = git.path.to_s
     current_commit = git.current_commit rescue nil
-    puts "Received push notification for #{user}/#{repo}@#{current_commit}"
     git.update!
 
     book.manifest do |files|
       files.each do |file|
-        puts "Processing #{file} for #{book.title}"
         Chapter.process!(book, git, file)
       end
     end
@@ -45,7 +43,6 @@ class Book
   def manifest(&block)
     Dir.chdir(path) do
       if File.exist?("manifest.txt")
-        puts "Reading mainfest"
         files = File.read("manifest.txt").split("\n")
         if block_given?
           yield(files)
