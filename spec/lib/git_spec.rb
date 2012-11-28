@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Git do
-  let(:args) { ["radar", "rails3book_test"] }
+  let(:args) { ["radar", "markdown_book_test"] }
   let(:test_repo) { Git.path + args.join("/") }
 
   before do
@@ -30,98 +30,5 @@ describe Git do
     git.should_receive(:`).with("git checkout")
     git.should_receive(:`).with("git pull origin master")
     git.update! # updates
-  end
-
-  it "retreives a list of files" do
-    git = Git.new(*args)
-    git.update!
-    Dir.chdir(git.path) do
-      git.files.should == Dir["**/*"]
-    end
-  end
-  
-  context "changed files" do
-    before do
-      @git = Git.new(*args)
-      @git.update!
-      @old_commit = @git.current_commit
-    end
-
-    it "first commit ever" do
-      @git.changed_files.should == [
-        "ch01",
-        "ch01/app.jpg",
-        "ch01/ch01.xml",
-        "ch01/hello_world.png",
-        "ch01/new_purchase.png",
-        "ch01/purchase_destroy.png",
-        "ch01/purchase_errors.png",
-        "ch01/purchase_errors_2.png",
-        "ch01/purchase_listing.png",
-        "ch01/purchases.png",
-        "ch01/purchases_edit.png",
-        "ch01/purchases_show_with_url.png",
-        "ch01/show_purchase.png",
-        "ch01/update_purchase_fail.png",
-        "ch01/updated_purchase.png",
-        "ch01/welcome_aboard.png"
-      ]
-    end
-    
-    it "shows all files if current commit is only commit" do
-      @git.changed_files("55802542ad90dc3b48d99de2e45c3b6ddaa6d445").should == [
-        "ch01",
-        "ch01/app.jpg",
-        "ch01/ch01.xml",
-        "ch01/hello_world.png",
-        "ch01/new_purchase.png",
-        "ch01/purchase_destroy.png",
-        "ch01/purchase_errors.png",
-        "ch01/purchase_errors_2.png",
-        "ch01/purchase_listing.png",
-        "ch01/purchases.png",
-        "ch01/purchases_edit.png",
-        "ch01/purchases_show_with_url.png",
-        "ch01/show_purchase.png",
-        "ch01/update_purchase_fail.png",
-        "ch01/updated_purchase.png",
-        "ch01/welcome_aboard.png"
-      ]
-    end
-
-    it "contains new files" do
-      Dir.chdir(@git.path) do
-        `touch test.txt`
-        `git add .`
-        `git commit -m "Testing changes"`
-      end
-
-      @git.changed_files(@old_commit).should == ["test.txt"]
-    end
-
-    it "contains modified files" do
-      Dir.chdir(@git.path) do
-        `echo "string" > ch01/ch01.xml`
-        `git add .`
-        `git commit -m "Testing changes"`
-      end
-
-      @git.changed_files(@old_commit).should == ["ch01/ch01.xml"]
-    end
-
-    it "contains deleted files" do
-      Dir.chdir(@git.path) do
-        `git rm ch01/ch01.xml`
-        `git commit -m "Testing changes"`
-      end
-
-      @git.changed_files(@old_commit).should == ["ch01/ch01.xml"]
-    end
-  end
-
-  it "retreives the current commit" do
-    git = Git.new(*args)
-    git.update!
-    git.current_commit.should eql("8a4de0df4009ed40f2e6476b5bbf44a3a47e2f0b")
   end
 end
