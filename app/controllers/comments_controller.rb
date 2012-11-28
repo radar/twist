@@ -31,6 +31,9 @@ class CommentsController < ApplicationController
       elsif params[:commit] == "Reject"
         @note.reject!
         notify_of_note_state_change("Rejected")
+      elsif params[:commit] == "Reopen"
+        @note.reopen!
+        notify_of_note_state_change("Reopened")
       end
     end
   end

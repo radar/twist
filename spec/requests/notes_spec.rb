@@ -88,6 +88,7 @@ describe "notes" do
     visit book_note_path(@book, note.number)
     click_button "Reopen"
     page.should have_content("Note state changed to Reopened")
+    note.reload.state.should == "reopened"
   end
 
 end

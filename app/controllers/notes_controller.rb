@@ -42,12 +42,6 @@ class NotesController < ApplicationController
     redirect_to [@book, @chapter, :notes]
   end
   
-  def reopen
-    @note.reopen!
-    flash[:notice] = "Note ##{@note.number} has been reopened!"
-    redirect_to [@book, @chapter, :notes]
-  end
-  
   def completed
     @notes = @notes.select { |n| n.state == "complete" }
     @title = "Completed notes"
