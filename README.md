@@ -1,7 +1,6 @@
-# It's kind of funny...
+# Twist 
 
-How the guy who won an award for writing documentation hasn't yet written documentation for this project.
+Twist provides an easy book-reviewing platform for authors.
 
-Soon, my pretty.
-
-Soon.
+It uses MongoDB and Mongoid, because strangely enough they are suitable for
+this purpose.
