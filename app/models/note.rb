@@ -40,7 +40,7 @@ class Note
   end
 
   def completed?
-    state == "accepted" || state == "rejected" || state == "complete"
+    ["accepted", "rejected", "complete"].include?(state)
   end
 
   def expire_chapter_cache
