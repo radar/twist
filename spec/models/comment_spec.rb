@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Comment do
   let(:user_1) { create_user! }
-  let(:user_2) { create_user!(:email => "user2@example.com") }
-  let(:user_3) { create_user!(:email => "user3@example.com")}
+  let(:user_2) { create_user! }
+  let(:user_3) { create_user! }
 
   before do
     # First, we need to create a book and a note for some place in the book
