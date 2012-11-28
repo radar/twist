@@ -9,8 +9,9 @@ describe "notes" do
     
   it "can add a new note to a paragraph", :js => true do
     visit book_chapter_path(@book, @book.chapters.first)
+    element = @book.chapters.first.elements.first
 
-    within "#note_button_ch01_3" do
+    within "#note_button_#{element.nickname}" do
       click_link "0 notes +"
     end
 
@@ -19,7 +20,7 @@ describe "notes" do
     page.should have_content("1 note +")
     click_link "All notes for this chapter"
     click_link "This is a test note!"
-    page.should have_content("user@example.com started a discussion less than a minute ago")
+    page.should have_content("#{author.email} started a discussion less than a minute ago")
     # Ensure note text shows up correctly in processed markdown.
     within ".review-note" do
       within(".body") do
@@ -42,7 +43,7 @@ describe "notes" do
     visit book_path(@book)
     click_link "All notes for this book"
     click_link "This is a test note!"
-    page.should have_content("user@example.com started a discussion less than a minute ago")
+    page.should have_content("#{author.email} started a discussion less than a minute ago")
     page.should have_content("This is a test note!")
   end
 

@@ -1,6 +1,6 @@
 <%= render :partial => "notes/button", :locals => { :element => element } %>
-<a name='<%= element.identity %>'></a>
+<a name='<%= element.nickname %>'></a>
 <%= raw(element.content) %>
-<div id='notes_container_<%= element.identity %>' class='notes_container' style='display:none'>
+<div id='notes_container_<%= element.nickname %>' class='notes_container' style='display:none'>
 
 </div>

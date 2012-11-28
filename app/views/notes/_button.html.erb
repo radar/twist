@@ -1,4 +1,4 @@
-<% id = element.identity %>
+<% id = element.nickname %>
 <% unless id.blank? %>
   <% count = @chapter.notes.where(:element_id => id).count %>
   <span class='note_button' id='note_button_<%= id %>'><%= link_to "#{pluralize(count, "note")} +", new_book_chapter_element_note_path(@book, @chapter, id), :remote => true, :update => id %></span>
