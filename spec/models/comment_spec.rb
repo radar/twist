@@ -24,9 +24,9 @@ describe Comment do
       comment = @note.comments.create!(:user => user_3, :text => "Second post")
       comment.send_notifications!
 
-      email_1 = find_email("user@example.com")
-      email_2 = find_email("user2@example.com")
-      
+      email_1 = find_email(user_1.email)
+      email_2 = find_email(user_2.email)
+
       email_1.subject.should == "[Twist] - Rails 3 in Action - Note #1"
       email_2.subject.should == "[Twist] - Rails 3 in Action - Note #1"
     end
@@ -34,9 +34,9 @@ describe Comment do
     it "sends notification emails to the right users" do
       comment = @note.comments.build(:user => user_3)
       emails = comment.notification_emails
-      emails.should include("user@example.com")
-      emails.should include("user2@example.com")
-      emails.should_not include("user3@example.com")
+      emails.should include(user_1.email)
+      emails.should include(user_2.email)
+      emails.should_not include(user_3.email)
     end
   end
 end
