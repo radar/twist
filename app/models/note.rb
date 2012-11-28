@@ -21,22 +21,22 @@ class Note
   
   def complete!
     self.state = "complete"
-    self.save
+    self.save!
   end
 
   def accept!
     self.state = "accepted"
-    self.save
+    self.save!
   end
 
   def reject!
     self.state = "rejected"
-    self.save
+    self.save!
   end
 
   def reopen!
     self.state = "reopened"
-    self.save
+    self.save!
   end
 
   def completed?
