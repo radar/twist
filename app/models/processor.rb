@@ -4,7 +4,7 @@ module Processor
     new({
       :tag        => name,
       :content    => markup.to_html,
-      :identity   => markup["id"] || Digest::MD5.hexdigest(markup.text)
+      :identity   => markup["id"] || Digest::MD5.hexdigest(markup.text + Time.now.to_s)
     })
   end
   

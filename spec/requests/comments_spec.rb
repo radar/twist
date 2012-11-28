@@ -5,7 +5,7 @@ describe 'commenting' do
   let!(:reviewer) { create_user! }
   let!(:book) { create_book! }
   let!(:chapter) { book.chapters.first }
-  let!(:element) { chapter.elements.where(:identity => "ch01_3").first }
+  let!(:element) { chapter.elements.first }
   let!(:note) { chapter.notes.create(:user => reviewer, :text => "My favourite element.", :element => element, :number => 1) }
   let!(:comment_text) { "This is a typical comment" }
 
