@@ -20,7 +20,7 @@ class NotesController < ApplicationController
   end
   
   def create
-    element = @chapter.elements.where(:xml_id => params[:element_id]).first
+    element = @chapter.elements.where(:identity => params[:element_id]).first
     number = @book.notes.map(&:number).max.try(:+, 1) || 1
     note = @chapter.notes.build(params[:note].merge(:element => element,
                                                     :element_id => params[:element_id],

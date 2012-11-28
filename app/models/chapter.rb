@@ -4,7 +4,6 @@ class Chapter
   include Mongoid::Document
   field :position, :type => Integer
   field :title, :type => String
-  field :xml_id, :type => String
   field :file_name, :type => String
   
   embedded_in :book
@@ -59,35 +58,9 @@ class Chapter
     ext = File.extname(file)
     if %w(.markdown .md).include?(ext)
       process_markdown!(book, git,file)
-    elsif %w(.xml).include?(ext)
-      process_xml!(book, git, file)
     else
       raise "Unknown chapter format!"
     end
-  end
-
-  def self.process_xml!(book, git, file)
-    # Read the XML, parse it with XSLT which will convert it into lovely HTML
-    xml = Nokogiri::XML(File.read(git.path + file))
-    xslt = Nokogiri::XSLT(File.read(Rails.root + 'lib/chapter.xslt'))
-    parsed_doc = xslt.transform(xml)
-
-    chapter = book.chapters.find_or_initialize_by(xml_id: xml.xpath("chapter").first["id"])
-    chapter.git = git
-    chapter.elements = [] # Clear the elements, begin anew.
-    chapter.title = xml.xpath("chapter/title").text
-    if chapter.new_record?
-      # We cannot rely on the ordering to stay the same.
-      chapter.position = book.chapters.count + 1
-    end
-
-    elements = parsed_doc.css("div.chapter > *")
-    # Why do we have to pass in the Chapter object here? Surely it can know it.
-    # In ActiveRecord there is an @association.owner object which would return it.
-    elements.each { |element| Element.process!(chapter, element) }
-    book.save
-    chapter.save_figure_attachments!
-    chapter
   end
 
   def self.process_markdown!(book, git, file)
@@ -110,10 +83,6 @@ class Chapter
 
   def to_param
     position.to_s
-  end
-  
-  def xml_id
-    self["xml_id"]
   end
 
   def save_figure_attachments!

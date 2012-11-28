@@ -2,7 +2,7 @@ class Element
   include Mongoid::Document
   extend Processor
   field :tag, :type => String
-  field :xml_id, :type => String
+  field :identity, :type => String
   field :title, :type => String
   field :content, :type => String
   
