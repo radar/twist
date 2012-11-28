@@ -128,7 +128,7 @@ end
     }
     output = render(footnote)
     footnote = output.css(".footnote")
-    footnote.text.should == "Behold, a footnote."
+    footnote.text.strip.should == "Behold, a footnote."
     footnote.css("a[name=footnote_1]").should_not be_empty
   end
 
@@ -138,7 +138,7 @@ end
     }
     output = render(footnote)
     footnote = output.css(".footnote")
-    footnote.text.should == "Behold, a footnote."
+    footnote.text.strip.should == "Behold, a footnote."
     footnote.css("a[name=footnote_123]").should_not be_empty
   end
 
