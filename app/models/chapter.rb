@@ -79,7 +79,7 @@ class Chapter
   end
 
   def to_html 
-    markdown = File.read(book.path + file_name)
+    markdown = File.read(File.join(book.path, file_name))
     renderer = Redcarpet::Markdown.new(MarkdownRenderer, :fenced_code_blocks => true)
     html = Nokogiri::HTML(renderer.render(markdown))
   end
