@@ -73,6 +73,10 @@ module Processor
     chapter.elements << build_element(markup, "warning")
   end
 
+  def process_footnote!(chapter, markup)
+    chapter.elements << build_element(markup, "footnote")
+  end
+
   def process_header!(chapter, markup)
     # headers are processed separately, we don't care about them in this context
   end
