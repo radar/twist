@@ -49,6 +49,71 @@ W> Please keep all extremities clear of the whirring blades.
     parsed_warning.css("p").count.should == 2
   end
 
+  it "can parse an error" do
+    error = %Q{
+E> **Something went wrong**
+E>
+E> Not going to tell you what.
+}
+
+    output = render(error)
+    parsed_error = output.css("div.error")
+    parsed_error.css("strong").text.should == "Something went wrong"
+    parsed_error.css("p").count.should == 2
+  end
+
+  it "can parse an information box" do
+    information = %Q{
+I> **Something you should know**
+I>
+I> This is an information box. Don't tell anyone.
+}
+
+    output = render(information)
+    parsed_information = output.css("div.information")
+    parsed_information.css("strong").text.should == "Something you should know"
+    parsed_information.css("p").count.should == 2
+  end
+
+  it "can parse a question box" do
+    question = %Q{
+Q> **Is there a question?**
+Q>
+Q> No?
+}
+
+    output = render(question)
+    parsed_question = output.css("div.question")
+    parsed_question.css("strong").text.should == "Is there a question?"
+    parsed_question.css("p").count.should == 2
+  end
+
+  it "can parse a discussion box" do
+    discussion = %Q{
+D> **Discussion area**
+D>
+D> Please, talk.
+}
+
+    output = render(discussion)
+    parsed_discussion = output.css("div.discussion")
+    parsed_discussion.css("strong").text.should == "Discussion area"
+    parsed_discussion.css("p").count.should == 2
+  end
+
+  it "can parse a exercise box" do
+    exercise = %Q{
+X> **Exercise!**
+X>
+X> One, and two, and three, and four!
+}
+
+    output = render(exercise)
+    parsed_exercise = output.css("div.exercise")
+    parsed_exercise.css("strong").text.should == "Exercise!"
+    parsed_exercise.css("p").count.should == 2
+  end
+
   it "can parse an aside" do
     aside = %Q{
 A> **Pssst, over here!**
