@@ -67,10 +67,11 @@ class Chapter
     chapter = book.chapters.find_or_initialize_by(file_name: file)
     chapter.git = git
     chapter.elements = []
-    chapter.title = html.css("h1").text
     chapter.position = book.manifest.index(file) + 1
 
-    elements = chapter.to_html.css("body > *")
+    html = chapter.to_html
+    chapter.title = html.css("h1").text
+    elements = html.css("body > *")
     elements.each { |element| Element.process!(chapter, element) }
     book.save
     chapter.save_figure_attachments!
