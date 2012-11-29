@@ -1,7 +1,7 @@
 class MarkdownRenderer < Redcarpet::Render::HTML
   def paragraph(text)
     # Is special
-    if text.gsub!(/^([TWAIDEQ])&gt;/, '')
+    if text.gsub!(/^([TWAIDEQX])&gt;/, '')
       special(text, $1)
     # Begins with the footnote markings: [^footnote]:
     elsif footnote_prefix_regex.match(text.strip)
@@ -94,6 +94,8 @@ class MarkdownRenderer < Redcarpet::Render::HTML
       when 'D'
         'discussion'
       when 'E'
+        'error'
+      when 'X'
         'exercise'
       when 'Q'
         'question'
