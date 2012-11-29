@@ -14,7 +14,7 @@ describe Chapter do
   it "processes a chapter" do
     Chapter.process!(book, git, "chapter_1/chapter_1.markdown")
     chapter = book.chapters.first
-    chapter.title.should == "In The Beginning"
+    chapter.title.should == "In the beginning"
     chapter.elements.first.tag.should == "p"
 
     pending
