@@ -64,22 +64,25 @@ class Chapter
   end
 
   def self.process_markdown!(book, git, file)
-    markdown = File.read(git.path + file)
-    renderer = Redcarpet::Markdown.new(MarkdownRenderer, :fenced_code_blocks => true)
-    html = Nokogiri::HTML(renderer.render(markdown))
-
     chapter = book.chapters.find_or_initialize_by(file_name: file)
     chapter.git = git
     chapter.elements = []
     chapter.title = html.css("h1").text
     chapter.position = book.manifest.index(file) + 1
 
-    elements = html.css("body > *")
+    elements = chapter.to_html.css("body > *")
     elements.each { |element| Element.process!(chapter, element) }
     book.save
     chapter.save_figure_attachments!
     chapter
   end
+
+  def to_html 
+    markdown = File.read(book.path + file_name)
+    renderer = Redcarpet::Markdown.new(MarkdownRenderer, :fenced_code_blocks => true)
+    html = Nokogiri::HTML(renderer.render(markdown))
+  end
+
 
   def to_param
     position.to_s

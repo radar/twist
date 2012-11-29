@@ -19,6 +19,20 @@ module Processor
     paragraph
   end
 
+  def process_img!(chapter, markup)
+    # First, check to see if file is within book directory
+    # This stops illegal access to files outside this directory
+    image_path = File.expand_path(File.join(chapter.book.path, markup['src']))
+    files = Dir[File.join(chapter.book.path, "**", "*")]
+    if files.include?(image_path)
+      figure = chapter.figures.where(:filename => image_path).first
+      figure ||= chapter.figures.build(:filename => image_path)
+      figure.figure = File.open(image_path)
+    else
+      # Ignore it
+    end
+  end
+
   def process_div!(chapter, markup)
     # Divs have classes to identify them, separate them and process them as we see fit
     method = "process_#{markup["class"]}!"
@@ -33,15 +47,6 @@ module Processor
   def process_ul!(chapter, markup)
     chapter.elements << new(:tag        => "ul",
                             :content    => markup.to_html)
-  end
-  
-  def process_figure!(chapter, markup)
-    chapter.figure_count += 1
-    filename = markup.css("img")[0]["src"]
-    figure = chapter.figures.where(:filename => filename).first
-    figure ||= chapter.figures.build(:filename => filename)
-    figure.figure = File.open(chapter.git.path + filename)
-    chapter.elements << build_element(markup, "figure")
   end
   
   def process_table!(chapter, markup)
