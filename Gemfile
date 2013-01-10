@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.11'
 gem 'mongoid', '~> 3.0.0'
 gem 'bson_ext', '~> 1.7.0'
 
@@ -32,3 +32,4 @@ gem 'coffee-script'
 
 gem 'jquery-rails'
 gem 'therubyracer'
+gem 'pry'
