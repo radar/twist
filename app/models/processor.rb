@@ -77,6 +77,10 @@ module Processor
     chapter.elements << build_element(markup, "footnote")
   end
 
+  def process_blockquote!(chapter, markup)
+    chapter.elements << build_element(markup, "blockquote")
+  end
+
   def process_header!(chapter, markup)
     # headers are processed separately, we don't care about them in this context
   end
