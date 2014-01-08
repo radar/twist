@@ -1,4 +1,6 @@
 class BookWorker
+  include Sidekiq::Worker
+
   def self.perform(id)
     book = Book.find(id)
     # TODO: determine if path is HTTP || Git
