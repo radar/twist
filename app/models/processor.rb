@@ -17,6 +17,7 @@ module Processor
       # TODO: can Markdown really contain multiple images in the same p tag?
       markup.css('img').each do |img|
         process_img!(chapter, img)
+        chapter.elements << build_element(img, "img")
       end
     else
       paragraph = build_element(markup, "p")
@@ -38,8 +39,11 @@ module Processor
       figure = chapter.figures.where(:filename => markup['src']).first
       figure ||= chapter.figures.build(:filename => markup['src'])
       figure.figure = File.open(image_path)
+      figure.save!
+      figure
     else
       # Ignore it
+      false
     end
   end
 

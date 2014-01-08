@@ -21,7 +21,7 @@ module ElementsHelper
     end
   end
   
-  def render_figure(element)
+  def render_image(element)
     figure_html = Nokogiri::HTML(element.content)
     content_tag(:div, :class => "figure") do
       raw("<img src='/figures/#{element.book.id}/#{figure_html.css("img")[0]["src"]}' /><br>") +
