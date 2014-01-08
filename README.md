@@ -22,6 +22,12 @@ To run this, you'll need the following:
 * Redis
 * MongoDB
 
+Install the dependencies for the app and the submodules that Twist uses for testing using these commands:
+
+    bundle install
+    git submodule init
+    git submodule update
+
 The app also uses [Sidekiq](http://sidekiq.org) to run some background jobs for books. Books won't be processed at all unless you're running the workers, so make sure to do that.
 
 To set up the application, you'll need to create a book and a user. The best place to do that is in the `rails console`:
