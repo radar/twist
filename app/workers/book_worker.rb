@@ -1,7 +1,7 @@
 class BookWorker
   include Sidekiq::Worker
 
-  def self.perform(id)
+  def perform(id)
     book = Book.find(id)
     # TODO: determine if path is HTTP || Git
     # TODO: determine if path is public

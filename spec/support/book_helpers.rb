@@ -9,7 +9,7 @@ module BookHelpers
                         :path => "http://github.com/radar/markdown_book_test")
     @book.path = git.path
     # Run the Sidekiq job ourselves
-    BookWorker.perform(@book.id)
+    BookWorker.new.perform(@book.id)
     @book.reload
   end
 end

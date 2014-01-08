@@ -24,7 +24,7 @@ describe Book do
     end
 
     it "processes a test Markdown book" do
-      BookWorker.perform(book.id)
+      BookWorker.new.perform(book.id)
       book.reload
       book.chapters.count.should eql(1)
       book.chapters.map(&:position).should == [1]

@@ -40,7 +40,7 @@ class Book
   end
 
   def enqueue
-    BookWorker.perform_async(id)
+    BookWorker.perform_async(id.to_s)
     self.processing = true
     self.save!
   end
