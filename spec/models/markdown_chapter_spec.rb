@@ -8,7 +8,7 @@ describe Chapter do
     # Nuke the repo, start afresh.
     FileUtils.rm_r(git.path)
     git.update!
-    book.path = `bundle show markdown_book_test`.strip
+    book.path = 'spec/fixtures/repos/radar/markdown_book_test'
   end
 
   it "processes a chapter" do
@@ -17,26 +17,10 @@ describe Chapter do
     chapter.title.should == "In the beginning"
     chapter.elements.first.tag.should == "p"
 
-    pending
-    sections = chapter.elements.select { |e| e.tag == "section" }
-    sections.map(&:title).should == ["What is Ruby on Rails?",
-                                     "Benefits",
-                                     "Common Terms",
-                                     "Rails in the wild",
-                                     "Developing your first application",
-                                     "Installing Rails",
-                                     "Generating an application",
-                                     "Starting the application",
-                                     "Scaffolding",
-                                     "Migrations",
-                                     "Viewing & creating purchases",
-                                     "Validations",
-                                     "Showing off",
-                                     "Routing",
-                                     "Updating",
-                                     "Deleting",
-                                     "Summary"]
-    chapter.figures.count.should == 13
-    chapter.figures.first.filename.should == "ch01/app.jpg"
+    sections = chapter.elements.select { |e| e.tag == "h2" }
+    sections.map! { |s| Nokogiri::HTML(s.content).text }
+    sections.should == ["This is a new section"]
+    chapter.figures.count.should == 1
+    chapter.figures.first.filename.should == "images/chapter_1/1.png"
   end
 end

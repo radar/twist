@@ -13,20 +13,30 @@ module Processor
   end
 
   def process_p!(chapter, markup)
-    paragraph = build_element(markup, "p")
-    chapter.elements << paragraph
-    paragraph.content = markup.to_html
-    paragraph
+    if markup.css('img').any?
+      # TODO: can Markdown really contain multiple images in the same p tag?
+      markup.css('img').each do |img|
+        process_img!(chapter, img)
+      end
+    else
+      paragraph = build_element(markup, "p")
+      chapter.elements << paragraph
+      paragraph.content = markup.to_html
+      # Images are embedded in paragraphs in Markdown.
+      # Need to extract and run through image processor.
+      
+      paragraph
+    end
   end
 
   def process_img!(chapter, markup)
     # First, check to see if file is within book directory
     # This stops illegal access to files outside this directory
     image_path = File.expand_path(File.join(chapter.book.path, markup['src']))
-    files = Dir[File.join(chapter.book.path, "**", "*")]
+    files = Dir[File.expand_path(File.join(chapter.book.path, "**", "*")) ]
     if files.include?(image_path)
-      figure = chapter.figures.where(:filename => image_path).first
-      figure ||= chapter.figures.build(:filename => image_path)
+      figure = chapter.figures.where(:filename => markup['src']).first
+      figure ||= chapter.figures.build(:filename => markup['src'])
       figure.figure = File.open(image_path)
     else
       # Ignore it

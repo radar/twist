@@ -7,7 +7,7 @@ describe Chapter do
   before do
     FileUtils.rm_r(git.path)
     git.update!
-    book.path = `bundle show markdown_book_test`.strip
+    book.path = 'spec/fixtures/repos/radar/markdown_book_test'
   end
 
   it "can process markdown" do
