@@ -17,7 +17,7 @@ describe Book do
     end
 
     it "enqueues" do
-      BookWorker.should_receive(:perform_async).with(book.id)
+      BookWorker.should_receive(:perform_async).with(book.id.to_s)
       expect(book.processing?).to be_false
       book.enqueue
       expect(book.processing?).to be_true
