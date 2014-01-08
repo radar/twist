@@ -22,5 +22,7 @@ describe Chapter do
     sections.should == ["This is a new section"]
     chapter.figures.count.should == 1
     chapter.figures.first.filename.should == "images/chapter_1/1.png"
+    expect(chapter.figures.first.figure).not_to be_nil
+    expect(chapter.elements.select { |e| e.tag == "img" }).not_to be_empty
   end
 end
