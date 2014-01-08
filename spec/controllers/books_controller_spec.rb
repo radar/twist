@@ -7,7 +7,8 @@ describe BooksController do
   end
   
   it "post-receive hooks" do
-    Resque.should_receive(:enqueue).with(Book, @book.id)
+    Book.should_receive(:find_by).and_return(@book)
+    @book.should_receive(:enqueue)
     post :receive, :id => @book.permalink
   end
 end

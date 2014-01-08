@@ -13,6 +13,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(params[:book])
     if @book.save
+      @book.enqueue
       flash[:notice] = "Thanks! Your book is now being processed. Please wait."
       redirect_to book_path(@book)
     # else
@@ -26,7 +27,7 @@ class BooksController < ApplicationController
   end
 
   def receive
-    @book = Book.where(:permalink => params[:id]).first
+    @book = Book.find_by(:permalink => params[:id])
     @book.enqueue
     render :nothing => true
   end

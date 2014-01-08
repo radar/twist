@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'markdown_renderer'
 
 describe MarkdownRenderer do
   let(:renderer) { Redcarpet::Markdown.new(MarkdownRenderer, :fenced_code_blocks => true) }

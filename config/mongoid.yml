@@ -14,11 +14,6 @@ development:
         # Change whether the session persists in safe mode by default.
         # (default: false)
         # safe: false
-
-        # Change the default consistency model to :eventual or :strong.
-        # :eventual will send reads to secondaries, :strong sends everything
-        # to master. (default: :eventual)
-        consistency: :strong
   # Configure Mongoid specific options. (optional)
   options:
     # Configuration for whether or not to allow access to fields that do
@@ -64,5 +59,3 @@ test:
       database: twist_test
       hosts:
         - localhost:27017
-      options:
-        consistency: :strong

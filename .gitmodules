@@ -1,3 +1,0 @@
-[submodule "spec/fixtures/repos/radar/markdown_book_test"]
-	path = spec/fixtures/repos/radar/markdown_book_test
-	url = git://github.com/radar/markdown_book_test

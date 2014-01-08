@@ -4,22 +4,28 @@ describe Book do
   context "upon creation" do
     let(:git) { Git.new("radar", "markdown_book_test") }
 
+    let(:book) do
+      Book.create(
+        :title => "Markdown Book Test",
+        :path => "http://github.com/radar/markdown_book_test"
+      )
+    end
+
     before do
-      # Ensure a pristine state
-      Resque.remove_queue("normal")
       FileUtils.rm_r(git.path) if File.exist?(git.path)
       git.update!
     end
 
+    it "enqueues" do
+      BookWorker.should_receive(:perform_async).with(book.id)
+      expect(book.processing?).to be_false
+      book.enqueue
+      expect(book.processing?).to be_true
+    end
+
     it "processes a test Markdown book" do
-      # Should enqueue a job...
-      book = Book.create(:title => "Markdown Book Test", :path => "http://github.com/radar/markdown_book_test")
-      assert book.processing?
-      # ... which when run ...
-      Book.perform(book.id)
+      BookWorker.perform(book.id)
       book.reload
-      assert !book.processing?
-      # ... creates a chapter!
       book.chapters.count.should eql(1)
       book.chapters.map(&:position).should == [1]
     end

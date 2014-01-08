@@ -1,16 +1,15 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
-gem 'mongoid', '~> 3.0.0'
-gem 'bson_ext', '~> 1.7.0'
+ruby '2.1.0'
+
+gem 'rails', '4.0.2'
+gem 'mongoid', '~> 4.0.0.alpha1'
 
 gem 'pg'
-gem 'devise'
-gem 'resque'
+gem 'devise', '3.2.2'
+gem 'sidekiq', '2.17.2'
 gem 'redcarpet'
 #gem 'omniauth'
-
-gem 'eeepub'
 gem 'nokogiri'
 gem 'dragonfly'
 gem 'pygments.rb'
@@ -24,12 +23,12 @@ group :development, :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'email_spec'
+  gem 'markdown_book_test', :github => 'radar/markdown_book_test', :branch => 'master'
 end
 
 # Asset template engines
-gem 'sass-rails', "~> 3.2.5"
+gem 'sass-rails', "~> 4.0.0"  
 gem 'coffee-script'
 
 gem 'jquery-rails'
-gem 'therubyracer'
 gem 'pry'

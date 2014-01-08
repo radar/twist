@@ -8,7 +8,7 @@ describe Chapter do
     # Nuke the repo, start afresh.
     FileUtils.rm_r(git.path)
     git.update!
-    book.path = (Rails.root + "repos/radar/markdown_book_test").to_s
+    book.path = `bundle show markdown_book_test`.strip
   end
 
   it "processes a chapter" do

@@ -22,10 +22,10 @@ class NotesController < ApplicationController
   def create
     element = @chapter.elements.where(:nickname => params[:element_id]).first
     number = @book.notes.map(&:number).max.try(:+, 1) || 1
-    note = @chapter.notes.build(params[:note].merge(:element => element,
-                                                    :element_id => params[:element_id],
-                                                    :number => number,
-                                                    :user => current_user))
+    note = @chapter.notes.build(note_params.merge(:element => element,
+                                                  :element_id => params[:element_id],
+                                                  :number => number,
+                                                  :user => current_user))
     if note.save
       # Increment notes count for the book
       @book.notes_count += 1
@@ -65,6 +65,10 @@ class NotesController < ApplicationController
     def find_book_and_chapter
       @book = Book.where(permalink: params[:book_id], :hidden => false).first
       @chapter = @book.chapters.where(:position => params[:chapter_id]).first if params[:chapter_id]
+    end
+
+    def note_params
+      params.require(:note).permit(:text)
     end
 
 end
