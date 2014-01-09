@@ -26,6 +26,13 @@ group :development, :test do
   gem 'markdown_book_test', :github => 'radar/markdown_book_test', :branch => 'master'
 end
 
+group :development do
+  gem 'capistrano', '~> 3.0'
+  gem 'capistrano-bundler', '1.1.1'
+  gem 'capistrano-rails', '1.1.0'
+  gem 'capistrano-rbenv', '~> 2.0'
+end
+
 # Asset template engines
 gem 'sass-rails', "~> 4.0.0"  
 gem 'coffee-script'
