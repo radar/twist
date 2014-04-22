@@ -23,7 +23,6 @@ group :development, :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'markdown_book_test', :github => 'radar/markdown_book_test', :branch => 'master'
 end
 
 group :development do
