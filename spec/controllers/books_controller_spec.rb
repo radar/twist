@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe BooksController do
   before do
@@ -7,8 +7,8 @@ describe BooksController do
   end
   
   it "post-receive hooks" do
-    Book.should_receive(:find_by).and_return(@book)
-    @book.should_receive(:enqueue)
+    expect(Book).to receive(:find_by).and_return(@book)
+    expect(@book).to receive(:enqueue)
     post :receive, :id => @book.permalink
   end
 end

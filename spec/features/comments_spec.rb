@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'commenting' do 
   let!(:author) { create_author! }
@@ -10,12 +10,12 @@ describe 'commenting' do
   let!(:comment_text) { "This is a typical comment" }
 
   def assert_comment_form_blank!
-    find("#comment_text").text.should be_blank
+    expect(find("#comment_text").text).to be_blank
   end
 
   def assert_comment_present!
     within("#comments") do
-      page.should have_content(comment_text)
+      expect(page).to have_content(comment_text)
     end
   end
 
@@ -29,7 +29,7 @@ describe 'commenting' do
     it "a normal comment" do
       click_button "Leave Comment"
       within("#flash_notice") do
-        page.should have_content("Comment has been created.")
+        expect(page).to have_content("Comment has been created.")
       end
       assert_comment_form_blank!
       assert_comment_present!
@@ -38,9 +38,9 @@ describe 'commenting' do
     it "accepting a note" do
       click_button "Accept"
       within("#flash_notice") do
-        page.should have_content("Note state changed to Accepted")
+        expect(page).to have_content("Note state changed to Accepted")
       end
-      note.reload.state.should == 'accepted'
+      expect(note.reload.state).to eq('accepted')
       assert_comment_form_blank!
       assert_comment_present!
     end
@@ -48,9 +48,9 @@ describe 'commenting' do
     it "rejecting a note" do
       click_button "Reject"
       within("#flash_notice") do
-        page.should have_content("Note state changed to Rejected")
+        expect(page).to have_content("Note state changed to Rejected")
       end
-      note.reload.state.should == 'rejected'
+      expect(note.reload.state).to eq('rejected')
       assert_comment_form_blank!
       assert_comment_present!
     end

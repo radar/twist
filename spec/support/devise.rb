@@ -4,7 +4,7 @@ module DeviseExtensions
     click_link "Sign in"
     fill_in "Email", :with => user.email
     fill_in "Password", :with => "password" # test password
-    click_button "Sign in"
+    click_button "Log in"
   end
   
   def create_user!(attributes={})

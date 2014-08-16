@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'books' do
   context "registering a book" do
@@ -14,7 +14,7 @@ describe 'books' do
       fill_in "Title", :with => "Rails 3 in Action"
       fill_in "Path", :with => "http://github.com/radar/markdown_book_test"
       click_button "Create Book"
-      page.should have_content("Thanks! Your book is now being processed. Please wait.")
+      expect(page).to have_content("Thanks! Your book is now being processed. Please wait.")
     end
 
     it "cannot register a book if not given a URL"

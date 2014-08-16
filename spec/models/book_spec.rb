@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Book do
   context "upon creation" do
@@ -17,17 +17,17 @@ describe Book do
     end
 
     it "enqueues" do
-      BookWorker.should_receive(:perform_async).with(book.id.to_s)
-      expect(book.processing?).to be_false
+      expect(BookWorker).to receive(:perform_async).with(book.id.to_s)
+      expect(book.processing?).to eq(false)
       book.enqueue
-      expect(book.processing?).to be_true
+      expect(book.processing?).to eq(true)
     end
 
     it "processes a test Markdown book" do
       BookWorker.new.perform(book.id)
       book.reload
-      book.chapters.count.should eql(1)
-      book.chapters.map(&:position).should == [1]
+      expect(book.chapters.count).to eq(1)
+      expect(book.chapters.map(&:position)).to eq([1])
     end
   end
 end

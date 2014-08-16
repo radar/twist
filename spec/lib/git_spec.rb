@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Git do
   let(:args) { ["radar", "markdown_book_test"] }
@@ -9,16 +9,16 @@ describe Git do
   end
 
   it "returns the repository path" do
-    Git.path.to_s.should == (Rails.root + "repos").to_s
+    expect(Git.path.to_s).to eq((Rails.root + "repos").to_s)
   end
 
   it "checks to see if a repository exists" do
-    Git.new(*args).exists?.should be_false
+    expect(Git.new(*args).exists?).to be(false)
   end
 
   it "initializes a new repository" do
     git = Git.new(*args)
-    git.should_receive(:`).with("git clone #{Git.host}#{args.join("/")} #{test_repo}")
+    expect(git).to receive(:`).with("git clone #{Git.host}#{args.join("/")} #{test_repo}")
     git.update!
   end
   
@@ -27,8 +27,8 @@ describe Git do
     git = Git.new(*args)
     git.update! # clones the repository
 
-    git.should_receive(:`).with("git checkout")
-    git.should_receive(:`).with("git pull origin master")
+    expect(git).to receive(:`).with("git checkout")
+    expect(git).to receive(:`).with("git pull origin master")
     git.update! # updates
   end
 end

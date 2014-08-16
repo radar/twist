@@ -5,7 +5,7 @@
 <strong><%= link_to "View this element within chapter", book_chapter_path(@book, @chapter, :anchor => @note.element.nickname) %></strong>
 
 <!-- Shamelessly ripped off from GitHub's AWESOME comment styling -->
-<div class='comment review-note'>
+<div class='comment'>
   <%= comment(@note, 'started a discussion', :class => 'review-note') %>
 </div>
 

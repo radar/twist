@@ -17,8 +17,8 @@ I wrote the foundations for this application in one single day after I raged at 
 
 To run this, you'll need the following:
 
-* Ruby 2.1.0
-* Rails 4.0.2
+* Ruby 2.1.2
+* Rails 4.1.4
 * Redis
 * MongoDB
 
