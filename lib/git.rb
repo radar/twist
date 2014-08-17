@@ -2,7 +2,7 @@ class Git
   attr_accessor :user, :repo
   
   def self.host
-    if Rails.env.production?
+    if Rails.env.production? || Rails.env.development?
       # Rely on GitHub
       "git@github.com:"
     else
