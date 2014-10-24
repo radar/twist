@@ -5,6 +5,7 @@ class Element
   field :xml_id, :type => String
   field :title, :type => String
   field :content, :type => String
+  field :number, :type => Integer
   
   embedded_in :chapter
   embedded_in :note

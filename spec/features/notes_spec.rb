@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "notes" do
   let(:author) { create_author! }
@@ -16,19 +16,17 @@ describe "notes" do
 
     fill_in "note_text", :with => "This is a **test** note!"
     click_button "Leave Note"
-    page.should have_content("1 note +")
+    expect(page).to have_content("1 note +")
     click_link "All notes for this chapter"
     click_link "This is a test note!"
-    page.should have_content("user@example.com started a discussion less than a minute ago")
+    expect(page).to have_content("#{author.email} started a discussion less than a minute ago")
     # Ensure note text shows up correctly in processed markdown.
-    within ".review-note" do
-      within(".body") do
-        within("strong") { page.should have_content("test") }
-      end
+    within ".review-note .body strong" do
+      expect(page).to have_content("test")
     end
 
     # And the rest of it.
-    page.should have_content("This is a test note!")
+    expect(page).to have_content("This is a test note!")
     
   end
   
@@ -42,8 +40,8 @@ describe "notes" do
     visit book_path(@book)
     click_link "All notes for this book"
     click_link "This is a test note!"
-    page.should have_content("user@example.com started a discussion less than a minute ago")
-    page.should have_content("This is a test note!")
+    expect(page).to have_content("#{author.email} started a discussion less than a minute ago")
+    expect(page).to have_content("This is a test note!")
   end
 
   context "changing a note's state" do
@@ -61,15 +59,15 @@ describe "notes" do
 
     it "can accept a note" do
       click_button "Accept"
-      page.should have_content("Note state changed to Accepted")
-      @note.state.should == "accepted"
+      expect(page).to have_content("Note state changed to Accepted")
+      expect(@note.reload.state).to eq("accepted")
 
     end
 
     it "can reject a note" do
       click_button "Reject"
-      page.should have_content("Note state changed to Rejected")
-      @note.state.should == "rejected"
+      expect(page).to have_content("Note state changed to Rejected")
+      expect(@note.reload.state).to eq("rejected")
     end
   end
 
@@ -80,13 +78,14 @@ describe "notes" do
                                  :number => 1,
                                  :element => chapter.elements.first,
                                  :state => "complete")
-    
+
     visit book_path(@book)
     click_link "All notes for this book"
-    page.should_not have_content("This is a test note!")
+    expect(page).not_to have_content("This is a test note!")
     visit book_note_path(@book, note.number)
     click_button "Reopen"
-    page.should have_content("Note state changed to Reopened")
+    expect(page).to have_content("Note state changed to Reopened")
+    expect(note.reload.state).to eq("reopened")
   end
 
 end

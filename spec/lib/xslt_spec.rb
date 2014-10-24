@@ -1,5 +1,6 @@
-require 'rspec'
+require 'spec_helper'
 require 'nokogiri'
+require 'pry'
 
 describe "XSLT parsing" do
   let(:xslt) { Nokogiri::XSLT(File.read("lib/chapter.xslt")) }
@@ -23,13 +24,12 @@ describe "XSLT parsing" do
     
     parsed_doc = xslt.transform(Nokogiri::XML(xml.to_xml))
     # No wrapping p tag
-    parsed_doc.css("div.figure").first.parent.should == parsed_doc.css("div.chapter").first
+    expect(parsed_doc.css("div.figure").first.parent).to eq(parsed_doc.css("div.chapter").first)
     # Ensure normal paragraph is unchanged
-    parsed_doc.css("p").first.text.should == "stock standard paragraph"
+    expect(parsed_doc.css("p").first.text).to eq("stock standard paragraph")
   end
   
   it "can parse footnotes containing paragraphs" do
-    pending("Footnote content still shows up in paragraph or vice versa. It's a tricky one.")
     xml = Nokogiri::XML::Builder.new do |xml|
       xml.chapter(:id => "ch1_1") do
         xml.para(:id => "ch1_2") do
@@ -46,6 +46,7 @@ describe "XSLT parsing" do
     end
       
     parsed_doc = xslt.transform(Nokogiri::XML(xml.to_xml))
+    skip("The footnote is within the paragraph. Not sure how to fix this.")
   end
   
   it "can parse paragraphs containing callouts" do
@@ -60,6 +61,6 @@ describe "XSLT parsing" do
     end
     
     parsed_doc = xslt.transform(Nokogiri::XML(xml.to_xml))
-    parsed_doc.css("p span.callout")[0]["id"].should == "ch1_3"
+    expect(parsed_doc.css("p span.callout")[0]["id"]).to eq("ch1_3")
   end
 end

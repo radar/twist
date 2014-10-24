@@ -9,7 +9,7 @@ module BookHelpers
     @book = Book.create(:title => "Rails 3 in Action", 
                         :path => "http://github.com/radar/rails3book_test")
     @book.path = git.path
-    run_resque_job!
+    Book.perform(@book.id)
     @book.reload
   end
 end

@@ -1,10 +1,16 @@
 development:
-  host: localhost
-  database: twist_development
+  sessions:
+    default:
+      database: twist_development
+      hosts:
+        - localhost:27017
 
 test:
-  host: localhost
-  database: twist_test
+  sessions:
+    default:
+      database: twist_test
+      hosts:
+        - localhost:27017
 
 # set these environment variables on your prod server
 production:
