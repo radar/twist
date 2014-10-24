@@ -16,12 +16,14 @@ gem 'redis-activesupport'
 
 group :development, :test do
   gem 'mailcatcher'
-  gem 'factory_girl'
-  gem 'capybara', '~> 1.0'
-  gem 'rspec-rails', '~> 2.8'
+  gem 'factory_girl_rails'
+  gem 'capybara', '~> 2.0'
+  gem 'rspec-rails', '~> 3.0'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'email_spec'
+  gem 'pry'
+  gem 'selenium-webdriver'
 end
 
 # Asset template engines

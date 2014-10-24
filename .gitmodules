@@ -1,0 +1,3 @@
+[submodule "spec/fixtures/repos/radar/rails3book_test"]
+	path = spec/fixtures/repos/radar/rails3book_test
+	url = git@github.com:radar/rails3book_test.git

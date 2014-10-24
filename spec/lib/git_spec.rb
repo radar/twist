@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'rails_helper'
+require 'git'
 
 describe Git do
   let(:args) { ["radar", "rails3book_test"] }
@@ -9,26 +10,26 @@ describe Git do
   end
 
   it "returns the repository path" do
-    Git.path.to_s.should == (Rails.root + "repos").to_s
+    expect(Git.path.to_s).to eq((Rails.root + "repos").to_s)
   end
 
   it "checks to see if a repository exists" do
-    Git.new(*args).exists?.should be_false
+    expect(Git.new(*args).exists?).to be_falsey
   end
 
   it "initializes a new repository" do
     git = Git.new(*args)
-    git.should_receive(:`).with("git clone #{Git.host}#{args.join("/")} #{test_repo}")
+    allow(git).to receive(:`).with("git clone #{Git.host}#{args.join("/")} #{test_repo}")
     git.update!
   end
-  
+
   it "updates an existing repository" do
     # Need to test this "live" to make sure everything goes through right
     git = Git.new(*args)
     git.update! # clones the repository
 
-    git.should_receive(:`).with("git checkout")
-    git.should_receive(:`).with("git pull origin master")
+    expect(git).to receive(:`).with("git checkout")
+    expect(git).to receive(:`).with("git pull origin master")
     git.update! # updates
   end
 
@@ -36,7 +37,7 @@ describe Git do
     git = Git.new(*args)
     git.update!
     Dir.chdir(git.path) do
-      git.files.should == Dir["**/*"]
+      expect(git.files).to eq(Dir["**/*"])
     end
   end
   
@@ -48,7 +49,7 @@ describe Git do
     end
 
     it "first commit ever" do
-      @git.changed_files.should == [
+      expect(@git.changed_files).to eq([
         "ch01",
         "ch01/app.jpg",
         "ch01/ch01.xml",
@@ -64,29 +65,9 @@ describe Git do
         "ch01/show_purchase.png",
         "ch01/update_purchase_fail.png",
         "ch01/updated_purchase.png",
-        "ch01/welcome_aboard.png"
-      ]
-    end
-    
-    it "shows all files if current commit is only commit" do
-      @git.changed_files("55802542ad90dc3b48d99de2e45c3b6ddaa6d445").should == [
-        "ch01",
-        "ch01/app.jpg",
-        "ch01/ch01.xml",
-        "ch01/hello_world.png",
-        "ch01/new_purchase.png",
-        "ch01/purchase_destroy.png",
-        "ch01/purchase_errors.png",
-        "ch01/purchase_errors_2.png",
-        "ch01/purchase_listing.png",
-        "ch01/purchases.png",
-        "ch01/purchases_edit.png",
-        "ch01/purchases_show_with_url.png",
-        "ch01/show_purchase.png",
-        "ch01/update_purchase_fail.png",
-        "ch01/updated_purchase.png",
-        "ch01/welcome_aboard.png"
-      ]
+        "ch01/welcome_aboard.png",
+        "manifest.txt"
+      ])
     end
 
     it "contains new files" do
@@ -96,7 +77,7 @@ describe Git do
         `git commit -m "Testing changes"`
       end
 
-      @git.changed_files(@old_commit).should == ["test.txt"]
+      expect(@git.changed_files(@old_commit)).to eq(["test.txt"])
     end
 
     it "contains modified files" do
@@ -106,7 +87,7 @@ describe Git do
         `git commit -m "Testing changes"`
       end
 
-      @git.changed_files(@old_commit).should == ["ch01/ch01.xml"]
+      expect(@git.changed_files(@old_commit)).to eq(["ch01/ch01.xml"])
     end
 
     it "contains deleted files" do
@@ -115,13 +96,13 @@ describe Git do
         `git commit -m "Testing changes"`
       end
 
-      @git.changed_files(@old_commit).should == ["ch01/ch01.xml"]
+      expect(@git.changed_files(@old_commit)).to eq(["ch01/ch01.xml"])
     end
   end
 
   it "retreives the current commit" do
     git = Git.new(*args)
     git.update!
-    git.current_commit.should eql("8a4de0df4009ed40f2e6476b5bbf44a3a47e2f0b")
+    expect(git.current_commit).to eq("a4e96c73960b96a4db1ff50983e9966846b81688")
   end
 end

@@ -1,9 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Comment do
   let(:user_1) { create_user! }
-  let(:user_2) { create_user!(:email => "user2@example.com") }
-  let(:user_3) { create_user!(:email => "user3@example.com")}
+  let(:user_2) { create_user! }
+  let(:user_3) { create_user!}
 
   before do
     # First, we need to create a book and a note for some place in the book
@@ -24,19 +24,19 @@ describe Comment do
       comment = @note.comments.create!(:user => user_3, :text => "Second post")
       comment.send_notifications!
 
-      email_1 = find_email("user@example.com")
-      email_2 = find_email("user2@example.com")
+      email_1 = find_email(user_1.email)
+      email_2 = find_email(user_2.email)
       
-      email_1.subject.should == "[Twist] - Rails 3 in Action - Note #1"
-      email_2.subject.should == "[Twist] - Rails 3 in Action - Note #1"
+      expect(email_1.subject).to eq("[Twist] - Rails 3 in Action - Note #1")
+      expect(email_2.subject).to eq("[Twist] - Rails 3 in Action - Note #1")
     end
 
     it "sends notification emails to the right users" do
       comment = @note.comments.build(:user => user_3)
       emails = comment.notification_emails
-      emails.should include("user@example.com")
-      emails.should include("user2@example.com")
-      emails.should_not include("user3@example.com")
+      expect(emails).to include(user_1.email)
+      expect(emails).to include(user_2.email)
+      expect(emails).to_not include(user_3.email)
     end
   end
 end

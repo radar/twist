@@ -29,10 +29,10 @@ class Git
   end
 
   def clone
-    puts "Cloning #{user}/#{repo}"
-    silence_stream(STDERR) do
+    puts "Cloning #{user}/#{repo} into #{path}"
+    # silence_stream(STDERR) do
       `git clone #{self.class.host}#{user}/#{repo} #{path}`
-    end
+    # end
   end
 
   def pull

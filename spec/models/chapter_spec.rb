@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Chapter do
   let(:git) { Git.new("radar", "rails3book_test") }
@@ -14,11 +14,11 @@ describe Chapter do
   it "processes a chapter" do
     Chapter.process!(book, git, "ch01/ch01.xml")
     chapter = book.chapters.first
-    chapter.title.should == "Ruby on Rails, the framework"
-    chapter.xml_id.should == "ch01_1"
-    chapter.elements.first.tag.should == "p"
+    expect(chapter.title).to eq("Ruby on Rails, the framework")
+    expect(chapter.xml_id).to eq("ch01_1")
+    expect(chapter.elements.first.tag).to eq("p")
     sections = chapter.elements.select { |e| e.tag == "section" }
-    sections.map(&:title).should == ["What is Ruby on Rails?",
+    expect(sections.map(&:title)).to eq(["What is Ruby on Rails?",
                                      "Benefits",
                                      "Common Terms",
                                      "Rails in the wild",
@@ -34,15 +34,16 @@ describe Chapter do
                                      "Routing",
                                      "Updating",
                                      "Deleting",
-                                     "Summary"]
-    chapter.figures.count.should == 13
-    chapter.figures.first.filename.should == "ch01/app.jpg"
+                                     "Summary",
+                                     "Regression tests"])
+    expect(chapter.figures.count).to eq(13)
+    expect(chapter.figures.first.filename).to eq("ch01/app.jpg")
   end
 
   it "updates a chapter" do
     Chapter.process!(book, git, "ch01/ch01.xml")
     chapter = book.chapters.first
-    chapter.title.should == "Ruby on Rails, the framework"
+    expect(chapter.title).to eq("Ruby on Rails, the framework")
     Dir.chdir(git.path) do
       doc = Nokogiri::XML(File.read("ch01/ch01.xml"))
       # Replace first paragraph's content with simply "Hello world!"
@@ -54,8 +55,8 @@ describe Chapter do
 
     # Re-process the chapter
     chapter = Chapter.process!(book, git, "ch01/ch01.xml")
-    book.chapters.count.should == 1
+    expect(book.chapters.count).to eq(1)
     element = chapter.elements.first
-    element.content.should == "<p id=\"ch01_3\">Hello world!</p>"
+    expect(element.content).to eq("<p id=\"ch01_3\">Hello world!</p>")
   end
 end

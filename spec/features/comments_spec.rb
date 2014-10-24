@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'commenting' do 
   let!(:author) { create_author! }

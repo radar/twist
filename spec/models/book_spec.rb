@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Book do
   context "upon creation" do
@@ -13,7 +13,7 @@ describe Book do
     end
 
     it "enqueues a book for processing" do
-      Resque.should_receive(:enqueue)
+      expect(Resque).to receive(:enqueue)
       book = Book.create(:title => "Rails 3 in Action", :path => "http://github.com/radar/rails3book_test")
       assert book.processing?
     end
@@ -23,11 +23,11 @@ describe Book do
       book = Book.create(:title => "Rails 3 in Action (TESTs)", :path => "http://github.com/radar/rails3book_test")
       assert book.processing?
       # ... which when run ...
-      run_resque_job!
+      Book.perform(book.id)
       book.reload
       assert !book.processing?
       # ... creates a chapter!
-      book.chapters.count.should eql(1)
+      expect(book.chapters.count).to eq(1)
     end
     
     it "processes the Rails 3 in Action real book" do
@@ -35,12 +35,12 @@ describe Book do
       book = Book.create(:title => "Rails 3 in Action", :path => "http://github.com/radar/rails3book")
       assert book.processing?
       # ... which when run ...
-      run_resque_job!
+      Book.perform(book.id)
       book.reload
       assert !book.processing?
       # ... creates a chapter!
-      book.chapters.count.should eql(18)
-      book.chapters.map(&:position).should == [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+      expect(book.chapters.count).to eq(18)
+      expect(book.chapters.map(&:position)).to eq([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18])
     end
   end
 end
