@@ -1,19 +1,14 @@
-class Comment
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  field :text, :type => String
-  field :user_id, :type => Integer
-
-  validates_presence_of :text
-
+class Comment < ActiveRecord::Base
   belongs_to :user
-  embedded_in :note
+  belongs_to :note
+
+  validates :text, presence: true
   
   # Send email notifications to all people "subscribed" to this note.
   def send_notifications!
     # The person who wrote the note, anybody who's left a comment on this note minus "current" comment creator
     notification_emails.each do |email|
-      Notifier.comment(self, email).deliver
+      Notifier.delay.comment(self, email)
     end
   end
 

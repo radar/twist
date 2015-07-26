@@ -36,11 +36,12 @@ module Processor
     image_path = File.expand_path(File.join(chapter.book.path, markup['src']))
     files = Dir[File.expand_path(File.join(chapter.book.path, "**", "*")) ]
     if files.include?(image_path)
-      figure = chapter.figures.where(:filename => markup['src']).first
-      figure ||= chapter.figures.build(:filename => markup['src'])
-      figure.figure = File.open(image_path)
-      figure.save!
-      figure
+      image = chapter.images.where(:filename => markup['src']).first
+      image ||= chapter.images.build(:filename => markup['src'])
+      image.tap do |i|
+        i.image = File.open(image_path)
+        i.save!
+      end
     else
       # Ignore it
       false

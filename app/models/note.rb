@@ -1,15 +1,8 @@
-class Note
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  field :text, :type => String
-  field :element_id, :type => String
-  field :number, :type => Integer
-  field :state, :type => String, :default => "new"
-  
-  embeds_one :element
-  embedded_in :chapter
-  
-  embeds_many :comments
+class Note < ActiveRecord::Base
+  belongs_to :element
+  has_many :comments
+
+  delegate :chapter, to: :element
 
   after_save :expire_chapter_cache
   

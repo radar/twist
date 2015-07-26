@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Chapter do
   let(:git) { Git.new("radar", "markdown_book_test") }
@@ -14,15 +14,15 @@ describe Chapter do
   it "processes a chapter" do
     Chapter.process!(book, git, "chapter_1/chapter_1.markdown")
     chapter = book.chapters.first
-    chapter.title.should == "In the beginning"
-    chapter.elements.first.tag.should == "p"
+    expect(chapter.title).to eq("In the beginning")
+    expect(chapter.elements.first.tag).to eq("p")
 
     sections = chapter.elements.select { |e| e.tag == "h2" }
     sections.map! { |s| Nokogiri::HTML(s.content).text }
-    sections.should == ["This is a new section"]
-    chapter.figures.count.should == 1
-    chapter.figures.first.filename.should == "images/chapter_1/1.png"
-    expect(chapter.figures.first.figure).not_to be_nil
+    expect(sections).to eq(["This is a new section"])
+    expect(chapter.images.count).to eq(1)
+    expect(chapter.images.first.filename).to eq("images/chapter_1/1.png")
+    expect(chapter.images.first.image).not_to be_nil
     expect(chapter.elements.select { |e| e.tag == "img" }).not_to be_empty
   end
 end

@@ -35,10 +35,12 @@ describe "notes" do
   
   it "can view all notes for a book" do
     chapter = @book.chapters.first
-    chapter.notes.create!(:text => "This is a test note!", 
-                          :user => author, 
-                          :number => 1,
-                          :element => chapter.elements.first)
+    element = chapter.elements.first
+    element.notes.create!(
+      :text => "This is a test note!", 
+      :user => author, 
+      :number => 1
+    )
     
     visit book_path(@book)
     click_link "All notes for this book"
@@ -50,10 +52,12 @@ describe "notes" do
   context "changing a note's state" do
     before do
       chapter = @book.chapters.first
-      @note = chapter.notes.create!(:text => "This is a test note!", 
-                                    :user => author, 
-                                    :number => 1,
-                                    :element => chapter.elements.first)
+      element = chapter.elements.first
+      @note = element.notes.create!(
+        :text => "This is a test note!", 
+        :user => author, 
+        :number => 1
+      )
       
       visit book_path(@book)
       click_link "All notes for this book"
@@ -76,11 +80,13 @@ describe "notes" do
 
   it "can reopen a note" do
     chapter = @book.chapters.first
-    note = chapter.notes.create!(:text => "This is a test note!", 
-                                 :user => author, 
-                                 :number => 1,
-                                 :element => chapter.elements.first,
-                                 :state => "complete")
+    element = chapter.elements.first
+    note = element.notes.create!(
+      :text => "This is a test note!", 
+      :user => author, 
+      :number => 1,
+      :state => "complete"
+    )
     
     visit book_path(@book)
     click_link "All notes for this book"

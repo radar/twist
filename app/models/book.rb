@@ -1,19 +1,6 @@
-class Book
-  include Mongoid::Document
-  field :user_id, :type => Integer
-  field :path, :type => String
-  field :title, :type => String
-  field :blurb, :type => String
-  field :permalink, :type => String
-  field :current_commit, :type => String
-  field :just_added, :type => Boolean, :default => true
-  field :processing, :type => Boolean, :default => false
-  field :notes_count, :type => Integer, :default => 0
-  field :hidden, :type => Boolean, :default => false
-  
-  embeds_many :chapters
-  
-  @queue = "normal"
+class Book < ActiveRecord::Base
+
+  has_many :chapters
   before_create :set_permalink
 
   def manifest(&block)

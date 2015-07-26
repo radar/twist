@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Chapter do
   let(:git) { Git.new("radar", "markdown_book_test") }

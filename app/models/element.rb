@@ -1,13 +1,8 @@
-class Element
-  include Mongoid::Document
+class Element < ActiveRecord::Base
   extend Processor
-  field :tag, :type => String
-  field :nickname, :type => String
-  field :title, :type => String
-  field :content, :type => String
-  
-  embedded_in :chapter
-  embedded_in :note
-  
-  delegate :book, :to => :chapter
+
+  belongs_to :chapter
+  has_many :notes
+
+  delegate :book, to: :chapter
 end

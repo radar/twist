@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Comment do
   let(:user_1) { create_user! }
@@ -9,11 +9,14 @@ describe Comment do
     # First, we need to create a book and a note for some place in the book
     create_book!
     chapter = @book.chapters.first
-    @note = chapter.notes.create!(:text => "This is a test note!", 
-                                               :user => user_1, 
-                                               :number => 1,
-                                               :element => chapter.elements.first,
-                                               :state => "complete")
+    element = chapter.elements.first
+    @note = element.notes.create!(
+      :text => "This is a test note!", 
+      :user => user_1, 
+      :number => 1,
+      :state => "complete"
+    )
+
     # Create a comment
     @note.comments.create!(:user => user_2, :text => "FIRST POST!")
     reset_mailer

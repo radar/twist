@@ -6,7 +6,7 @@ describe 'commenting' do
   let!(:book) { create_book! }
   let!(:chapter) { book.chapters.first }
   let!(:element) { chapter.elements.first }
-  let!(:note) { chapter.notes.create(:user => reviewer, :text => "My favourite element.", :element => element, :number => 1) }
+  let!(:note) { element.notes.create(:user => reviewer, :text => "My favourite element.", :number => 1) }
   let!(:comment_text) { "This is a typical comment" }
 
   def assert_comment_form_blank!

@@ -8,7 +8,7 @@ class NotesController < ApplicationController
   end
   
   def show
-    @chapter = @note._parent
+    @chapter = @note.chapter
     @comment = @note.comments.build
     @comments = @note.comments - [@comment]
   end
@@ -21,10 +21,13 @@ class NotesController < ApplicationController
   def create
     element = @chapter.elements.where(:nickname => params[:element_id]).first
     number = @book.notes.map(&:number).max.try(:+, 1) || 1
-    note = @chapter.notes.build(note_params.merge(:element => element,
-                                                  :element_id => params[:element_id],
-                                                  :number => number,
-                                                  :user => current_user))
+    new_note_params = note_params.merge(
+      number: number,
+      user: current_user
+    )
+
+    note = element.notes.build(new_note_params)
+
     if note.save
       # Increment notes count for the book
       @book.notes_count += 1

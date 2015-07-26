@@ -1,17 +1,16 @@
 source 'http://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.2.2'
 
-gem 'rails', '4.1.4'
-gem 'mongoid', '~> 4.0.0'
-
+gem 'rails', '4.2.2'
 gem 'pg'
-gem 'devise', '3.3.0'
+
+gem 'devise', '3.5.1'
 gem 'sidekiq', '3.2.2'
 gem 'redcarpet'
 #gem 'omniauth'
 gem 'nokogiri'
-gem 'dragonfly'
+gem 'paperclip'
 gem 'pygments.rb'
 
 gem 'redis-activesupport'
@@ -34,7 +33,7 @@ group :development do
 end
 
 # Asset template engines
-gem 'sass-rails', "~> 4.0.0"  
+gem 'sass-rails', "~> 4.0.0"
 gem 'coffee-script'
 
 gem 'jquery-rails'

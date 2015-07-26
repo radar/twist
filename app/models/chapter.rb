@@ -1,25 +1,22 @@
 require 'markdown_renderer'
 
-class Chapter
-  include Mongoid::Document
-  field :position, :type => Integer
-  field :title, :type => String
-  field :file_name, :type => String
-  
-  embedded_in :book
-  embeds_many :elements
-  embeds_many :figures
-  embeds_many :notes
-
-  after_save :expire_cache
+class Chapter < ActiveRecord::Base
 
   # Provides an accessor to get to the git repository where the chapter is contained
   attr_accessor :git
   
   attr_accessor :footnote_count
   attr_accessor :section_count
-  attr_accessor :figure_count
+  attr_accessor :image_count
   attr_accessor :listing_count
+
+  belongs_to :book
+
+  has_many :elements
+  has_many :images
+  has_many :notes, through: :elements
+
+  after_save :expire_cache
   
   # Defaults footnote_count to something.
   # Would use attr_accessor_with_default if it wasn't deprecated.
@@ -27,9 +24,9 @@ class Chapter
     @footnote_count ||= 0
   end
   
-  # Default figure count to 0, increments when we call process_figure! in Processor
-  def figure_count
-    @figure_count ||= 0
+  # Default image count to 0, increments when we call process_figure! in Processor
+  def image_count
+    @image_count ||= 0
   end
 
   # Default listing count to 0, increments when we call process_example! in
@@ -67,7 +64,7 @@ class Chapter
     chapter = book.chapters.find_or_initialize_by(file_name: file)
     chapter.git = git
     chapter.elements = []
-    chapter.figures = []
+    chapter.images = []
     chapter.position = book.manifest.index(file) + 1
 
     html = chapter.to_html
@@ -75,7 +72,6 @@ class Chapter
     elements = html.css("body > *")
     elements.each { |element| Element.process!(chapter, element) }
     book.save
-    chapter.save_figure_attachments!
     chapter
   end
 
@@ -88,10 +84,6 @@ class Chapter
 
   def to_param
     position.to_s
-  end
-
-  def save_figure_attachments!
-    self.figures.each { |figure| figure.save_attachment! }
   end
 
   def expire_cache

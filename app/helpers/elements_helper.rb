@@ -22,10 +22,11 @@ module ElementsHelper
   end
   
   def render_image(element)
-    figure_html = Nokogiri::HTML(element.content)
+    image_html = Nokogiri::HTML(element.content).css("img").first
+    image = @chapter.images.find_by(filename: image_html["src"])
     content_tag(:div, :class => "figure") do
-      raw("<img src='/figures/#{element.book.id}/#{figure_html.css("img")[0]["src"]}' /><br>") +
-      raw(figure_html.css("span.title").to_html)
+      image_tag(image.image.url) + "<br>"
+      raw(image_html["alt"])
     end
   end
   
