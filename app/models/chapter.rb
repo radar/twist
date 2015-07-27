@@ -12,7 +12,7 @@ class Chapter < ActiveRecord::Base
 
   belongs_to :book
 
-  has_many :elements
+  has_many :elements, -> { order("id ASC") }
   has_many :images
   has_many :notes, through: :elements
 
