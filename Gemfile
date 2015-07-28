@@ -32,6 +32,8 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.0'
 end
 
+gem "unicorn"
+
 # Asset template engines
 gem 'sass-rails', "~> 4.0.0"
 gem 'coffee-script'
