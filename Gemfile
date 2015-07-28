@@ -22,7 +22,7 @@ group :development, :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'selenium-webdriver'
+  gem 'poltergeist', '1.6.0'
 end
 
 group :development do
