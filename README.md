@@ -4,8 +4,7 @@ Twist provides an easy book-reviewing platform for authors using the LeanPub Mar
 
 You give people a login for the system (through the rails console), and then they can leave notes on the elements within the chapters within your books. Elements are anything ranging from paragraphs, to images, to blockquotes and so on.
 
-Twist uses MongoDB (with the Mongoid adapter), because strangely enough they are suitable for
-this purpose. MongoDB works extremely well with nested documents, and if you think about it, the information about books that's stored inside Twist are just nested documents:
+Twist uses PostgreSQL and the data model is fairly simple:
 
     Book -> Chapters -> Elements -> Notes -> Comments
 
@@ -17,10 +16,10 @@ I wrote the foundations for this application in one single day after I raged at 
 
 To run this, you'll need the following:
 
-* Ruby 2.1.2
-* Rails 4.1.4
+* Ruby 2.2.2
+* Rails 4.2.3
 * Redis
-* MongoDB
+* PostgreSQL
 
 Install the dependencies for the app and the submodules that Twist uses for testing using these commands:
 
