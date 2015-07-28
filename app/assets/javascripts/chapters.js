@@ -15,8 +15,11 @@ function create_section_listing() {
   });
 
   $('#sidebar a').click(function(e) {
-    section_id = $(this).attr("id").replace("_link", "");
-    window.scrollTo(0, $("#" + section_id)[0].offsetTop);
+    var id = $(this).attr("id")
+    if (id) {
+      section_id = id.replace("_link", "");
+      window.scrollTo(0, $("#" + section_id)[0].offsetTop);
+    }
   })
 }
 
