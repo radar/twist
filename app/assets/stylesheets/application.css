@@ -34,9 +34,10 @@ ol {
 }
 
 menu {
-  position: absolute;
-  top: 0.5em;
-  right: 0.5em;
+  width: 59%;
+  margin-left: 4em;
+  margin-right: 35%;
+  padding: 10px;
 }
 
 .wrapper {
@@ -87,11 +88,11 @@ label {
 }
 
 #flash_notice {
-  background: #6BE640;
+  background: #b1df7b;
   color: black;
 }
 
-#flash_error {
+#flash_error, #flash_alert {
   background: #E64040;
   color: white;
 }
