@@ -11,7 +11,8 @@ describe Chapter do
   end
 
   it "can process markdown" do
-    markdown_processing = lambda { Chapter.process_markdown!(book, git, "chapter_1/chapter_1.markdown") }
-    markdown_processing.should_not raise_error
+    expect do
+      Chapter.process_markdown!(book, git, "chapter_1/chapter_1.markdown")
+    end.not_to raise_error
   end
 end

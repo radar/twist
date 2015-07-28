@@ -9,6 +9,6 @@ describe 'signing out' do
   
   it "can sign out" do
     click_link "Sign out"
-    page.should have_content("You have been successfully signed out.")
+    expect(page).to have_content("You have been successfully signed out.")
   end
 end

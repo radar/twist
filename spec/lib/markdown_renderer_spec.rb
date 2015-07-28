@@ -14,7 +14,7 @@ Once upon a time...
 The end.
     }
     output = render(paragraph)
-    output.css("p").text.should == paragraph.strip
+    expect(output.css("p").text).to eq(paragraph.strip)
   end
 
   it "can parse a tip" do
@@ -33,8 +33,8 @@ T> authenticated user.
 
     output = render(tip)
     parsed_tip = output.css("div.tip")
-    parsed_tip.css("strong").text.should == "The constraint request object"
-    parsed_tip.css("p").count.should == 2
+    expect(parsed_tip.css("strong").text).to eq("The constraint request object")
+    expect(parsed_tip.css("p").count).to eq(2)
   end
 
   it "can parse a warning" do
@@ -46,8 +46,8 @@ W> Please keep all extremities clear of the whirring blades.
 
     output = render(warning)
     parsed_warning = output.css("div.warning")
-    parsed_warning.css("strong").text.should == "Don't do that!"
-    parsed_warning.css("p").count.should == 2
+    expect(parsed_warning.css("strong").text).to eq("Don't do that!")
+    expect(parsed_warning.css("p").count).to eq(2)
   end
 
   it "can parse an error" do
@@ -59,8 +59,8 @@ E> Not going to tell you what.
 
     output = render(error)
     parsed_error = output.css("div.error")
-    parsed_error.css("strong").text.should == "Something went wrong"
-    parsed_error.css("p").count.should == 2
+    expect(parsed_error.css("strong").text).to eq("Something went wrong")
+    expect(parsed_error.css("p").count).to eq(2)
   end
 
   it "can parse an information box" do
@@ -72,8 +72,8 @@ I> This is an information box. Don't tell anyone.
 
     output = render(information)
     parsed_information = output.css("div.information")
-    parsed_information.css("strong").text.should == "Something you should know"
-    parsed_information.css("p").count.should == 2
+    expect(parsed_information.css("strong").text).to eq("Something you should know")
+    expect(parsed_information.css("p").count).to eq(2)
   end
 
   it "can parse a question box" do
@@ -85,8 +85,8 @@ Q> No?
 
     output = render(question)
     parsed_question = output.css("div.question")
-    parsed_question.css("strong").text.should == "Is there a question?"
-    parsed_question.css("p").count.should == 2
+    expect(parsed_question.css("strong").text).to eq("Is there a question?")
+    expect(parsed_question.css("p").count).to eq(2)
   end
 
   it "can parse a discussion box" do
@@ -98,8 +98,8 @@ D> Please, talk.
 
     output = render(discussion)
     parsed_discussion = output.css("div.discussion")
-    parsed_discussion.css("strong").text.should == "Discussion area"
-    parsed_discussion.css("p").count.should == 2
+    expect(parsed_discussion.css("strong").text).to eq("Discussion area")
+    expect(parsed_discussion.css("p").count).to eq(2)
   end
 
   it "can parse a exercise box" do
@@ -111,8 +111,8 @@ X> One, and two, and three, and four!
 
     output = render(exercise)
     parsed_exercise = output.css("div.exercise")
-    parsed_exercise.css("strong").text.should == "Exercise!"
-    parsed_exercise.css("p").count.should == 2
+    expect(parsed_exercise.css("strong").text).to eq("Exercise!")
+    expect(parsed_exercise.css("p").count).to eq(2)
   end
 
   it "can parse an aside" do
@@ -124,8 +124,8 @@ A> Did you know that this is an aside? Please keep it on the DL.
 
     output = render(aside)
     parsed_aside = output.css("div.aside")
-    parsed_aside.css("strong").text.should == "Pssst, over here!"
-    parsed_aside.css("p").count.should == 2
+    expect(parsed_aside.css("strong").text).to eq("Pssst, over here!")
+    expect(parsed_aside.css("p").count).to eq(2)
   end
 
   it "can parse a titleized code listing" do
@@ -149,8 +149,8 @@ Followed by some text
 
     output = render(code)
     parsed_code = output.css("div.code")
-    parsed_code.css("div.highlight").should_not be_empty
-    parsed_code.css(".highlight .k").first.text.should == "module"
+    expect(parsed_code.css("div.highlight")).not_to be_empty
+    expect(parsed_code.css(".highlight .k").first.text).to eq("module")
   end
 
   it "can parse a titleized code listing with a paragraph following" do
@@ -170,10 +170,10 @@ This is just some text. Nothing to be too concerned about.
 }
     output = render(code)
     parsed_code = output.css("div.code")
-    parsed_code.css("div.highlight").should_not be_empty
-    parsed_code.css(".highlight .k").first.text.should == "module"
+    expect(parsed_code.css("div.highlight")).not_to be_empty
+    expect(parsed_code.css(".highlight .k").first.text).to eq("module")
 
-    parsed_code.css("div.highlight").text.strip.should == %Q{
+    expect(parsed_code.css("div.highlight").text.strip).to eq(%Q{
 module Subscribem
   module Constraints
     class SubdomainRequired
@@ -183,9 +183,9 @@ module Subscribem
     end
   end
 end
-    }.strip
+    }.strip)
 
-    output.css("p").last.text.should == "This is just some text. Nothing to be too concerned about."
+    expect(output.css("p").last.text).to eq("This is just some text. Nothing to be too concerned about.")
   end
 
   it "can process a footnote" do
@@ -194,8 +194,8 @@ end
     }
     output = render(footnote)
     footnote = output.css(".footnote")
-    footnote.text.strip.should == "Behold, a footnote."
-    footnote.css("a[name=footnote_1]").should_not be_empty
+    expect(footnote.text.strip).to eq("Behold, a footnote.")
+    expect(footnote.css("a[name=footnote_1]")).not_to be_empty
   end
 
   it "can process a multi-char" do
@@ -204,19 +204,19 @@ end
     }
     output = render(footnote)
     footnote = output.css(".footnote")
-    footnote.text.strip.should == "Behold, a footnote."
-    footnote.css("a[name=footnote_123]").should_not be_empty
+    expect(footnote.text.strip).to eq("Behold, a footnote.")
+    expect(footnote.css("a[name=footnote_123]")).not_to be_empty
   end
 
   it "can process a footnote within a paragraph" do
     footnote_within_paragraph = %Q{Hey, check out this footnote[^1]}
     output = render(footnote_within_paragraph)
-    output.css("a sup").text.should == "1"
+    expect(output.css("a sup").text).to eq("1")
   end
 
   it "can process a multi-char footnote within a paragraph" do
     footnote_within_paragraph = %Q{Hey, check out this footnote[^123]}
     output = render(footnote_within_paragraph)
-    output.css("a sup").text.should == "1"
+    expect(output.css("a sup").text).to eq("1")
   end
 end
