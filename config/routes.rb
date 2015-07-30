@@ -1,6 +1,8 @@
 Twist::Application.routes.draw do
   devise_for :users
 
+  root :to => "books#index"
+
   notes_routes = lambda do
     collection do
       get :completed
@@ -16,7 +18,6 @@ Twist::Application.routes.draw do
     resources :comments
   end
 
-  root :to => "books#index"
   resources :books do
     member do
       post :receive
