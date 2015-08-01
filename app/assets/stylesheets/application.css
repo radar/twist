@@ -75,10 +75,6 @@ textarea {
   resize: none;
 }
 
-label {
-  font: 14px Helvetica;
-}
-
 .flash {
   border-radius: 3px;
   background: #eee;
