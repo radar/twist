@@ -47,6 +47,7 @@ RSpec.configure do |config|
     "actionview",
     "activerecord",
     "activesupport",
+    "capybara",
     "rack",
     "rack-test",
     "railties",
