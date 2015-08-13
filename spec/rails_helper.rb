@@ -41,6 +41,19 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.filter_gems_from_backtrace(
+    "actionpack",
+    "actionview",
+    "activerecord",
+    "activesupport",
+    "rack",
+    "rack-test",
+    "railties",
+    "request_store",
+    "warden",
+    "zeus"
+  )
 end
 
 RSpec.configure do |config|
