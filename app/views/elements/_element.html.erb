@@ -1,6 +1,13 @@
-<%= render :partial => "notes/button", :locals => { :element => element } %>
-<a name='<%= element.nickname %>'></a>
-<%= raw(element.content) %>
-<div id='notes_container_<%= element.nickname %>' class='notes_container' style='display:none'>
+<div class='element'>
+  <% if show_notes %>
+    <%= render "notes/button", element: element %>
+  <% end %>
+  <a name='<%= element.nickname %>'></a>
+  <%= raw(element.content) %>
 
+  <% if show_notes %>
+    <div id='notes_container_<%= element.nickname %>' class='notes_container' style='display:none'>
+
+    </div>
+  <% end %>
 </div>

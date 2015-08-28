@@ -5,6 +5,7 @@
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.001">
     <%= yield :head %>
   </head>
@@ -17,15 +18,16 @@
         <%= link_to "Sign in", new_user_session_path %>
       <% end %>
     </menu>
-    <div id="sidebar_tip" style='display:none'>
-      <strong><em>To view the sidebar, turn your device to portrait mode.</em></strong>
-    </div>
-    <div class='wrapper <%= 'full-page' if @full_page %>'>
+    <div class='container-fluid'>
       <% flash.each do |k,v| %>
         <div class='flash' id='flash_<%= k %>'><%= v %></div>
       <% end %>
 
-      <%= yield %>
+      <div class='row'>
+        <div class='col-md-12'>
+          <%= yield %>
+        </div>
+      </div>
     </div>
    </body>
  </html>

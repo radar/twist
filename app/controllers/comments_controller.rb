@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comments = @note.comments
     check_for_state_transition!
     if params[:comment][:text].present?
-      @comment = @note.comments.build(comment_params.merge!(:user => current_user))
+      @comment = @note.comments.build(comment_params.merge!(user: current_user))
       if @comment.save
         @comment.send_notifications!
         flash[:notice] ||= "Comment has been created."
@@ -43,9 +43,9 @@ class CommentsController < ApplicationController
   end
 
   def find_book_and_chapter_and_note
-    @book = Book.where(permalink: params[:book_id]).first
-    @chapter = @book.chapters.where(:position => params[:chapter_id]).first
-    @note = @chapter.notes.where(:number => params[:note_id]).first
+    @book = Book.find_by_permalink(params[:book_id])
+    @chapter = @book.chapters.find_by(position: params[:chapter_id])
+    @note = @chapter.notes.find_by(number: params[:note_id])
   end
 
   private

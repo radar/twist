@@ -1,16 +1,19 @@
-<% @full_page = true %>
-<h2><%= link_to @note.chapter.book.title, @note.chapter.book %> - <%= link_to "#{@note.chapter.position}: #{@note.chapter.title}", [@note.chapter.book, @note.chapter] %></h2>
-<h3>Note #<%= @note.number %> - <%= state(@note) %></h3>
-<%= render_element(@note.element) %>
-<strong><%= link_to "View this element within chapter", book_chapter_path(@book, @chapter, :anchor => @note.element.nickname) %></strong>
+<div class='row'>
+  <div class='content col-md-8 col-md-offset-2'>
+    <% @full_page = true %>
+    <% chapter = @note.chapter %>
+    <% book = chapter.book %>
+    <h2>
+      <%= link_to book.title, book %> -
+      <%= link_to "#{chapter.position}: #{chapter.title}", [book, chapter] %></h2>
+    <h3>Note #<%= @note.number %> - <%= state(@note) %></h3>
+    <%= render_element(@note.element, show_notes: false) %>
+    <strong><%= link_to "View this element within chapter", book_chapter_path(book, chapter, :anchor => @note.element.nickname) %></strong>
 
-<!-- Shamelessly ripped off from GitHub's AWESOME comment styling -->
-<div class='comment'>
-  <%= comment(@note, 'started a discussion', :class => 'review-note') %>
+    <div id='comments'>
+      <%= render @comments.select(&:persisted?) %>
+    </div>
+
+    <%= render "comments/form" %>
+  </div>
 </div>
-
-<div id='comments'>
-  <%= render @comments.select(&:persisted?) %>
-</div>
-
-<%= render "comments/form" %>

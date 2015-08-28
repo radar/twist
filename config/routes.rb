@@ -12,7 +12,6 @@ Twist::Application.routes.draw do
       put :accept
       put :reject
       put :reopen
-      get 'comments', :to => redirect("/books/%{book_id}/chapters/%{chapter_id}/notes/%{id}")
     end
     
     resources :comments

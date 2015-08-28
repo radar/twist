@@ -6,9 +6,9 @@ module ElementsHelper
     nil
   end
   
-  def render_element(element)
+  def render_element(element, show_notes: true)
     partial = find_element_partial(element) ? element.tag : "element"
-    render(:partial => "elements/#{partial}", :locals => { :element => element })
+    render("elements/#{partial}", element: element, show_notes: show_notes)
   end
   
   def render_footnote(element)
@@ -20,15 +20,7 @@ module ElementsHelper
       "<a name='footnote_#{@footnote_count}'></a><sup>fn #{@footnote_count}</sup> #{footnote.to_html}<br />".html_safe
     end
   end
-  
-  def render_image(element)
-    image_html = Nokogiri::HTML(element.content).css("img").first
-    image = @chapter.images.find_by(filename: image_html["src"])
-    content_tag(:div, :class => "figure") do
-      image_tag(image.image.url) + "<br>"
-      raw(image_html["alt"])
-    end
-  end
+
   
   private
 

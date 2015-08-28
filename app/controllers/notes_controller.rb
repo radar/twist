@@ -1,8 +1,8 @@
 class NotesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_book_and_chapter
-  before_filter :find_note, :only => [:show, :complete, :reopen]
-  before_filter :find_notes, :only => [:index, :completed]
+  before_filter :find_note, only: [:show, :complete, :reopen]
+  before_filter :find_notes, only: [:index, :completed]
 
   def index
   end
@@ -15,11 +15,13 @@ class NotesController < ApplicationController
 
   def new
     @note = Note.new
-    @notes = @chapter.notes.where(:element_id => params[:element_id])
+    @note.comments.build
+    @element = Element.find_by(nickname: params[:element_id])
+    @notes = @element.notes
   end
   
   def create
-    element = @chapter.elements.where(:nickname => params[:element_id]).first
+    element = @chapter.elements.find_by(nickname: params[:element_id])
     number = @book.notes.map(&:number).max.try(:+, 1) || 1
     new_note_params = note_params.merge(
       number: number,
@@ -27,6 +29,7 @@ class NotesController < ApplicationController
     )
 
     note = element.notes.build(new_note_params)
+    note.comments.first.user = current_user
 
     if note.save
       # Increment notes count for the book
@@ -45,7 +48,7 @@ class NotesController < ApplicationController
   end
   
   def completed
-    @notes = @notes.select { |n| n.state == "complete" }
+    @notes = @notes.where(state: "complete")
     @title = "Completed notes"
     render :index
   end
@@ -65,12 +68,12 @@ class NotesController < ApplicationController
     end
 
     def find_book_and_chapter
-      @book = Book.where(permalink: params[:book_id], :hidden => false).first
-      @chapter = @book.chapters.where(:position => params[:chapter_id]).first if params[:chapter_id]
+      @book = Book.find_by_permalink(params[:book_id])
+      @chapter = @book.chapters.find_by(position: params[:chapter_id]) if params[:chapter_id]
     end
 
     def note_params
-      params.require(:note).permit(:text)
+      params.require(:note).permit(comments_attributes: [:text])
     end
 
 end

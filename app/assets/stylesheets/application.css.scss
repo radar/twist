@@ -1,0 +1,22 @@
+@import "bootstrap";
+@import "chapters";
+@import "notes";
+@import "highlights";
+
+body {
+  margin: 1% 2.5% 1% 2.5%;
+  font: 12pt 'Open Sans';
+  color: #444;
+  background: #efefef;
+}
+
+hr {
+  border-top: 1px solid #ddd;
+}
+
+.content {
+  padding: 10px;
+  background: white;
+  border: 1px solid #dadada;
+  border-radius: 3px;
+}

@@ -8,7 +8,6 @@ gem 'pg'
 gem 'devise', '3.5.1'
 gem 'sidekiq', '3.2.2'
 gem 'redcarpet'
-#gem 'omniauth'
 gem 'nokogiri'
 gem 'paperclip'
 gem 'pygments.rb'
@@ -37,6 +36,8 @@ gem "unicorn"
 # Asset template engines
 gem 'sass-rails', "~> 4.0.0"
 gem 'coffee-script'
+gem 'bootstrap-sass'
+gem 'simple_form', '3.1.0'
 
 gem 'jquery-rails'
 gem 'pry'

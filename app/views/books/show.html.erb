@@ -1,10 +1,15 @@
-<div id='sidebar'>
-  <%= link_to "All notes for this book", book_notes_path(@book) %>
-</div>
+<div class='row'>
+  <div class='col-md-8 content'>
 
-<h1><%= @book.title %></h1>
-<ol class='chapters'>
-  <% @book.chapters.each do |chapter| %>
-    <li><%= link_to chapter.title, [@book, chapter] %></li>
-  <% end %>
-</ol>
+    <h1><%= @book.title %></h1>
+    <ol class='chapters'>
+      <% @book.chapters.each do |chapter| %>
+        <li><%= link_to chapter.title, [@book, chapter] %></li>
+      <% end %>
+    </ol>
+  </div>
+
+  <div id='sidebar' class='col-md-4'>
+    <%= link_to "All notes for this book", book_notes_path(@book) %>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<%= form_for [@book, @chapter, @note, @comment] do |f| %>
+<%= simple_form_for [@book, @chapter, @note, @comment] do |f| %>
   <div class="comment_form">
     <strong>Comment on this note (Markdown enabled)</strong>
     <% if current_user.author? %>
@@ -11,11 +11,11 @@
     <% end %>
 
     <p>
-      <%= f.text_area :text, :rows => 5, :tabindex => 1 %>
+      <%= f.input :text, input_html: { rows: 10, tabindex: 1 } %>
     </p>
 
   </div>
   <p>
-    <%= f.submit "Leave Comment", :class => "comment-button", :tabindex => 5 %>
+    <%= f.submit "Leave Comment", class: "btn btn-primary comment-button", :tabindex => 5 %>
   </p>
 <% end %>

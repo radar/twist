@@ -1,1 +1,26 @@
-<%= render_image(element) %>
+<% image_html = Nokogiri::HTML(element.content).css("img").first %>
+<% image = @chapter.images.find_by(filename: image_html["src"]) %>
+
+<% if show_notes %>
+  <%= render "notes/button", element: element %>
+<% end %>
+
+<div class='image'>
+  <a name='<%= element.nickname %>'></a>
+  <% if image %>
+    <%= image_tag image.image.url %>
+    <div class='title'>
+      <%= image_html["alt"] %>
+    </div>
+  <% else %>
+    <div class='missing_image'>
+      MISSING IMAGE FOR <%= image_html["src"] %>
+    </div>
+  <% end %>
+</div>
+
+<% if show_notes %>
+  <div id='notes_container_<%= element.nickname %>' class='notes_container' style='display:none'>
+
+  </div>
+<% end %>

@@ -1,7 +1,6 @@
 class ChaptersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_book
-  # caches_action :show
 
   def index
     redirect_to @book
@@ -16,10 +15,10 @@ class ChaptersController < ApplicationController
   private
   
   def find_book
-    @book = Book.where(:permalink => params[:book_id], :hidden => false).first
+    @book = Book.find_by_permalink(params[:book_id])
   end
 
   def find_chapter(position)
-    @book.chapters.detect { |chapter| chapter.position == position.to_i }
+    @book.chapters.find_by(position: position)
   end
 end

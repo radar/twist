@@ -1,8 +1,10 @@
-<% partial = render(:partial => 'notes/form') %>
+<% partial = render('notes/form') %>
 container = $('#notes_container_<%= params[:element_id] %>');
 container.toggle();
 container.html(<%= raw(partial.inspect) %>);
 <% if !@notes.empty? %>
   container.append("<h4>Previous Notes</h4>");
   container.append(<%= raw(render(@notes).inspect) %>);
+  container.append("<hr>")
 <% end %>
+

@@ -4,7 +4,7 @@ describe "notes" do
   let(:author) { create_author! }
   before do
     create_book!
-    actually_sign_in_as(author)
+    login_as(author)
   end
     
   it "can add a new note to a paragraph", :js => true do
@@ -15,14 +15,16 @@ describe "notes" do
       click_link "0 notes +"
     end
 
-    fill_in "note_text", :with => "This is a **test** note!"
+    comment_box = find(".note_comments_text textarea")
+    comment_box.set("This is a **test** note!")
     click_button "Leave Note"
     expect(page).to have_content("1 note +")
     click_link "All notes for this chapter"
     click_link "This is a test note!"
-    expect(page).to have_content("#{author.email} started a discussion less than a minute ago")
+    expect(page).to have_content("#{author.email} commented less than a minute ago")
     # Ensure note text shows up correctly in processed markdown.
-    within ".review-note" do
+
+    within ".comment" do
       within(".body") do
         within("strong") { expect(page).to have_content("test") }
       end
@@ -36,16 +38,19 @@ describe "notes" do
   it "can view all notes for a book" do
     chapter = @book.chapters.first
     element = chapter.elements.first
-    element.notes.create!(
-      :text => "This is a test note!", 
-      :user => author, 
-      :number => 1
+    note = element.notes.create!(
+      user: author, 
+      number: 1
+    )
+    note.comments.create!(
+      user: author,
+      text: "This is a test note!"
     )
     
     visit book_path(@book)
     click_link "All notes for this book"
     click_link "This is a test note!"
-    expect(page).to have_content("#{author.email} started a discussion less than a minute ago")
+    expect(page).to have_content("#{author.email} commented less than a minute ago")
     expect(page).to have_content("This is a test note!")
   end
 
@@ -54,9 +59,12 @@ describe "notes" do
       chapter = @book.chapters.first
       element = chapter.elements.first
       @note = element.notes.create!(
-        :text => "This is a test note!", 
-        :user => author, 
-        :number => 1
+        user: author, 
+        number: 1
+      )
+      @note.comments.create!(
+        text: "This is a test note!",
+        user: author
       )
       
       visit book_path(@book)
@@ -82,10 +90,13 @@ describe "notes" do
     chapter = @book.chapters.first
     element = chapter.elements.first
     note = element.notes.create!(
-      :text => "This is a test note!", 
-      :user => author, 
-      :number => 1,
-      :state => "complete"
+      user: author, 
+      number: 1,
+      state: "complete"
+    )
+    note.comments.create!(
+      user: author,
+      text: "This is a test note!"
     )
     
     visit book_path(@book)

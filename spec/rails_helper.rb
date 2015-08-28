@@ -24,22 +24,21 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  
+
+
+  config.before do
+    ActionMailer::Base.deliveries.clear
+  end
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-  
-  config.before do
-    ActionMailer::Base.deliveries.clear
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 
   config.filter_gems_from_backtrace(
@@ -55,8 +54,8 @@ RSpec.configure do |config|
     "warden",
     "zeus"
   )
-end
 
-RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
+
+  config.include Warden::Test::Helpers, type: :feature
 end

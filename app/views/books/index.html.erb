@@ -1,4 +1,6 @@
-<% @books.each do |book| %>
-  <h2><%= link_to book.title, book %></h2>
-  <span class='blurb'><%= book.blurb %></span>
-<% end %>
+<div class='content'>
+  <% @books.each do |book| %>
+    <h2><%= link_to book.title, book %></h2>
+    <span class='blurb'><%= book.blurb %></span>
+  <% end %>
+</div>

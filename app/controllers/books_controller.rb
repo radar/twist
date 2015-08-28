@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-  before_filter :authenticate_user!, :except => [:receive]
-  skip_before_filter :verify_authenticity_token, :only => :receive
+  before_filter :authenticate_user!, except: [:receive]
+  skip_before_filter :verify_authenticity_token, only: :receive
 
   def index
     @books = Book.where(hidden: false)
@@ -11,7 +11,7 @@ class BooksController < ApplicationController
   end
   
   def create
-    @book = Book.new(params[:book])
+    @book = Book.new(book_params)
     if @book.save
       @book.enqueue
       flash[:notice] = "Thanks! Your book is now being processed. Please wait."
@@ -23,12 +23,16 @@ class BooksController < ApplicationController
   end
   
   def show
-    @book = Book.where(:permalink => params[:id], :hidden => false).first
+    @book = Book.find_by_permalink(params[:id])
   end
 
   def receive
-    @book = Book.find_by(:permalink => params[:id])
+    @book = Book.find_by_permalink(params[:id])
     @book.enqueue
-    render :nothing => true
+    render nothing: true
+  end
+
+  def book_params
+    params.require(:book).permit(:title, :path, :blurb)
   end
 end

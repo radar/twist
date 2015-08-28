@@ -2,6 +2,8 @@ class Note < ActiveRecord::Base
   belongs_to :element
   has_many :comments
 
+  accepts_nested_attributes_for :comments
+
   delegate :chapter, to: :element
 
   after_save :expire_chapter_cache

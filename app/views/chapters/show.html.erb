@@ -1,18 +1,22 @@
-<%= render "chapters/ipad" %>
-<div id='sidebar'>
-  <h3><%= previous_chapter_link %></h3>
-  <h3>Chapter <%= @chapter.position %></h3>
-  <%= link_to "All notes for this chapter", book_chapter_notes_path(@book, @chapter) %>
-  <div id='section_listing'>
+<div class='row'>
+  <div id='chapter' class='content col-md-7'>
+    <h1><%= link_to @chapter.book.title, @chapter.book %></h1>
+    <h2>Chapter <%= @chapter.position %> - <%= @chapter.title %></h2>
+    <%= link_to "All notes for this chapter", book_chapter_notes_path(@book, @chapter) %>
+    <hr>
+    <%= render_elements(@chapter.elements) %>
   </div>
-  <h3><%= next_chapter_link %></h3>
+
+  <div class='col-md-4' id='sidebar'>
+    <strong><%= previous_chapter_link %></strong>
+    <hr>
+    <ul id='section_listing'>
+    </ul>
+    <hr>
+    <strong><%= next_chapter_link %></strong>
+  </div>
 </div>
 
-<h1><%= link_to @chapter.book.title, @chapter.book %></h1>
-<br>
-<div id='chapter'>
-  <h2>Chapter <%= @chapter.position %> - <%= @chapter.title %></h2>
-  <%= render_elements(@chapter.elements) %>
-</div>
+
 
 <script>create_section_listing();</script>

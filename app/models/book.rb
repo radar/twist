@@ -3,6 +3,10 @@ class Book < ActiveRecord::Base
   has_many :chapters
   before_create :set_permalink
 
+  def self.find_by_permalink(permalink)
+    find_by(permalink: permalink, hidden: false)
+  end
+
   def manifest(&block)
     Dir.chdir(path) do
       if File.exist?("manifest.txt")

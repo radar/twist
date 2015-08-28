@@ -1,20 +1,15 @@
-<h2>New Book</h2>
+<div class='row'>
+  <div class='col-md-6'>
+    <div class='content'>
+      <h2>New Book</h2>
 
-<%= form_for @book do |f| %>
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </p>
+      <%= simple_form_for @book do |f| %>
+        <%= f.input :title %>
+        <%= f.input :path, label: "GitHub Path" %> 
+        <%= f.input :blurb %>
 
-  <p>
-    <%= f.label :path %>
-    <%= f.text_field :path %>
-  </p>
-
-  <p>
-    <%= f.label :blurb %>
-    <%= f.text_area :blurb, :rows => 5, :cols => 80 %>
-  </p>
-
-  <%= f.submit%>
-<% end %>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
