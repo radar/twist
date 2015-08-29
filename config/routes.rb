@@ -1,7 +1,7 @@
 Twist::Application.routes.draw do
   devise_for :users
 
-  root :to => "books#index"
+  root to: "books#index"
 
   notes_routes = lambda do
     collection do
@@ -33,5 +33,5 @@ Twist::Application.routes.draw do
     resources :notes, &notes_routes
   end
   
-  get 'signed_out', :to => "users#signed_out"
+  get 'signed_out', to: "users#signed_out"
 end
