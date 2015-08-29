@@ -13,11 +13,6 @@ class Note < ActiveRecord::Base
   def to_param
     number.to_s
   end
-  
-  def complete!
-    self.state = "complete"
-    self.save!
-  end
 
   def accept!
     self.state = "accepted"
@@ -35,7 +30,7 @@ class Note < ActiveRecord::Base
   end
 
   def completed?
-    ["accepted", "rejected", "complete"].include?(state)
+    ["accepted", "rejected"].include?(state)
   end
 
   def expire_chapter_cache

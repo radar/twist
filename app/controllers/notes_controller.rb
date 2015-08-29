@@ -40,15 +40,9 @@ class NotesController < ApplicationController
       # TODO: validation error if note text is blank
     end
   end
-  
-  def complete
-    @note.complete!
-    flash[:notice] = "Note ##{@note.number} has been marked as completed!"
-    redirect_to [@book, @chapter, :notes]
-  end
-  
+
   def completed
-    @notes = @notes.where(state: "complete")
+    @notes = @notes.where(state: ["accepted", "rejected"])
     @title = "Completed notes"
     render :index
   end

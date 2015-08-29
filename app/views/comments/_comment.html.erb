@@ -2,7 +2,7 @@
   <div class='col-md-1 avatar'>
     <%= avatar(comment.user) %>
   </div>
-  <div class='col-md-10 col-md-offset-1 comment-box'>
+  <div class='col-md-11 comment-box'>
     <div class='title'>
       <strong><%= comment.user.email %> commented <%= time_ago_in_words(comment.created_at) %> ago</strong><br>
     </div>

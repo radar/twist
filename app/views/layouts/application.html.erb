@@ -19,9 +19,13 @@
       <% end %>
     </menu>
     <div class='container-fluid'>
-      <% flash.each do |k,v| %>
-        <div class='flash' id='flash_<%= k %>'><%= v %></div>
-      <% end %>
+      <div class='row'>
+        <div class='col-md-12'>
+          <% flash.each do |k,v| %>
+            <div class='flash flash_<%= k %>'><%= v %></div>
+          <% end %>
+        </div>
+      </div>
 
       <div class='row'>
         <div class='col-md-12'>

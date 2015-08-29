@@ -1,7 +1,37 @@
-.comment {
-  margin: 10px;
+.note {
+  @extend .content;
+  @extend .col-md-8;
+  @extend .col-md-offset-2;
 
-  .comment-box {
+  .state-new, .state-accepted, .state-reopened {
+    color: green;
+  }
+
+  .state-rejected {
+    color: #df0000;
+  }
+
+  .comment {
     border: 1px solid #eee;
+    margin: 1rem;
+
+    .avatar {
+      height: 70px;
+      padding: 0px;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
+
+  .reopen-button, .accept-button {
+    @extend .btn;
+    @extend .btn-primary;
+  }
+
+  .reject-button {
+    @extend .btn;
+    @extend .btn-danger;
   }
 }
