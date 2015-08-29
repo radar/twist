@@ -2,7 +2,7 @@ worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 timeout 15
 preload_app true
 
-pid "/var/www/twist/tmp/unicorn.pid"
+pid "/var/www/twist/current/tmp/unicorn.pid"
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
@@ -25,5 +25,5 @@ end
 
 listen "/tmp/unicorn.twist.sock"
 
-stderr_path "/var/www/twist/log/unicorn.log"
-stdout_path "/var/www/twist/log/unicorn.log"
+stderr_path "/var/www/twist/current/log/unicorn.log"
+stdout_path "/var/www/twist/current/log/unicorn.log"
