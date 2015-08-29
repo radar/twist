@@ -3,7 +3,7 @@ set :repo_url, 'git://github.com/radar/twist'
 set :deploy_to, '/var/www/twist'
 set :bundle_flags, '--deployment'
 set :linked_files, %w{config/initializers/mail.rb config/database.yml}
-set :linked_dirs, %w{log tmp public/system}
+set :linked_dirs, %w{log tmp}
 
 set :chruby_ruby, 'ruby-2.2.3'
 
