@@ -2,11 +2,11 @@ source 'http://rubygems.org'
 
 ruby '2.2.2'
 
-gem 'rails', '4.2.2'
+gem 'rails', '4.2.4'
 gem 'pg'
 
 gem 'devise', '3.5.1'
-gem 'sidekiq', '3.2.2'
+gem 'sidekiq', '3.4.2'
 gem 'redcarpet'
 gem 'nokogiri'
 gem 'paperclip'
