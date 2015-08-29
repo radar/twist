@@ -7,8 +7,6 @@ set :linked_dirs, %w{log}
 
 set :chruby_ruby, 'ruby-2.2.3'
 
-set :rbenv_map_bins, %w{rake gem bundle ruby rails}
-
 namespace :deploy do
 
   desc 'Restart application'
@@ -18,6 +16,7 @@ namespace :deploy do
     end
   end
 
+  after "deploy:published", "deploy:restart"
   after :finishing, 'deploy:cleanup'
 
 end
