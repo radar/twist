@@ -13,6 +13,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute :sudo, "service unicorn-twist restart"
+      execute :sudo, "service sidekiq-twist restart"
     end
   end
 
