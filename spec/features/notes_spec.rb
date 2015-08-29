@@ -92,7 +92,7 @@ describe "notes" do
     note = element.notes.create!(
       user: author, 
       number: 1,
-      state: "complete"
+      state: "rejected"
     )
     note.comments.create!(
       user: author,
