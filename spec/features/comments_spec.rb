@@ -28,7 +28,7 @@ describe 'commenting' do
 
     it "a normal comment" do
       click_button "Leave Comment"
-      within("#flash_notice") do
+      within(".flash_notice") do
         expect(page).to have_content("Comment has been created.")
       end
       assert_comment_form_blank!
@@ -37,7 +37,7 @@ describe 'commenting' do
 
     it "accepting a note" do
       click_button "Accept"
-      within("#flash_notice") do
+      within(".flash_notice") do
         expect(page).to have_content("Note state changed to Accepted")
       end
       expect(note.reload.state).to eq('accepted')
@@ -47,7 +47,7 @@ describe 'commenting' do
 
     it "rejecting a note" do
       click_button "Reject"
-      within("#flash_notice") do
+      within(".flash_notice") do
         expect(page).to have_content("Note state changed to Rejected")
       end
       expect(note.reload.state).to eq('rejected')
