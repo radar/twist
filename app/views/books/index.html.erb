@@ -1,6 +1,17 @@
-<div class='content'>
-  <% @books.each do |book| %>
-    <h2><%= link_to book.title, book %></h2>
-    <span class='blurb'><%= book.blurb %></span>
-  <% end %>
+<div class='row'>
+  <div class='col-md-8 content'>
+    <h1>Welcome to Twist</h1>
+    <% @books.each do |book| %>
+      <h2><%= link_to book.title, book %></h2>
+      <span class='blurb'><%= book.blurb %></span>
+    <% end %>
+  </div>
+
+  <div id='sidebar' class='col-md-4'>
+    <% if current_user.author? %>
+      <%= link_to "Add Book", new_book_path %>
+    <% end %>
+  </div>
+
+  
 </div>

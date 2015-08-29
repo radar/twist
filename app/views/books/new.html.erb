@@ -1,15 +1,13 @@
 <div class='row'>
-  <div class='col-md-6'>
-    <div class='content'>
-      <h2>New Book</h2>
+  <div class='col-md-8 content'>
+    <h2>New Book</h2>
 
-      <%= simple_form_for @book do |f| %>
-        <%= f.input :title %>
-        <%= f.input :path, label: "GitHub Path" %> 
-        <%= f.input :blurb %>
+    <%= simple_form_for @book do |f| %>
+      <%= f.input :title %>
+      <%= f.input :path, label: "GitHub Path" %> 
+      <%= f.input :blurb %>
 
-        <%= f.submit class: 'btn btn-primary' %>
-      <% end %>
-    </div>
+      <%= f.submit class: 'btn btn-primary' %>
+    <% end %>
   </div>
 </div>
