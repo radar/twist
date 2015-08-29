@@ -2,6 +2,8 @@ worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 timeout 15
 preload_app true
 
+pid "/var/www/twist/tmp/unicorn.pid"
+
 before_fork do |server, worker|
   Signal.trap 'TERM' do
     puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
@@ -20,3 +22,8 @@ after_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
 end
+
+listen "/tmp/unicorn.twist.sock"
+
+stderr_path "/var/www/twist/log/unicorn.log"
+stdout_path "/var/www/twist/log/unicorn.log"
