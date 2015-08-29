@@ -2,7 +2,7 @@ set :application, 'twist'
 set :repo_url, 'git://github.com/radar/twist'
 set :deploy_to, '/var/www/twist'
 set :bundle_flags, '--deployment'
-set :linked_files, %w{config/mongoid.yml config/initializers/mail.rb}
+set :linked_files, %w{config/initializers/mail.rb}
 set :linked_dirs, %w{log}
 
 set :rbenv_type, :system # or :system, depends on your rbenv setup
