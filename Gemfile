@@ -26,8 +26,8 @@ end
 
 group :development do
   gem 'capistrano', '~> 3.0'
-  gem 'capistrano-bundler', '1.1.1'
-  gem 'capistrano-rails', '1.1.0'
+  gem 'capistrano-bundler', '1.1.4'
+  gem 'capistrano-rails', '1.1.3'
   gem 'capistrano-chruby'
 end
 
