@@ -63,8 +63,8 @@ class Chapter < ActiveRecord::Base
   def self.process_markdown!(book, git, file)
     chapter = book.chapters.find_or_initialize_by(file_name: file)
     chapter.git = git
-    chapter.elements = []
-    chapter.images = []
+    chapter.elements.delete_all
+    chapter.images.delete_all
     chapter.position = book.manifest.index(file) + 1
 
     html = chapter.to_html
