@@ -6,7 +6,7 @@ set :linked_files, %w{config/mongoid.yml config/initializers/mail.rb}
 set :linked_dirs, %w{log}
 
 set :rbenv_type, :system # or :system, depends on your rbenv setup
-set :rbenv_ruby, '2.1.2'
+set :rbenv_ruby, '2.2.2'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
