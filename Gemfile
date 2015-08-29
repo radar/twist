@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.2.2'
+ruby '2.2.3'
 
 gem 'rails', '4.2.4'
 gem 'pg'
@@ -28,7 +28,7 @@ group :development do
   gem 'capistrano', '~> 3.0'
   gem 'capistrano-bundler', '1.1.1'
   gem 'capistrano-rails', '1.1.0'
-  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-chruby'
 end
 
 gem "unicorn"
