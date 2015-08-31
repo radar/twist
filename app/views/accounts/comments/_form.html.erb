@@ -2,7 +2,7 @@
   <div class="comment_form">
     <strong>Comment on this note (Markdown enabled)</strong>
     <p>
-      <% if current_user.author? %>
+      <% if owner? %>
         <% if @note.completed? %>
           <%= f.submit "Reopen", :class => "reopen-button" %>
         <% else %>
