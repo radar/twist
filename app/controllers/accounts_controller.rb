@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
     account = Account.create(account_params)
     sign_in(account.owner)
     flash[:notice] = "Your account has been successfully created."
-    redirect_to root_url
+    redirect_to root_url(subdomain: account.subdomain)
   end
 
   private
