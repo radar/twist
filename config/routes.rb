@@ -1,7 +1,10 @@
 Twist::Application.routes.draw do
   devise_for :users
 
-  root to: "books#index"
+  root to: "home#index"
+
+  get "/accounts/new", to: "accounts#new", as: :new_account
+  post "/accounts", to: "accounts#create", as: :accounts
 
   notes_routes = lambda do
     collection do
