@@ -29,6 +29,7 @@ group :development do
   gem 'capistrano-bundler', '1.1.4'
   gem 'capistrano-rails', '1.1.3'
   gem 'capistrano-chruby'
+  gem 'mailcatcher'
 end
 
 gem "unicorn"
