@@ -23,6 +23,21 @@ describe Book do
       expect(book.processing?).to eq(true)
     end
 
+    it "processes a Book.txt file" do
+      manifest = book.process_manifest([
+        "frontmatter:",
+        "introduction.markdown",
+        "mainmatter:",
+        "chapter_1/chapter_1.markdown",
+        "backmatter:",
+        "appendix.markdown"
+      ])
+
+      expect(manifest[:frontmatter]).to eq(["introduction.markdown"])
+      expect(manifest[:mainmatter]).to eq(["chapter_1/chapter_1.markdown"])
+      expect(manifest[:backmatter]).to eq(["appendix.markdown"])
+    end
+
     it "processes a test Markdown book" do
       BookWorker.new.perform(book.id)
       book.reload
