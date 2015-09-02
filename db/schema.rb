@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150726220233) do
+ActiveRecord::Schema.define(version: 20150902220500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "owner_id"
+    t.string   "subdomain"
+  end
+
+  add_index "accounts", ["subdomain"], name: "index_accounts_on_subdomain", using: :btree
+
+  create_table "accounts_users", id: false, force: :cascade do |t|
+    t.integer "account_id"
+    t.integer "user_id"
+  end
 
   create_table "books", force: :cascade do |t|
     t.integer  "account"
@@ -40,8 +55,10 @@ ActiveRecord::Schema.define(version: 20150726220233) do
     t.string   "file_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "part"
   end
 
+  add_index "chapters", ["book_id", "part"], name: "index_chapters_on_book_id_and_part", using: :btree
   add_index "chapters", ["book_id"], name: "index_chapters_on_book_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
@@ -78,6 +95,16 @@ ActiveRecord::Schema.define(version: 20150726220233) do
   end
 
   add_index "images", ["chapter_id"], name: "index_images_on_chapter_id", using: :btree
+
+  create_table "invitations", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "token"
+  end
+
+  add_index "invitations", ["token"], name: "index_invitations_on_token", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.text     "text"

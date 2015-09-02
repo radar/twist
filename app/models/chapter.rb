@@ -51,21 +51,22 @@ class Chapter < ActiveRecord::Base
     @section_count ||= [position, 0]
   end
 
-  def self.process!(book, git, file)
+  def self.process!(book, part, git, file, position)
     ext = File.extname(file)
     if %w(.markdown .md).include?(ext)
-      process_markdown!(book, git,file)
+      process_markdown!(book, part, git, file, position)
     else
       raise "Unknown chapter format!"
     end
   end
 
-  def self.process_markdown!(book, git, file)
+  def self.process_markdown!(book, part, git, file, position)
     chapter = book.chapters.find_or_initialize_by(file_name: file)
+    chapter.part = part
     chapter.git = git
     chapter.elements.delete_all
     chapter.images.delete_all
-    chapter.position = book.manifest.index(file) + 1
+    chapter.position = position
 
     html = chapter.to_html
     chapter.title = html.css("h1").text

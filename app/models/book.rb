@@ -19,27 +19,13 @@ class Book < ActiveRecord::Base
       when /backmatter/
         part = :backmatter
       else
-        parts[part] << file
+        unless file.strip.blank?
+          parts[part] << file.strip
+        end
       end
     end
 
     parts
-  end
-
-  def manifest(&block)
-    filename = "Book.txt"
-    Dir.chdir(path) do
-      if File.exist?(filename)
-        files = File.read(filename).split("\n")
-        if block_given?
-          yield(files)
-        else
-          files
-        end
-      else
-        raise "Couldn't find Book.txt"
-      end
-    end
   end
 
   def notes
