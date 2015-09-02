@@ -11,7 +11,12 @@ class BookWorker
     current_commit = git.current_commit rescue nil
     git.update!
 
-    book.manifest do |files|
+    Dir.chdir(book.path) do
+      lines = File.readlines("Book.txt")
+      manifest = book.process_manifest(lines)
+    end
+
+    manifest do |files|
       files.each do |file|
         Chapter.process!(book, git, file)
       end
