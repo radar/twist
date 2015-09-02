@@ -1,11 +1,11 @@
 module Accounts
   class BaseController < ApplicationController
     before_filter :authenticate_user!
-    before_filter :authorise_user!
+    before_filter :authorize_user!
 
     private
 
-    def authorise_user!
+    def authorize_user!
       authenticate_user!
       unless current_account.owner == current_user || 
              current_account.users.exists?(current_user.id)
