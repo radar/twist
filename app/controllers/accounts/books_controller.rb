@@ -2,6 +2,7 @@ module Accounts
   class BooksController < Accounts::BaseController
     skip_before_filter :verify_authenticity_token, only: :receive
     skip_before_filter :authenticate_user!, only: [:receive]
+    skip_before_filter :authorize_user!, only: [:receive]
 
     def index
       @books = Book.where(hidden: false)
@@ -24,8 +25,11 @@ module Accounts
     end
     
     def show
-      @book = Book.find_by_permalink(params[:id])
-    end
+        @book = Book.find_by_permalink(params[:id])
+        @frontmatter = @book.chapters.frontmatter
+        @mainmatter = @book.chapters.mainmatter
+        @backmatter = @book.chapters.backmatter
+      end
 
     def receive
       @book = Book.find_by_permalink(params[:id])
