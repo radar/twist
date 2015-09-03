@@ -14,11 +14,12 @@ class BookWorker
     Dir.chdir(book.path) do
       lines = File.readlines("Book.txt")
       manifest = book.process_manifest(lines)
-    end
-
-    manifest do |files|
-      files.each do |file|
-        Chapter.process!(book, git, file)
+      manifest.each do |part, lines|
+        position = 1
+        lines.each do |line|
+          next if line.strip.blank?
+          Chapter.process!(book, part, git, line.strip, position)
+        end
       end
     end
 

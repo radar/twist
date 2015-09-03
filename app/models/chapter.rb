@@ -16,6 +16,10 @@ class Chapter < ActiveRecord::Base
   has_many :images
   has_many :notes, through: :elements
 
+  scope :frontmatter, -> { where(part: "frontmatter") }
+  scope :mainmatter, -> { where(part: "mainmatter") }
+  scope :backmatter, -> { where(part: "backmatter") }
+
   after_save :expire_cache
   
   # Defaults footnote_count to something.
@@ -51,28 +55,29 @@ class Chapter < ActiveRecord::Base
     @section_count ||= [position, 0]
   end
 
-  def self.process!(book, git, file)
+  def self.process!(book, part, git, file, position)
     ext = File.extname(file)
     if %w(.markdown .md).include?(ext)
-      process_markdown!(book, git,file)
+      process_markdown!(book, part, git, file, position)
     else
       raise "Unknown chapter format!"
     end
   end
 
-  def self.process_markdown!(book, git, file)
+  def self.process_markdown!(book, part, git, file, position)
     chapter = book.chapters.find_or_initialize_by(file_name: file)
+    chapter.part = part
     chapter.git = git
     chapter.elements.delete_all
     chapter.images.delete_all
-    chapter.position = book.manifest.index(file) + 1
+    chapter.position = position
 
     html = chapter.to_html
     chapter.title = html.css("h1").text
+    chapter.permalink = chapter.title.parameterize
     elements = html.css("body > *")
     elements.each { |element| Element.process!(chapter, element) }
-    book.save
-    chapter
+    chapter.save
   end
 
   def to_html 
@@ -81,9 +86,8 @@ class Chapter < ActiveRecord::Base
     html = Nokogiri::HTML(renderer.render(markdown))
   end
 
-
   def to_param
-    position.to_s
+    permalink
   end
 
   def expire_cache

@@ -12,7 +12,7 @@ describe Chapter do
 
   it "can process markdown" do
     expect do
-      Chapter.process_markdown!(book, git, "chapter_1/chapter_1.markdown")
+      Chapter.process_markdown!(book, "mainmatter", git, "chapter_1/chapter_1.markdown", 1)
     end.not_to raise_error
   end
 end

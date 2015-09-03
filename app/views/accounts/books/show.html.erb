@@ -2,10 +2,19 @@
   <div class='col-md-8 content'>
 
     <h1><%= @book.title %></h1>
-    <ol class='chapters'>
-      <% @book.chapters.each do |chapter| %>
-        <li><%= link_to chapter.title, [@book, chapter] %></li>
-      <% end %>
+      <ol class='frontmatter'>
+        <% @frontmatter.each do |chapter| %>
+          <li><%= link_to chapter.title, [@book, chapter] %></li>
+        <% end %>
+      </ol>
+
+      <hr>
+
+      <ol class='chapters'>
+        <% @mainmatter.each do |chapter| %>
+          <li><%= link_to chapter.title, [@book, chapter] %></li>
+        <% end %>
+      </ol>
     </ol>
   </div>
 
