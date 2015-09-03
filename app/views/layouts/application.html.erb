@@ -11,13 +11,21 @@
   </head>
   <body>
     <menu>
-      <strong>Twist</strong> |
-        <% if user_signed_in? %>
-          Signed in as <%= current_user.email %>
-          <%= link_to "Sign out", destroy_user_session_path %>
-        <% else %>
-          <%= link_to "Sign in", new_user_session_path %>
-        <% end %>
+      <%= link_to root_url(subdomain: nil) do %>
+        <strong>Twist</strong>
+      <% end %> |
+      <% if current_account %>
+        <%= link_to root_url(subdomain: current_account.subdomain) do %>
+          <strong><%= current_account.name %></strong>
+        <% end %> |
+      <% end %>
+
+      <% if user_signed_in? %>
+        Signed in as <%= current_user.email %>
+        <%= link_to "Sign out", destroy_user_session_path %>
+      <% else %>
+        <%= link_to "Sign in", new_user_session_path %>
+      <% end %>
     </menu>
     <div class='container-fluid'>
       <div class='row'>

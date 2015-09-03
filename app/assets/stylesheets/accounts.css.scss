@@ -1,3 +1,15 @@
-// Place all the styles related to the accounts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.accounts {
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    border: 1px solid #eee;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 14pt;
+
+    &:hover {
+      background: #eee;
+    }
+  }
+}
