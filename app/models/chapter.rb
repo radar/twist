@@ -16,6 +16,10 @@ class Chapter < ActiveRecord::Base
   has_many :images
   has_many :notes, through: :elements
 
+  scope :frontmatter, -> { where(part: "frontmatter") }
+  scope :mainmatter, -> { where(part: "mainmatter") }
+  scope :backmatter, -> { where(part: "backmatter") }
+
   after_save :expire_cache
   
   # Defaults footnote_count to something.
@@ -70,10 +74,10 @@ class Chapter < ActiveRecord::Base
 
     html = chapter.to_html
     chapter.title = html.css("h1").text
+    chapter.permalink = chapter.title.parameterize
     elements = html.css("body > *")
     elements.each { |element| Element.process!(chapter, element) }
-    book.save
-    chapter
+    chapter.save
   end
 
   def to_html 
@@ -82,9 +86,8 @@ class Chapter < ActiveRecord::Base
     html = Nokogiri::HTML(renderer.render(markdown))
   end
 
-
   def to_param
-    position.to_s
+    permalink
   end
 
   def expire_cache

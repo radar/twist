@@ -24,6 +24,9 @@ class BooksController < ApplicationController
   
   def show
     @book = Book.find_by_permalink(params[:id])
+    @frontmatter = @book.chapters.frontmatter
+    @mainmatter = @book.chapters.mainmatter
+    @backmatter = @book.chapters.backmatter
   end
 
   def receive

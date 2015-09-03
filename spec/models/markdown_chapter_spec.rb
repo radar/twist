@@ -12,7 +12,7 @@ describe Chapter do
   end
 
   it "processes a chapter" do
-    Chapter.process!(book, git, "chapter_1/chapter_1.markdown")
+    Chapter.process!(book, "mainmatter", git, "chapter_1/chapter_1.markdown", 1)
     chapter = book.chapters.first
     expect(chapter.title).to eq("In the beginning")
     expect(chapter.elements.first.tag).to eq("p")
