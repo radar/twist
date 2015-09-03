@@ -18,7 +18,7 @@ class ChaptersController < ApplicationController
     @book = Book.find_by_permalink(params[:book_id])
   end
 
-  def find_chapter(position)
-    @book.chapters.find_by(position: position)
+  def find_chapter(permalink)
+    @book.chapters.find_by(permalink: permalink)
   end
 end

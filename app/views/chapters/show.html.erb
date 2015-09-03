@@ -1,7 +1,13 @@
 <div class='row'>
   <div id='chapter' class='content col-md-7'>
     <h1><%= link_to @chapter.book.title, @chapter.book %></h1>
-    <h2>Chapter <%= @chapter.position %> - <%= @chapter.title %></h2>
+
+    <% if @chapter.part == "mainmatter" %>
+      <h2>Chapter <%= @chapter.position %> - <%= @chapter.title %></h2>
+    <% else %>
+      <h2><%= @chapter.title %></h2>
+    <% end %>
+
     <%= link_to "All notes for this chapter", book_chapter_notes_path(@book, @chapter) %>
     <hr>
     <%= render_elements(@chapter.elements) %>
