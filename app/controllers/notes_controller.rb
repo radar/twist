@@ -58,7 +58,7 @@ class NotesController < ApplicationController
     end
 
     def find_note
-      @note = @book.notes.where(number: params[:id])
+      @note = @book.notes.find_by(number: params[:id])
     end
 
     def find_book_and_chapter
