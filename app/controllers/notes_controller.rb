@@ -22,7 +22,7 @@ class NotesController < ApplicationController
   
   def create
     element = @chapter.elements.find_by(nickname: params[:element_id])
-    number = @book.notes.map(&:number).max.try(:+, 1) || 1
+    number = @book.notes_count + 1
     new_note_params = note_params.merge(
       number: number,
       user: current_user
@@ -58,7 +58,7 @@ class NotesController < ApplicationController
     end
 
     def find_note
-      @note = @book.notes.detect { |n| n.number == params[:id].to_i }
+      @note = @book.notes.where(number: params[:id])
     end
 
     def find_book_and_chapter
