@@ -5,8 +5,6 @@ class Note < ActiveRecord::Base
   accepts_nested_attributes_for :comments
 
   delegate :chapter, to: :element
-
-  after_save :expire_chapter_cache
   
   belongs_to :user
   
@@ -31,9 +29,5 @@ class Note < ActiveRecord::Base
 
   def completed?
     ["accepted", "rejected"].include?(state)
-  end
-
-  def expire_chapter_cache
-    chapter.expire_cache
   end
 end
