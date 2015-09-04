@@ -16,9 +16,10 @@ class Chapter < ActiveRecord::Base
   has_many :images
   has_many :notes, through: :elements
 
-  scope :frontmatter, -> { where(part: "frontmatter") }
-  scope :mainmatter, -> { where(part: "mainmatter") }
-  scope :backmatter, -> { where(part: "backmatter") }
+  scope :ordered -> { order("position ASC") }
+  scope :frontmatter, -> { ordered.where(part: "frontmatter") }
+  scope :mainmatter, -> { ordered.where(part: "mainmatter") }
+  scope :backmatter, -> { ordered.where(part: "backmatter") }
 
   after_save :expire_cache
   
