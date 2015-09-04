@@ -19,6 +19,7 @@ class BookWorker
         lines.each do |line|
           next if line.strip.blank?
           Chapter.process!(book, part, git, line.strip, position)
+          position += 1
         end
       end
     end

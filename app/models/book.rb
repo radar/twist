@@ -1,6 +1,7 @@
 class Book < ActiveRecord::Base
 
   has_many :chapters
+  has_many :notes, through: :chapters
   before_create :set_permalink
 
   def self.find_by_permalink(permalink)
@@ -26,10 +27,6 @@ class Book < ActiveRecord::Base
     end
 
     parts
-  end
-
-  def notes
-    chapters.map(&:notes).flatten
   end
 
   def to_param
