@@ -16,7 +16,7 @@ class Chapter < ActiveRecord::Base
   has_many :images
   has_many :notes, through: :elements
 
-  scope :ordered -> { order("position ASC") }
+  scope :ordered, -> { order("position ASC") }
   scope :frontmatter, -> { ordered.where(part: "frontmatter") }
   scope :mainmatter, -> { ordered.where(part: "mainmatter") }
   scope :backmatter, -> { ordered.where(part: "backmatter") }
