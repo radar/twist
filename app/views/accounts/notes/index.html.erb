@@ -6,8 +6,11 @@
   <% end %>
   <br>
 
+  <%= link_to "Completed notes", [:completed, @book, @chapter, :notes] %>
+  <hr>
+
   <% if @notes.empty? %>
-    <p>There are currently no <%= (@title || "notes").downcase %> for this <% if @chapter %>chapter<% else %>book<% end %>.</p>
+    <p>There are currently no <%= (@title || "notes").downcase %> for this <%= @chapter ? "chapter" : "book" %>.</p>
   <% end %>
   <%= render @notes %>
 </div>

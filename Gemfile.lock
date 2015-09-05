@@ -89,6 +89,10 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    dotenv (2.0.2)
+    dotenv-rails (2.0.2)
+      dotenv (= 2.0.2)
+      railties (~> 4.0)
     email_spec (1.6.0)
       launchy (~> 2.1)
       mail (~> 2.2)
@@ -194,6 +198,7 @@ GEM
       redis (>= 2.2)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rollbar (2.1.0)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -285,6 +290,7 @@ DEPENDENCIES
   coffee-script
   database_cleaner
   devise (= 3.5.1)
+  dotenv-rails
   email_spec
   factory_girl
   jquery-rails
@@ -299,6 +305,7 @@ DEPENDENCIES
   rails (= 4.2.4)
   redcarpet
   redis-activesupport
+  rollbar
   rspec-rails (~> 3.0)
   sass-rails (~> 4.0.0)
   sidekiq (= 3.4.2)

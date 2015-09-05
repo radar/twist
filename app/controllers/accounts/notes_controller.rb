@@ -5,6 +5,7 @@ module Accounts
     before_filter :find_notes, only: [:index, :completed]
 
     def index
+      @notes = @notes.where(state: ["new", "reopened"])
     end
     
     def show
