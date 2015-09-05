@@ -101,6 +101,7 @@ describe "notes" do
     
     visit book_path(@book)
     click_link "All notes for this book"
+    click_link "Completed notes"
     expect(page).to have_content("This is a test note!")
     visit book_note_path(@book, note.number)
     click_button "Reopen"

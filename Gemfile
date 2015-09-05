@@ -43,3 +43,4 @@ gem 'jquery-rails'
 gem 'pry'
 
 gem 'rollbar'
+gem 'dotenv-rails'
