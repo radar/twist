@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "notes" do
   let(:account) { FactoryGirl.create(:account) }
   before do
-    create_book!
+    create_book!(account)
     login_as(account.owner)
     set_subdomain(account.subdomain)
   end
