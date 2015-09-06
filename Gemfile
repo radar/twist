@@ -45,3 +45,5 @@ gem 'pry'
 
 gem 'rollbar'
 gem 'dotenv-rails'
+
+gem 'apartment'

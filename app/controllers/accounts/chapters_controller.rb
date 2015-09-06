@@ -16,7 +16,7 @@ module Accounts
     private
     
     def find_book
-      @book = current_account.books.find_by!(permalink: params[:book_id])
+      @book = Book.find_by!(permalink: params[:book_id])
     end
 
     def find_chapter(permalink)

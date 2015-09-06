@@ -2,5 +2,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_and_belongs_to_many :accounts
+  has_many :memberships
+  has_many :accounts, through: :memberships
 end

@@ -7,6 +7,7 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(account_params)
     if @account.save
+      @account.create_schema
       sign_in(@account.owner)
       flash[:notice] = "Your account has been successfully created."
       redirect_to root_url(subdomain: @account.subdomain)

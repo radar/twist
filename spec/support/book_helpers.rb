@@ -5,15 +5,18 @@ module BookHelpers
     FileUtils.rm_rf(git.path)
     git.update!
 
-    @book = account.books.create(
-      title: "Markdown Book Test", 
-      path: "http://github.com/radar/markdown_book_test"
-    )
+    book = nil
+    Apartment::Tenant.switch(account.subdomain) do
+      book = Book.create(
+        title: "Markdown Book Test", 
+        path: "http://github.com/radar/markdown_book_test"
+      )
+    end
 
-    @book.path = git.path
+    book.path = git.path
     # Run the Sidekiq job ourselves
-    BookWorker.new.perform(@book.id)
-    @book.reload
+    BookWorker.new.perform(account.id, book.id)
+    book
   end
 end
 

@@ -6,7 +6,10 @@ class Account < ActiveRecord::Base
 
   has_many :invitations
 
-  has_and_belongs_to_many :users
+  has_many :memberships
+  has_many :users, through: :memberships
 
-  has_many :books
+  def create_schema
+    Apartment::Tenant.create(subdomain)
+  end
 end

@@ -63,7 +63,7 @@ module Accounts
       end
 
       def find_book_and_chapter
-        @book = current_account.books.find_by!(permalink: params[:book_id])
+        @book = Book.find_by!(permalink: params[:book_id])
         @chapter = @book.chapters.find_by(permalink: params[:chapter_id]) if params[:chapter_id]
       end
 

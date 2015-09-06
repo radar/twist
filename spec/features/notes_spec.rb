@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "notes" do
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryGirl.create(:account_with_schema) }
   before do
     create_book!(account)
     login_as(account.owner)

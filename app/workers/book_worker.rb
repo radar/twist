@@ -1,7 +1,9 @@
 class BookWorker
   include Sidekiq::Worker
 
-  def perform(id)
+  def perform(account_id, id)
+    account = Account.find(account_id)
+    Apartment::Tenant.switch!(account.subdomain)
     book = Book.find(id)
     # TODO: determine if path is HTTP || Git
     # TODO: determine if path is public
