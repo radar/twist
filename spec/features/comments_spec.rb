@@ -22,7 +22,7 @@ describe 'commenting' do
   context "as an author" do
     before do
       actually_sign_in_as(author)
-      visit book_note_path(@book, note)
+      visit book_note_path(book, note)
       fill_in "comment_text", :with => comment_text
     end
 

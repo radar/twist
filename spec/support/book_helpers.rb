@@ -5,12 +5,12 @@ module BookHelpers
     FileUtils.rm_rf(git.path)
     git.update!
 
-    @book = Book.create(:title => "Rails 3 in Action", 
+    book = Book.create(:title => "Rails 3 in Action", 
                         :path => "http://github.com/radar/markdown_book_test")
-    @book.path = git.path
+    book.path = git.path
     # Run the Sidekiq job ourselves
-    BookWorker.new.perform(@book.id)
-    @book.reload
+    BookWorker.new.perform(book.id)
+    book.reload
   end
 end
 
