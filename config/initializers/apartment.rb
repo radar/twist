@@ -1,5 +1,5 @@
-# Apartment.excluded_models = [
-#   "Account",
-#   "Membership",
-#   "User"
-# ]
+Apartment.excluded_models = [
+  "Account",
+  "Membership",
+  "User"
+]

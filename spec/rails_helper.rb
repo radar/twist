@@ -25,6 +25,8 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.mock_with :rspec
 
+  config.use_transactional_fixtures = false
+
 
   config.before do
     ActionMailer::Base.deliveries.clear
@@ -38,6 +40,7 @@ RSpec.configure do |config|
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
       example.run
+      Apartment::Tenant.reset
     end
 
     connection = ActiveRecord::Base.connection.raw_connection

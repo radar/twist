@@ -4,13 +4,13 @@ describe "notes" do
   let(:account) { FactoryGirl.create(:account_with_schema) }
   let(:book) { create_book!(account) }
   before do
-    login_as(author)
+    login_as(account.owner)
+    set_subdomain(account.subdomain)
   end
     
   it "can add a new note to a paragraph", :js => true do
-    visit book_chapter_path(book, book.chapters.first)
+    visit book_chapter_url(book, book.chapters.first)
     element = book.chapters.first.elements.first
-
     within "#note_button_#{element.nickname}" do
       click_link "0 notes +"
     end
@@ -47,7 +47,7 @@ describe "notes" do
       text: "This is a test note!"
     )
     
-    visit book_path(book)
+    visit book_url(book)
     click_link "All notes for this book"
     click_link "This is a test note!"
     expect(page).to have_content("#{account.owner.email} commented less than a minute ago")
@@ -67,7 +67,7 @@ describe "notes" do
         user: account.owner
       )
       
-      visit book_path(book)
+      visit book_url(book)
       click_link "All notes for this book"
       click_link "This is a test note!"
     end
@@ -99,7 +99,7 @@ describe "notes" do
       text: "This is a test note!"
     )
     
-    visit book_path(book)
+    visit book_url(book)
     click_link "All notes for this book"
     click_link "Completed notes"
     expect(page).to have_content("This is a test note!")
