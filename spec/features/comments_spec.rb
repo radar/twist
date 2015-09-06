@@ -23,7 +23,7 @@ describe 'commenting' do
     before do
       login_as(account.owner)
       set_subdomain(account.subdomain)
-      visit book_note_url(@book, note)
+      visit book_note_url(book, note)
       fill_in "comment_text", :with => comment_text
     end
 

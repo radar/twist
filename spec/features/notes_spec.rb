@@ -2,15 +2,14 @@ require 'rails_helper'
 
 describe "notes" do
   let(:account) { FactoryGirl.create(:account) }
+  let(:book) { create_book!(account) }
   before do
-    create_book!(account)
-    login_as(account.owner)
-    set_subdomain(account.subdomain)
+    login_as(author)
   end
     
   it "can add a new note to a paragraph", :js => true do
-    visit book_chapter_path(@book, @book.chapters.first)
-    element = @book.chapters.first.elements.first
+    visit book_chapter_path(book, book.chapters.first)
+    element = book.chapters.first.elements.first
 
     within "#note_button_#{element.nickname}" do
       click_link "0 notes +"
@@ -37,7 +36,7 @@ describe "notes" do
   end
   
   it "can view all notes for a book" do
-    chapter = @book.chapters.first
+    chapter = book.chapters.first
     element = chapter.elements.first
     note = element.notes.create!(
       user: account.owner, 
@@ -48,7 +47,7 @@ describe "notes" do
       text: "This is a test note!"
     )
     
-    visit book_path(@book)
+    visit book_path(book)
     click_link "All notes for this book"
     click_link "This is a test note!"
     expect(page).to have_content("#{account.owner.email} commented less than a minute ago")
@@ -57,7 +56,7 @@ describe "notes" do
 
   context "changing a note's state" do
     before do
-      chapter = @book.chapters.first
+      chapter = book.chapters.first
       element = chapter.elements.first
       @note = element.notes.create!(
         user: account.owner, 
@@ -68,7 +67,7 @@ describe "notes" do
         user: account.owner
       )
       
-      visit book_path(@book)
+      visit book_path(book)
       click_link "All notes for this book"
       click_link "This is a test note!"
     end
@@ -88,7 +87,7 @@ describe "notes" do
   end
 
   it "can reopen a note" do
-    chapter = @book.chapters.first
+    chapter = book.chapters.first
     element = chapter.elements.first
     note = element.notes.create!(
       user: account.owner, 
@@ -100,11 +99,11 @@ describe "notes" do
       text: "This is a test note!"
     )
     
-    visit book_path(@book)
+    visit book_path(book)
     click_link "All notes for this book"
     click_link "Completed notes"
     expect(page).to have_content("This is a test note!")
-    visit book_note_path(@book, note.number)
+    visit book_note_path(book, note.number)
     click_button "Reopen"
     expect(page).to have_content("Note state changed to Reopened")
     expect(note.reload.state).to eq("reopened")
