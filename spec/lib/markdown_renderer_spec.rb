@@ -153,6 +153,29 @@ Followed by some text
     expect(parsed_code.css(".highlight .k").first.text).to eq("module")
   end
 
+  it "can parse a titleized code listing with multiple underscores" do
+    code = %Q{
+{title=spec/controllers/accounts/books_controller_spec.rb,lang=ruby,line-numbers=on}
+    module Subscribem
+      module Constraints
+        class SubdomainRequired
+          def self.matches?(request)
+            request.subdomain.present? && request.subdomain != "www"
+          end
+        end
+      end
+    end
+
+Followed by some text
+}
+# Two linebreaks with text is ultra important.
+# Regex used to locate and pre-process code listings uses two linebreaks and
+# text as a delimiter.
+
+    output = render(code)
+    expect(output.css("p").first.children.css("em").any?).to eq(false)
+  end
+
   it "can parse a titleized code listing with a paragraph following" do
     code = %Q{
 {title=lib/subscribem/constraints/subdomain_required.rb,lang=ruby,line-numbers=on}
