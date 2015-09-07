@@ -69,7 +69,11 @@ class Chapter < ActiveRecord::Base
     chapter = book.chapters.find_or_initialize_by(file_name: file)
     chapter.part = part
     chapter.git = git
-    chapter.elements.delete_all
+
+    # Keep any elements that have notes, ditch the rest
+    chapter.elements.where("notes_count > 0").update_all(old: true)
+    chapter.elements.where("notes_count = 0").destroy_all
+
     chapter.images.delete_all
     chapter.position = position
 

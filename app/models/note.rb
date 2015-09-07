@@ -1,5 +1,5 @@
 class Note < ActiveRecord::Base
-  belongs_to :element
+  belongs_to :element, counter_cache: true
   has_many :comments
 
   accepts_nested_attributes_for :comments

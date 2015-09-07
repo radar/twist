@@ -10,7 +10,7 @@
 
     <%= link_to "All notes for this chapter", book_chapter_notes_path(@book, @chapter) %>
     <hr>
-    <%= render_elements(@chapter.elements) %>
+    <%= render_elements(@chapter.elements.where(old: false)) %>
   </div>
 
   <div class='col-md-4' id='sidebar'>
