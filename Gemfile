@@ -42,5 +42,4 @@ gem 'simple_form', '3.1.0'
 gem 'jquery-rails'
 gem 'pry'
 
-gem 'rollbar'
 gem 'dotenv-rails'
