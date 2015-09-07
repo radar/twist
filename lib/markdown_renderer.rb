@@ -70,7 +70,7 @@ class MarkdownRenderer < Redcarpet::Render::HTML
       detail.split("=")
     end]
     if details['title']
-      output = "**#{details['title']}**\n\n"
+      output = "**#{details['title'].gsub('_', '\\_')}**\n\n"
     end
 
     #outdent code
