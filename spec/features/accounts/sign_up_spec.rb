@@ -1,14 +1,25 @@
 require "rails_helper"
 
 feature "Accounts" do
-  scenario "creating an account" do
-    visit root_path
+  before do
+    Plan.create(name: "Starter", price: "9.99")
+  end
+
+  scenario "creating an account", js: true do
+    no_subdomain
+    binding.pry
+    visit root_url
+    save_and_open_page
     click_link "Create a new account"
+
+    choose "Starter"
+
     fill_in "Name", with: "Test"
     fill_in "Subdomain", with: "test"
     fill_in "Email", with: "test@example.com"
     fill_in "Password", with: "password"
     fill_in "Password confirmation", with: "password"
+
     click_button "Create Account"
 
     success_message = "Your account has been successfully created."
