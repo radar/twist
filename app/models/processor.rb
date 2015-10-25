@@ -63,6 +63,11 @@ module Processor
     chapter.elements << new(:tag        => "ul",
                             :content    => markup.to_html)
   end
+
+  def process_ol!(chapter, markup)
+    chapter.elements << new(:tag        => "ol",
+                            :content    => markup.to_html)
+  end
   
   def process_table!(chapter, markup)
     chapter.elements << build_element(markup, "table")
