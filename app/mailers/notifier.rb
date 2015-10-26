@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default :from => "notifications@twist.ryanbigg.com"
+  default :from => "notifications@twistbooks.com"
 
   def markdown(text)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
