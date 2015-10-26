@@ -1,5 +1,5 @@
 <div class='row'>
-  <div class='col-md-8 content'>
+  <div class='col-md-7 content'>
     <h1>Welcome to Twist</h1>
     <% @books.each do |book| %>
       <h2><%= link_to book.title, book %></h2>
@@ -7,7 +7,7 @@
     <% end %>
   </div>
 
-  <div id='sidebar' class='col-md-4'>
+  <div id='sidebar' class='col-md-3'>
     <% if current_user.author? %>
       <%= link_to "Add Book", new_book_path %>
     <% end %>

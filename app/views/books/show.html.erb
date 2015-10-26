@@ -1,5 +1,5 @@
 <div class='row'>
-  <div class='col-md-8 content'>
+  <div class='col-md-7 content'>
 
     <h1><%= @book.title %></h1>
       <ol class='frontmatter'>
@@ -18,7 +18,7 @@
     </ol>
   </div>
 
-  <div id='sidebar' class='col-md-4'>
+  <div id='sidebar' class='col-md-3'>
     <%= link_to "All notes for this book", book_notes_path(@book) %>
   </div>
 </div>
