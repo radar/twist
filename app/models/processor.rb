@@ -55,7 +55,7 @@ module Processor
       send(method, chapter, markup)
     else
       # Or go kaboom if we don't know what the hell it is
-      raise "I don't know what to do with div.#{markup["class"]}"
+      # Rollbar.log(:warning, "I don't know what to do with div.#{markup["class"]}")
     end
   end
 
