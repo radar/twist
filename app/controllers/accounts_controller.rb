@@ -5,6 +5,9 @@ class AccountsController < ApplicationController
       redirect_to root_url
     end
 
+    @plans = Plan.all
+    @client_token = Braintree::ClientToken.generate
+
     @account = Account.new
     @account.build_owner
   end
