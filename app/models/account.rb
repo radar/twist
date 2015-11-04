@@ -2,6 +2,8 @@ class Account < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
   accepts_nested_attributes_for :owner
 
+  belongs_to :plan
+
   validates :subdomain, presence: true, uniqueness: true
 
   has_many :invitations

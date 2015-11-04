@@ -1,7 +1,16 @@
 require "rails_helper"
 
 feature "Accounts" do
+
+  let!(:plan) do
+    Plan.create(
+      name: "Starter",
+      braintree_id: "starter"
+    )
+  end
+
   scenario "creating an account" do
+    set_default_host
     visit root_path
     click_link "Create a new account"
 
@@ -15,6 +24,11 @@ feature "Accounts" do
 
     account = Account.last
     expect(account.braintree_customer_id).to be_present
+    expect(page.current_url).to eq(choose_plan_url(subdomain: "test"))
+    choose "Starter"
+    click_button "Finish"
+    account.reload
+    expect(account.plan).to eq(plan)
 
     within(".flash_notice") do
       success_message = "Your account has been successfully created."
