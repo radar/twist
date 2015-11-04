@@ -13,13 +13,15 @@
     <%= render_elements(@chapter.elements.where(old: false)) %>
   </div>
 
-  <div class='col-md-4' id='sidebar'>
-    <strong><%= previous_chapter_link %></strong>
-    <hr>
-    <ul id='section_listing'>
-    </ul>
-    <hr>
-    <strong><%= next_chapter_link %></strong>
+  <div class='col-md-4'>
+    <div id='sidebar' data-spy="affix">
+      <strong><%= previous_chapter_link %></strong>
+      <hr>
+      <ul id='section_listing'>
+      </ul>
+      <hr>
+      <strong><%= next_chapter_link %></strong>
+    </div>
   </div>
 </div>
 
