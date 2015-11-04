@@ -1,6 +1,9 @@
 class Accounts::PlansController < Accounts::BaseController
   def choose
     @plans = Plan.all
+    @client_token = Braintree::ClientToken.generate(
+      customer_id: current_account.braintree_customer_id
+    )
   end
 
   def chosen
