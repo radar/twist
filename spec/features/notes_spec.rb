@@ -4,7 +4,8 @@ describe "notes" do
   let(:account) { FactoryGirl.create(:account) }
   let(:book) { create_book!(account) }
   before do
-    login_as(author)
+    login_as(account.owner)
+    set_subdomain(account.subdomain)
   end
     
   it "can add a new note to a paragraph", :js => true do
