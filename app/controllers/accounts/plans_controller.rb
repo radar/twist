@@ -26,4 +26,12 @@ class Accounts::PlansController < Accounts::BaseController
       choose
     end
   end
+
+  def cancel
+    result = Braintree::Subscription.cancel(current_account.braintree_subscription_id)
+    if result.success?
+      flash[:notice] = "Your subscription to Twist has been cancelled."
+      redirect_to root_url(subdomain: nil)
+    end
+  end
 end
