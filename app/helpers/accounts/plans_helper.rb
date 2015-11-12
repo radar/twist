@@ -1,0 +1,2 @@
+module Accounts::PlansHelper
+end

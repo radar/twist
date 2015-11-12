@@ -1,0 +1,16 @@
+<div class='row'>
+  <div class='col-md-offset-4 col-md-4'>
+    <div class='content'>
+      <h2>Choose a plan</h2>
+
+      <%= simple_form_for(current_account, url: choose_plan_url) do |account| %>
+        <% @plans.each do |plan| %>
+          <%= account.radio_button :plan_id, plan.id %>
+          <%= account.label "plan_id_#{plan.id}", plan.name %> 
+          (<%= number_to_currency(plan.price) %>) <br>
+        <% end %>
+        <%= account.submit "Finish", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
