@@ -2,6 +2,7 @@ module Accounts
   class BaseController < ApplicationController
     before_filter :authenticate_user!
     before_filter :authorize_user!
+    before_action :subscription_required!
 
     private
 
@@ -23,5 +24,15 @@ module Accounts
       current_account.owner == current_user
     end
     helper_method :owner?
+
+    def subscription_required!
+      return unless owner?
+
+      if current_account.braintree_subscription_id.blank?
+        message = "You must subscribe to a plan before you can use your account."
+        flash[:alert] = message
+        redirect_to choose_plan_url
+      end
+    end
   end
 end

@@ -1,4 +1,6 @@
 class Accounts::PlansController < Accounts::BaseController
+  skip_before_action :subscription_required!
+
   def choose
     @plans = Plan.all
     @client_token = Braintree::ClientToken.generate(
