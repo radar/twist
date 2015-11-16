@@ -33,5 +33,8 @@ feature "Subscriptions" do
 
     sub = Braintree::Subscription.find(old_subscription_id)
     expect(sub.status).to eq('Canceled')
+
+    account.reload
+    expect(account.braintree_subscription_status).to eq('Canceled')
   end
 end

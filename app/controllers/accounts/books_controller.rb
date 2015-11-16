@@ -3,6 +3,7 @@ module Accounts
     skip_before_filter :verify_authenticity_token, only: :receive
     skip_before_filter :authenticate_user!, only: [:receive]
     skip_before_filter :authorize_user!, only: [:receive]
+    skip_before_action :subscription_required!, only: [:receive]
 
     def index
       @books = current_account.books

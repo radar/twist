@@ -27,12 +27,24 @@ module Accounts
 
     def subscription_required!
       return unless owner?
-
-      if current_account.braintree_subscription_id.blank?
+      if current_account.braintree_subscription_id.present?
+        if current_account.braintree_subscription_status == 'Canceled'
+          message = "Welcome back! Please choose a plan to re-subscribe to Twist."
+          flash[:alert] = message
+          redirect_to choose_plan_url
+        end
+      else
         message = "You must subscribe to a plan before you can use your account."
         flash[:alert] = message
         redirect_to choose_plan_url
       end
+    end
+
+    def owner_required!
+      return if owner?
+
+      redirect_to root_url(subdomain: current_account.subdomain)
+      flash[:alert] = "You are not allowed to do that."
     end
   end
 end
