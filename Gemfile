@@ -6,7 +6,7 @@ gem 'rails', '4.2.5'
 gem 'pg'
 
 gem 'devise', '3.5.1'
-gem 'sidekiq', '3.4.2'
+gem 'sidekiq', '4.0.0'
 gem 'redcarpet'
 gem 'nokogiri'
 gem 'paperclip'

@@ -3,7 +3,7 @@ class Accounts::PlansController < Accounts::BaseController
   before_action :owner_required!
 
   def choose
-    @plans = Plan.all
+    @plans = Plan.order(:price)
     @client_token = Braintree::ClientToken.generate(
       customer_id: current_account.braintree_customer_id
     )
