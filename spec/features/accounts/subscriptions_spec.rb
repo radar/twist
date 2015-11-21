@@ -17,11 +17,31 @@ feature "Subscriptions" do
     fail if !result.success?
     account.braintree_subscription_id = result.subscription.id
     account.save
+
+    set_subdomain(account.subdomain)
+    login_as(account.owner)
+  end
+
+  scenario "can be updated" do
+    Plan.create(
+      name: "Silver",
+      braintree_id: "silver",
+      price: 9.95)
+
+    visit root_url
+    click_link "Change Plan"
+    choose "Silver"
+    click_button "Change Plan"
+
+    subscription = Braintree::Subscription.find(account.braintree_subscription_id)
+    expect(subscription.plan_id).to eq("silver")
+
+    within(".flash_notice") do
+      expect(page).to have_content("You have changed to the Silver plan.")
+    end
   end
 
   scenario "can be cancelled" do
-    set_subdomain(account.subdomain)
-    login_as(account.owner)
     old_subscription_id = account.braintree_subscription_id
 
     visit root_url

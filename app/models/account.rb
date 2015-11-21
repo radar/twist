@@ -11,4 +11,8 @@ class Account < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   has_many :books
+
+  def subscribed?
+    braintree_subscription_id.present?
+  end
 end
