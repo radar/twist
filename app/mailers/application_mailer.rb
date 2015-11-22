@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noreply@twistbooks.com"
+  default from: "notifications@twistbooks.com"
   layout 'mailer'
 end
