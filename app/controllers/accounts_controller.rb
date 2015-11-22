@@ -1,5 +1,10 @@
 class AccountsController < ApplicationController
   def new
+    unless signup_enabled?
+      flash[:alert] = "Not taking signups at this time."
+      redirect_to root_url
+    end
+
     @account = Account.new
     @account.build_owner
   end

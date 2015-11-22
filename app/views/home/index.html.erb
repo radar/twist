@@ -12,11 +12,13 @@
     </ul>
   <% else %>
     <strong>
-      <h3>Twist is a book review tool that makes receiving feedback on your books painless.</h3>
-      <p>Sign ups are now open.</p>
+      <h3>Twist is a review tool that makes reviewing technical books painless.</h3>
+      <p>Sign ups will be open soon.</p>
     </strong>
 
-    <%= link_to "Create a new account", new_account_path %>
+    <% if signup_enabled? %>
+      <%= link_to "Create a new account", new_account_path %>
+    <% end %>
 
   <% end %>
 </div>
