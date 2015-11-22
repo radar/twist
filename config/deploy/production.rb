@@ -1,7 +1,7 @@
 set :stage, :production
-set :branch, 'my-saas'
+set :branch, 'live'
 
-role :app, %w{ryanbigg@twist.ryanbigg.com}
-role :db, %w{ryanbigg@twist.ryanbigg.com}
+role :app, %w{ryanbigg@twistbooks.com}
+role :db, %w{ryanbigg@twistbooks.com}
 
 fetch(:default_env).merge!(rails_env: :production)
