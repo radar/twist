@@ -9,9 +9,4 @@ class ApplicationController < ActionController::Base
     nil
   end
   helper_method :current_account
-
-  def signup_enabled?
-    !Rails.env.production?
-  end
-  helper_method :signup_enabled?
 end
