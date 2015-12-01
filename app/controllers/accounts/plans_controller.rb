@@ -11,28 +11,6 @@ class Accounts::PlansController < Accounts::BaseController
   end
 
   def chosen
-    if current_account.subscribed?
-      update_subscription
-    else
-      create_subscription
-    end
-  end
-
-  def cancel
-    result = Braintree::Subscription.cancel(current_account.braintree_subscription_id)
-    if result.success?
-      current_account.update_column(
-        :braintree_subscription_status, 
-        result.subscription.status
-      )
-      flash[:notice] = "Your subscription to Twist has been cancelled."
-      redirect_to root_url(subdomain: nil)
-    end
-  end
-
-  private
-
-  def create_subscription
     plan = Plan.find(params[:account][:plan_id])
     result = Braintree::Subscription.create(
       payment_method_nonce: params[:payment_method_nonce],
@@ -51,13 +29,28 @@ class Accounts::PlansController < Accounts::BaseController
     end
   end
 
-  def update_subscription
-    plan = Plan.find(params[:account][:plan_id])
-    result = Braintree::Subscription.update(
+  def cancel
+    result = Braintree::Subscription.cancel(current_account.braintree_subscription_id)
+    if result.success?
+      current_account.update_column(
+        :braintree_subscription_status, 
+        result.subscription.status
+      )
+      flash[:notice] = "Your subscription to Twist has been cancelled."
+      redirect_to root_url(subdomain: nil)
+    end
+  end
+
+  def switch
+    plan = Plan.find(params[:plan_id])
+    Braintree::Subscription.update(
       current_account.braintree_subscription_id,
       plan_id: plan.braintree_id
     )
+
+    current_account.update_column(:plan_id, plan.id)
+
     flash[:notice] = "You have changed to the #{plan.name} plan."
-    redirect_to root_url(subdomain: current_account.subdomain)
+    redirect_to root_url
   end
 end

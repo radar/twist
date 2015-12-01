@@ -23,18 +23,20 @@ feature "Subscriptions" do
   end
 
   scenario "can be updated" do
-    Plan.create(
+    silver_plan = Plan.create(
       name: "Silver",
       braintree_id: "silver",
-      price: 9.95)
+      price: 15)
 
     visit root_url
     click_link "Change Plan"
-    choose "Silver"
-    click_button "Change Plan"
+    click_button "choose_silver"
 
     subscription = Braintree::Subscription.find(account.braintree_subscription_id)
     expect(subscription.plan_id).to eq("silver")
+
+    account.reload
+    expect(account.plan).to eq(silver_plan)
 
     within(".flash_notice") do
       expect(page).to have_content("You have changed to the Silver plan.")
