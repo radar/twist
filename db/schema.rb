@@ -11,20 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112021417) do
+ActiveRecord::Schema.define(version: 20151204065341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "owner_id"
     t.string   "subdomain"
     t.string   "braintree_customer_id"
     t.integer  "plan_id"
     t.string   "braintree_subscription_id"
+    t.string   "braintree_subscription_status"
   end
 
   add_index "accounts", ["subdomain"], name: "index_accounts_on_subdomain", using: :btree
@@ -131,8 +132,9 @@ ActiveRecord::Schema.define(version: 20151112021417) do
     t.string   "name"
     t.float    "price"
     t.string   "braintree_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "books_allowed"
   end
 
   create_table "users", force: :cascade do |t|
