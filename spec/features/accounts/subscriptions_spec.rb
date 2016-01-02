@@ -26,7 +26,8 @@ feature "Subscriptions" do
     silver_plan = Plan.create(
       name: "Silver",
       braintree_id: "silver",
-      price: 15)
+      price: 15,
+      books_allowed: 3)
 
     visit root_url
     click_link "Change Plan"
@@ -58,5 +59,42 @@ feature "Subscriptions" do
 
     account.reload
     expect(account.braintree_subscription_status).to eq('Canceled')
+  end
+
+  scenario "is prompted to upgrade plan when over limit" do
+    starter_plan = Plan.create!(
+      name: "Starter",
+      braintree_id: "starter",
+      books_allowed: 1,
+    )
+
+    silver_plan = Plan.create!(
+      name: "Silver",
+      braintree_id: "silver",
+      books_allowed: 3
+    )
+
+    account.plan = starter_plan
+    account.books << FactoryGirl.create(:book)
+    account.save
+
+    visit root_url
+    click_link "Add Book"
+
+    expect(page.current_url).to eq(choose_plan_url)
+
+    within(".flash_alert") do
+      message = "You have reached your plan's limit." + 
+        " You need to upgrade your plan to add more books."
+      expect(page).to have_content(message)
+    end
+
+    click_button "choose_silver"
+
+    within(".flash_notice") do
+      expect(page).to have_content("You have changed to the Silver plan.")
+    end
+
+    expect(page.current_url).to eq(new_book_url)
   end
 end
