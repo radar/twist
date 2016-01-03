@@ -22,6 +22,7 @@ To run this, you'll need the following:
 * Rails 4.2.3
 * Redis
 * PostgreSQL
+* Phantom JS (for tests only)
 
 Install the dependencies for the app and the submodules that Twist uses for testing using these commands:
 
