@@ -40,8 +40,8 @@ class MarkdownRenderer < Redcarpet::Render::HTML
 
   def preprocess(full_document)
     @footnote_count = 0
-    full_document = full_document.gsub(/^({[^}]*})$(.*?)^([^\s].*?\n)/m) do
-      preprocess_code($1, $2.strip) + $3
+    full_document = full_document.gsub(/^({[^}]*})$\n((?:(?:(?=\s).*)\n?)*)/) do
+      preprocess_code($1, $2.strip)
     end
 
     # ARE YOU RETURNING A STRING HERE?!
