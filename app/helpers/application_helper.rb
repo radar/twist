@@ -1,6 +1,6 @@
 module ApplicationHelper
   def markdown(text)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
     raw(markdown.render(text))
   end
 
