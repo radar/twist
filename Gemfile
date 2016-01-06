@@ -15,6 +15,7 @@ gem 'pygments.rb'
 gem 'redis-activesupport'
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'factory_girl'
   gem 'capybara', '~> 2.0'
   gem 'rspec-rails', '~> 3.0'

@@ -143,6 +143,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     pygments.rb (0.6.3)
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.2.0)
@@ -275,6 +277,7 @@ DEPENDENCIES
   pg
   poltergeist (= 1.6.0)
   pry
+  pry-rails
   pygments.rb
   rails (= 4.2.4)
   redcarpet
