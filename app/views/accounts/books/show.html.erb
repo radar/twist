@@ -2,23 +2,23 @@
   <div class='col-md-8 content'>
 
     <h1><%= @book.title %></h1>
-      <ol class='frontmatter'>
-        <% @frontmatter.each do |chapter| %>
-          <li><%= link_to chapter.title, [@book, chapter] %></li>
-        <% end %>
-      </ol>
-
-      <hr>
-
-      <ol class='chapters'>
-        <% @mainmatter.each do |chapter| %>
-          <li><%= link_to chapter.title, [@book, chapter] %></li>
-        <% end %>
-      </ol>
-    </ol>
-  </div>
-
-  <div id='sidebar' class='col-md-4'>
     <%= link_to "All notes for this book", book_notes_path(@book) %>
+    <hr>
+
+    <h3>Frontmatter</h3>
+    <ol class='frontmatter'>
+      <% @frontmatter.each do |chapter| %>
+        <li><%= link_to chapter.title, [@book, chapter] %></li>
+      <% end %>
+    </ol>
+
+    <hr>
+
+    <h3>Mainmatter</h3>
+    <ol class='chapters'>
+      <% @mainmatter.each do |chapter| %>
+        <li><%= link_to chapter.title, [@book, chapter] %></li>
+      <% end %>
+    </ol>
   </div>
 </div>
