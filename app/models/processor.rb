@@ -33,8 +33,9 @@ module Processor
   def process_img!(chapter, markup)
     # First, check to see if file is within book directory
     # This stops illegal access to files outside this directory
-    image_path = File.expand_path(File.join(chapter.book.path, markup['src']))
-    files = Dir[File.expand_path(File.join(chapter.book.path, "**", "*")) ]
+    book = chapter.book
+    image_path = File.expand_path(File.join(book.path, markup['src']))
+    files = Dir[File.expand_path(File.join(book.path, "**", "*")) ]
     if files.include?(image_path)
       image = chapter.images.where(:filename => markup['src']).first
       image ||= chapter.images.build(:filename => markup['src'])
@@ -43,6 +44,7 @@ module Processor
         i.save!
       end
     else
+      Rollbar.warning("Missing image in #{book.title} - #{chapter.title}: #{image_path}")
       # Ignore it
       false
     end
