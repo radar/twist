@@ -7,6 +7,7 @@ class Account < ActiveRecord::Base
   validates :subdomain, presence: true, uniqueness: true
 
   has_many :invitations
+  has_many :subscription_events
 
   has_and_belongs_to_many :users
 

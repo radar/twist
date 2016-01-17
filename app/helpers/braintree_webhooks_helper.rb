@@ -1,0 +1,2 @@
+module BraintreeWebhooksHelper
+end
