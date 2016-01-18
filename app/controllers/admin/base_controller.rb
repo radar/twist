@@ -3,7 +3,7 @@ module Admin
     before_filter :authorize_admin!
 
     def authorize_admin!
-      `
+      
     end
   end
 end
