@@ -10,7 +10,6 @@ class SubscriptionEvent < ActiveRecord::Base
     binding.pry
 
     account = Account.find_by!(braintree_subscription_id: event.subscription.id)
-    Rails.logger.info(event.inspect)
     account.subscription_events.create!(
       kind: event.kind
     )
