@@ -7,11 +7,16 @@ class SubscriptionEvent < ActiveRecord::Base
       webhook[:bt_payload]
     )
 
-    binding.pry
+    return if event.kind == Braintree::WebhookNotification::Kind::Check
 
     account = Account.find_by!(braintree_subscription_id: event.subscription.id)
     account.subscription_events.create!(
       kind: event.kind
     )
+
+    if event.kind == Braintree::WebhookNotification::Kind::SubscriptionWentPastDue
+      account.braintree_subscription_status = "Past Due"
+      account.save
+    end
   end
 end
