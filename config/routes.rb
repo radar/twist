@@ -18,6 +18,9 @@ Twist::Application.routes.draw do
         to: "plans#switch",
         as: :switch_plan
 
+      get "/billing", to: "billing#index"
+      post "/billing", to: "billing#update"
+
       resources :invitations, only: [:new, :create] do
         member do
           get :accept

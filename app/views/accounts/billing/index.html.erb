@@ -1,0 +1,21 @@
+<div class='row'>
+  <div class='col-md-offset-3 col-md-6'>
+    <div class='content'>
+      <h2>Your payment method</h2>
+      <%= form_tag do %>
+        <div id="payment-form"></div>
+        <%= submit_tag "Update payment method", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+var clientToken = "<%= @client_token %>";
+
+braintree.setup(clientToken, "dropin", {
+  container: "payment-form"
+});
+</script>
