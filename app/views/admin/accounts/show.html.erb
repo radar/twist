@@ -1,0 +1,38 @@
+<div class='row'>
+  <div class='col-md-8 content'>
+    <h1><%= @account.name %></h1>
+
+    <ul>
+      <li>
+        <strong>Owner:</strong> 
+        <%= @account.owner.email %>
+      </li>
+      <li>
+        <strong>Created at:</strong> 
+        <%= @account.created_at.strftime("%Y-%m-%d") %>
+      </li>
+      <li>
+        <strong>Plan:</strong> 
+        <%= @account.plan.name %>
+      </li>
+    </ul>
+
+    <h2>Events</h2>
+    <table class='table table-striped' id='subscription_events'>
+      <thead>
+        <tr>
+          <th>Kind</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @account.subscription_events.each do |event| %>
+          <tr>
+            <td><%= event.kind %></td>
+            <td><%= event.created_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
