@@ -13,6 +13,7 @@
     <menu>
       <strong>Twist</strong> |
       <% if user_signed_in? %>
+        Signed in as <%= current_user.email %>
         <%= link_to "Sign out (#{current_user.email})", destroy_user_session_path %>
       <% else %>
         <%= link_to "Sign in", new_user_session_path %>
