@@ -52,3 +52,15 @@
   left: -7rem;
   font-size: 90%;
 }
+
+.footnote_container {
+  margin: 20px 0;
+  color: lighten(#444, 25);
+  font-size: 90%;
+
+  .number {
+    font-size: 75%;
+    float: left;
+    margin-right: 10px;
+  }
+}
