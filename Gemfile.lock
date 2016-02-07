@@ -177,7 +177,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.15.0)
     rake (10.4.2)
-    redcarpet (3.3.2)
+    redcarpet (3.3.4)
     redis (3.2.1)
     redis-activesupport (4.1.0)
       activesupport (~> 4)
