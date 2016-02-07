@@ -72,7 +72,7 @@ class Chapter < ActiveRecord::Base
 
     # Keep any elements that have notes, ditch the rest
     chapter.elements.where("notes_count > 0").update_all(old: true)
-    chapter.elements.where("notes_count = 0").destroy_all
+    chapter.elements.where("notes_count = 0").delete_all
 
     chapter.images.delete_all
     chapter.position = position
