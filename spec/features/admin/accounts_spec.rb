@@ -39,6 +39,20 @@ feature "Account searching" do
         expect(page).to have_content("subscription_charged_successfully")
       end
     end
+
+    scenario "looks at past due accounts" do
+      past_due_account = FactoryGirl.create(
+        :account, :subscribed, 
+        braintree_subscription_status: "Past Due", plan: starter_plan
+      )
+
+      visit admin_root_path
+      click_link "Past due accounts"
+      expect(page).not_to have_content(account.name)
+
+      click_link past_due_account.name
+      expect(page.current_url).to eq(admin_account_url(past_due_account))
+    end
   end
 
   context "as a user" do

@@ -10,4 +10,10 @@
       <%= submit_tag "Search", class: "btn btn-primary" %>
     <% end %>
   </div>
+
+  <div id='sidebar' class='col-md-4'>
+    <ul>
+      <li><%= link_to "Past due accounts", past_due_admin_accounts_path %></li>
+    </ul>
+  </div>
 </div>

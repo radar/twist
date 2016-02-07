@@ -6,9 +6,10 @@ Twist::Application.routes.draw do
   namespace :admin do
     root to: "accounts#index"
 
-    resources :accounts, only: [:show] do
+    resources :accounts, only: [:index, :show] do
       collection do
         post :search
+        get :past_due
       end
     end
   end

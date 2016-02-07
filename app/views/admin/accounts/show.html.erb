@@ -15,6 +15,15 @@
         <strong>Plan:</strong> 
         <%= @account.plan.name %>
       </li>
+      <li>
+        <strong>Subscription status:</strong> 
+        <%= @account.braintree_subscription_status %>
+      </li>
+
+      <li>
+        <strong>Braintree Subscription ID:</strong> 
+        <%= @account.braintree_subscription_id %>
+      </li>
     </ul>
 
     <h2>Events</h2>
