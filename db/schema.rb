@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907031755) do
+ActiveRecord::Schema.define(version: 20160207123435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "books", force: :cascade do |t|
     t.integer  "account"
@@ -84,16 +90,6 @@ ActiveRecord::Schema.define(version: 20150907031755) do
   end
 
   add_index "images", ["chapter_id"], name: "index_images_on_chapter_id", using: :btree
-
-  create_table "invitations", force: :cascade do |t|
-    t.string   "email"
-    t.integer  "account_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "token"
-  end
-
-  add_index "invitations", ["token"], name: "index_invitations_on_token", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.text     "text"
