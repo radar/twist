@@ -30,6 +30,10 @@
   pre, code {
     font: 12px 'Input Mono', Inconsolata, Menlo, monospace;
   }
+
+  pre {
+    line-height: 150%;
+  }
 }
 
 #section_listing {
