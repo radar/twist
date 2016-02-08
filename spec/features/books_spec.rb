@@ -1,11 +1,12 @@
 require "rails_helper"
 
 feature "Books" do
-  let!(:author) { create_author! }
+  let!(:account) { FactoryGirl.create(:account) }
   let!(:book) { create_book! }
 
   before do
-    actually_sign_in_as(author)
+    login_as(account.owner)
+    set_subdomain(account.subdomain)
   end
 
   context "navigating" do
