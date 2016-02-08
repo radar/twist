@@ -1,6 +1,6 @@
 <div class='element'>
   <% if show_notes %>
-    <%= render "notes/button", element: element %>
+    <%= render "accounts/notes/button", element: element %>
   <% end %>
   <a name='<%= element.nickname %>'></a>
   <%= raw(element.content) %>

@@ -1,4 +1,4 @@
-<% partial = render('notes/form') %>
+<% partial = render('accounts/notes/form') %>
 container = $('#notes_container_<%= params[:element_id] %>');
 container.toggle();
 container.html(<%= raw(partial.inspect) %>);
