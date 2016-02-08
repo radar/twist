@@ -32,10 +32,6 @@
   }
 }
 
-#sidebar {
-  padding-top: 5rem;
-}
-
 #section_listing {
   list-style-type: none;
   margin-left: -2rem;
@@ -46,6 +42,11 @@
 
     &.major {
       font-weight: bold;
+    }
+
+    &.minor {
+      font-size: 90%;
+      line-height: 90%;
     }
   }
 }
