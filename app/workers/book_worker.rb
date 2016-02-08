@@ -8,24 +8,22 @@ class BookWorker
     user, repo = book.path.split("/")[-2, 2]
     git = Git.new(user, repo)
     book.path = git.path.to_s
-    current_commit = git.current_commit rescue nil
-    git.update!
+    book.current_commit = git.current_commit rescue nil
+    # git.update!
 
     Dir.chdir(book.path) do
       lines = File.readlines("Book.txt")
       manifest = book.process_manifest(lines)
-      manifest.each do |part, lines|
-        position = 1
-        lines.each do |line|
-          next if line.strip.blank?
-          Chapter.process!(book, part, git, line.strip, position)
-          position += 1
+      manifest.each do |part, file_names|
+        file_names.each_with_index do |file_name, position|
+          next if file_name.strip.blank?
+          chapter = book.chapters.find_or_create_by(file_name: file_name, part: part)
+          chapter.position = position + 1
+          chapter.process!
         end
       end
     end
 
-    # When done, update the book with the current commit as a point of reference
-    book.current_commit = git.current_commit
     book.processing = false
     book.just_added = false
     book.save

@@ -56,33 +56,19 @@ class Chapter < ActiveRecord::Base
     @section_count ||= [position, 0]
   end
 
-  def self.process!(book, part, git, file, position)
-    ext = File.extname(file)
-    if %w(.markdown .md).include?(ext)
-      process_markdown!(book, part, git, file, position)
-    else
-      raise "Unknown chapter format!"
-    end
-  end
-
-  def self.process_markdown!(book, part, git, file, position)
-    chapter = book.chapters.find_or_initialize_by(file_name: file)
-    chapter.part = part
-    chapter.git = git
-
+  def process!
     # Keep any elements that have notes, ditch the rest
-    chapter.elements.where("notes_count > 0").update_all(old: true)
-    chapter.elements.where("notes_count = 0").delete_all
+    elements.where("notes_count > 0").update_all(old: true)
+    elements.where("notes_count = 0").delete_all
 
-    chapter.images.delete_all
-    chapter.position = position
+    images.delete_all
 
-    html = chapter.to_html
-    chapter.title = html.css("h1").text
-    chapter.permalink = chapter.title.parameterize
+    html = to_html
+    self.title = html.css("h1").text
+    self.permalink = title.parameterize
     elements = html.css("body > *")
-    elements.each { |element| Element.process!(chapter, element) }
-    chapter.save
+    elements.each { |element| Element.process!(self, element) }
+    save
   end
 
   def to_html 

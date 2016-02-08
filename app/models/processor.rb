@@ -121,6 +121,18 @@ module Processor
     chapter.elements << build_element(markup, "h3")
   end
 
+  def process_h4!(chapter, markup)
+    chapter.elements << build_element(markup, "h4")
+  end
+
+  def process_h5!(chapter, markup)
+    chapter.elements << build_element(markup, "h5")
+  end
+
+  def process_h6!(chapter, markup)
+    chapter.elements << build_element(markup, "h6")
+  end
+
   def process_text!(chapter, markup)
     # We don't care about orphaned text, only text within an element such as a paragraph.
   end
