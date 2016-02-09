@@ -27,6 +27,7 @@ feature "Accepting invitations" do
   end
 
   scenario "accepts an invitation as an existing user" do
+    set_subdomain(account.subdomain)
     email = open_email("test@example.com")
     accept_link = links_in_email(current_email).first
     expect(accept_link).to be_present
