@@ -1,3 +1,16 @@
 <div class='content col-md-8'>
-  <%= link_to "Create a new account", new_account_path %>
+  <h2>Pick an account</h2>
+  <% if user_signed_in? %>
+    <ul class="accounts">
+      <% current_user.all_accounts.each do |account| %>
+        <li>
+          <%= link_to root_url(subdomain: account.subdomain) do %>
+            <%= account.name %> (<%= account.subdomain %>)
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <%= link_to "Create a new account", new_account_path %>
+  <% end %>
 </div>
