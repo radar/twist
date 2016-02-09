@@ -7,7 +7,12 @@ Twist::Application.routes.draw do
     scope module: "accounts" do
       root to: "books#index", as: :account_root
 
-      resources :invitations, only: [:new, :create]
+      resources :invitations, only: [:new, :create] do
+        member do
+          get :accept
+          patch :accepted
+        end
+      end
 
       notes_routes = lambda do
         collection do
