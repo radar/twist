@@ -4,7 +4,7 @@ module Accounts
     skip_before_filter :authorize_user!, only: [:receive]
 
     def index
-      @books = Book.where(hidden: false)
+      @books = current_account.books
     end
 
     def new
