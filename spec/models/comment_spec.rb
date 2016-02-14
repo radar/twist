@@ -4,7 +4,8 @@ describe Comment do
   let(:user_1) { create_user! }
   let(:user_2) { create_user! }
   let(:user_3) { create_user! }
-  let(:book) { create_book! }
+  let(:account) { FactoryGirl.create(:account) }
+  let(:book) { create_book!(account) }
   let!(:note) do
     chapter = book.chapters.first
     element = chapter.elements.first

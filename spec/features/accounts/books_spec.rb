@@ -26,4 +26,26 @@ require "rails_helper"
         expect(page).to_not have_content("Account A's Book")
       end
     end
+
+    context "show" do
+      context "when signed in as account A's owner" do
+        before do
+          login_as(account_a.owner)
+          set_subdomain(account_a.subdomain)
+        end
+
+        it "can see Account A's book" do
+          book = account_a.books.first
+          visit book_url(book)
+          expect(page).to have_content(book.title)
+        end
+
+        it "cannot see Account B's book" do
+          book = account_b.books.first
+          visit book_url(book)
+          expect(page).to have_content('Book not found.')
+          expect(page.current_url).to eq(root_url)
+        end
+      end
+    end
   end
