@@ -41,7 +41,7 @@ describe Book do
     it "processes a test Markdown book" do
       BookWorker.new.perform(book.id)
       book.reload
-      expect(book.chapters.count).to eq(3)
+      expect(book.chapters.count).to eq(4)
 
       intro = book.chapters.first
       expect(intro.file_name).to eq("introduction.markdown")
@@ -56,6 +56,12 @@ describe Book do
       expect(chapter_1.part).to eq("mainmatter")
 
       appendix = book.chapters.third
+      expect(appendix.file_name).to eq("chapter_2/chapter_2.markdown")
+      expect(appendix.permalink).to eq("another-chapter")
+      expect(appendix.position).to eq(2)
+      expect(appendix.part).to eq("mainmatter")
+
+      appendix = book.chapters.fourth
       expect(appendix.file_name).to eq("appendix.markdown")
       expect(appendix.permalink).to eq("appendix")
       expect(appendix.position).to eq(1)
