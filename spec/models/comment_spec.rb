@@ -32,8 +32,8 @@ describe Comment do
       email_1 = find_email(user_1.email)
       email_2 = find_email(user_2.email)
 
-      expect(email_1.subject).to eq("[Twist] - Rails 3 in Action - Note #1")
-      expect(email_2.subject).to eq("[Twist] - Rails 3 in Action - Note #1")
+      expect(email_1.subject).to eq("[Twist] - Markdown Book Test - Note #1")
+      expect(email_2.subject).to eq("[Twist] - Markdown Book Test - Note #1")
     end
 
     it "sends notification emails to the right users" do

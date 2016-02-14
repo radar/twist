@@ -8,8 +8,8 @@ class ChaptersController < ApplicationController
   
   def show
     @chapter = @book.chapters.find_by(permalink: params[:id])
-    @previous_chapter = @book.chapters.find_by(position: @chapter.position.to_i-1)
-    @next_chapter = @book.chapters.find_by(position: @chapter.position.to_i+1)
+    @previous_chapter = @chapter.previous_chapter
+    @next_chapter = @chapter.next_chapter
   end
   
   private

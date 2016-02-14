@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :book do
-    title "Rails 3 in Action"
+    title "Markdown Book Test"
   end
 end

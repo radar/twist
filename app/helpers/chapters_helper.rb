@@ -14,6 +14,10 @@ module ChaptersHelper
   private
 
   def chapter_link(chapter)
-    link_to("Chapter #{chapter.position}: #{chapter.title}", book_chapter_path(@book, chapter))
+    name = ""
+    name += "Chapter #{chapter.position}:" if chapter.part == "mainmatter"
+    name += " " + chapter.title
+
+    link_to(name, [@book, chapter])
   end
 end
