@@ -11,19 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160214042547) do
+ActiveRecord::Schema.define(version: 20160224205547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "owner_id"
     t.string   "subdomain"
+    t.string   "stripe_customer_id"
+    t.integer  "plan_id"
   end
 
+  add_index "accounts", ["plan_id"], name: "index_accounts_on_plan_id", using: :btree
   add_index "accounts", ["subdomain"], name: "index_accounts_on_subdomain", using: :btree
 
   create_table "books", force: :cascade do |t|
@@ -130,6 +133,14 @@ ActiveRecord::Schema.define(version: 20160214042547) do
 
   add_index "notes", ["element_id"], name: "index_notes_on_element_id", using: :btree
 
+  create_table "plans", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "amount"
+    t.string   "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -149,6 +160,7 @@ ActiveRecord::Schema.define(version: 20160214042547) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "accounts", "plans"
   add_foreign_key "books", "accounts"
   add_foreign_key "invitations", "accounts"
   add_foreign_key "memberships", "accounts"
