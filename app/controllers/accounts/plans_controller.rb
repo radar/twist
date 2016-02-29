@@ -4,6 +4,7 @@ class Accounts::PlansController < Accounts::BaseController
   end
 
   def chosen
+    # binding.pry
     current_account.plan_id = params[:account][:plan_id]
     current_account.save
     flash[:notice] = "Your account has been successfully created."
