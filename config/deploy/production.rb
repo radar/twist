@@ -1,5 +1,5 @@
 set :stage, :production
-set :branch, 'my-saas-braintree'
+set :branch, 'production'
 
 role :app, %w{ryanbigg@twistbooks.com}
 role :db, %w{ryanbigg@twistbooks.com}
