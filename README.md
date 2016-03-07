@@ -2,7 +2,7 @@
 
 Twist provides an easy book-reviewing platform for authors using the LeanPub Markdown format. Twist will update your book *as soon as you push it to GitHub*. It's super easy!
 
-![Preview](https://raw.githubusercontent.com/radar/twist/master/doc/preview.png)
+![Preview](https://raw.githubusercontent.com/radar/twist/master/doc/preview-new.png)
 
 You give people a login for the system (through the rails console), and then they can leave notes on the elements within the chapters within your books. Elements are anything ranging from paragraphs, to images, to blockquotes and so on.
 
@@ -22,6 +22,7 @@ To run this, you'll need the following:
 * Rails 4.2.3
 * Redis
 * PostgreSQL
+* Phantom JS (for tests only)
 
 Install the dependencies for the app and the submodules that Twist uses for testing using these commands:
 

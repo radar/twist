@@ -3,6 +3,12 @@ require 'rails_helper'
 describe Chapter do
   let(:git) { Git.new("radar", "markdown_book_test") }
   let(:book) { FactoryGirl.create(:book) }
+  let(:chapter) do
+    book.chapters.find_or_create_by(
+      file_name: "chapter_1/chapter_1.markdown",
+      part: "mainmatter"
+    )
+  end
 
   before do
     # Nuke the repo, start afresh.
@@ -12,7 +18,7 @@ describe Chapter do
   end
 
   it "processes a chapter" do
-    Chapter.process!(book, "mainmatter", git, "chapter_1/chapter_1.markdown", 1)
+    chapter.process!
     chapter = book.chapters.first
     expect(chapter.title).to eq("In the beginning")
     expect(chapter.elements.first.tag).to eq("p")

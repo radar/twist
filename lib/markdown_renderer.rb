@@ -41,7 +41,7 @@ class MarkdownRenderer < Redcarpet::Render::HTML
   def preprocess(full_document)
     @footnote_count = 0
     full_document = full_document.gsub(/^({[^}]*})$\n((?:(?:(?=\s).*)\n?)*)/) do
-      preprocess_code($1, $2.strip)
+      preprocess_code($1, $2)
     end
 
     # ARE YOU RETURNING A STRING HERE?!
@@ -73,10 +73,7 @@ class MarkdownRenderer < Redcarpet::Render::HTML
       output = "**#{details['title'].gsub('_', '\\_')}**\n\n"
     end
 
-    #outdent code
-    code_lines = code.split("\n")
-    outdented_code = code_lines[1..-1].map { |l| l.gsub(/^\s{4}/,'') }
-    code = ([code_lines[0]] + [*outdented_code]).join("\n")
+    code = code.split("\n").map { |l| l.gsub(/\A\s{4}/, '') }.join("\n")
 
     output += "```#{details['lang']}\n#{code}\n```\n\n"
   end

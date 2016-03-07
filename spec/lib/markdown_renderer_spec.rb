@@ -140,8 +140,6 @@ A> Did you know that this is an aside? Please keep it on the DL.
         end
       end
     end
-
-Followed by some text
 }
 # Two linebreaks with text is ultra important.
 # Regex used to locate and pre-process code listings uses two linebreaks and
@@ -151,6 +149,24 @@ Followed by some text
     parsed_code = output.css("div.code")
     expect(parsed_code.css("div.highlight")).not_to be_empty
     expect(parsed_code.css(".highlight .k").first.text).to eq("module")
+  end
+
+  it "maintains line breaks in code listing" do
+    code = %Q{
+{title=code.rb,lang=ruby,line-numbers=on}
+    def some code
+      #code goes here
+    end
+
+    def some_more_code
+      # some more code goes here
+    end
+}
+
+    output = render(code)
+    parsed_code = output.css("div.code")
+    expect(parsed_code.css("div.highlight")).not_to be_empty
+    expect(parsed_code.css(".highlight").text).to include("\n\n")
   end
 
   it "can parse a titleized code listing with multiple underscores" do

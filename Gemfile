@@ -45,9 +45,10 @@ gem 'simple_form', '3.1.0'
 gem 'jquery-rails'
 gem 'pry'
 
-gem 'rollbar'
 gem 'dotenv-rails'
 
 gem 'braintree'
 
 gem 'method_source', '0.8.1'
+
+gem "rollbar"

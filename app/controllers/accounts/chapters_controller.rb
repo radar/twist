@@ -9,8 +9,8 @@ module Accounts
     
     def show
       @chapter = find_chapter(params[:id])
-      @previous_chapter = find_chapter(params[:id].to_i-1)
-      @next_chapter = find_chapter(params[:id].to_i+1)
+      @previous_chapter = @chapter.previous_chapter
+      @next_chapter = @chapter.next_chapter
     end
     
     private

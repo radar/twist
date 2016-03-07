@@ -21,15 +21,20 @@
     }
   }
 
-  .aside {
+  .aside, .tip {
     background: #D9F1FF;
     padding: 1rem;
     margin-bottom: 2rem;
   }
-}
 
-#sidebar {
-  padding-top: 5rem;
+  pre, code {
+    font: 12px 'Input Mono', Inconsolata, Menlo, monospace;
+    letter-spacing: -0.5px;
+  }
+
+  pre {
+    line-height: 150%;
+  }
 }
 
 #section_listing {
@@ -43,6 +48,11 @@
     &.major {
       font-weight: bold;
     }
+
+    &.minor {
+      font-size: 90%;
+      line-height: 90%;
+    }
   }
 }
 
@@ -51,4 +61,16 @@
   position: absolute;
   left: -7rem;
   font-size: 90%;
+}
+
+.footnote_container {
+  margin: 20px 0;
+  color: lighten(#444, 25);
+  font-size: 90%;
+
+  .number {
+    font-size: 75%;
+    float: left;
+    margin-right: 10px;
+  }
 }

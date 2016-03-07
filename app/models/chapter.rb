@@ -1,6 +1,7 @@
 require 'markdown_renderer'
 
 class Chapter < ActiveRecord::Base
+  PARTS = ["frontmatter", "mainmatter", "backmatter"]
 
   # Provides an accessor to get to the git repository where the chapter is contained
   attr_accessor :git
@@ -69,6 +70,30 @@ class Chapter < ActiveRecord::Base
     elements = html.css("body > *")
     elements.each { |element| Element.process!(self, element) }
     save
+  end
+
+  def previous_chapter
+    # A previous chapter in the same part
+    prev = book.chapters.find_by(part: part, position: position - 1)
+    return prev if prev
+
+    # The last chapter in the previous part
+    current_part_index = PARTS.index(part)
+    if current_part_index != 0
+      book.chapters.where(part: PARTS[current_part_index-1]).order(position: :asc).last
+    end
+  end
+
+  def next_chapter
+    # The next chapter in the same part
+    next_ch = book.chapters.find_by(part: part, position: position + 1)
+    return next_ch if next_ch
+
+    # The first chapter in the next part
+    current_part_index = PARTS.index(part)
+    if current_part_index != PARTS.count - 1
+      book.chapters.where(part: PARTS[current_part_index+1]).order(position: :asc).first
+    end
   end
 
   def to_html 
