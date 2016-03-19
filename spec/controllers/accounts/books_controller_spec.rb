@@ -2,8 +2,10 @@ require 'rails_helper'
 
 describe Accounts::BooksController do
   before do
-    # Needs to exist (and have called Resque.enqueue) before we trigger the post-receive hook
     @book = FactoryGirl.create(:book)
+    account = FactoryGirl.create(:account)
+    allow(controller).to receive(:current_account).and_return(account)
+    allow(controller).to receive(:current_user).and_return(nil)
   end
   
   it "post-receive hooks" do
