@@ -17,6 +17,20 @@
         <%= account.submit "Pay", class: "btn btn-primary", id: "checkout-btn" %>
       <% end %>
     </div>
+    <% if current_account.stripe_subscription_id.present? %>
+      <hr>
+      <div class='text-center text-danger'>
+        <small>
+          <%= link_to "Cancel your subscription",
+            cancel_subscription_path, 
+            method: :delete,
+            data: {
+              confirm: "Are you sure you would like to cancel your subscription?" 
+            }
+          %>
+        </small>
+      </div>
+    <% end %>
   </div>
 </div>
 

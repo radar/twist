@@ -19,4 +19,16 @@ class Accounts::PlansController < Accounts::BaseController
     flash[:notice] = "Your account has been successfully created."
     redirect_to root_url(subdomain: current_account.subdomain)
   end
+
+  def cancel
+    customer = Stripe::Customer.retrieve(current_account.stripe_customer_id)
+    subscription = customer.subscriptions.retrieve(current_account.stripe_subscription_id).delete
+
+    if subscription.status == "canceled"
+      current_account.stripe_subscription_id = nil
+      current_account.save
+      flash[:notice] = "Your subscription to Twist has been cancelled."
+      redirect_to root_url(subdomain: nil)
+    end
+  end
 end
