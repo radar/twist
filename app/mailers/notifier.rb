@@ -30,7 +30,7 @@ class Notifier < ActionMailer::Base
 
   private
 
-  def note_subject
-    "[Twist] - #{@book.title} - Note ##{@comment.note.number}"
+  def note_subject(book, note)
+    "[Twist] - #{book.title} - Note ##{note.number}"
   end
 end
