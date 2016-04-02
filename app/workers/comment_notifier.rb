@@ -5,7 +5,7 @@ class CommentNotifier
     comment = Comment.find(comment_id)
 
     notification_emails.each do |email|
-      Notifier.comment(comment, email).deliver_now
+      Notifier.comment(comment, email).deliver_later
     end
   end
 end

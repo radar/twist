@@ -25,7 +25,7 @@ class Notifier < ActionMailer::Base
 
     mail(
       to: email,
-      subject: note_subject(book, note)
+      subject: note_subject(@book, @note)
     )
   end
 
