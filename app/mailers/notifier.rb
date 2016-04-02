@@ -13,7 +13,7 @@ class Notifier < ActionMailer::Base
     @comment = note.comments.first
 
     mail(
-      to: @book.account.owner,
+      to: @book.account.owner.email,
       subject: note_subject(@book, note)
     )
   end

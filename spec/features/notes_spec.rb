@@ -36,6 +36,7 @@ describe "notes" do
 
     note_email = ActionMailer::Base.deliveries.last
     expect(note_email).to be_present
+    expect(note_email.to).to include(account.owner.email)
     expect(note_email.subject).to eq("[Twist] - Markdown Book Test - Note #1")
     expect(note_email.body).to include("just created a note")
     
