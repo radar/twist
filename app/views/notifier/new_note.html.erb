@@ -1,7 +1,7 @@
 <strong>Hello!</strong>
 
 <p>
-  <%= @note.user.email %> just created a note: <%= link_to "Note ##{@note.number}", book_note_url(@book, @note) %> for <%= @book.title %>:
+  <%= @note.user.email %> just created a note: <%= link_to "Note ##{@note.number}", book_note_url(@book, @note, subdomain: @account.subdomain) %> for <%= @book.title %>:
 </p>
 
 <%= markdown(@comment.text) %>

@@ -11,6 +11,7 @@ class Notifier < ActionMailer::Base
     @note = note
     @book = note.chapter.book
     @comment = note.comments.first
+    @account = @book.account
 
     mail(
       to: @book.account.owner.email,
@@ -22,6 +23,7 @@ class Notifier < ActionMailer::Base
     @book = comment.note.chapter.book
     @comment = comment
     @note = comment.note
+    @account = @book.account
 
     mail(
       to: email,
