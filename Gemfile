@@ -51,4 +51,4 @@ gem 'braintree'
 
 gem 'method_source', '0.8.1'
 
-# gem "rollbar"
+gem "rollbar"

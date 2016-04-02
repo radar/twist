@@ -203,6 +203,8 @@ GEM
       redis (>= 2.2)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rollbar (2.8.0)
+      multi_json
     rspec-core (3.4.1)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -315,6 +317,7 @@ DEPENDENCIES
   rails (= 4.2.5)
   redcarpet
   redis-activesupport
+  rollbar
   rspec-rails (~> 3.0)
   sass-rails (~> 4.0.0)
   selenium-webdriver
