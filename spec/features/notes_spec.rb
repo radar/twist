@@ -33,6 +33,11 @@ describe "notes" do
 
     # And the rest of it.
     expect(page).to have_content("This is a test note!")
+
+    note_email = ActionMailer::Base.deliveries.last
+    expect(note_email).to be_present
+    expect(note_email.subject).to eq("[Twist] - Markdown Book Test - Note #1")
+    expect(note_email.body).to include("just created a note")
     
   end
   
