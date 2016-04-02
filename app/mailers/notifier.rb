@@ -8,6 +8,7 @@ class Notifier < ActionMailer::Base
   helper_method :markdown
 
   def new_note(note)
+    @note = note
     @book = note.chapter.book
     @comment = note.comments.first
 
