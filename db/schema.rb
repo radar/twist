@@ -104,6 +104,16 @@ ActiveRecord::Schema.define(version: 20160402045234) do
 
   add_index "images", ["chapter_id"], name: "index_images_on_chapter_id", using: :btree
 
+  create_table "invitations", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "token"
+  end
+
+  add_index "invitations", ["token"], name: "index_invitations_on_token", using: :btree
+
   create_table "notes", force: :cascade do |t|
     t.text     "text"
     t.integer  "element_id"
