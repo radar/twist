@@ -12,8 +12,8 @@ class Notifier < ActionMailer::Base
     @comment = note.comments.first
 
     mail(
-      to: book.account.owner,
-      subject: note_subject(book, note)
+      to: @book.account.owner,
+      subject: note_subject(@book, note)
     )
   end
 
