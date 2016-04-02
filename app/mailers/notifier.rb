@@ -7,12 +7,30 @@ class Notifier < ActionMailer::Base
   end
   helper_method :markdown
 
+  def new_note(note)
+    @book = note.chapter.book
+    @comment = note.comments.first
+
+    mail(
+      to: book.account.owner,
+      subject: note_subject(book, note)
+    )
+  end
+
   def comment(comment, email)
     @book = comment.note.chapter.book
     @comment = comment
     @note = comment.note
 
-    mail(:to      => email,
-         :subject => "[Twist] - #{@book.title} - Note ##{@comment.note.number}")
+    mail(
+      to: email,
+      subject: note_subject(book, note)
+    )
+  end
+
+  private
+
+  def note_subject
+    "[Twist] - #{@book.title} - Note ##{@comment.note.number}"
   end
 end

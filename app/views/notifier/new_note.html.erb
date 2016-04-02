@@ -1,0 +1,12 @@
+<strong>Hello!</strong>
+
+<p>
+  <%= @note.user.email %> just created a note: <%= link_to "Note ##{@note.number}", book_note_url(@book, @note) %> for <%= @book.title %>:
+</p>
+
+<%= markdown(@note.text) %>
+
+
+
+<p>Love,<br>
+The Twist Bot.</p>
