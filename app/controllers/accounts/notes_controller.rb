@@ -33,7 +33,7 @@ module Accounts
       note.comments.first.user = current_user
 
       if note.save
-        NoteNotifier.perform_async(note.id)
+        Notifier.new_note(note).deliver_now
         # Increment notes count for the book
         @book.notes_count += 1
         @book.save
