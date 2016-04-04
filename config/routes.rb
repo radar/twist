@@ -14,6 +14,9 @@ Twist::Application.routes.draw do
       delete "/account/cancel",
         to: "plans#cancel",
         as: :cancel_subscription
+      put "/accounts/switch_plan",
+        to: "plans#switch",
+        as: :switch_plan
 
       resources :invitations, only: [:new, :create] do
         member do

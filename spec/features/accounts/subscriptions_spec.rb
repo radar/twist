@@ -41,4 +41,26 @@ feature 'Subscriptions' do
     active_subscriptions = customer.subscriptions.all
     expect(active_subscriptions.count).to eq(0)
   end
+
+  scenario "can be updated" do
+    silver_plan = Plan.create(
+      name: "Silver",
+      stripe_id: "silver",
+      amount: 1500)
+
+    visit root_url
+    click_link "Change Plan"
+    click_button "choose_silver"
+
+    customer = Stripe::Customer.retrieve(account.stripe_customer_id)
+    subscription = customer.subscriptions.retrieve(account.stripe_subscription_id)
+    expect(subscription.plan.id).to eq(silver_plan.stripe_id)
+
+    account.reload
+    expect(account.plan).to eq(silver_plan)
+
+    within(".flash_notice") do
+      expect(page).to have_content("You have changed to the Silver plan.")
+    end
+  end
 end
