@@ -248,6 +248,8 @@ GEM
     skinny (0.2.3)
       eventmachine (~> 1.0.0)
       thin (~> 1.5.0)
+    skylight (0.10.3)
+      activesupport (>= 3.0.0)
     slop (3.6.0)
     sprockets (2.12.4)
       hike (~> 1.2)
@@ -323,6 +325,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq (= 4.0.0)
   simple_form (= 3.1.0)
+  skylight
   unicorn
 
 BUNDLED WITH

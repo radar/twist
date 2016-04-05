@@ -14,6 +14,8 @@ gem 'pygments.rb'
 
 gem 'redis-activesupport'
 
+gem 'skylight'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'factory_girl'
