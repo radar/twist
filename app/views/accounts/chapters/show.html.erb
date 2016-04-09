@@ -18,15 +18,9 @@
   <div class='col-md-4'>
     <div id='sidebar' data-spy="affix">
       <strong id='previous_chapter'><%= previous_chapter_link %></strong>
-      <hr>
-      <ul id='section_listing'>
-      </ul>
-      <hr>
+      <%= render "sidebar" %>
       <strong id='next_chapter'><%= next_chapter_link %></strong>
     </div>
   </div>
 </div>
 
-
-
-<script>create_section_listing();</script>

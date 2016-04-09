@@ -11,6 +11,10 @@ module ChaptersHelper
     end
   end
 
+  def section_fragment(element)
+    Nokogiri::HTML::DocumentFragment.parse(element.content)
+  end
+
   private
 
   def chapter_link(chapter)

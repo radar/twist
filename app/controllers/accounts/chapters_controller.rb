@@ -11,6 +11,7 @@ module Accounts
       @chapter = find_chapter(params[:id])
       @previous_chapter = @chapter.previous_chapter
       @next_chapter = @chapter.next_chapter
+      @sections = @chapter.elements.where(tag: ["h2", "h3"])
     end
     
     private
@@ -20,7 +21,7 @@ module Accounts
     end
 
     def find_chapter(permalink)
-      @book.chapters.find_by(permalink: permalink)
+      @book.chapters.includes(:elements).find_by(permalink: permalink)
     end
   end
 end
