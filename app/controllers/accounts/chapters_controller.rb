@@ -11,7 +11,7 @@ module Accounts
       @chapter = find_chapter(params[:id])
       @previous_chapter = @chapter.previous_chapter
       @next_chapter = @chapter.next_chapter
-      @sections = @chapter.elements.where(tag: ["h2", "h3"])
+      @sections = @chapter.elements.where(tag: ["h2", "h3"]).order("id ASC")
     end
     
     private
