@@ -10,20 +10,21 @@ RUN apt-get update && apt-get install -y curl apt-transport-https
 ADD externals.list /etc/apt/sources.list.d/externals.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C3173AA6 86F44E2A EEA14886 5E5C44C6 \
  && apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A \
+ && curl https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - \
  && curl https://www.postgresql.org/media/keys/ACCC4CF8.asc  | apt-key add - \
  && apt-get update
 
 # Install packages
 RUN apt-get -y install build-essential git-core \
  libssl-dev libmysqlclient-dev wget imagemagick \
- curl apt-transport-https sudo \
+ curl apt-transport-https sudo nodejs \
  libpq-dev \
  ruby2.3 ruby2.3-dev \
  postgresql-9.4 postgresql-contrib-9.4 \
  redis-server ruby2.3 ruby2.3-dev
 
 # Install rubygems
-RUN gem update --system --no-ri --no-rdoc && gem install bundler haml --no-ri --no-rdoc
+RUN gem update --system --no-ri --no-rdoc && gem install bundler --no-ri --no-rdoc
 
 # Setup phantomjs
 WORKDIR /tmp
