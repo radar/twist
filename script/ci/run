@@ -11,6 +11,7 @@ mkdir -p vendor
 cd /build
 
 gunzip -c artifacts/bundle.gz > vendor/bundle
+ls -al vendor/bundle
 
 echo "--- start postgresql and redis"
 sudo service postgresql start
