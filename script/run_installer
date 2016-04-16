@@ -4,4 +4,4 @@ docker run --rm=true \
 -t twist/ci \
 /source/script/ci/installer
 
-tar -zcvf bundle.gz ~/.buildbox/be-bundle-cache/
+tar -zcf bundle.gz ~/.buildbox/be-bundle-cache/
