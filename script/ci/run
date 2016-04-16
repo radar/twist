@@ -5,7 +5,7 @@ set -x
 
 export RAILS_ENV=test
 
-rsync -v -a /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system --exclude public/images
+rsync -v -a /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system
 
 cd /build
 
