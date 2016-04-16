@@ -31,3 +31,7 @@ WORKDIR /tmp
 RUN wget https://github.com/skakri/phantomjs/releases/download/2.0.1-regression-12506/ubuntu-x86_64-phantomjs \
   && mv ubuntu-x86_64-phantomjs /usr/bin/phantomjs \
   && chmod 0755 /usr/bin/phantomjs
+
+# Set up postgresql
+ADD pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf
+ADD postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
