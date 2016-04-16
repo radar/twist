@@ -43,3 +43,5 @@ ADD docker/postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
 COPY . /source
 
 RUN gem update --system 2.6.1
+RUN gem uninstall bundler
+RUN gem install bundler
