@@ -5,7 +5,7 @@ set -x
 
 export RAILS_ENV=test
 
-rsync -a -v /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system
+rsync -a /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system
 mkdir -p vendor
 
 cd /build
