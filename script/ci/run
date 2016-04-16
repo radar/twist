@@ -14,7 +14,7 @@ sudo service postgresql start
 sudo service redis-server start
 
 echo "--- bundle check"
-bundle check --path vendor/bundler
+bundle check --path vendor/bundle
 
 echo "--- setup test database"
 time bundle exec rake db:create

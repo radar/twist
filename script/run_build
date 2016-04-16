@@ -1,7 +1,7 @@
 echo "--- fetching artifact"
 mkdir artifacts
 buildkite-agent artifact download bundle.gz artifacts/
-gunzip -c artifacts/bundle.gz > vendor/bundler
+gunzip -c artifacts/bundle.gz > vendor/bundle
 echo "--- running build"
 
 docker run --rm=true \
