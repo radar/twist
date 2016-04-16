@@ -22,7 +22,10 @@ RUN apt-get -y install build-essential git-core \
  ruby2.3 ruby2.3-dev \
  postgresql-9.4 postgresql-contrib-9.4 \
  redis-server ruby2.3 ruby2.3-dev \
- python2.7
+ python2.7 python-pip
+
+# For syntax highlighting within Twist
+RUN pip install Pygments
 
 RUN gem update --system 2.6.1
 
