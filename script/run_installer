@@ -4,4 +4,8 @@ docker run --rm=true \
 -t twist/ci \
 /source/script/ci/installer
 
-tar -zcf bundle.gz ~/.buildbox/be-bundle-cache/
+APP_PATH=`pwd`
+cd ~/.buildbox/be-bundle-cache/
+tar -zcf $APP_PATH/bundler.gz bundler/*
+cd -
+
