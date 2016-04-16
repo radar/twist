@@ -7,9 +7,10 @@ export RAILS_ENV=test
 
 rsync -a -v /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system
 mkdir -p vendor
-gunzip -c artifacts/bundle.gz > vendor/bundle
 
 cd /build
+
+gunzip -c artifacts/bundle.gz > vendor/bundle
 
 echo "--- start postgresql and redis"
 sudo service postgresql start
