@@ -6,6 +6,7 @@ set -x
 export RAILS_ENV=test
 
 rsync -a /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system
+mkdir -p vendor/bundle
 gunzip -c artifacts/bundle.gz > vendor/bundle
 
 cd /build
