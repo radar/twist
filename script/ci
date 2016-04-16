@@ -5,7 +5,7 @@ set -x
 
 export RAILS_ENV=test
 
-rsync -v -a /source/ /build/ --exclude .git --exclude log --exclude tmp --exclude repos --exclude public/system --exclude public/images
+rsync -v -a /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system --exclude public/images
 
 cd /build
 
@@ -13,13 +13,15 @@ echo "--- start postgresql and redis"
 sudo service postgresql start
 sudo service redis-server start
 
-
 echo "--- bundle install"
 bundle check --path /cache/bundler || bundle install --deployment --path /cache/bundler -j 8
 
 echo "--- setup test database"
 time bundle exec rake db:create
 time bundle exec rake db:test:prepare
+
+echo "--- git submodules"
+git submodule update --init
 
 echo "--- rspec"
 time bundle exec rspec spec
