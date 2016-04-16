@@ -24,6 +24,8 @@ RUN apt-get -y install build-essential git-core \
  redis-server ruby2.3 ruby2.3-dev \
  python2.7
 
+RUN gem update --system 2.6.1
+
 # Install rubygems
 RUN gem update --system --no-ri --no-rdoc && gem install bundler --no-ri --no-rdoc
 
@@ -42,6 +44,3 @@ ADD docker/postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
 
 COPY . /source
 
-RUN gem update --system 2.6.1
-RUN gem uninstall bundler
-RUN gem install bundler
