@@ -5,6 +5,8 @@ set -x
 
 rsync -v -a /source/ /build/ --exclude .git --exclude log --exclude tmp --exclude repos --exclude public/system --exclude public/images
 
+cd /build
+
 echo "--- bundle install"
 bundle check --path /cache/bundler || bundle install --deployment --path /cache/bundler -j 8
 
