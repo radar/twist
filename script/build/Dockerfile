@@ -26,7 +26,10 @@ RUN apt-get -y install build-essential git-core \
 # Install rubygems
 RUN gem update --system --no-ri --no-rdoc && gem install bundler --no-ri --no-rdoc
 
-# Setup phantomjs
+# Setup phantomJS
+# This library is required:
+# Read: https://github.com/Pyppe/phantomjs2.0-ubuntu14.04x64/issues/1
+RUN apt-get -y install libicu52
 WORKDIR /tmp
 RUN wget https://github.com/skakri/phantomjs/releases/download/2.0.1-regression-12506/ubuntu-x86_64-phantomjs \
   && mv ubuntu-x86_64-phantomjs /usr/bin/phantomjs \
