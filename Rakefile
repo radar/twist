@@ -5,3 +5,5 @@
 require File.expand_path('../config/application', __FILE__)
 
 Twist::Application.load_tasks
+
+Knapsack.load_tasks if defined?(Knapsack)
