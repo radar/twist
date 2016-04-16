@@ -40,4 +40,3 @@ ADD docker/pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf
 ADD docker/postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
 
 COPY . /source
-COPY .bundler_cache /cache
