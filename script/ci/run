@@ -6,10 +6,6 @@ set -x
 export RAILS_ENV=test
 
 rsync -a /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system
-
-echo "--- fetching artifact"
-mkdir artifacts
-buildkite-agent artifact download bundle.gz artifacts/
 mkdir -p vendor
 gunzip -c artifacts/bundle.gz > vendor/bundle
 

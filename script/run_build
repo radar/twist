@@ -1,3 +1,8 @@
+echo "--- fetching artifact"
+mkdir artifacts
+buildkite-agent artifact download bundle.gz artifacts/
+echo "--- running build"
+
 docker run --rm=true \
 -v $PWD:/source \
 -t twist/ci \
