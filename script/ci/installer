@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "--- bundle install"
+bundle check --path /cache/bundler || bundle install --deployment --path /cache/bundler -j 8

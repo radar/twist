@@ -1,8 +1,0 @@
-#!/bin/bash
-
-set -e
-set -x
-
-cp -r ~/.buildbox/be-bundle-cache/ .bundler-cache
-docker build -t twist/runner .
-rm -rf .bundler-cache
