@@ -27,7 +27,7 @@ RUN apt-get -y install build-essential git-core \
 RUN gem update --system 2.6.1
 
 # Install rubygems
-RUN gem update --system --no-ri --no-rdoc && gem install bundler --no-ri --no-rdoc
+gem install bundler -v 1.12.0.rc.2 --no-ri --no-rdoc
 
 # Setup phantomJS
 # This library is required:
