@@ -11,7 +11,7 @@ mkdir -p vendor
 cd /build
 
 mkdir vendor/bundle
-tar xzf bundle.gz -C vendor/bundle
+tar xzf artifacts/bundle.gz -C vendor/bundle
 
 echo "--- start postgresql and redis"
 sudo service postgresql start
