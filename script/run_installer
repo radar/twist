@@ -7,5 +7,6 @@ docker run --rm=true \
 APP_PATH=`pwd`
 cd ~/.buildbox/be-bundle-cache/
 tar -zcf $APP_PATH/bundler.gz bundler/*
+echo $APP_PATH/bundler.gz
 cd -
 
