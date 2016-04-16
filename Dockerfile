@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y curl apt-transport-https
 
 # Add external sources & keys
-ADD externals.list /etc/apt/sources.list.d/externals.list
+ADD docker/externals.list /etc/apt/sources.list.d/externals.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C3173AA6 86F44E2A EEA14886 5E5C44C6 \
  && apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A \
  && curl https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - \
@@ -36,8 +36,8 @@ RUN wget https://github.com/skakri/phantomjs/releases/download/2.0.1-regression-
   && chmod 0755 /usr/bin/phantomjs
 
 # Set up postgresql
-ADD pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf
-ADD postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
+ADD docker/pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf
+ADD docker/postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
 
 COPY . /source
 COPY .bundler_cache /cache
