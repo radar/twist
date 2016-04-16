@@ -1,0 +1,14 @@
+{
+  "spec/controllers/books_controller_spec.rb": 0.1221170425415039,
+  "spec/features/books_spec.rb": 1.0187828540802002,
+  "spec/features/comments_spec.rb": 1.7313990592956543,
+  "spec/features/notes_spec.rb": 4.0959532260894775,
+  "spec/features/users/signing_out_spec.rb": 0.1954512596130371,
+  "spec/helpers/application_helper_spec.rb": 0.0013163089752197266,
+  "spec/lib/git_spec.rb": 0.04300427436828613,
+  "spec/lib/markdown_renderer_spec.rb": 0.02197265625,
+  "spec/models/book_spec.rb": 0.31884002685546875,
+  "spec/models/chapter_spec.rb": 0.6489088535308838,
+  "spec/models/comment_spec.rb": 0.9114856719970703,
+  "spec/models/markdown_chapter_spec.rb": 0.15109515190124512
+}
