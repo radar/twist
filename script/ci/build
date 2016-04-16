@@ -3,4 +3,6 @@
 set -e
 set -x
 
+cp -r ~/.buildbox/be-bundle-cache/ .bundle-cache
 docker build -t twist/runner .
+rm -rf .bundle-cache

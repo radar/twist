@@ -6,6 +6,7 @@ set -x
 export RAILS_ENV=test
 
 rsync -v -a /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system --exclude public/images
+COPY .bundler-cache /cache/bundler
 
 cd /build
 
