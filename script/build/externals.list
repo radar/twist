@@ -1,0 +1,2 @@
+deb http://apt.postgresql.org/pub/repos/apt trusty-pgdg main 9.4
+deb http://ppa.launchpad.net/brightbox/ruby-ng-experimental/ubuntu trusty main
