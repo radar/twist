@@ -10,15 +10,14 @@ mkdir -p vendor
 
 cd /build
 
-mkdir vendor/bundle
-tar xzf artifacts/bundle.gz -C vendor/bundle
+tar xzf artifacts/bundle.gz -C vendor/
 
 echo "--- start postgresql and redis"
 sudo service postgresql start
 sudo service redis-server start
 
 echo "--- bundle check"
-bundle check --path vendor/bundle
+bundle check --path vendor/bundler
 
 echo "--- setup test database"
 time bundle exec rake db:create
