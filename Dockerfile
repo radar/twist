@@ -41,3 +41,5 @@ ADD docker/pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf
 ADD docker/postgresql.conf /etc/postgresql/9.4/main/postgresql.conf
 
 COPY . /source
+
+RUN gem update --system 2.6.1
