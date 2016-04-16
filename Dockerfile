@@ -21,7 +21,8 @@ RUN apt-get -y install build-essential git-core \
  libpq-dev \
  ruby2.3 ruby2.3-dev \
  postgresql-9.4 postgresql-contrib-9.4 \
- redis-server ruby2.3 ruby2.3-dev
+ redis-server ruby2.3 ruby2.3-dev \
+ python2.7
 
 # Install rubygems
 RUN gem update --system --no-ri --no-rdoc && gem install bundler --no-ri --no-rdoc
