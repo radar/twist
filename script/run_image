@@ -1,5 +1,5 @@
 docker run --rm=true \
 -v $PWD:/source \
 -v ~/.buildbox/be-bundle-cache:/cache \
--t twist/ci \
-/source/script/ci
+-t twist/runner \
+/source/script/tests
