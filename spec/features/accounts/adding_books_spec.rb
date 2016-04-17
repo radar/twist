@@ -1,7 +1,8 @@
 require "rails_helper"
 
 feature "Adding books" do
-  let!(:account) { FactoryGirl.create(:account, :subscribed) }
+  let(:plan) { Plan.create(name: "Starter", books_allowed: 1) }
+  let(:account) { FactoryGirl.create(:account, :subscribed, plan: plan) }
 
   context "as the account's owner" do
     before do
