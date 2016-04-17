@@ -25,6 +25,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'poltergeist', '1.9.0'
+  gem 'knapsack'
 end
 
 group :development do

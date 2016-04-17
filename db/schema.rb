@@ -45,12 +45,7 @@ ActiveRecord::Schema.define(version: 20160416040442) do
     t.integer  "account_id"
   end
 
-<<<<<<< HEAD
-  add_index "books", ["account"], name: "index_books_on_account", using: :btree
   add_index "books", ["account_id"], name: "index_books_on_account_id", using: :btree
-
-=======
->>>>>>> ci
   create_table "chapters", force: :cascade do |t|
     t.integer  "book_id"
     t.integer  "position"
@@ -103,7 +98,6 @@ ActiveRecord::Schema.define(version: 20160416040442) do
 
   add_index "images", ["chapter_id"], name: "index_images_on_chapter_id", using: :btree
 
-<<<<<<< HEAD
   create_table "invitations", force: :cascade do |t|
     t.string   "email"
     t.integer  "account_id"
@@ -125,8 +119,6 @@ ActiveRecord::Schema.define(version: 20160416040442) do
   add_index "memberships", ["account_id"], name: "index_memberships_on_account_id", using: :btree
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
-=======
->>>>>>> ci
   create_table "notes", force: :cascade do |t|
     t.text     "text"
     t.integer  "element_id"

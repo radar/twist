@@ -115,6 +115,9 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     kgio (2.9.3)
+    knapsack (1.7.0)
+      rake
+      timecop (>= 0.1.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     loofah (2.0.3)
@@ -253,6 +256,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    timecop (0.6.1)
     timers (4.0.1)
       hitimes
     tzinfo (1.2.2)
@@ -290,6 +294,7 @@ DEPENDENCIES
   email_spec
   factory_girl
   jquery-rails
+  knapsack
   launchy
   money
   nokogiri
