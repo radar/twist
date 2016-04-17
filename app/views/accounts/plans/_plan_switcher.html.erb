@@ -20,11 +20,25 @@
           <%= money(plan.amount) %>
         </td>
         <td>
-          <%= form_tag switch_plan_path, method: :put do %>
-            <%= hidden_field_tag :plan_id, plan.id %>
-            <%= submit_tag "Switch",
-              id: "choose_#{plan.name.underscore}",
-               class: 'btn btn-primary' %>
+          <% if current_account.plan == plan %>
+            <button class='btn btn-success'>Current plan</button>
+          <% else %>
+            <% if current_account.over_limit_for?(plan) %>
+              <%= form_tag switch_plan_path, method: :put do %>
+                <%= hidden_field_tag :plan_id, plan.id %>
+                <%= submit_tag "Switch", 
+                  id: "choose_#{plan.name.underscore}",
+                   class: 'btn btn-primary',
+                   disabled: true %>
+              <% end %>
+            <% else %>
+              <%= form_tag switch_plan_path, method: :put do %>
+                <%= hidden_field_tag :plan_id, plan.id %>
+                <%= submit_tag "Switch", 
+                  id: "choose_#{plan.name.underscore}",
+                   class: 'btn btn-primary' %>
+              <% end %>
+            <% end %>
           <% end %>
         </td>
       </tr>
