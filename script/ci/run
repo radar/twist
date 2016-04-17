@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+set -x
+
+export RAILS_ENV=test
+export CI_NODE_TOTAL=$BUILDKITE_PARALLEL_JOB_COUNT
+export CI_NODE_INDEX=$BUILDKITE_PARALLEL_JOB
+
+rsync -a /source/ /build/ --exclude log --exclude tmp --exclude repos --exclude public/system
+mkdir -p vendor
+
+cd /build
+
+tar xzf artifacts/bundle.gz -C vendor/
+
+echo "--- start postgresql and redis"
+sudo service postgresql start
+sudo service redis-server start
+
+echo "--- bundle check"
+bundle check --path vendor/bundler
+
+echo "--- setup test database"
+time bundle exec rake db:create
+time bundle exec rake db:test:prepare
+
+echo "--- git submodules"
+git submodule update --init
+
+echo "--- rspec"
+time bundle exec rake knapsack:rspec

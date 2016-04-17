@@ -4,5 +4,7 @@ development:
 
 test:
   adapter: postgresql
+  username: postgres
   database: twist_test
+  template: template0
 

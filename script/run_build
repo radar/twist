@@ -1,0 +1,11 @@
+echo "--- fetching artifact"
+mkdir artifacts
+buildkite-agent artifact download bundle.gz artifacts/
+echo "--- running build"
+
+docker run --rm=true \
+-e "BUILDKITE_PARALLEL_JOB_COUNT=$BUILDKITE_PARALLEL_JOB_COUNT" \
+-e "BUILDKITE_PARALLEL_JOB=$BUILDKITE_PARALLEL_JOB" \
+-v $PWD:/source \
+-t twist/ci \
+/source/script/ci/run
