@@ -3,6 +3,17 @@ require "constraints/subdomain_required"
 Twist::Application.routes.draw do
   devise_for :users
 
+  namespace :admin do
+    root to: "accounts#index"
+
+    resources :accounts, only: [:index, :show] do
+      collection do
+        post :search
+        get :unpaid
+      end
+    end
+  end
+
   constraints(SubdomainRequired) do
     scope module: "accounts" do
       root to: "books#index", as: :account_root

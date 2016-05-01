@@ -1,0 +1,19 @@
+<div class='row'>
+  <div class='content col-md-8'>
+    <h1>Find account by subdomain</h1>
+    <%= form_tag search_admin_accounts_path do %>
+      <p>
+        <%= label_tag "subdomain" %>
+        <%= text_field_tag "subdomain", '', class: "form-control" %>
+      </p>
+
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <div id='sidebar' class='col-md-4'>
+    <ul>
+      <li><%= link_to "Unpaid accounts", unpaid_admin_accounts_path %></li>
+    </ul>
+  </div>
+</div>
