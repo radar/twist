@@ -3,6 +3,7 @@ module Accounts
     skip_before_filter :verify_authenticity_token, only: :receive
     skip_before_filter :authorize_user!, only: [:receive]
     skip_before_action :subscription_required!, only: [:receive]
+    skip_before_action :active_subscription_required!, only: [:index]
     before_action :check_plan_limit, only: [:new, :create]
 
     def index

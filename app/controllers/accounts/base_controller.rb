@@ -2,6 +2,7 @@ module Accounts
   class BaseController < ApplicationController
     before_action :authorize_user!
     before_action :subscription_required!
+    before_action :active_subscription_required!
 
     def current_account
       @current_account ||= Account.find_by!(subdomain: request.subdomain)
@@ -41,5 +42,13 @@ module Accounts
       end
     end
 
+    def active_subscription_required!
+      return if current_account.stripe_subscription_id.blank? ||
+        current_account.stripe_subscription_status == "active"
+      flash[:alert] = "This account is currently disabled due to an unpaid subscription."
+      flash[:alert] += " Please contact the account owner."
+
+      redirect_to root_url
+    end
   end
 end

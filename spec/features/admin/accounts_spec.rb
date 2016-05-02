@@ -52,7 +52,6 @@ feature "Admin account dashboard" do
       click_link "Unpaid accounts"
       expect(page).not_to have_content(account.name)
 
-      save_and_open_page
       click_link unpaid_account.name
       expect(page.current_url).to eq(admin_account_url(unpaid_account))
     end
