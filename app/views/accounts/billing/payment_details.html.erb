@@ -1,0 +1,22 @@
+<div class='row'>
+  <div class='col-md-offset-3 col-md-6'>
+    <div class='content'>
+      <h3>Current payment details</h3>
+       <%= current_account.card_brand %>, ending in <%= current_account.card_last_4 %> Exp: <%= current_account.card_expiry_month %>/<%= current_account.card_expiry_year %>
+
+      <h3>Update details</h3>
+
+      <p>
+        Update your payment details by clicking the button below.
+      </p>
+
+      <%= form_tag "/billing/update_details" do %>
+        <input type="hidden" id="email" value="<%= current_account.owner.email %>" />
+        <%= submit_tag "Update Details", class: "btn btn-primary", id: "checkout-btn" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<%= javascript_include_tag "accounts/plans" %>
