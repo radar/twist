@@ -6,8 +6,8 @@
         <% if @note.completed? %>
           <%= f.submit "Reopen", :class => "reopen-button" %>
         <% else %>
-          <%= f.submit "Accept", :class => "accept-button", :tabindex => 2 %>
-          <%= f.submit "Reject", :class => "reject-button", :tabindex => 3 %>
+          <%= f.submit "Accept", :class => "btn btn-primary", :tabindex => 2 %>
+          <%= f.submit "Reject", :class => "btn btn-danger", :tabindex => 3 %>
         <% end %>
       <% end %>
     </p>

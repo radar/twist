@@ -1,8 +1,4 @@
 .note {
-  @extend .content;
-  @extend .col-md-8;
-  @extend .col-md-offset-2;
-
   .state-new, .state-accepted, .state-reopened {
     color: green;
   }
@@ -23,15 +19,5 @@
         height: 100%;
       }
     }
-  }
-
-  .reopen-button, .accept-button {
-    @extend .btn;
-    @extend .btn-primary;
-  }
-
-  .reject-button {
-    @extend .btn;
-    @extend .btn-danger;
   }
 }
