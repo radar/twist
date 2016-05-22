@@ -3,6 +3,13 @@
 
   <%= simple_form_for(@account) do |account| %>
     <%= account.input :name %>
+
+    <%= account.fields_for :owner do |owner| %>
+      <%= owner.input :email %>
+      <%= owner.input :password %>
+      <%= owner.input :password_confirmation %>
+    <% end %>
+
     <%= account.submit class: "btn btn-primary" %>
   <% end %>
 </div>
