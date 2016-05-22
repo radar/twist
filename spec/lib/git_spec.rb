@@ -18,7 +18,7 @@ describe Git do
 
   it "initializes a new repository" do
     git = Git.new(*args)
-    expect(git).to receive(:`).with("git clone #{Git.host}#{args.join("/")} #{test_repo}")
+    expect(git).to receive(:`).with("git clone -q #{Git.host}#{args.join("/")} #{test_repo}")
     git.update!
   end
   
@@ -27,8 +27,8 @@ describe Git do
     git = Git.new(*args)
     git.update! # clones the repository
 
-    expect(git).to receive(:`).with("git checkout")
-    expect(git).to receive(:`).with("git pull origin master")
+    expect(git).to receive(:`).with("git checkout -q")
+    expect(git).to receive(:`).with("git pull -q origin master")
     git.update! # updates
   end
 end

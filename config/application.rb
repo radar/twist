@@ -40,7 +40,5 @@ module Twist
     config.assets.enabled = true
 
     config.cache_store = :redis_store
-
-    config.active_record.raise_in_transactional_callbacks = true
   end
 end

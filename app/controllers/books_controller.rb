@@ -32,7 +32,7 @@ class BooksController < ApplicationController
   def receive
     @book = Book.find_by_permalink(params[:id])
     @book.enqueue
-    render nothing: true
+    head :ok
   end
 
   def book_params

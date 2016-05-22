@@ -9,6 +9,6 @@ describe BooksController do
   it "post-receive hooks" do
     expect(Book).to receive(:find_by).and_return(@book)
     expect(@book).to receive(:enqueue)
-    post :receive, :id => @book.permalink
+    process :receive, method: :post, params: { id: @book.permalink }
   end
 end

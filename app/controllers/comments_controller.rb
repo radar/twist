@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comments = @note.comments
     check_for_state_transition!
     if params[:comment][:text].present?
-      @comment = @note.comments.build(comment_params.merge!(user: current_user))
+      @comment = @note.comments.build(comment_params.to_h.merge!(user: current_user))
       if @comment.save
         @comment.send_notifications!
         flash[:notice] ||= "Comment has been created."
