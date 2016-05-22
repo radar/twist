@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   # lol embedded documents
-  before_filter :find_book_and_chapter_and_note
+  before_action :find_book_and_chapter_and_note
 
   def create
     @comments = @note.comments
