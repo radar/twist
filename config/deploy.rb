@@ -5,7 +5,7 @@ set :bundle_flags, '--deployment'
 set :linked_files, %w{config/initializers/mail.rb config/database.yml}
 set :linked_dirs, %w{log tmp public/system repos}
 
-set :chruby_ruby, 'ruby-2.3.0'
+set :chruby_ruby, 'ruby-2.3.1'
 
 namespace :deploy do
 
