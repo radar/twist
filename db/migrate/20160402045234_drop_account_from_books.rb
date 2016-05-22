@@ -1,4 +1,4 @@
-class DropAccountFromBooks < ActiveRecord::Migration
+class DropAccountFromBooks < ActiveRecord::Migration[4.2]
   def change
     remove_column :books, :account
   end
