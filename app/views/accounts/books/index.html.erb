@@ -8,7 +8,7 @@
   </div>
 
   <div id='sidebar' class='col-md-3'>
-    <% if current_user.author? %>
+    <% if owner? %>
       <%= link_to "Add Book", new_book_path %>
     <% end %>
   </div>

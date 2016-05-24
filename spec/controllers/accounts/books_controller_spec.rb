@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe BooksController do
+describe Accounts::BooksController do
   before do
     # Needs to exist (and have called Resque.enqueue) before we trigger the post-receive hook
     @book = FactoryGirl.create(:book)
