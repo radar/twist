@@ -43,6 +43,8 @@ Twist::Application.routes.draw do
           patch :accepted
         end
       end
+
+      resources :users, only: [:index, :destroy]
     end
   end
 
