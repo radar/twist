@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+  belongs_to :account
 
   has_many :chapters
   has_many :notes, through: :chapters
