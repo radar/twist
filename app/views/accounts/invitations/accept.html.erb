@@ -3,7 +3,7 @@
     <h2>Accepting an invitation</h2>
 
     <p>
-      You are accepting an invitation to join the <%= @invitation.account.name %> account.
+      You are accepting an invitation to join the <%= current_account.name %> account.
     </p>
 
     <% if !user_signed_in? %>

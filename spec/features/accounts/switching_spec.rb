@@ -2,14 +2,14 @@ require "rails_helper"
 
 describe "Switching accounts" do
   let(:account_1) do
-    FactoryGirl.create(:account, 
+    FactoryGirl.create(:account, :with_schema,
       name: "Account #1", 
       subdomain: "account1"
     )
   end
 
   let(:account_2) do
-    FactoryGirl.create(:account, 
+    FactoryGirl.create(:account, :with_schema,
       name: "Account #2", 
       subdomain: "account2"
     )

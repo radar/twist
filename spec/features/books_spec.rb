@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "Books" do
-  let!(:account) { FactoryGirl.create(:account) }
+  let!(:account) { FactoryGirl.create(:account, :with_schema) }
   let!(:book) { create_book!(account) }
 
   before do

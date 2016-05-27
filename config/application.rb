@@ -40,5 +40,8 @@ module Twist
     config.assets.enabled = true
 
     config.cache_store = :redis_store
+
+    require "apartment/elevators/subdomain"
+    config.middleware.use Apartment::Elevators::Subdomain
   end
 end

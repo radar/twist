@@ -1,16 +1,17 @@
 require "rails_helper"
 
 feature "Accepting invitations" do
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryGirl.create(:account, :with_schema) }
   let(:invitation) do
-    Invitation.create(
-      account: account, 
-      email: "test@example.com"
-    )
+    Apartment::Tenant.switch(account.subdomain) do
+      Invitation.create(
+        email: "test@example.com"
+      )
+    end
   end
 
   before do
-    InvitationMailer.invite(invitation).deliver_now
+    InvitationMailer.invite(invitation, account).deliver_now
     set_subdomain(account.subdomain)
   end
 

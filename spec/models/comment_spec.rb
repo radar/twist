@@ -4,31 +4,31 @@ describe Comment do
   let(:user_1) { create_user! }
   let(:user_2) { create_user! }
   let(:user_3) { create_user! }
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryGirl.create(:account, :with_schema) }
   let(:book) { create_book!(account) }
-  let!(:note) do
-    chapter = book.chapters.first
-    element = chapter.elements.first
-    note = element.notes.create!(
-      text: "This is a test note!", 
-      user: user_1, 
-      number: 1,
-      state: "complete"
-    )
-  end
-
-  let!(:comment) do
-    note.comments.create!(:user => user_2, :text => "FIRST POST!")
-  end
 
   before do
+    Apartment::Tenant.switch(account.subdomain) do
+      chapter = book.chapters.first
+      element = chapter.elements.first
+      @note = element.notes.create!(
+        text: "This is a test note!", 
+        user: user_1, 
+        number: 1,
+        state: "complete"
+      )
+      @note.comments.create!(:user => user_2, :text => "FIRST POST!")
+    end
+
     reset_mailer
   end
 
   context "upon creation" do
     it "sends an email to note author + commentors, minus comment owner" do
-      comment = note.comments.create!(:user => user_3, :text => "Second post")
-      comment.send_notifications!
+      Apartment::Tenant.switch(account.subdomain) do
+        comment = @note.comments.create!(:user => user_3, :text => "Second post")
+        comment.send_notifications!
+      end
 
       email_1 = find_email(user_1.email)
       email_2 = find_email(user_2.email)
@@ -38,11 +38,13 @@ describe Comment do
     end
 
     it "sends notification emails to the right users" do
-      comment = note.comments.build(:user => user_3)
-      emails = comment.notification_emails
-      expect(emails).to include(user_1.email)
-      expect(emails).to include(user_2.email)
-      expect(emails).not_to include(user_3.email)
+      Apartment::Tenant.switch(account.subdomain) do
+        comment = @note.comments.build(:user => user_3)
+        emails = comment.notification_emails
+        expect(emails).to include(user_1.email)
+        expect(emails).to include(user_2.email)
+        expect(emails).not_to include(user_3.email)
+      end
     end
   end
 end

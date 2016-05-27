@@ -9,9 +9,9 @@ module Accounts
     end
 
     def create
-      @invitation = current_account.invitations.new(invitation_params)
+      @invitation = Invitation.new(invitation_params)
       @invitation.save
-      InvitationMailer.invite(@invitation).deliver_now
+      InvitationMailer.invite(@invitation, current_account).deliver_now
       flash[:notice] = "#{@invitation.email} has been invited."
       redirect_to root_url
     end
