@@ -6,6 +6,11 @@ Twist::Application.routes.draw do
   constraints(SubdomainRequired) do
     scope module: "accounts" do
       root to: "books#index", as: :account_root
+      get "/account/choose_plan",
+        to: "plans#choose",
+        as: :choose_plan
+      patch "/account/choose_plan",
+        to: "plans#chosen"
 
       notes_routes = lambda do
         collection do
