@@ -12,8 +12,21 @@
           <%= account.label "plan_id_#{plan.id}", plan.name %> 
           (<%= number_to_currency(plan.price) %>) <br>
         <% end %>
+
+        <h4>Payment details</h4>
+        <div id="payment-form"></div>
+
         <%= account.submit "Finish", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
 </div>
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+var clientToken = "<%= @client_token %>";
+
+braintree.setup(clientToken, "dropin", {
+  container: "payment-form"
+});
+</script>
