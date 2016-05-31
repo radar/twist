@@ -19,6 +19,21 @@
         <%= account.submit "Finish", class: "btn btn-primary" %>
       <% end %>
     </div>
+
+    <% if current_account.braintree_subscription_id.present? %>
+      <hr>
+      <div class='text-center text-danger'>
+        <small>
+          <%= link_to "Cancel your subscription",
+            cancel_subscription_path, 
+            method: :delete,
+            data: {
+              confirm: "Are you sure you would like to cancel your subscription?" 
+            }
+          %>
+        </small>
+      </div>
+    <% end %>
   </div>
 </div>
 

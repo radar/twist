@@ -41,6 +41,7 @@ feature "Accounts" do
     account.reload
     expect(account.plan).to eq(plan)
     expect(account.braintree_subscription_id).to_not be_blank
+    expect(account.braintree_subscription_status).to eq('Active')
 
     expect(page).to have_content("Signed in as test@example.com")
     expect(page.current_url).to eq(root_url(subdomain: "test"))
