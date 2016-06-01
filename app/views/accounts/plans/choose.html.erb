@@ -6,17 +6,10 @@
       <em>Plans are billed monthly.</em>
       <hr>
 
-      <%= simple_form_for(current_account, url: choose_plan_url) do |account| %>
-        <% @plans.each do |plan| %>
-          <%= account.radio_button :plan_id, plan.id %>
-          <%= account.label "plan_id_#{plan.id}", plan.name %> 
-          (<%= number_to_currency(plan.price) %>) <br>
-        <% end %>
-
-        <h4>Payment details</h4>
-        <div id="payment-form"></div>
-
-        <%= account.submit "Finish", class: "btn btn-primary" %>
+      <% if current_account.subscribed? %>
+        <%= render "plan_switcher" %>
+      <% else %>
+        <%= render "plan_picker" %>
       <% end %>
     </div>
 

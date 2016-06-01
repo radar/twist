@@ -39,4 +39,25 @@ feature "Subscriptions" do
     account.reload
     expect(account.braintree_subscription_status).to eq('Canceled')
   end
+
+  scenario "can be updated" do
+    silver_plan = Plan.create(
+      name: "Silver",
+      braintree_id: "silver",
+      price: 15)
+
+    visit root_url
+    click_link "Change Plan"
+    click_button "choose_silver"
+
+    subscription = Braintree::Subscription.find(account.braintree_subscription_id)
+    expect(subscription.plan_id).to eq("silver")
+
+    account.reload
+    expect(account.plan).to eq(silver_plan)
+
+    within(".flash_notice") do
+      expect(page).to have_content("You have changed to the Silver plan.")
+    end
+  end
 end
