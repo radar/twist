@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Books Allowed</th>
       <th>Price</th>
       <th></th>
     </tr>
@@ -11,6 +12,9 @@
       <tr>
         <td>
           <%= plan.name %>
+        </td>
+        <td>
+          <%= plan.books_allowed %>
         </td>
         <td>
           <%= number_to_currency(plan.price) %>
