@@ -23,6 +23,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'poltergeist', '1.6.0'
+  gem 'selenium-webdriver'
 end
 
 group :development do

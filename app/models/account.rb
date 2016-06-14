@@ -9,6 +9,7 @@ class Account < ActiveRecord::Base
   has_many :invitations
   has_many :memberships
   has_many :users, through: :memberships
+  has_many :subscription_events
 
   def subscribed?
     braintree_subscription_id.present?
