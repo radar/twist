@@ -9,6 +9,7 @@ Twist::Application.routes.draw do
     resources :accounts, only: [:show] do
       collection do
         post :search
+        get :past_due
       end
     end
   end
