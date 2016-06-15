@@ -44,3 +44,5 @@ gem 'jquery-rails'
 gem 'pry'
 
 gem 'dotenv-rails'
+
+gem 'stripe', '1.43.0'
