@@ -7,9 +7,13 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(account_params)
     if @account.save
+      customer = Stripe::Customer.create(
+        description: @account.subdomain,
+        email: @account.owner.email
+      )
+      @account.update_column(:stripe_customer_id, customer.id)
       sign_in(@account.owner)
-      flash[:notice] = "Your account has been created."
-      redirect_to root_url(subdomain: @account.subdomain)
+      redirect_to choose_plan_url(subdomain: @account.subdomain)
     else
       flash.now[:alert] = "Sorry, your account could not be created."
       render :new
