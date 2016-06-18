@@ -66,3 +66,4 @@ RSpec.configure do |config|
 end
 
 Capybara.app_host = "http://lvh.me"
+Capybara.default_max_wait_time = 20
