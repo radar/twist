@@ -2,6 +2,7 @@ module Accounts
   class BaseController < ApplicationController
     before_action :authenticate_user!
     before_action :authorize_user!
+    before_action :subscription_required!
 
     def current_account
       @current_account ||= Account.find_by!(subdomain: request.subdomain)
@@ -14,6 +15,16 @@ module Accounts
     helper_method :owner?
 
     private
+
+    def subscription_required!
+      return unless owner?
+
+      if current_account.stripe_subscription_id.blank?
+        message = "You must subscribe to a plan before you can use your account."
+        flash[:alert] = message
+        redirect_to choose_plan_url
+      end
+    end
 
     def authorize_user!
       authenticate_user!

@@ -3,5 +3,10 @@ FactoryGirl.define do
     sequence(:name) { |n| "Test Account ##{n}" }
     sequence(:subdomain) { |n| "test#{n}" }
     association :owner, :factory => :user 
+
+    trait :subscribed do
+      stripe_customer_id "123ABC"
+      stripe_subscription_id "ABC123"
+    end
   end
 end
