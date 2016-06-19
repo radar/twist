@@ -9,7 +9,7 @@ class BookWorker
     git = Git.new(user, repo)
     book.path = git.path.to_s
     book.current_commit = git.current_commit rescue nil
-    # git.update!
+    git.update!
 
     Dir.chdir(book.path) do
       lines = File.readlines("Book.txt")
