@@ -8,12 +8,17 @@
 
       <%= simple_form_for(current_account, url: choose_plan_url) do |account| %>
         <% @plans.each do |plan| %>
-          <%= account.radio_button :plan_id, plan.id %>
+          <%= account.radio_button :plan_id, plan.id, data: {
+            name: plan.name, amount: plan.amount
+          } %>
           <%= account.label "plan_id_#{plan.id}", plan.name %> 
           (<%= money(plan.amount) %>) <br>
         <% end %>
-        <%= account.submit "Finish", class: "btn btn-primary" %>
+        <%= account.submit "Pay", class: "btn btn-primary", id: "checkout-btn" %>
       <% end %>
     </div>
   </div>
 </div>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<%= javascript_include_tag "accounts/plans" %>
