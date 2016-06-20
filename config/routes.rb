@@ -11,6 +11,9 @@ Twist::Application.routes.draw do
           as: :choose_plan
       patch "/account/choose_plan",
         to: "plans#chosen"
+      delete "/account/cancel",
+        to: "plans#cancel",
+        as: :cancel_subscription
 
       notes_routes = lambda do
         collection do
