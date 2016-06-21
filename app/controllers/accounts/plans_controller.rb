@@ -29,4 +29,17 @@ class Accounts::PlansController < Accounts::BaseController
       redirect_to root_url(subdomain: nil)
     end
   end
+
+  def switch
+    plan = Plan.find(params[:plan_id])
+    customer = Stripe::Customer.retrieve(current_account.stripe_customer_id)
+    subscription = customer.subscriptions.retrieve(current_account.stripe_subscription_id)
+    subscription.plan = plan.stripe_id
+    subscription.save
+
+    current_account.update_column(:plan_id, plan.id)
+
+    flash[:notice] = "You have changed to the #{plan.name} plan."
+    redirect_to root_url
+  end
 end
