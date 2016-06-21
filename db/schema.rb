@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160619215518) do
+ActiveRecord::Schema.define(version: 20160622072247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,8 +127,9 @@ ActiveRecord::Schema.define(version: 20160619215518) do
     t.string   "name"
     t.integer  "amount"
     t.string   "stripe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "books_allowed"
   end
 
   create_table "users", force: :cascade do |t|
@@ -149,8 +150,8 @@ ActiveRecord::Schema.define(version: 20160619215518) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "books", "accounts"
   add_foreign_key "accounts", "plans"
+  add_foreign_key "books", "accounts"
   add_foreign_key "invitations", "accounts"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
