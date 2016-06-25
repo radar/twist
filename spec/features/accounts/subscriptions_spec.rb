@@ -20,6 +20,7 @@ feature "Subscriptions" do
     subscription = customer.subscriptions.create(plan: "starter")
     account.stripe_customer_id = customer.id
     account.stripe_subscription_id = subscription.id
+    account.stripe_subscription_status = "active"
     account.save
 
     set_subdomain(account.subdomain)

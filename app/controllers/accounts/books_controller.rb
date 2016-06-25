@@ -1,5 +1,6 @@
 module Accounts
   class BooksController < Accounts::BaseController
+    skip_before_action :active_subscription_required!, only: [:index]
     skip_before_action :authenticate_user!, only: [:receive]
     skip_before_action :verify_authenticity_token, only: :receive
     skip_before_action :authorize_user!, only: [:receive]
