@@ -25,4 +25,19 @@ RSpec.feature "Unpaid subscriptions" do
       expect(page).to have_content("Please contact the account owner.")
     end
   end
+
+  context "the owner of the account" do
+    before do
+      account.books << book
+      login_as(account.owner)
+      set_subdomain(account.subdomain)
+    end
+
+    it "cannot add a new book to the account" do
+      visit new_book_path
+      expect(page.current_url).to eq(root_url)
+      expect(page).to have_content("This account is currently disabled due to an unpaid subscription.")
+      expect(page).to have_content("Please update your payment details to re-activate your subscription.")
+    end
+  end
 end

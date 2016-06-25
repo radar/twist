@@ -20,9 +20,12 @@ module Accounts
     def active_subscription_required!
       return if current_account.stripe_subscription_id.blank? ||
         current_account.stripe_subscription_status == "active"
-
       flash[:alert] = "This account is currently disabled due to an unpaid subscription."
-      flash[:alert] += " Please contact the account owner."
+      if owner?
+        flash[:alert] += "Please update your payment details to re-activate your subscription."
+      else
+        flash[:alert] += " Please contact the account owner."
+      end
 
       redirect_to root_url
     end
