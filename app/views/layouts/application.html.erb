@@ -22,9 +22,13 @@
       <% if user_signed_in? %>
         Signed in as <%= current_user.email %>
         <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <% if current_user.admin? %>
+          | <%= link_to "Admin", admin_root_path %>
+        <% end %>
       <% else %>
         <%= link_to "Sign in", new_user_session_path %>
       <% end %>
+
     </menu>
     <div class='container-fluid'>
       <div class='row'>
