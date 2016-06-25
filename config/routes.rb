@@ -64,4 +64,6 @@ Twist::Application.routes.draw do
   post "/accounts", to: "accounts#create", as: :accounts
 
   get "signed_out", to: "users#signed_out"
+
+  post "/stripe/webhook", to: "stripe_webhooks#receive"
 end

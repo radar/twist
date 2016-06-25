@@ -8,6 +8,7 @@ class Account < ActiveRecord::Base
   has_many :books
   has_many :invitations
   has_many :memberships
+  has_many :subscription_events
   has_many :users, through: :memberships
 
   def subscribed?
