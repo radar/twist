@@ -35,7 +35,7 @@ RSpec.feature "Unpaid subscriptions" do
 
     it "cannot add a new book to the account" do
       visit new_book_path
-      expect(page.current_url).to eq(root_url)
+      expect(page.current_url).to eq(billing_url)
       expect(page).to have_content("This account is currently disabled due to an unpaid subscription.")
       expect(page).to have_content("Please update your payment details to re-activate your subscription.")
     end

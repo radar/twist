@@ -28,6 +28,12 @@ Twist::Application.routes.draw do
       put "/account/switch_plan",
         to: "plans#switch",
         as: :switch_plan
+      get "/account/billing",
+        to: "billing#payment_details",
+        as: :billing
+      put "/account/billing/update_details",
+        to: "billing#update_payment_details",
+        as: :update_payment_details
 
       notes_routes = lambda do
         collection do

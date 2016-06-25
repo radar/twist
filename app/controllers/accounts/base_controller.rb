@@ -23,11 +23,11 @@ module Accounts
       flash[:alert] = "This account is currently disabled due to an unpaid subscription."
       if owner?
         flash[:alert] += "Please update your payment details to re-activate your subscription."
+        redirect_to billing_url
       else
         flash[:alert] += " Please contact the account owner."
+        redirect_to root_url
       end
-
-      redirect_to root_url
     end
 
     def subscription_required!
