@@ -1,0 +1,10 @@
+<div class='row'>
+  <div class='content col-md-8'>
+    <h1>Unpaid accounts</h1>
+    <ul>
+      <% @accounts.each do |account| %>
+        <li><%= link_to account.name, [:admin, account] %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
