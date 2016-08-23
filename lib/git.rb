@@ -1,6 +1,6 @@
 class Git
   attr_accessor :user, :repo
-  
+
   def self.host
     if Rails.env.production? || Rails.env.development?
       # Rely on GitHub
@@ -19,7 +19,7 @@ class Git
     @user = user
     @repo = repo
   end
-  
+
   def path
     self.class.path + "#{user}/#{repo}"
   end
@@ -47,5 +47,15 @@ class Git
     Dir.chdir(path) do
       `git rev-parse HEAD`.strip
     end
+  end
+
+  def silence_stream(stream)
+    old_stream = stream.dup
+    stream.reopen(RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ ? 'NUL:' : '/dev/null')
+    stream.sync = true
+    yield
+  ensure
+    stream.reopen(old_stream)
+    old_stream.close
   end
 end
