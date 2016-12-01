@@ -1,4 +1,4 @@
-class CreateElements < ActiveRecord::Migration
+class CreateElements < ActiveRecord::Migration[4.2]
   def change
     create_table :elements do |t|
       t.integer :chapter_id, index: true

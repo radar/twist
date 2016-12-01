@@ -1,13 +1,13 @@
 class CommentsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   # lol embedded documents
-  before_filter :find_book_and_chapter_and_note
+  before_action :find_book_and_chapter_and_note
 
   def create
     @comments = @note.comments
     check_for_state_transition!
     if params[:comment][:text].present?
-      @comment = @note.comments.build(comment_params.merge!(user: current_user))
+      @comment = @note.comments.build(comment_params.to_h.merge!(user: current_user))
       if @comment.save
         @comment.send_notifications!
         flash[:notice] ||= "Comment has been created."

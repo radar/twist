@@ -1,8 +1,8 @@
 class NotesController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :find_book_and_chapter
-  before_filter :find_note, only: [:show, :complete, :reopen]
-  before_filter :find_notes, only: [:index, :completed]
+  before_action :authenticate_user!
+  before_action :find_book_and_chapter
+  before_action :find_note, only: [:show, :complete, :reopen]
+  before_action :find_notes, only: [:index, :completed]
 
   def index
     @notes = @notes.where(state: ["new", "reopened"])

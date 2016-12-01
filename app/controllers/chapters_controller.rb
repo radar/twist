@@ -1,6 +1,6 @@
 class ChaptersController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :find_book
+  before_action :authenticate_user!
+  before_action :find_book
 
   def index
     redirect_to @book
