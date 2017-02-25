@@ -1,6 +1,6 @@
 class Git
   attr_accessor :user, :repo
-  
+
   def self.host
     if Rails.env.production? || Rails.env.development?
       # Rely on GitHub
@@ -19,7 +19,7 @@ class Git
     @user = user
     @repo = repo
   end
-  
+
   def path
     self.class.path + "#{user}/#{repo}"
   end
@@ -29,17 +29,13 @@ class Git
   end
 
   def clone
-    silence do
-      `git clone #{self.class.host}#{user}/#{repo} #{path}`
-    end
+    `git clone -q #{self.class.host}#{user}/#{repo} #{path}`
   end
 
   def pull
     Dir.chdir(path) do
-      silence do
-        `git checkout`
-        `git pull origin master`
-      end
+      `git checkout -q`
+      `git pull -q origin master`
     end
   end
 
@@ -53,9 +49,13 @@ class Git
     end
   end
 
-  def silence(&block)
-    silence_stream(STDOUT) do
-      silence_stream(STDERR, &block)
-    end
+  def silence_stream(stream)
+    old_stream = stream.dup
+    stream.reopen(RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ ? 'NUL:' : '/dev/null')
+    stream.sync = true
+    yield
+  ensure
+    stream.reopen(old_stream)
+    old_stream.close
   end
 end

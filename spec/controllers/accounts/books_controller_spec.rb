@@ -11,6 +11,6 @@ describe Accounts::BooksController do
     allow(controller).to receive(:current_account).and_return(@account)
     expect(Book).to receive(:find_by).and_return(@book)
     expect(@book).to receive(:enqueue)
-    post :receive, :id => @book.permalink
+    process :receive, method: :post, params: { id: @book.permalink }
   end
 end

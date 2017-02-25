@@ -1,18 +1,18 @@
 source 'http://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.4.0'
 
-gem 'rails', '4.2.5'
+gem 'rails', '~> 5.0'
 gem 'pg'
 
-gem 'devise', '3.5.1'
-gem 'sidekiq', '4.0.0'
+gem 'devise', '4.1.1'
+gem 'sidekiq', '4.2.9'
 gem 'redcarpet'
 gem 'nokogiri'
 gem 'paperclip'
 gem 'pygments.rb'
 
-gem 'redis-activesupport'
+gem 'redis-activesupport', '5.0.1'
 
 gem 'skylight'
 
@@ -20,7 +20,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'factory_girl'
   gem 'capybara', '~> 2.0'
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.5.0'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'email_spec'
@@ -39,10 +39,10 @@ end
 gem "unicorn"
 
 # Asset template engines
-gem 'sass-rails', "~> 4.0.0"
+gem 'sass-rails', "~> 5.0.6"
 gem 'coffee-script'
-gem 'bootstrap-sass'
-gem 'simple_form', '3.1.0'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'simple_form', '3.2.1'
 
 gem 'jquery-rails'
 gem 'pry'
@@ -50,7 +50,5 @@ gem 'pry'
 gem 'dotenv-rails'
 
 gem 'braintree'
-
-gem 'method_source', '0.8.1'
 
 gem "rollbar"

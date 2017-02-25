@@ -8,7 +8,7 @@ require "active_job/railtie"
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+Bundler.require(*Rails.groups)
 
 module Twist
   class Application < Rails::Application
@@ -41,8 +41,6 @@ module Twist
     config.assets.enabled = true
 
     config.cache_store = :redis_store
-
-    config.active_record.raise_in_transactional_callbacks = true
 
     config.active_job.queue_adapter = :sidekiq
   end

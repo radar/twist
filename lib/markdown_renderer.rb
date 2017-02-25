@@ -8,7 +8,7 @@ class MarkdownRenderer < Redcarpet::Render::HTML
       footnote(text)
     else
       #inline footnotes
-      footnote_regex = /\[\^([^\]]*)\]/ 
+      footnote_regex = /\[\^([^\]]*)\]/
       if footnote_regex.match(text)
         text = text.gsub(footnote_regex) do
           @footnote_count += 1

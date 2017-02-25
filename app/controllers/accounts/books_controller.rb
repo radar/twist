@@ -1,8 +1,8 @@
 module Accounts
   class BooksController < Accounts::BaseController
-    skip_before_filter :verify_authenticity_token, only: :receive
-    skip_before_filter :authenticate_user!, only: [:receive]
-    skip_before_filter :authorize_user!, only: [:receive]
+    skip_before_action :verify_authenticity_token, only: :receive
+    skip_before_action :authenticate_user!, only: [:receive]
+    skip_before_action :authorize_user!, only: [:receive]
     skip_before_action :subscription_required!, only: [:receive]
 
     before_action :check_plan_limit, only: [:new, :create]
@@ -14,19 +14,16 @@ module Accounts
     def new
       @book = Book.new
     end
-    
+
     def create
       @book = current_account.books.build(book_params)
       if @book.save
         @book.enqueue
         flash[:notice] = "#{@book.title} has been enqueued for processing."
         redirect_to book_path(@book)
-      # else
-      #   flash[:alert] = "Book could not be created."
-      #   render :action => "new"
       end
     end
-    
+
     def show
       @book = current_account.books.find_by!(permalink: params[:id])
       @frontmatter = @book.chapters.frontmatter
