@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'Subscription required' do
+feature 'Subscription required', braintree: true do
   let!(:account) { FactoryGirl.create(:account) }
   context "as an account owner" do
-    before do 
+    before do
       login_as(account.owner)
       set_subdomain(account.subdomain)
     end

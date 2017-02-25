@@ -1,12 +1,7 @@
 require "rails_helper"
 
 describe MarkdownBookWorker do
-  let(:book) do
-    Book.create(
-      :title => "Markdown Book Test",
-      :path => "http://github.com/radar/markdown_book_test"
-    )
-  end
+  let(:book) { create_markdown_book! }
 
   it "processes a test Markdown book" do
     MarkdownBookWorker.new.perform(book.id)
