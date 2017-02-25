@@ -1,13 +1,13 @@
 module Accounts
   class NotesController < Accounts::BaseController
-    before_filter :find_book_and_chapter
-    before_filter :find_note, only: [:show, :complete, :reopen]
-    before_filter :find_notes, only: [:index, :completed]
+    before_action :find_book_and_chapter
+    before_action :find_note, only: [:show, :complete, :reopen]
+    before_action :find_notes, only: [:index, :completed]
 
     def index
       @notes = @notes.where(state: ["new", "reopened"])
     end
-    
+
     def show
       @chapter = @note.chapter
       @comment = @note.comments.build
@@ -20,7 +20,7 @@ module Accounts
       @element = Element.find_by(nickname: params[:element_id])
       @notes = @element.notes
     end
-    
+
     def create
       element = @chapter.elements.find_by(nickname: params[:element_id])
       number = @book.notes_count + 1
@@ -48,7 +48,7 @@ module Accounts
       @title = "Completed notes"
       render :index
     end
-    
+
     private
 
       def find_notes

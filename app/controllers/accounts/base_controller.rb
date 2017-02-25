@@ -1,14 +1,14 @@
 module Accounts
   class BaseController < ApplicationController
-    before_filter :authenticate_user!
-    before_filter :authorize_user!
+    before_action :authenticate_user!
+    before_action :authorize_user!
     before_action :subscription_required!
 
     private
 
     def authorize_user!
       authenticate_user!
-      unless current_account.owner == current_user || 
+      unless current_account.owner == current_user ||
              current_account.users.exists?(current_user.id)
         flash[:notice] = "You are not permitted to view that account."
         redirect_to root_url(subdomain: nil)
@@ -26,7 +26,7 @@ module Accounts
     helper_method :owner?
 
     def subscription_required!
-      if owner? 
+      if owner?
         check_subscription_for_owner!
       else
         check_subscription_for_user!
@@ -47,7 +47,7 @@ module Accounts
     end
 
     def check_subscription_for_user!
-      return unless current_account.braintree_subscription_id.nil? || 
+      return unless current_account.braintree_subscription_id.nil? ||
         current_account.braintree_subscription_status == 'Canceled'
 
       message = "There are subscription issues with the #{current_account.subdomain} account."

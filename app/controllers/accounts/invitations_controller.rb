@@ -1,8 +1,8 @@
 module Accounts
   class InvitationsController < Accounts::BaseController
-    skip_before_filter :authenticate_user!, only: [:accept, :accepted]
-    skip_before_filter :authorize_user!, only: [:accept, :accepted]
-    before_filter :authorize_owner!, except: [:accept, :accepted]
+    skip_before_action :authenticate_user!, only: [:accept, :accepted]
+    skip_before_action :authorize_user!, only: [:accept, :accepted]
+    before_action :authorize_owner!, except: [:accept, :accepted]
 
     def new
       @invitation = Invitation.new
@@ -23,7 +23,7 @@ module Accounts
 
     def accepted
       @invitation = Invitation.find_by!(token: params[:id])
-      
+
       if user_signed_in?
         user = current_user
       else

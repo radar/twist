@@ -1,7 +1,7 @@
 module Accounts
   class CommentsController < Accounts::BaseController
     # lol embedded documents
-    before_filter :find_book_and_chapter_and_note
+    before_action :find_book_and_chapter_and_note
 
     def create
       @comments = @note.comments
