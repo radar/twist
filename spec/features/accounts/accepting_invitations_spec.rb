@@ -4,7 +4,7 @@ feature "Accepting invitations" do
   let(:account) { FactoryGirl.create(:account, :subscribed) }
   let(:invitation) do
     Invitation.create(
-      account: account, 
+      account: account,
       email: "test@example.com"
     )
   end

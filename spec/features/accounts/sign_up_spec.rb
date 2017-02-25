@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Accounts" do
+feature "Accounts", braintree: true do
   let!(:plan) do
     Plan.create(
       name: "Starter",

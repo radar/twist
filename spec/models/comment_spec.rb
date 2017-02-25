@@ -5,23 +5,29 @@ describe Comment do
   let(:user_2) { create_user! }
   let(:user_3) { create_user! }
   let(:account) { FactoryGirl.create(:account) }
-  let(:book) { create_book!(account) }
-  let!(:note) do
+  let(:book) { create_markdown_book!(account) }
+
+  def create_note
     chapter = book.chapters.first
     element = chapter.elements.first
     note = element.notes.create!(
-      text: "This is a test note!", 
-      user: user_1, 
+      text: "This is a test note!",
+      user: user_1,
       number: 1,
       state: "complete"
     )
   end
 
-  let!(:comment) do
+  def create_comment(note)
     note.comments.create!(:user => user_2, :text => "FIRST POST!")
   end
 
+  let(:note) { book.notes.last }
+
   before do
+    process_book(book)
+    create_note
+    create_comment(note)
     reset_mailer
   end
 

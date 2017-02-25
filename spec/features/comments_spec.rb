@@ -1,9 +1,11 @@
 require 'rails_helper'
 
-describe 'commenting' do 
+describe 'commenting' do
   let!(:account) { FactoryGirl.create(:account, :subscribed) }
   let!(:reviewer) { create_user! }
-  let!(:book) { create_book!(account) }
+  let!(:book) do
+    create_markdown_book!(account).tap { |b| process_book(b) }
+  end
   let!(:chapter) { book.chapters.first }
   let!(:element) { chapter.elements.first }
   let!(:note) { element.notes.create(:user => reviewer, :text => "My favourite element.", :number => 1) }

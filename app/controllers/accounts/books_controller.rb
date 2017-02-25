@@ -38,11 +38,11 @@ module Accounts
     def receive
       @book = Book.find_by_permalink(params[:id])
       @book.enqueue
-      render nothing: true
+      head :ok
     end
 
     def book_params
-      params.require(:book).permit(:title, :path, :blurb)
+      params.require(:book).permit(:title, :path, :blurb, :github_user, :github_repo)
     end
 
     def check_plan_limit

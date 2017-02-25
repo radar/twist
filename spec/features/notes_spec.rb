@@ -2,12 +2,13 @@ require 'rails_helper'
 
 describe "notes" do
   let(:account) { FactoryGirl.create(:account, :subscribed) }
-  let(:book) { create_book!(account) }
+  let(:book) { create_markdown_book!(account) }
   before do
+    process_book(book)
     login_as(account.owner)
     set_subdomain(account.subdomain)
   end
-    
+
   it "can add a new note to a paragraph", :js => true do
     visit book_chapter_path(book, book.chapters.first)
     element = book.chapters.first.elements.first
@@ -39,21 +40,21 @@ describe "notes" do
     expect(note_email.to).to include(account.owner.email)
     expect(note_email.subject).to eq("[Twist] - Markdown Book Test - Note #1")
     expect(note_email.body).to include("just created a note")
-    
+
   end
-  
+
   it "can view all notes for a book" do
     chapter = book.chapters.first
     element = chapter.elements.first
     note = element.notes.create!(
-      user: account.owner, 
+      user: account.owner,
       number: 1
     )
     note.comments.create!(
       user: account.owner,
       text: "This is a test note!"
     )
-    
+
     visit book_path(book)
     click_link "All notes for this book"
     click_link "This is a test note!"
@@ -66,14 +67,14 @@ describe "notes" do
       chapter = book.chapters.first
       element = chapter.elements.first
       @note = element.notes.create!(
-        user: account.owner, 
+        user: account.owner,
         number: 1
       )
       @note.comments.create!(
         text: "This is a test note!",
         user: account.owner
       )
-      
+
       visit book_path(book)
       click_link "All notes for this book"
       click_link "This is a test note!"
@@ -97,7 +98,7 @@ describe "notes" do
     chapter = book.chapters.first
     element = chapter.elements.first
     note = element.notes.create!(
-      user: account.owner, 
+      user: account.owner,
       number: 1,
       state: "rejected"
     )
@@ -105,7 +106,7 @@ describe "notes" do
       user: account.owner,
       text: "This is a test note!"
     )
-    
+
     visit book_path(book)
     click_link "All notes for this book"
     click_link "Completed notes"

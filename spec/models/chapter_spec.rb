@@ -1,14 +1,7 @@
 require 'rails_helper'
 
 describe Chapter do
-  let(:git) { Git.new("radar", "markdown_book_test") }
-  let(:book) { FactoryGirl.create(:book) }
-
-  before do
-    FileUtils.rm_r(git.path)
-    git.update!
-    book.path = 'spec/fixtures/repos/radar/markdown_book_test'
-  end
+  let(:book) { create_markdown_book! }
 
   it "can process markdown" do
     chapter = book.chapters.find_or_create_by(

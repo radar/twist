@@ -27,7 +27,7 @@ class MarkdownRenderer < Redcarpet::Render::HTML
 
   def block_code(code, language)
     language = 'text' if language == 'plain'
-    code = Pygments.highlight(code, :lexer => language) if !Rails.env.test?
+    code = Pygments.highlight(code, :lexer => language)
     "<div class='code'>#{code}</div>"
   end
 

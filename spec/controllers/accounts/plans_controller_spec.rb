@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Accounts::PlansController, type: :controller do
+RSpec.describe Accounts::PlansController, type: :controller, braintree: true do
   let!(:account) { FactoryGirl.create(:account) }
 
   before do
@@ -8,7 +8,7 @@ RSpec.describe Accounts::PlansController, type: :controller do
   end
 
   context "as a regular user" do
-    let!(:user) do 
+    let!(:user) do
       FactoryGirl.create(:user).tap do |user|
         account.users << user
       end
@@ -61,7 +61,7 @@ RSpec.describe Accounts::PlansController, type: :controller do
     context "with 3 books" do
       it "cannot switch to the starter plan" do
         expect(Braintree::Subscription).to_not receive(:update)
-        put :switch, plan_id: starter_plan.id
+        put :switch, params: { plan_id: starter_plan.id }
         expect(flash[:alert]).to eq(
           "You cannot switch to that plan." +
           " Your account is over that plan's limit.")

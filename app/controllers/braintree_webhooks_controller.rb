@@ -1,6 +1,7 @@
 class BraintreeWebhooksController < ApplicationController
   def incoming
-    SubscriptionEvent.process_webhook(params.slice(:bt_signature, :bt_payload))
-    render nothing: true
+    braintree_params = params.permit(:bt_signature, :bt_payload).to_h
+    SubscriptionEvent.process_webhook(braintree_params)
+    head :ok
   end
 end

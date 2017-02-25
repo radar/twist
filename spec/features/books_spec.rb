@@ -2,9 +2,10 @@ require "rails_helper"
 
 feature "Books" do
   let!(:account) { FactoryGirl.create(:account, :subscribed) }
-  let!(:book) { create_book!(account) }
+  let!(:book) { create_markdown_book!(account) }
 
   before do
+    process_book(book)
     login_as(account.owner)
     set_subdomain(account.subdomain)
   end
@@ -12,7 +13,7 @@ feature "Books" do
   context "navigating" do
     it "sees a list of frontmatter / mainmatter / backmatter" do
       visit book_path(book)
-      
+
       within("#frontmatter") do
         expect { find_link("Introduction") }.not_to raise_error
       end

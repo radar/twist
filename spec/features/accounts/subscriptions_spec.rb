@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Subscriptions" do
+feature "Subscriptions", braintree: true do
   let!(:account) { FactoryGirl.create(:account) }
   before do
     result = Braintree::Customer.create(
@@ -84,7 +84,7 @@ feature "Subscriptions" do
     expect(page.current_url).to eq(choose_plan_url)
 
     within(".flash_alert") do
-      message = "You have reached your plan's limit." + 
+      message = "You have reached your plan's limit." +
         " You need to upgrade your plan to add more books."
       expect(page).to have_content(message)
     end

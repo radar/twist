@@ -4,7 +4,8 @@
 
     <%= simple_form_for @book do |f| %>
       <%= f.input :title %>
-      <%= f.input :path, label: "GitHub Path" %> 
+      <%= f.input :github_user, label: "GitHub Username" %>
+      <%= f.input :github_repo, label: "GitHub Repo" %>
       <%= f.input :blurb %>
 
       <%= f.submit "Add Book", class: 'btn btn-primary' %>

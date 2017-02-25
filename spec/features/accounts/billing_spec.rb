@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Billing", js: true do
+feature "Billing", js: true, braintree: true do
   let!(:account) { FactoryGirl.create(:account) }
   before do
     result = Braintree::Customer.create(
