@@ -11,6 +11,7 @@ gem 'redcarpet'
 gem 'nokogiri'
 gem 'paperclip'
 gem 'pygments.rb'
+gem 'asciidoctor'
 
 gem 'redis-activesupport', '5.0.1'
 
