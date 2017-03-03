@@ -42,6 +42,7 @@ GEM
     airbrussh (1.1.0)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (7.1.4)
+    asciidoctor (1.5.5)
     autoprefixer-rails (6.4.0.3)
       execjs
     bcrypt (3.1.11)
@@ -298,6 +299,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  asciidoctor
   bootstrap-sass (~> 3.3.6)
   braintree
   capistrano (~> 3.0)

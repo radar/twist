@@ -14,6 +14,21 @@ module BookHelpers
     )
   end
 
+  def create_asciidoc_book!(account=nil)
+    git = Git.new("radar", "asciidoc_book_test")
+    # Nuke the repo, start afresh.
+    FileUtils.rm_rf(git.path)
+    git.update!
+
+    scope = account ? account.books : Book
+
+    book = scope.create(
+      title: "Asciidoc Book Test",
+      github_user: "radar",
+      github_repo: "asciidoc_book_test"
+    )
+  end
+
   def process_book(book)
     # Run the Sidekiq job ourselves
     MarkdownBookWorker.new.perform(book.id)

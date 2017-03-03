@@ -31,7 +31,13 @@ class AsciidocBookWorker
   end
 
   def htmlify_book(path, book)
-    book_file = path + "book.ad"
+    book_file_candidates = [path + "book.ad", path + "book.adoc"]
+    book_file = book_file_candidates.detect { |file| File.exist?(file) }
+
+    unless book_file
+      raise "Couldn't find book.ad or book.adoc at root of repository."
+    end
+
     output_dir = Rails.root + "tmp/#{book.github_user}/#{book.github_repo}"
     FileUtils.rm_rf(output_dir)
     FileUtils.mkdir_p(output_dir)
