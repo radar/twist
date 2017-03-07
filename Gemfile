@@ -7,6 +7,7 @@ gem 'pg'
 gem 'webpacker', github: 'rails/webpacker'
 gem 'webpacker-react'
 gem 'jbuilder'
+gem 'uglifier'
 
 gem 'devise', '4.1.1'
 gem 'sidekiq', '4.2.9'
