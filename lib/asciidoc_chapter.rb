@@ -8,12 +8,14 @@ class AsciidocChapter
   end
 
   def process
+    title_without_number = title.gsub(/^\d+\.\s+/, '')
     chapter = book.chapters.create!(
-      title: title,
+      title: title_without_number,
+      permalink: title_without_number.parameterize,
       position: index,
       part: part,
     )
-    AsciidocChapterProcessor.new(chapter, element).process
+    AsciidocChapterProcessor.perform_async(book.id, chapter.id, element.to_s)
   end
 
   def part

@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-env": "^1.2.0",
+    "babel-preset-react": "^6.23.0",
+    "coffee-loader": "^0.7.3",
+    "coffee-script": "^1.12.4",
+    "compression-webpack-plugin": "^0.3.2",
+    "glob": "^7.1.1",
+    "path-complete-extname": "^0.1.0",
+    "rails-erb-loader": "^3.2.0",
+    "react": "^15.4.2",
+    "react-addons-css-transition-group": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "uberfetch": "^1.0.1",
+    "webpack": "^2.2.1",
+    "webpack-merge": "^3.0.0",
+    "webpacker-react": "^0.1.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.4.1"
+  }
+}

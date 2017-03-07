@@ -17,7 +17,18 @@ namespace :deploy do
     end
   end
 
+  desc 'Compile webpacker assets'
+  task :webpack_compile do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "webpacker:compile"
+        end
+      end
+    end
+  end
+
+  after "deploy:updated", "deploy:webpack_compile"
   after "deploy:published", "deploy:restart"
   after :finishing, 'deploy:cleanup'
-
 end

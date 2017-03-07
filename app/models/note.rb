@@ -5,9 +5,9 @@ class Note < ActiveRecord::Base
   accepts_nested_attributes_for :comments
 
   delegate :chapter, to: :element
-  
+
   belongs_to :user
-  
+
   def to_param
     number.to_s
   end
@@ -22,8 +22,8 @@ class Note < ActiveRecord::Base
     self.save!
   end
 
-  def reopen!
-    self.state = "reopened"
+  def open!
+    self.state = "open"
     self.save!
   end
 

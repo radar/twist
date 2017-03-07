@@ -5,12 +5,12 @@ module ElementsHelper
     end
     nil
   end
-  
+
   def render_element(element, show_notes: true)
     partial = find_element_partial(element) ? element.tag : "element"
     render("accounts/elements/#{partial}", element: element, show_notes: show_notes)
   end
-  
+
   def render_footnote(element)
     @footnote_count ||= 0
     @footnote_count += 1
@@ -23,7 +23,7 @@ module ElementsHelper
     end
   end
 
-  
+
   private
 
   def find_element_partial(element)

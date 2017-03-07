@@ -1,6 +1,7 @@
 development:
   adapter: postgresql
   database: twist_braintree_dev
+  pool: 25
 
 test:
   adapter: postgresql

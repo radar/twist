@@ -4,7 +4,7 @@
     <p>
       <% if owner? %>
         <% if @note.completed? %>
-          <%= f.submit "Reopen", :class => "reopen-button" %>
+          <%= f.submit "Reopen", :class => "btn btn-primary reopen-button" %>
         <% else %>
           <%= f.submit "Accept", :class => "btn btn-primary", :tabindex => 2 %>
           <%= f.submit "Reject", :class => "btn btn-danger", :tabindex => 3 %>

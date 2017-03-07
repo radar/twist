@@ -4,6 +4,9 @@ ruby '2.4.0'
 
 gem 'rails', '~> 5.0'
 gem 'pg'
+gem 'webpacker', github: 'rails/webpacker'
+gem 'webpacker-react'
+gem 'jbuilder'
 
 gem 'devise', '4.1.1'
 gem 'sidekiq', '4.2.9'

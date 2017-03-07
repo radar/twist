@@ -5,7 +5,7 @@ class Chapter < ActiveRecord::Base
 
   # Provides an accessor to get to the git repository where the chapter is contained
   attr_accessor :git
-  
+
   attr_accessor :footnote_count
   attr_accessor :section_count
   attr_accessor :image_count
@@ -23,13 +23,13 @@ class Chapter < ActiveRecord::Base
   scope :backmatter, -> { ordered.where(part: "backmatter") }
 
   after_save :expire_cache
-  
+
   # Defaults footnote_count to something.
   # Would use attr_accessor_with_default if it wasn't deprecated.
   def footnote_count
     @footnote_count ||= 0
   end
-  
+
   # Default image count to 0, increments when we call process_figure! in Processor
   def image_count
     @image_count ||= 0
@@ -40,10 +40,10 @@ class Chapter < ActiveRecord::Base
   def listing_count
     @listing_count ||= 0
   end
-  
+
   # Used for correctly counting + labelling the sections.
   # Works with the within_section method contained in the Processor module.
-  # 
+  #
   # Let's assume we're processing the first chapter of a book
   # For the first section, this variable will become:
   # [1, 1]
@@ -96,7 +96,7 @@ class Chapter < ActiveRecord::Base
     end
   end
 
-  def to_html 
+  def to_html
     markdown = File.read(File.join(book.path, file_name))
     renderer = Redcarpet::Markdown.new(MarkdownRenderer, :fenced_code_blocks => true)
     html = Nokogiri::HTML(renderer.render(markdown))
@@ -104,6 +104,10 @@ class Chapter < ActiveRecord::Base
 
   def to_param
     permalink
+  end
+
+  def part_position
+    book.chapters.where(part: part).order(:position).pluck(:id).index(id) + 1
   end
 
   def expire_cache

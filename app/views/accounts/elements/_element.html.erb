@@ -1,13 +1,6 @@
-<div class='element'>
-  <% if show_notes %>
-    <%= render "accounts/notes/button", element: element %>
-  <% end %>
-  <a name='<%= element.nickname %>'></a>
-  <%= raw(element.content) %>
-
-  <% if show_notes %>
-    <div id='notes_container_<%= element.nickname %>' class='notes_container' style='display:none'>
-
-    </div>
-  <% end %>
-</div>
+<% if show_notes %>
+  <div id="<%= element.id %>" data-react-class="ElementContainer" data-react-props='{"elementID": <%= element.id %>, "content": <%= element.content.inspect %>, "tag": "<%= element.tag %>", "url": "<%= book_chapter_element_notes_url(@book, @chapter, element.id) %>" }'>
+  </div>
+<% else %>
+  <%= raw element.content %>
+<% end %>

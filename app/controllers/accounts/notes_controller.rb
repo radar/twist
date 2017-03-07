@@ -1,5 +1,6 @@
 module Accounts
   class NotesController < Accounts::BaseController
+    skip_before_action :verify_authenticity_token
     before_action :find_book_and_chapter
     before_action :find_note, only: [:show, :complete, :reopen]
     before_action :find_notes, only: [:index, :completed]
@@ -22,22 +23,22 @@ module Accounts
     end
 
     def create
-      element = @chapter.elements.find_by(nickname: params[:element_id])
+      element = @chapter.elements.find(params[:element_id])
       number = @book.notes_count + 1
-      new_note_params = note_params.merge(
+      note = element.notes.build(
+        state: "open",
         number: number,
         user: current_user
       )
+      comment = note.comments.build(
+        user: current_user,
+        text: params[:note][:comment]
+      )
 
-      note = element.notes.build(new_note_params)
-      note.comments.first.user = current_user
-
-      if note.save
+      if note.save && comment.save
         Notifier.new_note(note).deliver_later
-        # Increment notes count for the book
-        @book.notes_count += 1
-        @book.save
-        # create.js.erb
+        @book.increment!(:notes_count)
+        head :ok
       else
         # TODO: validation error if note text is blank
       end
@@ -60,12 +61,12 @@ module Accounts
       end
 
       def find_note
-        @note = @book.notes.find_by(number: params[:id])
+        @note = @book.notes.find_by!(number: params[:id])
       end
 
       def find_book_and_chapter
         @book = current_account.books.find_by!(permalink: params[:book_id])
-        @chapter = @book.chapters.find_by(permalink: params[:chapter_id]) if params[:chapter_id]
+        @chapter = @book.chapters.find_by!(permalink: params[:chapter_id]) if params[:chapter_id]
       end
 
       def note_params

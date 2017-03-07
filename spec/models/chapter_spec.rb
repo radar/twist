@@ -127,4 +127,36 @@ describe Chapter do
       end
     end
   end
+
+  context "part_position" do
+    let!(:preface) do
+      book.chapters.create(
+        title: "Preface",
+        position: 3,
+        part: "frontmatter"
+      )
+    end
+
+    let!(:chapter_1) do
+      book.chapters.create(
+        title: "First Chapter",
+        position: 2,
+        part: "mainmatter",
+      )
+    end
+
+    let!(:chapter_2) do
+      book.chapters.create(
+        title: "Second Chapter",
+        position: 3,
+        part: "mainmatter",
+      )
+    end
+
+    it "returns position relative to the part of the book" do
+      expect(preface.part_position).to eq(1)
+      expect(chapter_1.part_position).to eq(1)
+      expect(chapter_2.part_position).to eq(2)
+    end
+  end
 end

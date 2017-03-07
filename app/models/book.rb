@@ -19,7 +19,7 @@ class Book < ActiveRecord::Base
   end
 
   def enqueue
-    MarkdownBookWorker.perform_async(id.to_s)
+    AsciidocBookWorker.perform_async(id.to_s)
     self.processing = true
     self.save!
   end

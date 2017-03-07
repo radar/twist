@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "prism";
 
 @import "accounts";
 @import "books";
@@ -8,7 +9,7 @@
 
 body {
   margin: 1% 2.5% 1% 2.5%;
-  font: 12pt Roboto, 'Helvetica Neue';
+  font: 13pt "Titillium Web", 'Helvetica Neue';
   color: #444;
   background: #efefef;
 }
@@ -17,11 +18,11 @@ hr {
   border-top: 1px solid #ddd;
 }
 
-.content {
-  padding: 10px;
+.twist-content {
   background: white;
   border: 1px solid #dadada;
   border-radius: 3px;
+  padding: 2.5rem 1.5rem;
 }
 
 .flash_notice {

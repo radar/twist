@@ -1,9 +1,0 @@
-<%= simple_form_for(@note, url: book_chapter_element_notes_path(@book, @chapter, params[:element_id]), :remote => true) do |f| %>
-  <%= f.fields_for :comments do |comment| %>
-    <%= comment.input :text, label: "Leave a note (Markdown enabled)" %>
-  <% end %>
-  
-  <p>
-    <%= f.submit "Leave Note", class: 'btn btn-primary' %>
-  </p>
-<% end %>

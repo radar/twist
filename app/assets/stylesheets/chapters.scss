@@ -1,6 +1,10 @@
 #chapter {
   margin-left: 5em;
-  padding: 2.5rem 1.5rem;
+
+  .thanks {
+    @extend .alert;
+    @extend .alert-success;
+  }
 
   p, ol, ul {
     line-height: 1.75;
@@ -12,7 +16,7 @@
 
     img {
       border: 1px solid #eee;
-      width: 95%;
+      max-width: 95%;
     }
 
     .missing_image {
@@ -21,19 +25,19 @@
     }
   }
 
-  .aside, .tip {
+  .aside, .tip, .admonitionblock {
     background: #D9F1FF;
     padding: 1rem;
     margin-bottom: 2rem;
+
+    .title {
+      font-weight: bold;
+      font-size: 110%;
+    }
   }
 
   pre, code {
-    font: 12px 'Input Mono', Inconsolata, Menlo, monospace;
-    letter-spacing: -0.5px;
-  }
-
-  pre {
-    line-height: 150%;
+    font: 15px 'Source Code Pro';
   }
 }
 

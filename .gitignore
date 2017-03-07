@@ -6,3 +6,5 @@ tmp/
 public/system
 repos
 dump.rdb
+/public/packs
+/node_modules

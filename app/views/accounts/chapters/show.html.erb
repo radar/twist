@@ -1,24 +1,23 @@
 <div class='row'>
-  <div id='chapter' class='content col-md-7'>
+  <div id='chapter' class='twist-content col-md-7'>
     <h1><%= link_to @chapter.book.title, @chapter.book %></h1>
 
     <% if @chapter.part == "mainmatter" %>
-      <h2>Chapter <%= @chapter.position %> - <%= @chapter.title %></h2>
+      <h2>Chapter <%= @chapter.part_position %> - <%= @chapter.title %></h2>
     <% else %>
       <h2><%= @chapter.title %></h2>
     <% end %>
 
     <%= link_to "All notes for this chapter", book_chapter_notes_path(@book, @chapter) %>
     <hr>
-    <% cache @chapter do %>
-      <%= render_elements(@chapter.elements.where(old: false)) %>
-    <% end %>
+    <div data-react-class="Elements" data-react-props='{"url": "<%= book_chapter_elements_path(@book, @chapter) %>"}'>
+    </div>
   </div>
 
   <div class='col-md-4'>
     <div id='sidebar' data-spy="affix">
       <strong id='previous_chapter'><%= previous_chapter_link %></strong>
-      <%= render "sidebar" %>
+      <%= render "sidebar", sections: @sections %>
       <strong id='next_chapter'><%= next_chapter_link %></strong>
     </div>
   </div>

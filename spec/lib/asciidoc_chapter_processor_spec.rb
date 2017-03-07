@@ -8,7 +8,7 @@ describe AsciidocChapterProcessor do
       #{content}
     HTML
   end
-  subject { AsciidocChapterProcessor.new(chapter, element) }
+  before { subject.perform(book.id, chapter.id, element.to_s) }
 
   def build_chapter_element(tags)
     Nokogiri::HTML.parse(<<-HTML
@@ -22,10 +22,9 @@ describe AsciidocChapterProcessor do
   context "h2" do
     let(:content) { %Q{<h2 id="_chapter_1">1. Chapter 1</h2>} }
 
-    it "adds a h2 element to the chapter" do
-      subject.process
-      element = chapter.elements.find_by(tag: "h2")
-      expect(element.content).to eq(content)
+    # Chapter title has already been handled
+    it "adds no element to the chapter" do
+      expect(chapter.elements.count).to eq(0)
     end
   end
 
@@ -41,7 +40,6 @@ describe AsciidocChapterProcessor do
     end
 
     it "adds the table element to the chapter" do
-      subject.process
       element = chapter.elements.find_by(tag: "table")
       expect(element.content).to eq(content)
     end
@@ -51,7 +49,6 @@ describe AsciidocChapterProcessor do
     let(:content) { %Q{<div class="paragraph"><p>Simple paragraph</p></div>} }
 
     it "adds a h2 element to the chapter" do
-      subject.process
       element = chapter.elements.find_by(tag: "p")
       expect(element.content).to eq("<p>Simple paragraph</p>")
     end
@@ -76,7 +73,6 @@ describe AsciidocChapterProcessor do
     end
 
     it "adds the listingblock element to the chapter" do
-      subject.process
       element = chapter.elements.find_by(tag: "div")
       expect(element.content).to eq(content)
     end
@@ -89,14 +85,21 @@ describe AsciidocChapterProcessor do
         <div class="content">
           <img src="ch01/images/welcome_aboard.png" alt="welcome aboard">
         </div>
+        <div class="title">
+          Figure 1. Welcome aboard!
+        </div>
       </div>
       HTML
     end
 
     it "adds the imageblock element to the chapter" do
-      subject.process
-      element = chapter.elements.find_by(tag: "div")
-      expect(element.content).to eq(content)
+      element = chapter.elements.find_by(tag: "img")
+      expect(element.content).to eq("ch01/images/welcome_aboard.png")
+
+      image = chapter.images.last
+      expect(image.image_file_name).to eq("welcome_aboard.png")
+      expect(image.position).to eq(1)
+      expect(image.caption).to eq("Welcome aboard!")
     end
   end
 
@@ -112,11 +115,9 @@ describe AsciidocChapterProcessor do
       HTML
     end
 
-    it "adds the admonitionblock element to the chapter" do
-      subject.process
-
-      h3_element = chapter.elements.find_by(tag: "h3")
-      expect(h3_element.content).to eq("<h3>Sect2 title</h3>")
+    it "adds the h3 and para elements to the chapter" do
+      h3_element = chapter.elements.find_by(tag: "h2")
+      expect(h3_element.content).to eq("<h2>Sect2 title</h2>")
 
 
       para_element = chapter.elements.find_by(tag: "p")
@@ -136,11 +137,9 @@ describe AsciidocChapterProcessor do
       HTML
     end
 
-    it "adds the admonitionblock element to the chapter" do
-      subject.process
-
-      h3_element = chapter.elements.find_by(tag: "h4")
-      expect(h3_element.content).to eq("<h4>Sect3 title</h4>")
+    it "adds the h3 and para elements to the chapter" do
+      h3_element = chapter.elements.find_by(tag: "h3")
+      expect(h3_element.content).to eq("<h3>Sect3 title</h3>")
 
 
       para_element = chapter.elements.find_by(tag: "p")
@@ -160,12 +159,9 @@ describe AsciidocChapterProcessor do
       HTML
     end
 
-    it "adds the admonitionblock element to the chapter" do
-      subject.process
-
-      h3_element = chapter.elements.find_by(tag: "h5")
-      expect(h3_element.content).to eq("<h5>Sect4 title</h5>")
-
+    it "adds h4 and para elements to the chapter" do
+      h4_element = chapter.elements.find_by(tag: "h4")
+      expect(h4_element.content).to eq("<h4>Sect4 title</h4>")
 
       para_element = chapter.elements.find_by(tag: "p")
       expect(para_element.content).to eq("<p>Simple para inside of a sect4</p>")
@@ -186,6 +182,17 @@ describe AsciidocChapterProcessor do
               <div class="paragraph">
                 <p>Notes stand out different from the text.</p>
               </div>
+
+              <div class="listingblock">
+                <div class="content">
+                  <pre>$ rails new rails
+                  Invalid application name rails, constant Rails is already in use.
+                  Please choose another application name.
+                  $ rails new test
+                  Invalid application name test. Please give a name which does not match one of
+                  the reserved rails words.</pre>
+                </div>
+              </div>
             </td>
           </tr>
         </table>
@@ -194,9 +201,28 @@ describe AsciidocChapterProcessor do
     end
 
     it "adds the admonitionblock element to the chapter" do
-      subject.process
       element = chapter.elements.find_by(tag: "div")
-      expect(element.content).to eq(content)
+      expected =
+      <<-HTML.strip
+        <div class="admonitionblock note">
+          <div class="title">This is a note</div>
+          <div class="paragraph">
+            <p>Notes stand out different from the text.</p>
+          </div>
+
+          <div class="listingblock">
+            <div class="content">
+              <pre>$ rails new rails
+              Invalid application name rails, constant Rails is already in use.
+              Please choose another application name.
+              $ rails new test
+              Invalid application name test. Please give a name which does not match one of
+              the reserved rails words.</pre>
+            </div>
+          </div>
+        </div>
+      HTML
+      expect(element.content.gsub(/^\s+/, '')).to eq(expected.gsub(/^\s+/, ''))
     end
   end
 
@@ -213,8 +239,7 @@ describe AsciidocChapterProcessor do
       HTML
     end
 
-    it "adds the admonitionblock element to the chapter" do
-      subject.process
+    it "adds the ul element to the chapter" do
       element = chapter.elements.find_by(tag: "ul")
       expect(element.content).to eq(<<-HTML.strip
         <ul>
@@ -222,6 +247,32 @@ describe AsciidocChapterProcessor do
           <li><p>Item 2</p></li>
           <li><p>Item 3</p></li>
         </ul>
+      HTML
+      )
+    end
+  end
+
+  context "div.olist" do
+    let(:content) do
+      <<-HTML.strip
+      <div class="olist arabic">
+        <ol>
+          <li><p>Item 1</p></li>
+          <li><p>Item 2</p></li>
+          <li><p>Item 3</p></li>
+        </ol>
+      </div>
+      HTML
+    end
+
+    it "adds the ol element to the chapter" do
+      element = chapter.elements.find_by(tag: "ol")
+      expect(element.content).to eq(<<-HTML.strip
+        <ol>
+          <li><p>Item 1</p></li>
+          <li><p>Item 2</p></li>
+          <li><p>Item 3</p></li>
+        </ol>
       HTML
       )
     end
@@ -244,7 +295,6 @@ describe AsciidocChapterProcessor do
     end
 
     it "adds the quoteblock element to the chapter" do
-      subject.process
       element = chapter.elements.find_by(tag: "div")
       expect(element.content).to eq(content)
     end

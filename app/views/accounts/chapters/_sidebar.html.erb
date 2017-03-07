@@ -1,12 +1,14 @@
-<hr>
-<ul id='section_listing'>
-  <% @sections.each do |section| %>
-    <li class="<%= section.tag == "h2" ? "major" : "minor" %>">
-      <% fragment = section_fragment(section) %>
-      <%= link_to "##{fragment.children.first["id"]}" do %>
-        <%= fragment.text %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
-<hr>
+<% if sections.any? %>
+  <hr>
+  <ul id='section_listing'>
+    <% sections.each do |section| %>
+      <li class="<%= section.tag == "h2" ? "major" : "minor" %>">
+        <% fragment = section_fragment(section) %>
+        <%= link_to "##{section.id}" do %>
+          <%= fragment.text %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <hr>
+<% end %>

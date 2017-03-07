@@ -49,7 +49,7 @@ Twist::Application.routes.draw do
           put :reject
           put :reopen
         end
-        
+
         resources :comments
       end
 
@@ -57,24 +57,27 @@ Twist::Application.routes.draw do
         member do
           post :receive
         end
-        
+
         resources :chapters do
           resources :elements do
             resources :notes
           end
-            
+
           resources :notes, &notes_routes
         end
-        
+
         resources :notes, &notes_routes
       end
+
+      post "/elements/:element_id/notes", to: "notes#create"
     end
   end
+
 
   root to: "home#index"
   get "/accounts/new", to: "accounts#new", as: :new_account
   post "/accounts", to: "accounts#create", as: :accounts
-  
+
   get 'signed_out', :to => "users#signed_out"
 
   post "braintree/incoming", to: "braintree_webhooks#incoming"
