@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+
   def after_sign_out_path_for(resource)
     signed_out_path
   end
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_account
 
   def signup_enabled?
-    !Rails.env.production?
+    true
   end
   helper_method :signup_enabled?
 end
