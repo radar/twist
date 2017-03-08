@@ -137,3 +137,4 @@ class NoteForm extends React.Component {
 }
 
 WebpackerReact.register(Elements)
+WebpackerReact.initialize()
