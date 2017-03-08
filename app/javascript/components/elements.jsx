@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import uberfetch from 'uberfetch'
+import 'whatwg-fetch'
 
 class Elements extends React.Component {
   constructor(props) {
