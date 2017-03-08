@@ -126,4 +126,4 @@ class NoteForm extends React.Component {
   }
 }
 
-export default Elements
+export default Elements;

@@ -10,8 +10,7 @@
 
     <%= link_to "All notes for this chapter", book_chapter_notes_path(@book, @chapter) %>
     <hr>
-    <div data-react-class="Elements" data-react-props='{"url": "<%= book_chapter_elements_path(@book, @chapter) %>"}'>
-    </div>
+    <%= react_component "Elements", url: book_chapter_elements_path(@book, @chapter) %>
   </div>
 
   <div class='col-md-4'>
