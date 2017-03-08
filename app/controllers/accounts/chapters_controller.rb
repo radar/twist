@@ -21,7 +21,7 @@ module Accounts
     end
 
     def find_chapter(permalink)
-      @book.chapters.includes(:elements).find_by(permalink: permalink)
+      @book.chapters.find_by(permalink: permalink)
     end
   end
 end
