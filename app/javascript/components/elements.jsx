@@ -12,7 +12,7 @@ class Elements extends React.Component {
   }
 
   componentDidMount() {
-    uberfetch.get(this.props.url)
+    uberfetch.get(this.props.elementsURL)
       .then(res => res.json())
       .then(res => {
         this.setState({elements: res.elements});
@@ -29,7 +29,12 @@ class Elements extends React.Component {
 
   renderElements() {
     return this.state.elements.map((element, i) => {
-      return <Element key={i} content={element.content} />
+      return <Element
+        key={i}
+        tag={element.tag}
+        elementID={element.id}
+        chapterURL={this.props.chapterURL}
+        content={element.content} />
     })
   }
 }
@@ -74,7 +79,9 @@ class Element extends React.Component {
 
   renderForm() {
     if (!this.state.showForm) { return }
-    return <NoteForm noteSubmitted={this.noteSubmitted} url={this.props.url} elementID={this.props.elementID} />
+    const {chapterURL, elementID} = this.props;
+    const noteURL = `${chapterURL}/elements/${elementID}/notes`
+    return <NoteForm noteSubmitted={this.noteSubmitted} url={noteURL} elementID={this.props.elementID} />
   }
 
   renderThanks() {
