@@ -33,7 +33,7 @@ module Accounts
         @note.reject!
         notify_of_note_state_change("Rejected")
       elsif params[:commit] == "Reopen"
-        @note.reopen!
+        @note.open!
         notify_of_note_state_change("Open")
       end
     end

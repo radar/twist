@@ -113,8 +113,8 @@ describe "notes" do
     expect(page).to have_content("This is a test note!")
     visit book_note_path(book, note.number)
     click_button "Reopen"
-    expect(page).to have_content("Note state changed to Reopened")
-    expect(note.reload.state).to eq("reopened")
+    expect(page).to have_content("Note state changed to Open")
+    expect(note.reload.state).to eq("open")
   end
 
 end
