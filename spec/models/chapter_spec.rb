@@ -3,44 +3,6 @@ require 'rails_helper'
 describe Chapter do
   let(:book) { create_markdown_book! }
 
-  it "can process markdown" do
-    chapter = book.chapters.find_or_create_by(
-      file_name: "chapter_1/chapter_1.markdown",
-      part: "mainmatter"
-    )
-
-    expect do
-      chapter.process!
-    end.not_to raise_error
-  end
-
-  context "updating an existing chapter" do
-    let(:chapter) do
-      book.chapters.create!(
-        title: "Introduction",
-        file_name: "chapter_1/chapter_1.markdown"
-      )
-    end
-
-    let!(:element_1) do
-      element = chapter.elements.create
-      element.notes.create
-      element
-    end
-
-    let!(:element_2) do
-      chapter.elements.create
-    end
-
-    it "keeps elements with notes" do
-      chapter.process!
-      chapter.reload
-
-      expect { element_1.reload }.not_to raise_error
-      expect { element_2.reload }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-  end
-
   context "navigation" do
     context "chapter 1" do
       let(:chapter) do
