@@ -5,12 +5,14 @@
     <%= link_to "All notes for this book", book_notes_path(@book) %>
     <hr>
 
-    <h3>Frontmatter</h3>
-    <ol class='frontmatter' id='frontmatter'>
-      <% @frontmatter.each do |chapter| %>
-        <li><%= link_to chapter.title, [@book, chapter] %></li>
-      <% end %>
-    </ol>
+    <% if @frontmatter.any? %>
+      <h3>Frontmatter</h3>
+      <ol class='frontmatter' id='frontmatter'>
+        <% @frontmatter.each do |chapter| %>
+          <li><%= link_to chapter.title, [@book, chapter] %></li>
+        <% end %>
+      </ol>
+    <% end %>
 
     <h3>Mainmatter</h3>
     <ol class='chapters' id='mainmatter'>
@@ -19,11 +21,13 @@
       <% end %>
     </ol>
 
-    <h3>Backmatter</h3>
-    <ol class='chapters' id='backmatter'>
-      <% @backmatter.each do |chapter| %>
-        <li><%= link_to chapter.title, [@book, chapter] %></li>
-      <% end %>
-    </ol>
+    <% if @backmatter.any? %>
+      <h3>Backmatter</h3>
+      <ol class='chapters' id='backmatter'>
+        <% @backmatter.each do |chapter| %>
+          <li><%= link_to chapter.title, [@book, chapter] %></li>
+        <% end %>
+      </ol>
+    <% end %>
   </div>
 </div>
