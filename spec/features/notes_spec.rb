@@ -13,11 +13,11 @@ describe "notes" do
     visit book_chapter_path(book, book.chapters.first)
     element = book.chapters.first.elements.first
 
-    within "#note_button_#{element.nickname}" do
+    within "#note_button_#{element.id}" do
       click_link "0 notes +"
     end
 
-    comment_box = find(".note_comments_text textarea")
+    comment_box = find(".note_form textarea")
     comment_box.set("This is a **test** note!")
     click_button "Leave Note"
     expect(page).to have_content("1 note +")

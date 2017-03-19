@@ -23,9 +23,9 @@ module Accounts
     end
 
     def create
-      element = @chapter.elements.find(params[:element_id])
+      @element = @chapter.elements.find(params[:element_id])
       number = @book.notes_count + 1
-      note = element.notes.build(
+      note = @element.notes.build(
         state: "open",
         number: number,
         user: current_user
@@ -38,7 +38,6 @@ module Accounts
       if note.save && comment.save
         Notifier.new_note(note).deliver_later
         @book.increment!(:notes_count)
-        head :ok
       else
         # TODO: validation error if note text is blank
       end

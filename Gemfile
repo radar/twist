@@ -31,6 +31,7 @@ group :development, :test do
   gem 'email_spec'
   gem 'poltergeist', '1.6.0'
   gem 'selenium-webdriver'
+  gem "chromedriver-helper"
 end
 
 group :development do
