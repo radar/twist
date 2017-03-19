@@ -36,8 +36,8 @@ module Accounts
     end
 
     def receive
-      @book = Book.find_by_permalink(params[:id])
-      @book.enqueue
+      book = Book.find_by_permalink(params[:id])
+      book.enqueue
       head :ok
     end
 
