@@ -9,6 +9,7 @@ module BookHelpers
 
     book = scope.create(
       title: "Markdown Book Test",
+      format: "markdown",
       github_user: "radar",
       github_repo: "markdown_book_test"
     )
@@ -24,6 +25,7 @@ module BookHelpers
 
     book = scope.create(
       title: "Asciidoc Book Test",
+      format: "asciidoc",
       github_user: "radar",
       github_repo: "asciidoc_book_test"
     )
