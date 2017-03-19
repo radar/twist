@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170305214748) do
+ActiveRecord::Schema.define(version: 20170319032710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20170305214748) do
     t.datetime "updated_at", null: false
     t.string   "part"
     t.string   "permalink"
+    t.string   "commit"
+    t.index ["book_id", "commit"], name: "index_chapters_on_book_id_and_commit", using: :btree
     t.index ["book_id", "part"], name: "index_chapters_on_book_id_and_part", using: :btree
     t.index ["book_id", "permalink"], name: "index_chapters_on_book_id_and_permalink", using: :btree
     t.index ["book_id"], name: "index_chapters_on_book_id", using: :btree

@@ -10,6 +10,7 @@ class AsciidocBookWorker
     book = Book.find(id)
     git = Git.new(book.github_user, book.github_repo)
     commit = update_git(git, book)
+    book.current_commit = commit
     path = htmlify_book(git.path, book)
 
     chapter_elements = Nokogiri::HTML.parse(File.read(path)).css(".sect1")
@@ -17,9 +18,6 @@ class AsciidocBookWorker
       AsciidocChapter.new(book, chapter_element, index).process
     end
 
-    book.current_commit = commit
-    book.processing = false
-    book.just_added = false
     book.save
   end
 

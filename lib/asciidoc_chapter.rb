@@ -10,6 +10,7 @@ class AsciidocChapter
   def process
     title_without_number = title.gsub(/^\d+\.\s+/, '')
     chapter = book.chapters.create!(
+      commit: book.current_commit,
       title: title_without_number,
       permalink: title_without_number.parameterize,
       position: index,
