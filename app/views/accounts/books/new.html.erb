@@ -6,6 +6,7 @@
       <%= f.input :title %>
       <%= f.input :github_user, label: "GitHub Username" %>
       <%= f.input :github_repo, label: "GitHub Repo" %>
+      <%= f.input :format, collection: [["AsciiDoc", :asciidoc], ["Markdown", :markdown]] %>
       <%= f.input :blurb %>
 
       <%= f.submit "Add Book", class: 'btn btn-primary' %>

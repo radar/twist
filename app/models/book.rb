@@ -19,9 +19,16 @@ class Book < ActiveRecord::Base
   end
 
   def enqueue
-    AsciidocBookWorker.perform_async(id.to_s)
-    self.processing = true
-    self.save!
+    worker = case format
+    when "asciidoc"
+      AsciidocBookWorker
+    when "markdown"
+      MarkdownBookWorker
+    else
+      raise "Unknown format specified."
+    end
+
+    worker.perform_async(id.to_s)
   end
 
   def set_permalink

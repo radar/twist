@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319032710) do
+ActiveRecord::Schema.define(version: 20170319212932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,8 +39,6 @@ ActiveRecord::Schema.define(version: 20170319032710) do
     t.string   "blurb"
     t.string   "permalink"
     t.string   "current_commit"
-    t.boolean  "just_added"
-    t.boolean  "processing"
     t.integer  "notes_count",    default: 0
     t.boolean  "hidden",         default: false
     t.datetime "created_at",                     null: false
@@ -48,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170319032710) do
     t.integer  "account_id"
     t.string   "github_user"
     t.string   "github_repo"
+    t.string   "format"
     t.index ["account_id"], name: "index_books_on_account_id", using: :btree
   end
 

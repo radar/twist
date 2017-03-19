@@ -42,7 +42,7 @@ module Accounts
     end
 
     def book_params
-      params.require(:book).permit(:title, :path, :blurb, :github_user, :github_repo)
+      params.require(:book).permit(:title, :path, :blurb, :format, :github_user, :github_repo)
     end
 
     def check_plan_limit

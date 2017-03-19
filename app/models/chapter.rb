@@ -57,21 +57,6 @@ class Chapter < ActiveRecord::Base
     @section_count ||= [position, 0]
   end
 
-  def process!
-    # Keep any elements that have notes, ditch the rest
-    elements.where("notes_count > 0").update_all(old: true)
-    elements.where("notes_count = 0").delete_all
-
-    images.delete_all
-
-    html = to_html
-    self.title = html.css("h1").text
-    self.permalink = title.parameterize
-    elements = html.css("body > *")
-    elements.each { |element| Element.process!(self, element) }
-    save
-  end
-
   def previous_chapter
     # A previous chapter in the same part
     prev = book.chapters.find_by(part: part, position: position - 1)
@@ -94,12 +79,6 @@ class Chapter < ActiveRecord::Base
     if current_part_index != PARTS.count - 1
       book.chapters.where(part: PARTS[current_part_index+1]).order(position: :asc).first
     end
-  end
-
-  def to_html
-    markdown = File.read(File.join(book.path, file_name))
-    renderer = Redcarpet::Markdown.new(MarkdownRenderer, :fenced_code_blocks => true)
-    html = Nokogiri::HTML(renderer.render(markdown))
   end
 
   def to_param

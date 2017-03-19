@@ -24,7 +24,7 @@ describe AsciidocBookWorker do
     end
   end
 
-  context "with Rails 4 in Action", tag: :real_book do
+  context "with Rails 4 in Action", real_book: true do
     let(:book) do
       Book.create(
         title: "Rails 4 in Action",
