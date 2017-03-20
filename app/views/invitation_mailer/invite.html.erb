@@ -3,9 +3,13 @@
 </p>
 
 <p>
+  Twist is a review tool which is used to review in-progress books.
+</p>
+
+<p>
   <% accept_url = accept_invitation_url(
-    @invitation, 
+    @invitation,
     subdomain: @invitation.account.subdomain
   ) %>
-  <%= link_to "Accept Invitation", accept_url %>
+  Accept the invitation here: <%= link_to accept_url, accept_url %>
 </p>
