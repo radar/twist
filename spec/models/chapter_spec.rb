@@ -4,11 +4,13 @@ describe Chapter do
   let(:book) { create_markdown_book! }
 
   context "navigation" do
+    let(:current_commit) { "abc123" }
     context "chapter 1" do
       let(:chapter) do
         book.chapters.find_or_create_by(
           file_name: "chapter_1/chapter_1.markdown",
           position: 1,
+          commit: current_commit,
           part: "mainmatter"
         )
       end
@@ -17,6 +19,14 @@ describe Chapter do
         introduction = book.chapters.create(
           title: "Introduction",
           position: 1,
+          commit: current_commit,
+          part: "frontmatter"
+        )
+
+        old_introduction = book.chapters.create(
+          title: "Introduction",
+          position: 1,
+          commit: "abc124",
           part: "frontmatter"
         )
 
@@ -27,12 +37,14 @@ describe Chapter do
         introduction = book.chapters.create(
           title: "Introduction",
           position: 1,
+          commit: current_commit,
           part: "frontmatter"
         )
 
         foreword = book.chapters.create(
           title: "Introduction",
           position: 2,
+          commit: current_commit,
           part: "frontmatter"
         )
 
@@ -44,6 +56,14 @@ describe Chapter do
         chapter_2 = book.chapters.create(
           title: "Chapter 2",
           position: 2,
+          commit: current_commit,
+          part: "mainmatter"
+        )
+
+        old_chapter_2 = book.chapters.create(
+          title: "Chapter 2",
+          position: 2,
+          commit: "abc124",
           part: "mainmatter"
         )
 
