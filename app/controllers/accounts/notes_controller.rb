@@ -38,6 +38,8 @@ module Accounts
       if note.save && comment.save
         Notifier.new_note(note).deliver_later
         @book.increment!(:notes_count)
+        # Invalidates elements/index cache
+        @chapter.touch
       else
         # TODO: validation error if note text is blank
       end
