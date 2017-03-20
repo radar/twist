@@ -91,9 +91,13 @@ describe Chapter do
   end
 
   context "part_position" do
+    let(:current_commit) { "abc123" }
+    let(:previous_commit) { "abc124" }
+
     let!(:preface) do
       book.chapters.create(
         title: "Preface",
+        commit: current_commit,
         position: 3,
         part: "frontmatter"
       )
@@ -102,6 +106,16 @@ describe Chapter do
     let!(:chapter_1) do
       book.chapters.create(
         title: "First Chapter",
+        commit: current_commit,
+        position: 2,
+        part: "mainmatter",
+      )
+    end
+
+    let!(:old_chapter_1) do
+      book.chapters.create(
+        title: "First Chapter",
+        commit: previous_commit,
         position: 2,
         part: "mainmatter",
       )
@@ -110,9 +124,14 @@ describe Chapter do
     let!(:chapter_2) do
       book.chapters.create(
         title: "Second Chapter",
+        commit: current_commit,
         position: 3,
         part: "mainmatter",
       )
+    end
+
+    before do
+      book.update_column(:current_commit, current_commit)
     end
 
     it "returns position relative to the part of the book" do

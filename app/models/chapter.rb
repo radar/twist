@@ -79,7 +79,7 @@ class Chapter < ActiveRecord::Base
   end
 
   def part_position
-    book.chapters.where(part: part).order(:position).pluck(:id).index(id) + 1
+    book.chapters.where(part: part, commit: book.current_commit).order(:position).pluck(:id).index(id) + 1
   end
 
   def expire_cache
