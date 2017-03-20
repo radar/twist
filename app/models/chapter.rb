@@ -3,14 +3,6 @@ require 'markdown_renderer'
 class Chapter < ActiveRecord::Base
   PARTS = ["frontmatter", "mainmatter", "backmatter"]
 
-  # Provides an accessor to get to the git repository where the chapter is contained
-  attr_accessor :git
-
-  attr_accessor :footnote_count
-  attr_accessor :section_count
-  attr_accessor :image_count
-  attr_accessor :listing_count
-
   belongs_to :book
 
   has_many :elements, -> { order("id ASC") }
@@ -21,6 +13,7 @@ class Chapter < ActiveRecord::Base
   scope :frontmatter, -> { ordered.where(part: "frontmatter") }
   scope :mainmatter, -> { ordered.where(part: "mainmatter") }
   scope :backmatter, -> { ordered.where(part: "backmatter") }
+  scope :commit, -> (commit) { where(commit: commit) }
 
   after_save :expire_cache
 

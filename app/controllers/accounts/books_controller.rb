@@ -26,9 +26,10 @@ module Accounts
 
     def show
       @book = current_account.books.find_by!(permalink: params[:id])
-      @frontmatter = @book.chapters.frontmatter
-      @mainmatter = @book.chapters.mainmatter
-      @backmatter = @book.chapters.backmatter
+      chapters = @book.chapters.commit(@book.current_commit)
+      @frontmatter = chapters.frontmatter
+      @mainmatter = chapters.mainmatter
+      @backmatter = chapters.backmatter
 
       rescue ActiveRecord::RecordNotFound
         flash[:alert] = "Book not found."
