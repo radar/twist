@@ -25,7 +25,7 @@ module Accounts
     end
 
     def show
-      @book = current_account.books.find_by!(permalink: params[:id])
+      @book = find_book(params[:id])
       chapters = @book.chapters.commit(@book.current_commit)
       @frontmatter = chapters.frontmatter
       @mainmatter = chapters.mainmatter

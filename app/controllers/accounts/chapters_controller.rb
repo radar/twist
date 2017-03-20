@@ -21,7 +21,7 @@ module Accounts
     end
 
     def find_chapter(permalink)
-      @book.chapters.find_by(permalink: permalink)
+      @book.chapters.commit(@book.current_commit).find_by(permalink: permalink)
     end
   end
 end

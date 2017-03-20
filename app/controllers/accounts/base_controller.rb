@@ -6,6 +6,14 @@ module Accounts
 
     private
 
+    def find_book(permalink)
+      current_account.books.find_by!(permalink: permalink)
+    end
+
+    def find_chapter(book, permalink)
+      book.chapters.commit(book.current_commit).find_by!(permalink: permalink)
+    end
+
     def authorize_user!
       authenticate_user!
       unless current_account.owner == current_user ||
