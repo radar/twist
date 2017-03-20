@@ -26,7 +26,7 @@ class MarkdownElementProcessor
         create_element(img.to_html, "img")
       end
     else
-      create_element(markup, "p")
+      create_element(markup.to_html, "p")
     end
   end
 
@@ -53,7 +53,7 @@ class MarkdownElementProcessor
   def process_div!(markup)
     # Divs have classes to identify them, separate them and process them as we see fit
     method = "process_#{markup["class"]}!"
-    if self.respond_to?(method)
+    if self.respond_to?(method, true)
       send(method, markup)
     else
       # Or go kaboom if we don't know what the hell it is
@@ -70,39 +70,39 @@ class MarkdownElementProcessor
   end
 
   def process_table!(markup)
-    chapter.elements << create_element(markup, "table")
+    create_element(markup.to_html, "table")
   end
 
   def process_note!(markup)
-    chapter.elements << create_element(markup, "note")
+    create_element(markup.to_html, "note")
   end
 
   def process_warning!(markup)
-    chapter.elements << create_element(markup, "warning")
+    create_element(markup.to_html, "warning")
   end
 
   def process_tip!(markup)
-    chapter.elements << create_element(markup, "tip")
+    create_element(markup.to_html, "tip")
   end
 
   def process_code!(markup)
-    chapter.elements << create_element(markup, "code")
+    create_element(markup.to_html, "code")
   end
 
   def process_aside!(markup)
-    chapter.elements << create_element(markup, "warning")
+    create_element(markup.to_html, "warning")
   end
 
   def process_footnote!(markup)
-    chapter.elements << create_element(markup, "footnote")
+    create_element(markup.to_html, "footnote")
   end
 
   def process_blockquote!(markup)
-    chapter.elements << create_element(markup, "blockquote")
+    create_element(markup.to_html, "blockquote")
   end
 
   def process_hr!(markup)
-    chapter.elements << create_element(markup, "hr")
+    create_element(markup, "hr")
   end
 
   def process_header!(markup)
@@ -114,23 +114,23 @@ class MarkdownElementProcessor
   end
 
   def process_h2!(markup)
-    chapter.elements << create_element(markup, "h2")
+    create_element(markup.to_html, "h2")
   end
 
   def process_h3!(markup)
-    chapter.elements << create_element(markup, "h3")
+    create_element(markup.to_html, "h3")
   end
 
   def process_h4!(markup)
-    chapter.elements << create_element(markup, "h4")
+    create_element(markup.to_html, "h4")
   end
 
   def process_h5!(markup)
-    chapter.elements << create_element(markup, "h5")
+    create_element(markup.to_html, "h5")
   end
 
   def process_h6!(markup)
-    chapter.elements << create_element(markup, "h6")
+    create_element(markup.to_html, "h6")
   end
 
   def process_text!(markup)

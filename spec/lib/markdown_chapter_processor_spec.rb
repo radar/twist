@@ -24,5 +24,6 @@ describe MarkdownChapterProcessor do
     expect(chapter.images.first.filename).to eq("images/chapter_1/1.png")
     expect(chapter.images.first.image).not_to be_nil
     expect(chapter.elements.select { |e| e.tag == "img" }).not_to be_empty
+    expect(chapter.elements.select { |e| e.tag == "code" }).not_to be_empty
   end
 end
