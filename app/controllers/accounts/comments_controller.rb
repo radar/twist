@@ -1,7 +1,7 @@
 module Accounts
   class CommentsController < Accounts::BaseController
     # lol embedded documents
-    before_action :find_book_and_chapter_and_note
+    before_action :find_note
 
     def create
       @comments = @note.comments
@@ -44,7 +44,7 @@ module Accounts
 
     def find_note
       @book = find_book(params[:book_id])
-      @note = @book.notes.find(params[:id])
+      @note = @book.notes.find(params[:note_id])
     end
 
     private
