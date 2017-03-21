@@ -5,7 +5,7 @@ describe Chapter do
   let(:book) { FactoryGirl.create(:book) }
 
   before do
-    FileUtils.rm_r(git.path)
+    FileUtils.rm_rf(git.path)
     git.update!
     book.path = 'spec/fixtures/repos/radar/markdown_book_test'
   end

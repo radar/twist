@@ -5,7 +5,7 @@ describe Git do
   let(:test_repo) { Git.path + args.join("/") }
 
   before do
-    FileUtils.rm_r(Git.path + args.join("/")) if File.exist?(test_repo)
+    FileUtils.rm_rf(Git.path + args.join("/")) if File.exist?(test_repo)
   end
 
   it "returns the repository path" do
@@ -21,7 +21,7 @@ describe Git do
     expect(git).to receive(:`).with("git clone -q #{Git.host}#{args.join("/")} #{test_repo}")
     git.update!
   end
-  
+
   it "updates an existing repository" do
     # Need to test this "live" to make sure everything goes through right
     git = Git.new(*args)

@@ -12,7 +12,7 @@ describe Book do
     end
 
     before do
-      FileUtils.rm_r(git.path) if File.exist?(git.path)
+      FileUtils.rm_rf(git.path) if File.exist?(git.path)
       git.update!
     end
 

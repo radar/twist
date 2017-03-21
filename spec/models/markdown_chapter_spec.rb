@@ -12,7 +12,7 @@ describe Chapter do
 
   before do
     # Nuke the repo, start afresh.
-    FileUtils.rm_r(git.path)
+    FileUtils.rm_rf(git.path)
     git.update!
     book.path = 'spec/fixtures/repos/radar/markdown_book_test'
   end
