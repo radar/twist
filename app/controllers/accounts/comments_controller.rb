@@ -42,10 +42,9 @@ module Accounts
       flash[:notice] = "Note state changed to #{state}"
     end
 
-    def find_book_and_chapter_and_note
+    def find_note
       @book = find_book(params[:book_id])
-      @chapter = find_chapter(@book, params[:chapter_id])
-      @note = @chapter.notes.find_by(number: params[:note_id])
+      @note = @book.notes.find(params[:id])
     end
 
     private
