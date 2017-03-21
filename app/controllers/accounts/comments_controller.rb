@@ -44,7 +44,7 @@ module Accounts
 
     def find_note
       @book = find_book(params[:book_id])
-      @note = @book.notes.find(params[:note_id])
+      @note = @book.notes.find_by!(number: params[:note_id])
     end
 
     private
