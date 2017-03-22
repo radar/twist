@@ -5,7 +5,7 @@
     <% book = chapter.book %>
     <h2>
       <%= link_to book.title, book %> -
-      <%= link_to "#{chapter.position}: #{chapter.title}", [book, chapter] %></h2>
+      <%= link_to "#{chapter.part_position}: #{chapter.title}", [book, chapter] %></h2>
     <h3>Note #<%= @note.number %> - <%= state(@note) %></h3>
     <%= render_element(@note.element, show_notes: false) %>
     <strong><%= link_to "View this element within chapter", book_chapter_path(book, chapter, :anchor => @note.element.nickname) %></strong>
