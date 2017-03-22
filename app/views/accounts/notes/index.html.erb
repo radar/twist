@@ -2,7 +2,7 @@
   <div class='twist-content col-md-12'>
   <h1><%= @title || "Notes" %> for <%= link_to @book.title, @book %></h1>
   <% if @chapter %>
-    <h2><%= link_to "Chapter #{@chapter.position} - #{@chapter.title}", [@book, @chapter] %></h2>
+    <h2><%= link_to "Chapter #{@chapter.part_position} - #{@chapter.title}", [@book, @chapter] %></h2>
   <% end %>
   <br>
 
