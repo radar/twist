@@ -1,6 +1,10 @@
 module ApplicationHelper
   def markdown(text)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
+    markdown = Redcarpet::Markdown.new(
+      Redcarpet::Render::HTML,
+      fenced_code_blocks: true,
+      autolink: true,
+    )
     raw(markdown.render(text))
   end
 
