@@ -61,6 +61,7 @@ class Element extends React.Component {
 
     return (
       <div>
+        <a name={elementID}></a>
         <span className={`note_button note_button_${tag}`} id={`note_button_${elementID}`}>
           <a href="#" onClick={this.toggleForm}>{notesCount} +</a>
         </span>
@@ -74,7 +75,7 @@ class Element extends React.Component {
 
   toggleForm(e) {
     this.setState({showThanks: false, showForm: !this.state.showForm});
-    e.preventDefault();
+    if (e) { e.preventDefault() };
   }
 
   noteSubmitted(notesCount) {
