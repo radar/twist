@@ -72,8 +72,9 @@ class Element extends React.Component {
     )
   }
 
-  toggleForm() {
+  toggleForm(e) {
     this.setState({showThanks: false, showForm: !this.state.showForm});
+    e.preventDefault();
   }
 
   noteSubmitted(notesCount) {
