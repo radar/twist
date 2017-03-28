@@ -38,7 +38,7 @@ module Accounts
 
     def receive
       book = Book.find_by_permalink(params[:id])
-      book.enqueue
+      BookReceiver.new(book).perform(params.slice(:commits))
       head :ok
     end
 

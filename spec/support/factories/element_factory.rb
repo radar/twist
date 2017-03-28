@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :element do
-    tag "para"
+    tag "p"
     content "Hello world!"
-    identifier "ch01_1"
   end
 end
