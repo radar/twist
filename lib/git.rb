@@ -1,3 +1,5 @@
+require 'shellwords'
+
 class Git
   attr_accessor :user, :repo
 
@@ -29,7 +31,15 @@ class Git
   end
 
   def clone
-    `git clone -q #{self.class.host}#{user}/#{repo} #{path}`
+    `git clone -q #{origin} #{destination}`
+  end
+
+  def origin
+    Shellwords.escape("#{self.class.host}#{user}/#{repo}")
+  end
+
+  def destination
+    Shellwords.escape(path.to_s)
   end
 
   def pull

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shellwords'
 
 describe Git do
   let(:args) { ["radar", "markdown_book_test"] }
@@ -18,7 +19,9 @@ describe Git do
 
   it "initializes a new repository" do
     git = Git.new(*args)
-    expect(git).to receive(:`).with("git clone -q #{Git.host}#{args.join("/")} #{test_repo}")
+    origin = Shellwords.escape("#{Git.host}#{args.join("/")}")
+    destination = Shellwords.escape(test_repo)
+    expect(git).to receive(:`).with("git clone -q #{origin} #{destination}")
     git.update!
   end
 
