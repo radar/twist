@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,28 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504223441) do
+ActiveRecord::Schema.define(version: 20160402045234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "accounts", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "owner_id"
-    t.string   "subdomain"
-    t.string   "stripe_customer_id"
-    t.integer  "plan_id"
-    t.string   "stripe_subscription_id"
-    t.string   "stripe_subscription_status"
-    t.string   "card_last_4"
-    t.string   "card_brand"
-    t.integer  "card_expiry_month"
-    t.integer  "card_expiry_year"
-    t.index ["plan_id"], name: "index_accounts_on_plan_id", using: :btree
-    t.index ["subdomain"], name: "index_accounts_on_subdomain", using: :btree
-  end
 
   create_table "books", force: :cascade do |t|
     t.string   "path"
@@ -46,8 +27,6 @@ ActiveRecord::Schema.define(version: 20160504223441) do
     t.boolean  "hidden",         default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.integer  "account_id"
-    t.index ["account_id"], name: "index_books_on_account_id", using: :btree
   end
 
   create_table "chapters", force: :cascade do |t|
@@ -98,25 +77,6 @@ ActiveRecord::Schema.define(version: 20160504223441) do
     t.index ["chapter_id"], name: "index_images_on_chapter_id", using: :btree
   end
 
-  create_table "invitations", force: :cascade do |t|
-    t.string   "email"
-    t.integer  "account_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "token"
-    t.index ["account_id"], name: "index_invitations_on_account_id", using: :btree
-    t.index ["token"], name: "index_invitations_on_token", using: :btree
-  end
-
-  create_table "memberships", force: :cascade do |t|
-    t.integer  "account_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_memberships_on_account_id", using: :btree
-    t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
-  end
-
   create_table "notes", force: :cascade do |t|
     t.text     "text"
     t.integer  "element_id"
@@ -126,23 +86,6 @@ ActiveRecord::Schema.define(version: 20160504223441) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.index ["element_id"], name: "index_notes_on_element_id", using: :btree
-  end
-
-  create_table "plans", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "amount"
-    t.string   "stripe_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "books_allowed"
-  end
-
-  create_table "subscription_events", force: :cascade do |t|
-    t.integer  "account_id"
-    t.string   "type"
-    t.jsonb    "data"
-    t.datetime "created_at", null: false
-    t.index ["account_id"], name: "index_subscription_events_on_account_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -159,15 +102,8 @@ ActiveRecord::Schema.define(version: 20160504223441) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "author",                 default: false
-    t.boolean  "admin",                  default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "accounts", "plans"
-  add_foreign_key "books", "accounts"
-  add_foreign_key "invitations", "accounts"
-  add_foreign_key "memberships", "accounts"
-  add_foreign_key "memberships", "users"
-  add_foreign_key "subscription_events", "accounts"
 end
