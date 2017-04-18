@@ -1,0 +1,8 @@
+<div class='col-md-offset-4 col-md-4 content'>
+  <h2>Create a new account</h2>
+
+  <%= simple_form_for(@account) do |account| %>
+    <%= account.input :name %>
+    <%= account.submit class: "btn btn-primary" %>
+  <% end %>
+</div>

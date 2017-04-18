@@ -1,8 +1,8 @@
 development:
   adapter: postgresql
-  database: twist_dev
+  database: twist_mtwr_dev
 
 test:
   adapter: postgresql
-  database: twist_test
+  database: twist_mtwr_test
 
