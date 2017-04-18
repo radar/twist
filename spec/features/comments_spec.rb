@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'commenting' do 
-  let!(:author) { create_author! }
+describe 'commenting' do
+  let!(:account) { FactoryGirl.create(:account) }
   let!(:reviewer) { create_user! }
   let!(:book) { create_book! }
   let!(:chapter) { book.chapters.first }
@@ -19,10 +19,11 @@ describe 'commenting' do
     end
   end
 
-  context "as an author" do
+  context "as an account's owner" do
     before do
-      actually_sign_in_as(author)
-      visit book_note_path(book, note)
+      login_as(account.owner)
+      set_subdomain(account.subdomain)
+      visit book_note_url(book, note)
       fill_in "comment_text", :with => comment_text
     end
 

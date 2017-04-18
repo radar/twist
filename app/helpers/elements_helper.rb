@@ -5,12 +5,12 @@ module ElementsHelper
     end
     nil
   end
-  
+
   def render_element(element, show_notes: true)
     partial = find_element_partial(element) ? element.tag : "element"
-    render("elements/#{partial}", element: element, show_notes: show_notes)
+    render("accounts/elements/#{partial}", element: element, show_notes: show_notes)
   end
-  
+
   def render_footnote(element)
     @footnote_count ||= 0
     @footnote_count += 1
@@ -23,13 +23,13 @@ module ElementsHelper
     end
   end
 
-  
+
   private
 
   def find_element_partial(element)
     @partials ||= {}
     return @partials[element.tag] unless @partials[element.tag].nil?
-    partial = Rails.root + "app/views/elements/_#{element.tag}.html.erb"
+    partial = Rails.root + "app/views/accounts/elements/_#{element.tag}.html.erb"
     @partials[element.tag] = File.exist?(partial)
   end
 end
