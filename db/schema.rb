@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418072907) do
+ActiveRecord::Schema.define(version: 20170418073617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20170418072907) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "owner_id"
+    t.string   "subdomain"
+    t.index ["subdomain"], name: "index_accounts_on_subdomain", using: :btree
   end
 
   create_table "books", force: :cascade do |t|

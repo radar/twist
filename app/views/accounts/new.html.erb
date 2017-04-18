@@ -3,6 +3,7 @@
 
   <%= simple_form_for(@account) do |account| %>
     <%= account.input :name %>
+    <%= account.input :subdomain %>
 
     <%= account.fields_for :owner do |owner| %>
       <%= owner.input :email %>
