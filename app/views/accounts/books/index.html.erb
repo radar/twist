@@ -9,7 +9,10 @@
 
   <div id='sidebar' class='col-md-3'>
     <% if owner? %>
-      <%= link_to "Add Book", new_book_path %>
+      <ul>
+        <li><%= link_to "Add Book", new_book_path %></li>
+        <li><%= link_to "Invite User", new_invitation_path %></li>
+      </ul>
     <% end %>
   </div>
 
