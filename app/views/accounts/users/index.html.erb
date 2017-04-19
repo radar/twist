@@ -1,0 +1,31 @@
+<div class='row'>
+  <div class='col-md-7 content'>
+    <h1><%= current_account.name %> Users</h1>
+    <%= link_to "Invite User", new_invitation_path, class: "btn btn-primary" %>
+
+    <table class='table table-striped' id='users'>
+      <thead>
+        <th>User</th>
+        <th></th>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><%= current_account.owner.email %></td>
+          <td></td>
+        </tr>
+        <% current_account.users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to "Remove", user_path(user),
+                method: :delete,
+                data: { confirm: "Are you sure you want to remove this user?" },
+                class: "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

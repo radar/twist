@@ -14,6 +14,8 @@ Twist::Application.routes.draw do
         end
       end
 
+      resources :users, only: [:index, :destroy]
+
       notes_routes = lambda do
         collection do
           get :completed
