@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Chapter do
   let(:git) { Git.new("radar", "markdown_book_test") }
-  let(:book) { FactoryGirl.create(:book) }
+  let(:book) { FactoryBot.create(:book) }
 
   before do
     FileUtils.rm_rf(git.path)
@@ -30,13 +30,13 @@ describe Chapter do
     end
 
     let!(:element_1) do
-      element = chapter.elements.create
-      element.notes.create
+      element = chapter.elements.create!
+      element.notes.create!
       element
     end
 
     let!(:element_2) do
-      chapter.elements.create
+      chapter.elements.create!
     end
 
     it "keeps elements with notes" do

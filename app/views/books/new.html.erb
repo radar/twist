@@ -2,10 +2,10 @@
   <div class='col-md-8 content'>
     <h2>New Book</h2>
 
-    <%= simple_form_for @book do |f| %>
-      <%= f.input :title %>
-      <%= f.input :path, label: "GitHub Path" %> 
-      <%= f.input :blurb %>
+    <%= form_with @book do |f| %>
+      <%= f.text_field :title %>
+      <%= f.text_field :path, label: "GitHub Path" %>
+      <%= f.text_field :blurb %>
 
       <%= f.submit "Add Book", class: 'btn btn-primary' %>
     <% end %>

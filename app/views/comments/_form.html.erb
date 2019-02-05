@@ -1,4 +1,4 @@
-<%= simple_form_for [@book, @chapter, @note, @comment] do |f| %>
+<%= form_with model: [@book, @chapter, @note, @comment] do |f| %>
   <div class="comment_form">
     <strong>Comment on this note (Markdown enabled)</strong>
     <p>
@@ -12,8 +12,9 @@
       <% end %>
     </p>
 
-    <p>
-      <%= f.input :text, input_html: { rows: 10, tabindex: 1 } %>
+    <div class='form-group'>
+      <%= f.label :text %>
+      <%= f.text_area :text, class: "form-control" %>
     </p>
 
   </div>

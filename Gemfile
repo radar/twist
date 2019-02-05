@@ -1,44 +1,47 @@
 source 'http://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.6.1'
 
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 6.0.0.beta1'
 gem 'pg'
 
-gem 'devise', '4.1.1'
-gem 'sidekiq', '4.1.2'
+gem 'devise', '~> 4.5.0'
+gem 'sidekiq'
 gem 'redcarpet'
 gem 'nokogiri'
 gem 'paperclip'
 gem 'pygments.rb'
 
-gem 'redis-activesupport', '5.0.1'
+gem 'redis-activesupport'
 
 group :development, :test do
   gem 'pry-rails'
-  gem 'factory_girl'
-  gem 'capybara', '~> 2.0'
-  gem 'rspec-rails', '~> 3.5.0'
+  gem 'rspec-rails', '~> 3.5'
+end
+
+group :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'poltergeist', '1.6.0'
+  gem 'factory_bot'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end
 
 group :development do
+  gem 'listen'
   gem 'capistrano', '~> 3.0'
   gem 'capistrano-bundler', '1.1.4'
   gem 'capistrano-rails', '1.1.3'
   gem 'capistrano-chruby'
 end
 
-gem "unicorn"
+gem "puma"
 
 # Asset template engines
-gem 'sass-rails', "~> 5.0.6"
-gem 'coffee-script'
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'simple_form', '3.2.1'
+gem 'sassc-rails'
+gem 'bootstrap', '~> 4.2.1'
 
 gem 'jquery-rails'
 gem 'pry'

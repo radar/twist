@@ -6,7 +6,7 @@ describe "notes" do
   before do
     login_as(author)
   end
-    
+
   it "can add a new note to a paragraph", :js => true do
     visit book_chapter_path(book, book.chapters.first)
     element = book.chapters.first.elements.first
@@ -15,7 +15,7 @@ describe "notes" do
       click_link "0 notes +"
     end
 
-    comment_box = find(".note_comments_text textarea")
+    comment_box = find(".notes_container textarea")
     comment_box.set("This is a **test** note!")
     click_button "Leave Note"
     expect(page).to have_content("1 note +")
@@ -32,21 +32,21 @@ describe "notes" do
 
     # And the rest of it.
     expect(page).to have_content("This is a test note!")
-    
+
   end
-  
+
   it "can view all notes for a book" do
     chapter = book.chapters.first
     element = chapter.elements.first
     note = element.notes.create!(
-      user: author, 
+      user: author,
       number: 1
     )
     note.comments.create!(
       user: author,
       text: "This is a test note!"
     )
-    
+
     visit book_path(book)
     click_link "All notes for this book"
     click_link "This is a test note!"
@@ -59,14 +59,14 @@ describe "notes" do
       chapter = book.chapters.first
       element = chapter.elements.first
       @note = element.notes.create!(
-        user: author, 
+        user: author,
         number: 1
       )
       @note.comments.create!(
         text: "This is a test note!",
         user: author
       )
-      
+
       visit book_path(book)
       click_link "All notes for this book"
       click_link "This is a test note!"
@@ -90,7 +90,7 @@ describe "notes" do
     chapter = book.chapters.first
     element = chapter.elements.first
     note = element.notes.create!(
-      user: author, 
+      user: author,
       number: 1,
       state: "rejected"
     )
@@ -98,7 +98,7 @@ describe "notes" do
       user: author,
       text: "This is a test note!"
     )
-    
+
     visit book_path(book)
     click_link "All notes for this book"
     click_link "Completed notes"

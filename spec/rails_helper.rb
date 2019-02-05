@@ -5,11 +5,9 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+
 require 'sidekiq/testing'
 Sidekiq::Testing.inline!
-
-require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -41,21 +39,11 @@ RSpec.configure do |config|
     end
   end
 
-  config.filter_gems_from_backtrace(
-    "actionpack",
-    "actionview",
-    "activerecord",
-    "activesupport",
-    "capybara",
-    "rack",
-    "rack-test",
-    "railties",
-    "request_store",
-    "warden",
-    "zeus"
-  )
-
   config.infer_spec_type_from_file_location!
 
   config.include Warden::Test::Helpers, type: :feature
+end
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
 end

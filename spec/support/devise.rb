@@ -6,9 +6,9 @@ module DeviseExtensions
     fill_in "Password", :with => "password" # test password
     click_button "Log in"
   end
-  
+
   def create_user!(attributes={})
-    user = FactoryGirl.create(:user, attributes)
+    user = FactoryBot.create(:user, attributes)
     user
   end
 
